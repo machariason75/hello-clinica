@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   HELLO CLINICA — GLOBAL STYLES
+   Tokens below mirror the FROZEN design system. Do not introduce new colors
+   or alter the type scale in future phases.
+   ===========================================================================*/
+
+@layer base {
+  :root {
+    /* Shadcn semantic tokens mapped to the brand palette (HSL channels). */
+    --background: 210 40% 98%; /* #F8FAFC */
+    --foreground: 213 51% 18%; /* near deep-blue text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 51% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 51% 18%;
+
+    --primary: 209 79% 28%; /* #0F4C81 medical-blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 209 79% 28%;
+
+    --muted: 210 33% 96%;
+    --muted-foreground: 213 18% 46%;
+
+    --accent: 199 91% 64%; /* #4FC3F7 accent-blue */
+    --accent-foreground: 213 51% 18%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 56% 38%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 213 27% 88%;
+    --input: 213 27% 86%;
+    --ring: 199 91% 64%;
+
+    --radius: 0.875rem; /* "rounded XL" base for buttons/inputs */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-bg text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible keyboard focus everywhere (accessibility baseline). */
+  :focus-visible {
+    outline: none;
+  }
+
+  /* Honor reduced motion globally as a safety net. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- Responsive type scale (frozen) ---------------------------------- */
+  .text-h1 {
+    @apply text-[34px] font-bold leading-[1.1] tracking-tight md:text-[42px] lg:text-[56px];
+  }
+  .text-h2 {
+    @apply text-[28px] font-bold leading-[1.15] tracking-tight md:text-[34px] lg:text-[42px];
+  }
+  .text-h3 {
+    @apply text-[24px] font-semibold leading-[1.2] md:text-[28px] lg:text-[32px];
+  }
+  .text-body {
+    @apply text-base leading-relaxed md:text-lg;
+  }
+  .text-lead {
+    @apply text-lg leading-relaxed text-muted-foreground md:text-xl;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.14em] text-medical-blue;
+  }
+
+  /* ---- Section rhythm (48 / 80 / 120, frozen) -------------------------- */
+  .section {
+    @apply py-section-mobile md:py-section-tablet lg:py-section-desktop;
+  }
+  .section-tight {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  /* ---- Surfaces -------------------------------------------------------- */
+  .surface-card {
+    @apply rounded-card border border-border bg-card shadow-card transition-all duration-300;
+  }
+  .surface-card-interactive {
+    @apply surface-card hover:-translate-y-1 hover:shadow-card-hover;
+  }
+  .glass-card {
+    @apply rounded-card border border-white/40 bg-white/70 shadow-card backdrop-blur-md;
+  }
+
+  /* ---- Gradient helpers ------------------------------------------------ */
+  .bg-brand-gradient {
+    background-image: linear-gradient(135deg, #0f4c81 0%, #1e3a5f 55%, #4fc3f7 100%);
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0f4c81 0%, #1e3a5f 55%, #4fc3f7 100%);
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2;
+  }
+}
+
+/* Skip-to-content link (a11y) */
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-medical-blue focus:px-4 focus:py-2 focus:text-white;
+}

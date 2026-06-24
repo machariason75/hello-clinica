@@ -1,0 +1,402 @@
+// =============================================================================
+// HELLO CLINICA — PRISMA SCHEMA
+// Database: PostgreSQL · ORM: Prisma  (per System Architecture + DB Schema)
+//
+// The 16 tables below match DATABASE_SCHEMA.md exactly. Fields marked
+// "[additive]" were NOT in the base schema doc but are required to satisfy
+// other frozen documents (delivery-status logging, archive-not-delete,
+// login lockout, admin-editable fields). Nothing approved was removed or
+// restructured — these are forward-compatible extensions only.
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ----------------------------------------------------------------------------
+// ENUMS
+// ----------------------------------------------------------------------------
+
+enum AdminRole {
+  SUPER_ADMIN
+  EDITOR // future
+  SUPPORT // future
+  CONTENT_MANAGER // future
+}
+
+enum ConsultationStatus {
+  NEW
+  CONTACTED
+  FOLLOW_UP_REQUIRED
+  CLOSED
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum BookCategory {
+  RECOMMENDED_BOOKS
+  MEDICAL_SCHOOL_BOOKS
+  STUDY_GUIDES
+  DIGITAL_DOWNLOADS
+}
+
+enum ResourceCategory {
+  MEDICAL_SCHOOL_ADMISSIONS
+  APPLICATION_TIMELINE
+  PERSONAL_STATEMENT_GUIDE
+  INTERVIEW_GUIDE
+  CLINICAL_EXPERIENCE
+  VOLUNTEER_GUIDE
+  SHADOWING_GUIDE
+  STUDY_RESOURCES
+  CAREER_EXPLORATION
+}
+
+enum FaqCategory {
+  GENERAL
+  ADMISSIONS_ADVISING
+  APPLICATION_REVIEW
+  INTERVIEW_COACHING
+  CONSULTATION_PACKAGES
+  BOOKS
+  RESOURCES
+  CONTACT
+}
+
+// ----------------------------------------------------------------------------
+// ADMINS
+// ----------------------------------------------------------------------------
+
+model Admin {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  role         AdminRole  @default(SUPER_ADMIN)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  auditLogs    AuditLog[]
+
+  @@map("admins")
+}
+
+// [additive] Login throttling store — required by ADMIN_REQUIREMENTS
+// "3 failed attempts -> 15 minute lockout -> audit log -> notify admin".
+model LoginAttempt {
+  id          String   @id @default(cuid())
+  email       String
+  ipAddress   String?
+  successful  Boolean  @default(false)
+  attemptedAt DateTime @default(now())
+  lockedUntil DateTime?
+
+  @@index([email, attemptedAt])
+  @@map("login_attempts")
+}
+
+// ----------------------------------------------------------------------------
+// CONSULTATIONS
+// ----------------------------------------------------------------------------
+
+model Consultation {
+  id            String             @id @default(cuid())
+  firstName     String
+  lastName      String
+  phone         String
+  email         String
+  cadre         String
+  contactMethod String // single selection (frozen: "Only One Selection Allowed" for cadre; contact method stored as the chosen channel)
+  socialHandle  String?
+  consent       Boolean            @default(false)
+  message       String?
+  status        ConsultationStatus @default(NEW)
+  archived      Boolean            @default(false) // [additive] archive-not-delete
+  emailStatus   EmailStatus        @default(PENDING) // [additive] delivery status
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("consultations")
+}
+
+// ----------------------------------------------------------------------------
+// CONTACT REQUESTS
+// ----------------------------------------------------------------------------
+
+model ContactRequest {
+  id             String      @id @default(cuid())
+  firstName      String
+  lastName       String
+  phone          String
+  email          String
+  cadre          String
+  reason         String
+  message        String
+  acceptedTerms  Boolean     @default(false)
+  archived       Boolean     @default(false) // [additive]
+  emailStatus    EmailStatus @default(PENDING) // [additive]
+  createdAt      DateTime    @default(now())
+
+  @@index([createdAt])
+  @@map("contact_requests")
+}
+
+// ----------------------------------------------------------------------------
+// NEWSLETTER SUBSCRIBERS
+// ----------------------------------------------------------------------------
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  consent      Boolean  @default(true) // [additive] consent statement is required
+  archived     Boolean  @default(false) // [additive]
+  subscribedAt DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+// ----------------------------------------------------------------------------
+// BOOKS
+// ----------------------------------------------------------------------------
+
+model Book {
+  id            String        @id @default(cuid())
+  title         String
+  author        String
+  description   String
+  category      BookCategory
+  coverImage    String?
+  fileUrl       String?
+  downloadCount Int           @default(0)
+  featured      Boolean       @default(false) // [additive] admin Feature/Unfeature
+  published     Boolean       @default(false)
+  archived      Boolean       @default(false) // [additive]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  downloadLogs  DownloadLog[]
+
+  @@index([category])
+  @@index([published])
+  @@map("books")
+}
+
+// ----------------------------------------------------------------------------
+// RESOURCES
+// ----------------------------------------------------------------------------
+
+model Resource {
+  id           String           @id @default(cuid())
+  title        String
+  description  String
+  body         String? // [additive] rich article body (Content Structure: Articles)
+  category     ResourceCategory
+  thumbnail    String?
+  resourceFile String?
+  featured     Boolean          @default(false)
+  published    Boolean          @default(false)
+  archived     Boolean          @default(false) // [additive]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  downloadLogs DownloadLog[]
+
+  @@index([category])
+  @@index([published])
+  @@map("resources")
+}
+
+// ----------------------------------------------------------------------------
+// PACKAGES
+// ----------------------------------------------------------------------------
+
+model Package {
+  id          String             @id @default(cuid())
+  packageName String
+  description String
+  totalHours  Int
+  totalCost   Int // stored in minor units / whole currency per admin entry
+  features    String[] // feature list
+  buttonText  String             @default("Proceed") // [additive] admin "Button Text"
+  sortOrder   Int                @default(0) // [additive] admin "Reorder"
+  published   Boolean            @default(true)
+  archived    Boolean            @default(false) // [additive]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  inquiries   PackageInquiry[]
+
+  @@index([sortOrder])
+  @@map("packages")
+}
+
+// ----------------------------------------------------------------------------
+// PACKAGE INQUIRIES
+// ----------------------------------------------------------------------------
+
+model PackageInquiry {
+  id               String      @id @default(cuid())
+  packageId        String
+  studentFirstName String
+  studentLastName  String
+  studentEmail     String
+  studentPhone     String
+  message          String?
+  archived         Boolean     @default(false) // [additive]
+  emailStatus      EmailStatus @default(PENDING) // [additive]
+  createdAt        DateTime    @default(now())
+
+  package          Package     @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@index([packageId])
+  @@map("package_inquiries")
+}
+
+// ----------------------------------------------------------------------------
+// TESTIMONIALS
+// ----------------------------------------------------------------------------
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  studentName String
+  program     String? // [additive] Content Structure lists "Program"
+  headline    String
+  content     String
+  photo       String?
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  archived    Boolean  @default(false) // [additive]
+  createdAt   DateTime @default(now())
+
+  @@map("testimonials")
+}
+
+// ----------------------------------------------------------------------------
+// FAQS
+// ----------------------------------------------------------------------------
+
+model Faq {
+  id        String      @id @default(cuid())
+  category  FaqCategory
+  question  String
+  answer    String
+  sortOrder Int         @default(0) // [additive] stable ordering
+  published Boolean     @default(true)
+  archived  Boolean     @default(false) // [additive]
+  createdAt DateTime    @default(now())
+
+  @@index([category])
+  @@map("faqs")
+}
+
+// ----------------------------------------------------------------------------
+// SITE SETTINGS (single row)
+// ----------------------------------------------------------------------------
+
+model SiteSettings {
+  id            String   @id @default(cuid())
+  siteName      String   @default("Hello Clinica")
+  siteEmail1    String   @default("helloqlinica@gmail.com")
+  siteEmail2    String   @default("helloqlinica@outlook.com")
+  logo          String?
+  favicon       String?
+  socialLinks   Json     @default("{}")
+  footerText    String?  @default("Expert guidance for future healthcare professionals.") // [additive]
+  copyrightText String?  @default("© Hello Clinica. All rights reserved.") // [additive]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// ----------------------------------------------------------------------------
+// AUDIT LOGS
+// ----------------------------------------------------------------------------
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  adminId   String
+  action    String
+  entity    String
+  entityId  String?
+  timestamp DateTime @default(now())
+  ipAddress String?
+
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([timestamp])
+  @@map("audit_logs")
+}
+
+// ----------------------------------------------------------------------------
+// DOWNLOAD LOGS
+// ----------------------------------------------------------------------------
+
+model DownloadLog {
+  id           String    @id @default(cuid())
+  resourceId   String?
+  bookId       String?
+  downloadDate DateTime  @default(now())
+  ipAddress    String?
+
+  resource     Resource? @relation(fields: [resourceId], references: [id], onDelete: SetNull)
+  book         Book?     @relation(fields: [bookId], references: [id], onDelete: SetNull)
+
+  @@index([resourceId])
+  @@index([bookId])
+  @@map("download_logs")
+}
+
+// ----------------------------------------------------------------------------
+// SEARCH INDEX
+// ----------------------------------------------------------------------------
+
+model SearchIndex {
+  id          String   @id @default(cuid())
+  contentType String
+  contentId   String
+  title       String
+  body        String
+  url         String? // [additive] direct link target for results
+  createdAt   DateTime @default(now())
+
+  @@index([contentType])
+  @@map("search_index")
+}
+
+// ----------------------------------------------------------------------------
+// EMAIL LOG  [additive table]
+// Records every notification attempt so "store delivery status / retry on
+// failure / never lose data" is auditable independent of the source record.
+// ----------------------------------------------------------------------------
+
+model EmailLog {
+  id          String      @id @default(cuid())
+  template    String // e.g. "contact", "consultation", "package_inquiry"
+  recipients  String[]
+  subject     String
+  status      EmailStatus @default(PENDING)
+  attempts    Int         @default(0)
+  lastError   String?
+  relatedType String? // source model name
+  relatedId   String? // source record id
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([status])
+  @@map("email_logs")
+}
