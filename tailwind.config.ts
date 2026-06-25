@@ -1,9 +1,17 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Hello Clinica — Design System (FROZEN, per Clinica_File_04_Design_System.md
- * and PROJECT_CONSTITUTION.md). These values must not be altered by future
- * phases. Components reference these tokens only — no inline hex values.
+ * Hello Clinica — Design System.
+ *
+ * PALETTE OVERRIDE (File 17 — Amendment Register v1.2, owner-authorized):
+ * the original medical-blue palette is replaced by the MSHQ-mirrored palette.
+ * Token NAMES are intentionally preserved (medical-blue / deep-blue /
+ * accent-blue) so existing components need no edits; only their VALUES change:
+ *   medical-blue -> Deep Teal  #0C3C4C  (primary brand / structural)
+ *   deep-blue    -> Petrol     #082C38  (darker brand)
+ *   accent-blue  -> Cyan       #17A2B8  (accent)
+ *   coral        -> Coral      #C2461A  (primary CTA; AA-compliant on white)
+ * Future phases must not revert these to the pre-override blues.
  */
 const config: Config = {
   darkMode: ["class"],
@@ -26,11 +34,16 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Brand palette (frozen)
-        "medical-blue": "#0F4C81",
-        "deep-blue": "#1E3A5F",
-        "accent-blue": "#4FC3F7",
-        "brand-bg": "#F8FAFC",
+        // Brand palette (MSHQ-mirrored — names preserved, values overridden)
+        "medical-blue": "#0C3C4C", // Deep Teal (primary/structural brand)
+        "deep-blue": "#082C38", // Petrol (darker brand)
+        "accent-blue": "#17A2B8", // Cyan (accent)
+        "brand-bg": "#F4F7F8", // light neutral section background
+        coral: {
+          DEFAULT: "#C2461A", // primary CTA — AA (4.9:1) with white text
+          dark: "#A93C15", // CTA hover/active
+          bright: "#F2683C", // non-text accent only (fails AA as text bg)
+        },
 
         // Shadcn UI semantic tokens mapped to brand palette via CSS variables
         border: "hsl(var(--border))",
@@ -75,7 +88,6 @@ const config: Config = {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
       },
       borderRadius: {
-        // Cards = 24px (frozen); buttons = "rounded XL"
         card: "24px",
         xl: "calc(var(--radius))",
         lg: "calc(var(--radius) - 2px)",
@@ -83,24 +95,22 @@ const config: Config = {
         sm: "calc(var(--radius) - 8px)",
       },
       boxShadow: {
-        // Card shadow + hover lift (frozen "Shadow Large" + "Hover Lift")
-        card: "0 10px 30px -12px rgba(15, 76, 129, 0.18)",
-        "card-hover": "0 24px 48px -16px rgba(15, 76, 129, 0.28)",
-        focus: "0 0 0 3px rgba(79, 195, 247, 0.45)",
+        // Card shadow + hover lift (teal-tinted to match override)
+        card: "0 10px 30px -12px rgba(12, 60, 76, 0.18)",
+        "card-hover": "0 24px 48px -16px rgba(12, 60, 76, 0.28)",
+        focus: "0 0 0 3px rgba(23, 162, 184, 0.45)",
       },
       backgroundImage: {
-        // Frozen gradient
+        // Overridden gradient: teal -> petrol -> cyan
         "brand-gradient":
-          "linear-gradient(135deg, #0F4C81 0%, #1E3A5F 55%, #4FC3F7 100%)",
+          "linear-gradient(135deg, #0C3C4C 0%, #082C38 55%, #17A2B8 100%)",
       },
       spacing: {
-        // 8px grid extensions for section rhythm (48 / 80 / 120)
         "section-mobile": "48px",
         "section-tablet": "80px",
         "section-desktop": "120px",
       },
       transitionDuration: {
-        // Page transitions = 300ms (frozen)
         page: "300ms",
       },
       keyframes: {

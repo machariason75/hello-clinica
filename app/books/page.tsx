@@ -1,52 +1,61 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { BookOpen, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
-import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { NewsletterSection } from "@/components/sections/NewsletterSection";
+import { BooksCatalog, type CatalogBook } from "@/components/books/BooksCatalog";
 import { buildMetadata } from "@/lib/seo";
+import { bookCategories, getBookCategoryByEnum } from "@/lib/data/book-categories";
+import { getAllPublishedBooks } from "@/lib/queries/books";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Books",
-  description: "Curated books and study guides to support your medical education journey.",
+  description:
+    "A curated library of recommended books, medical school texts, study guides, and digital downloads for future clinicians.",
   path: "/books",
 });
 
-/**
- * Books hub — Phase 1 foundation shell only. The catalog, categories, and
- * downloads are built in the Books phase from the `books` table. This shell
- * keeps the frozen navigation working with no broken links.
- */
-export default function BooksPage() {
+export default async function BooksPage() {
+  const books = await getAllPublishedBooks();
+
+  const catalog: CatalogBook[] = books.map((b) => {
+    const cat = getBookCategoryByEnum(b.category);
+    return {
+      id: b.id,
+      title: b.title,
+      author: b.author,
+      categorySlug: cat?.slug ?? "recommended-books",
+      categoryLabel: cat?.title ?? "Books",
+    };
+  });
+
+  const filters = bookCategories.map((c) => ({ slug: c.slug, label: c.title }));
+
   return (
     <PageTransition>
       <PageHero
         eyebrow="Books"
         title="Curated reading for future clinicians"
-        description="A selection of recommended books, study guides, and digital downloads to complement your advising and self-study."
+        description="Recommended books, core medical school texts, study guides, and digital downloads — organized to help you find the right resource fast."
       />
-      <Section>
-        <EmptyState
-          icon={<BookOpen className="h-7 w-7" />}
-          title="The library is being stocked"
-          description="We're preparing a curated collection of books and study guides. Check back soon, or subscribe to our newsletter to hear when it launches."
-          action={
-            <div className="flex flex-col justify-center gap-3 sm:flex-row">
-              <Button asChild>
-                <Link href="/resources">
-                  Browse free resources
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </Button>
-              <Button asChild variant="secondary">
-                <Link href="/contact">Contact us</Link>
-              </Button>
-            </div>
-          }
-        />
+
+      <Section ariaLabel="Book catalog">
+        {catalog.length === 0 ? (
+          <EmptyState
+            icon={<BookOpen className="h-7 w-7" />}
+            title="The library is being stocked"
+            description="We're preparing a curated collection of books and study guides. Subscribe below to hear when it launches."
+          />
+        ) : (
+          <BooksCatalog books={catalog} filters={filters} />
+        )}
       </Section>
+
+      <NewsletterSection />
     </PageTransition>
   );
 }

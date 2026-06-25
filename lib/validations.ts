@@ -49,3 +49,16 @@ export const contactSchema = z.object({
   }),
 });
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const packageInquirySchema = z.object({
+  studentFirstName: z.string().trim().min(1, "Please enter your first name."),
+  studentLastName: z.string().trim().min(1, "Please enter your last name."),
+  studentEmail: z
+    .string()
+    .trim()
+    .min(1, "Please provide your email address.")
+    .email("Please provide a valid email address."),
+  studentPhone: z.string().trim().min(1, "Please enter your phone number."),
+  message: z.string().trim().optional(),
+});
+export type PackageInquiryInput = z.infer<typeof packageInquirySchema>;

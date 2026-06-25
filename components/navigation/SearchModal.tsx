@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Search, FileText, ArrowRight } from "lucide-react";
+import { Search, FileText, ArrowRight, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -11,14 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { searchablePages } from "@/lib/site-config";
+import { searchAll, type SearchResult } from "@/lib/actions/search";
 
 /**
- * Search modal.
- *
- * Phase 1 searches the published site pages/sections — every result links to a
- * real, existing route (no broken links). The frozen requirement to also search
- * resources, books and FAQs is fulfilled in later phases by extending the
- * result set from the SearchIndex table; the UI here does not change.
+ * Header search modal. Empty/short query shows the static page list; from two
+ * characters it queries the SearchIndex (resources, books, FAQs, pages) via the
+ * debounced server action. Every result links to a real route.
  */
 export function SearchModal({
   open,
@@ -28,17 +26,46 @@ export function SearchModal({
   onOpenChange: (open: boolean) => void;
 }) {
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [loading, setLoading] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return searchablePages;
-    return searchablePages.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.type.toLowerCase().includes(q) ||
-        p.keywords.toLowerCase().includes(q)
-    );
+  const staticResults: SearchResult[] = searchablePages.map((p) => ({
+    title: p.title,
+    type: p.type,
+    url: p.href,
+  }));
+
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+    const q = query.trim();
+    if (q.length < 2) {
+      setResults([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    timer.current = setTimeout(async () => {
+      const found = await searchAll(q);
+      setResults(found);
+      setLoading(false);
+    }, 250);
+    return () => {
+      if (timer.current) clearTimeout(timer.current);
+    };
   }, [query]);
+
+  // Reset when closed
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+      setResults([]);
+      setLoading(false);
+    }
+  }, [open]);
+
+  const isSearching = query.trim().length >= 2;
+  const shown = isSearching ? results : staticResults;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -58,18 +85,19 @@ export function SearchModal({
             className="h-10 border-0 px-0 focus-visible:ring-0"
             aria-label="Search query"
           />
+          {loading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" aria-hidden="true" />}
         </div>
 
-        <ul className="max-h-[55vh] overflow-y-auto p-2" role="listbox" aria-label="Search results">
-          {results.length === 0 ? (
+        <ul className="max-h-[55vh] overflow-y-auto p-2" aria-label="Search results">
+          {isSearching && !loading && shown.length === 0 ? (
             <li className="px-4 py-10 text-center text-muted-foreground">
-              No matches yet. Try a different term — more content becomes searchable as it is published.
+              No matches yet. Try a different term.
             </li>
           ) : (
-            results.map((result) => (
-              <li key={result.href} role="option" aria-selected="false">
+            shown.map((result, i) => (
+              <li key={`${result.url}-${i}`}>
                 <Link
-                  href={result.href}
+                  href={result.url}
                   onClick={() => onOpenChange(false)}
                   className="focus-ring group flex items-center justify-between gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-brand-bg"
                 >

@@ -62,3 +62,61 @@ export const searchablePages: { title: string; href: string; type: string; keywo
 ];
 
 export type SidebarNavItem = (typeof sidebarNav)[number];
+
+/* ---------------------------------------------------------------------------
+ * MEGA-MENU NAVIGATION (File 17 — Amendment Register v1.2, owner-authorized).
+ * Desktop renders a horizontal mega-menu with dropdown panels; mobile/tablet
+ * collapses to the drawer. Top-level items resolve to existing Phase 1 hub
+ * routes. Dropdown children point at their parent hub with a section hash so
+ * NO route 404s in Phase 1 — later phases repoint each child to its dedicated
+ * page (e.g. /resources/personal-statement-guide) as those pages ship.
+ * ------------------------------------------------------------------------- */
+
+export type NavChild = { label: string; href: string };
+export type NavItem = { label: string; href: string; children?: NavChild[] };
+
+export const primaryNav: NavItem[] = [
+  {
+    label: "Free Resources",
+    href: "/resources",
+    children: [
+      { label: "Medical School Admissions", href: "/resources/admissions" },
+      { label: "Application Timeline", href: "/resources/application-timeline" },
+      { label: "Personal Statement Guide", href: "/resources/personal-statement-guide" },
+      { label: "Interview Guide", href: "/resources/interview-guide" },
+      { label: "Clinical Experience", href: "/resources/clinical-experience" },
+      { label: "Volunteer Guide", href: "/resources/volunteer-guide" },
+      { label: "Shadowing Guide", href: "/resources/shadowing-guide" },
+      { label: "Study Resources", href: "/resources/study-resources" },
+      { label: "Career Exploration", href: "/resources/career-exploration" },
+    ],
+  },
+  {
+    label: "Advising Services",
+    href: "/advising",
+    children: [
+      { label: "Admissions Advising", href: "/advising#admissions-advising" },
+      { label: "Application Review", href: "/advising#application-review" },
+      { label: "Interview Coaching", href: "/advising#interview-coaching" },
+      { label: "Consultation Packages", href: "/advising#consultation-packages" },
+    ],
+  },
+  {
+    label: "Books",
+    href: "/books",
+    children: [
+      { label: "Recommended Books", href: "/books/recommended-books" },
+      { label: "Medical School Books", href: "/books/medical-school-books" },
+      { label: "Study Guides", href: "/books/study-guides" },
+      { label: "Digital Downloads", href: "/books/digital-downloads" },
+    ],
+  },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+/**
+ * Persistent header CTA. Points to /contact in Phase 1 (the live intake form);
+ * repoint to /request-consultation once the consultation page ships.
+ */
+export const primaryCta = { label: "Request a Consultation", href: "/contact" };

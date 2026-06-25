@@ -4,9 +4,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Button — frozen styles:
- *  - primary: blue background, white text, rounded-xl
- *  - secondary: white background, blue border, blue text
+ * Button styles (palette overridden per File 17 v1.2):
+ *  - primary:   coral background, white text, rounded-xl (the MSHQ CTA)
+ *  - secondary: white background, teal border + teal text
+ * Coral (#C2461A) meets WCAG AA (4.9:1) with white label text.
  */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60",
