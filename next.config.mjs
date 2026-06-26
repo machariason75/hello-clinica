@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  output: "standalone",
   eslint: {
     // Lint locally during development, but don't fail production builds on
     // lint warnings (e.g. unescaped apostrophes in copy). Vercel-friendly.
