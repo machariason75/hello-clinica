@@ -6,7 +6,7 @@ import { testimonials } from "@/lib/data/homepage-content";
 
 export function Testimonials() {
   return (
-    <section className="section bg-white">
+    <section className="section">
       <Container>
         <SectionHeading
           eyebrow="Testimonials"

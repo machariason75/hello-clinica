@@ -62,3 +62,47 @@ export const packageInquirySchema = z.object({
   message: z.string().trim().optional(),
 });
 export type PackageInquiryInput = z.infer<typeof packageInquirySchema>;
+
+export const contactMethodOptions = [
+  "WhatsApp",
+  "Email",
+  "Instagram",
+  "Facebook",
+  "TikTok",
+] as const;
+
+/** A handle/username is required for every method except Email. */
+export function methodNeedsHandle(method: string): boolean {
+  return method !== "" && method !== "Email";
+}
+
+export const consultationSchema = z
+  .object({
+    firstName: z.string().trim().min(1, "Please enter your first name."),
+    lastName: z.string().trim().min(1, "Please enter your last name."),
+    phone: z.string().trim().min(1, "Please enter your phone number."),
+    email: z
+      .string()
+      .trim()
+      .min(1, "Please provide your email address.")
+      .email("Please provide a valid email address."),
+    cadre: z.enum(cadreOptions, {
+      errorMap: () => ({ message: "Please select your current stage." }),
+    }),
+    contactMethod: z.enum(contactMethodOptions, {
+      errorMap: () => ({ message: "Please select a preferred contact method." }),
+    }),
+    socialHandle: z.string().trim().optional(),
+    message: z.string().trim().optional(),
+    consent: z.literal(true, {
+      errorMap: () => ({ message: "Please agree to be contacted to continue." }),
+    }),
+  })
+  .refine(
+    (data) => !methodNeedsHandle(data.contactMethod) || !!data.socialHandle?.trim(),
+    {
+      message: "Please provide your username or number for the selected method.",
+      path: ["socialHandle"],
+    }
+  );
+export type ConsultationInput = z.infer<typeof consultationSchema>;

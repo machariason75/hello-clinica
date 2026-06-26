@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/common/Toaster";
 import { JsonLd } from "@/components/common/JsonLd";
+import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { buildMetadata, organizationJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -28,7 +29,8 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-brand-bg font-sans">
+      <body className="min-h-screen font-sans">
+        <AmbientBackground />
         <JsonLd data={organizationJsonLd()} />
         <a href="#main-content" className="skip-link">
           Skip to content

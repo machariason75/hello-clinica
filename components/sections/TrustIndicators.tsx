@@ -5,7 +5,7 @@ import { trustStats } from "@/lib/data/homepage-content";
 /** Trust indicators band — outcome-style statistics. */
 export function TrustIndicators() {
   return (
-    <section className="border-y border-border bg-white" aria-label="Hello Clinica at a glance">
+    <section className="border-y border-white/40 bg-white/55 backdrop-blur-sm" aria-label="Hello Clinica at a glance">
       <Container className="py-12 lg:py-16">
         <StaggerGroup className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {trustStats.map((stat) => {

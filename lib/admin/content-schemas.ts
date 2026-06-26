@@ -1,0 +1,107 @@
+import { z } from "zod";
+
+export const bookCategoryValues = [
+  "RECOMMENDED_BOOKS",
+  "MEDICAL_SCHOOL_BOOKS",
+  "STUDY_GUIDES",
+  "DIGITAL_DOWNLOADS",
+] as const;
+
+export const resourceCategoryValues = [
+  "MEDICAL_SCHOOL_ADMISSIONS",
+  "APPLICATION_TIMELINE",
+  "PERSONAL_STATEMENT_GUIDE",
+  "INTERVIEW_GUIDE",
+  "CLINICAL_EXPERIENCE",
+  "VOLUNTEER_GUIDE",
+  "SHADOWING_GUIDE",
+  "STUDY_RESOURCES",
+  "CAREER_EXPLORATION",
+] as const;
+
+const optionalUrl = z
+  .string()
+  .trim()
+  .url("Please enter a valid URL (starting with http).")
+  .optional()
+  .or(z.literal(""));
+
+export const bookSchema = z.object({
+  title: z.string().trim().min(1, "Title is required."),
+  author: z.string().trim().min(1, "Author is required."),
+  description: z.string().trim().min(1, "Description is required."),
+  category: z.enum(bookCategoryValues, {
+    errorMap: () => ({ message: "Please choose a category." }),
+  }),
+  coverImage: optionalUrl,
+  fileUrl: optionalUrl,
+  featured: z.boolean(),
+  published: z.boolean(),
+});
+export type BookFormInput = z.infer<typeof bookSchema>;
+
+export const resourceSchema = z.object({
+  title: z.string().trim().min(1, "Title is required."),
+  description: z.string().trim().min(1, "Description is required."),
+  body: z.string().trim().optional().or(z.literal("")),
+  category: z.enum(resourceCategoryValues, {
+    errorMap: () => ({ message: "Please choose a category." }),
+  }),
+  thumbnail: optionalUrl,
+  resourceFile: optionalUrl,
+  featured: z.boolean(),
+  published: z.boolean(),
+});
+export type ResourceFormInput = z.infer<typeof resourceSchema>;
+
+/* ------------------------- Packages / Testimonials / FAQs ------------------------- */
+
+export const packageSchema = z.object({
+  packageName: z.string().trim().min(1, "Package name is required."),
+  description: z.string().trim().min(1, "Description is required."),
+  totalHours: z.coerce.number().int("Whole number of hours.").min(0, "Cannot be negative."),
+  totalCost: z.coerce.number().int("Whole number.").min(0, "Cannot be negative."),
+  features: z
+    .array(z.string().trim().min(1))
+    .min(1, "Add at least one feature."),
+  buttonText: z.string().trim().min(1, "Button text is required."),
+  published: z.boolean(),
+});
+export type PackageFormInput = z.infer<typeof packageSchema>;
+
+export const testimonialSchema = z.object({
+  studentName: z.string().trim().min(1, "Student name is required."),
+  program: z.string().trim().optional().or(z.literal("")),
+  headline: z.string().trim().min(1, "Headline is required."),
+  content: z.string().trim().min(1, "Story is required."),
+  photo: z
+    .string()
+    .trim()
+    .url("Please enter a valid URL (starting with http).")
+    .optional()
+    .or(z.literal("")),
+  featured: z.boolean(),
+  published: z.boolean(),
+});
+export type TestimonialFormInput = z.infer<typeof testimonialSchema>;
+
+export const faqCategoryValues = [
+  "GENERAL",
+  "ADMISSIONS_ADVISING",
+  "APPLICATION_REVIEW",
+  "INTERVIEW_COACHING",
+  "CONSULTATION_PACKAGES",
+  "BOOKS",
+  "RESOURCES",
+  "CONTACT",
+] as const;
+
+export const faqSchema = z.object({
+  category: z.enum(faqCategoryValues, {
+    errorMap: () => ({ message: "Please choose a category." }),
+  }),
+  question: z.string().trim().min(1, "Question is required."),
+  answer: z.string().trim().min(1, "Answer is required."),
+  published: z.boolean(),
+});
+export type FaqFormInput = z.infer<typeof faqSchema>;

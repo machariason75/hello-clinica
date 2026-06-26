@@ -44,8 +44,11 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <p className="font-semibold text-deep-blue">Email</p>
-                  <a href={`mailto:${siteConfig.email.primary}`} className="text-medical-blue hover:underline">
+                  <a href={`mailto:${siteConfig.email.primary}`} className="block text-medical-blue hover:underline">
                     {siteConfig.email.primary}
+                  </a>
+                  <a href={`mailto:${siteConfig.email.secondary}`} className="block text-medical-blue hover:underline">
+                    {siteConfig.email.secondary}
                   </a>
                 </div>
               </li>

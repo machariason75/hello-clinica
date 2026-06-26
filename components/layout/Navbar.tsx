@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, Search as SearchIcon, ChevronDown } from "lucide-react";
 import { Container } from "@/components/common/Container";
@@ -34,12 +35,14 @@ export function Navbar() {
             className="focus-ring flex shrink-0 items-center gap-2 rounded-lg"
             aria-label={`${siteConfig.name} home`}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-sm font-bold text-white">
-              HC
-            </span>
-            <span className="text-lg font-bold tracking-tight text-deep-blue">
-              {siteConfig.name}
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt={siteConfig.name}
+              width={290}
+              height={134}
+              priority
+              className="h-9 w-auto sm:h-10"
+            />
           </Link>
 
           {/* Desktop mega-menu */}

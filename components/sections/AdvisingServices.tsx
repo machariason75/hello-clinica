@@ -6,7 +6,7 @@ import { advisingServices } from "@/lib/data/homepage-content";
 
 export function AdvisingServices() {
   return (
-    <section className="section bg-white">
+    <section className="section">
       <Container>
         <SectionHeading
           eyebrow="Advising Services"

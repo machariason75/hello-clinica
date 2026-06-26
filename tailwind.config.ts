@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
 /**
  * Hello Clinica — Design System.
@@ -38,7 +39,7 @@ const config: Config = {
         "medical-blue": "#0C3C4C", // Deep Teal (primary/structural brand)
         "deep-blue": "#082C38", // Petrol (darker brand)
         "accent-blue": "#17A2B8", // Cyan (accent)
-        "brand-bg": "#F4F7F8", // light neutral section background
+        "brand-bg": "#FBF5EF", // warm cream — global page background (consistent site-wide)
         coral: {
           DEFAULT: "#C2461A", // primary CTA — AA (4.9:1) with white text
           dark: "#A93C15", // CTA hover/active
@@ -132,4 +133,4 @@ const config: Config = {
   plugins: [require("tailwindcss-animate")],
 };
 
-export default config;
+export default withUt(config);

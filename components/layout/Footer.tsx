@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
@@ -21,10 +22,13 @@ export function Footer() {
           {/* Newsletter */}
           <div className="max-w-md">
             <Link href="/" className="flex items-center gap-2" aria-label={`${siteConfig.name} home`}>
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-sm font-bold text-white">
-                HC
-              </span>
-              <span className="text-lg font-bold">{siteConfig.name}</span>
+              <Image
+                src="/images/logo-white.png"
+                alt={siteConfig.name}
+                width={290}
+                height={134}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="mt-4 text-white/80">
               Join our newsletter for educational updates, guides, and advising tips — straight to
