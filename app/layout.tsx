@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/common/Toaster";
 import { JsonLd } from "@/components/common/JsonLd";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { buildMetadata, organizationJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main-content">{children}</main>
         <Footer />
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   );
