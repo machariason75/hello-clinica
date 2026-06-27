@@ -13,7 +13,7 @@ import { buildMetadata } from "@/lib/seo";
 import { getBookCategoryBySlug } from "@/lib/data/book-categories";
 import { getBooksByCategory } from "@/lib/queries/books";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 type Params = { params: Promise<{ category: string }> };
 

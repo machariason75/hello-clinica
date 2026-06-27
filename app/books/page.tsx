@@ -9,8 +9,9 @@ import { BooksCatalog, type CatalogBook } from "@/components/books/BooksCatalog"
 import { buildMetadata } from "@/lib/seo";
 import { bookCategories, getBookCategoryByEnum } from "@/lib/data/book-categories";
 import { getAllPublishedBooks } from "@/lib/queries/books";
+import { BooksFeatureBanner } from "@/components/sections/BooksFeatureBanner";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 export const metadata: Metadata = buildMetadata({
   title: "Books",
@@ -43,7 +44,11 @@ export default async function BooksPage() {
         description="Recommended books, core medical school texts, study guides, and digital downloads — organized to help you find the right resource fast."
       />
 
-      <Section ariaLabel="Book catalog">
+      <Section className="section-tight">
+        <BooksFeatureBanner />
+      </Section>
+
+      <Section id="book-catalog" ariaLabel="Book catalog">
         {catalog.length === 0 ? (
           <EmptyState
             icon={<BookOpen className="h-7 w-7" />}

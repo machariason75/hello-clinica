@@ -17,7 +17,7 @@ import { getAdvisingServiceBySlug } from "@/lib/data/advising-services";
 import { getPublishedPackages } from "@/lib/queries/packages";
 import type { PackageView } from "@/components/packages/PackageCard";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 type Params = { params: Promise<{ service: string }> };
 

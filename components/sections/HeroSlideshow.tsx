@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { HeartPulse, Plus, GraduationCap } from "lucide-react";
 
@@ -71,25 +72,36 @@ export function HeroSlideshow() {
         className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5"
       >
         {reduce ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={current.src} alt={current.alt} className="absolute inset-0 h-full w-full object-cover" />
+          <Image
+            src={current.src}
+            alt={current.alt}
+            fill
+            priority
+            sizes="(max-width: 1024px) 90vw, 600px"
+            className="object-cover"
+          />
         ) : (
           <>
-            <motion.img
-              src={current.src}
-              alt={current.alt}
-              style={{ opacity: currentOpacity, y: drift, scale: zoom }}
-              className="absolute inset-0 h-full w-full object-cover"
-              draggable={false}
-            />
-            <motion.img
-              src={next.src}
-              alt=""
-              aria-hidden="true"
-              style={{ opacity: nextOpacity, y: drift, scale: zoom }}
-              className="absolute inset-0 h-full w-full object-cover"
-              draggable={false}
-            />
+            <motion.div style={{ opacity: currentOpacity, y: drift, scale: zoom }} className="absolute inset-0">
+              <Image
+                src={current.src}
+                alt={current.alt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 600px"
+                className="object-cover"
+              />
+            </motion.div>
+            <motion.div style={{ opacity: nextOpacity, y: drift, scale: zoom }} className="absolute inset-0">
+              <Image
+                src={next.src}
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="(max-width: 1024px) 90vw, 600px"
+                className="object-cover"
+              />
+            </motion.div>
           </>
         )}
       </motion.div>

@@ -15,7 +15,7 @@ import { buildMetadata } from "@/lib/seo";
 import { getResourceCategoryBySlug } from "@/lib/data/resource-categories";
 import { getResourcesByCategory } from "@/lib/queries/resources";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 type Params = { params: Promise<{ category: string }> };
 

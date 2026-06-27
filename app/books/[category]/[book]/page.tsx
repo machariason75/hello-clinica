@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 import { getBookCategoryBySlug, getBookCategoryByEnum } from "@/lib/data/book-categories";
 import { getBookById, getRelatedBooks } from "@/lib/queries/books";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 type Params = { params: Promise<{ category: string; book: string }> };
 

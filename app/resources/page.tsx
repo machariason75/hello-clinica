@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 import { resourceCategories } from "@/lib/data/resource-categories";
 import { getResourceCountsByCategory } from "@/lib/queries/resources";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300; // cached, refreshed every 5 min
 
 export const metadata: Metadata = buildMetadata({
   title: "Free Resources",
