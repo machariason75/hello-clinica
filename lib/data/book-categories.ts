@@ -22,6 +22,18 @@ export const bookCategories: BookCategoryDef[] = [
     description: "Core textbooks and references used throughout medical school.",
   },
   {
+    slug: "nursing-books",
+    enum: "NURSING_BOOKS",
+    title: "Nursing Books",
+    description: "Foundational texts and references for nursing students at every stage.",
+  },
+  {
+    slug: "nclex-books",
+    enum: "NCLEX_BOOKS",
+    title: "NCLEX Books",
+    description: "Review books and question banks focused on NCLEX preparation.",
+  },
+  {
     slug: "study-guides",
     enum: "STUDY_GUIDES",
     title: "Study Guides",

@@ -31,7 +31,9 @@ export default async function ResourcesPage() {
 
       <Section ariaLabel="Resource categories">
         <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {resourceCategories.map((category) => {
+          {resourceCategories
+            .filter((category) => category.group !== "nursing")
+            .map((category) => {
             const count = counts.get(category.enum) ?? 0;
             return (
               <StaggerItem key={category.slug} className="h-full">

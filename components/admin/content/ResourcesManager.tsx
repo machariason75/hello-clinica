@@ -44,6 +44,19 @@ const categoryLabels: Record<string, string> = {
   SHADOWING_GUIDE: "Shadowing Guide",
   STUDY_RESOURCES: "Study Resources",
   CAREER_EXPLORATION: "Career Exploration",
+  NURSING_RESOURCES: "Nursing Resources",
+  NURSING_ANATOMY: "Anatomy Review",
+  NURSING_PHYSIOLOGY: "Physiology Review",
+  NURSING_PHARMACOLOGY: "Pharmacology Basics",
+  NURSING_DOSAGE: "Dosage Calculations",
+  NURSING_NCLEX_SHEETS: "NCLEX Quick Sheets",
+  NURSING_LAB_VALUES: "Lab Values",
+  NURSING_MED_TERMINOLOGY: "Medical Terminology",
+  NURSING_ABBREVIATIONS: "Nursing Abbreviations",
+  NURSING_ASSESSMENT: "Head-to-Toe Assessment",
+  NURSING_VITAL_SIGNS: "Vital Signs Guide",
+  NURSING_ECG: "ECG Basics",
+  NURSING_MED_ADMIN: "Medication Administration",
 };
 
 const emptyForm: ResourceFormInput = {

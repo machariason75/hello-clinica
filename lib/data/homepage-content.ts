@@ -113,24 +113,52 @@ export const featuredBooks: BookCardData[] = [
 export const testimonials: TestimonialData[] = [
   {
     studentName: "Amara N.",
-    program: "Accepted, MD Program",
+    program: "Medical Student",
     headline: "I finally understood what to prioritize.",
     story:
       "The advising sessions turned a confusing process into a clear plan. I walked into interviews knowing exactly how to tell my story.",
   },
   {
+    studentName: "Jasmine R.",
+    program: "BSN Student",
+    headline: "My NCLEX prep finally had a structure.",
+    story:
+      "I went from random studying to a focused weekly plan. The recommended books and practice approach made the material click.",
+  },
+  {
     studentName: "Daniel K.",
-    program: "Pre-Med, Junior Year",
+    program: "Pre-Med Student",
     headline: "The timeline kept me on track all year.",
     story:
       "Having a realistic month-by-month plan meant I was never scrambling. Every deadline felt manageable instead of overwhelming.",
   },
   {
+    studentName: "Grace M.",
+    program: "RN Graduate",
+    headline: "Confident going into my first role.",
+    story:
+      "The clinical refreshers and lab-value guides were exactly what I needed to feel ready. I started my first job far less anxious.",
+  },
+  {
     studentName: "Priya S.",
-    program: "International Medical Graduate",
+    program: "International Student",
     headline: "Guidance that understood my situation.",
     story:
-      "As an IMG, I had specific questions no generic guide answered. The personalized advice made all the difference for my path.",
+      "I had specific questions no generic guide answered. The personalized advice made all the difference for my path.",
+  },
+  {
+    studentName: "Marcus T.",
+    program: "Nurse Practitioner Student",
+    headline: "Support that scaled with my goals.",
+    story:
+      "As I moved from RN toward NP, the advising kept up with where I was — practical, specific, and never one-size-fits-all.",
+  },
+  {
+    studentName: "Sofia L.",
+    program: "Pharmacy Student",
+    headline: "Resources that fit my field, not just one path.",
+    story:
+      "I worried everything would be med-school focused, but the guidance spoke to pharmacy too. It helped me plan rotations and stay organized.",
   },
 ];
 
@@ -154,5 +182,15 @@ export const homepageFaqs: FaqItem[] = [
     question: "How do I get started?",
     answer:
       "Reach out through our contact page with a short note about your goals. A member of our team will follow up to help you find the right next step.",
+  },
+  {
+    question: "How do I prepare for the NCLEX?",
+    answer:
+      "Start with a realistic study schedule, work through a trusted review book, and practice questions consistently rather than cramming. Focus on understanding the rationale behind each answer — why it's right or wrong — not just memorizing facts.",
+  },
+  {
+    question: "How does Hello Clinica help nursing students?",
+    answer:
+      "We bring together curated study guides, recommended books, and personalized advising for nursing students — from pre-nursing through BSN, RN, and advanced practice — so you have clear guidance and trusted resources at every step.",
   },
 ];

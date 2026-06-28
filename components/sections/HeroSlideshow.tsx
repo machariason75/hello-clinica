@@ -14,27 +14,21 @@ const SLIDES = [
   { src: "/images/medics/medic-6.jpg", alt: "Smiling healthcare professional" },
 ];
 
-// Module-level counter: advances once per mount, so each time the visitor
-// lands back on the welcome view a different photo greets them.
-let visitCursor = 0;
 
 /**
  * Hero image — one photo visible at a time. There is no timed carousel and no
  * thumbnail strip. As the visitor scrolls the welcome view away, the current
  * photo gently cross-dissolves into the next while drifting (parallax), so the
- * change reads as part of the scroll rather than a slideshow. A fresh starting
- * photo is chosen on each visit. Reduced-motion users see a single still image.
+ * change reads as part of the scroll rather than a slideshow. Reduced-motion
+ * users see a single still image.
  */
 export function HeroSlideshow() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
 
-  // Pick a stable starting photo once per mount.
-  const startRef = useRef<number | null>(null);
-  if (startRef.current === null) {
-    startRef.current = visitCursor++ % SLIDES.length;
-  }
-  const start = startRef.current;
+  // Deterministic first photo so server and client render identically
+  // (avoids hydration mismatch). Scrolling still cross-dissolves to the next.
+  const start = 0;
   const current = SLIDES[start];
   const next = SLIDES[(start + 1) % SLIDES.length];
 

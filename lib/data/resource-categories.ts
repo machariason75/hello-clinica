@@ -8,6 +8,17 @@ import {
   Eye,
   BookOpenCheck,
   Compass,
+  Dna,
+  Activity,
+  Pill,
+  Calculator,
+  ListChecks,
+  FlaskConical,
+  BookA,
+  ClipboardList,
+  Thermometer,
+  HeartPulse,
+  Syringe,
   type LucideIcon,
 } from "lucide-react";
 import type { ResourceCategory } from "@prisma/client";
@@ -27,6 +38,7 @@ export type ResourceCategoryDef = {
   overview: string;
   icon: LucideIcon;
   faqs: { question: string; answer: string }[];
+  group?: "nursing";
 };
 
 export const resourceCategories: ResourceCategoryDef[] = [
@@ -154,6 +166,176 @@ export const resourceCategories: ResourceCategoryDef[] = [
       { question: "How do I know which healthcare career fits me?", answer: "Explore through shadowing, conversations with professionals, and honest reflection on the lifestyle, training length, and work you find meaningful." },
       { question: "What's the difference between the main paths?", answer: "Each differs in training length, scope of practice, and day-to-day work. Exploring several helps you choose with clarity rather than assumption." },
       { question: "Can I change paths later?", answer: "Many people do. Early exploration reduces costly detours, but skills and prerequisites often transfer across paths." },
+    ],
+  },
+  {
+    slug: "nursing-resources",
+    enum: "NURSING_RESOURCES",
+    title: "Nursing Resources",
+    description: "Core study aids and quick-reference guides for nursing students.",
+    overview:
+      "Practical, high-yield resources for nursing students — from anatomy and pharmacology review to dosage calculations, lab values, and NCLEX quick sheets. Use them to reinforce coursework and build confidence for clinicals and exams.",
+    icon: Stethoscope,
+    faqs: [
+      { question: "How should I use these nursing resources?", answer: "Pair them with your coursework — review the relevant guide before lectures or clinicals, then use the quick sheets for fast recall while practicing questions." },
+      { question: "Are these enough to pass the NCLEX?", answer: "They're a strong supplement for building fundamentals, but combine them with a dedicated review book and consistent practice questions for full NCLEX preparation." },
+      { question: "Which should I start with?", answer: "Most students start with anatomy, physiology, and pharmacology basics, then layer in dosage calculations, lab values, and assessment guides as they move toward clinicals." },
+    ],
+  },
+  {
+    slug: "nursing-anatomy",
+    enum: "NURSING_ANATOMY",
+    title: "Anatomy Review",
+    description: "Skeletal, muscular, and organ-system overviews.",
+    overview: "Skeletal, muscular, and organ-system overviews. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Dna,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Anatomy Review folder?", answer: "Quick-reference guides and downloadable sheets covering anatomy review. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-physiology",
+    enum: "NURSING_PHYSIOLOGY",
+    title: "Physiology Review",
+    description: "How body systems function — cardiac, respiratory, renal and more.",
+    overview: "How body systems function — cardiac, respiratory, renal and more. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Activity,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Physiology Review folder?", answer: "Quick-reference guides and downloadable sheets covering physiology review. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-pharmacology",
+    enum: "NURSING_PHARMACOLOGY",
+    title: "Pharmacology Basics",
+    description: "Drug classes, mechanisms, and high-yield medication facts.",
+    overview: "Drug classes, mechanisms, and high-yield medication facts. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Pill,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Pharmacology Basics folder?", answer: "Quick-reference guides and downloadable sheets covering pharmacology basics. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-dosage-calculations",
+    enum: "NURSING_DOSAGE",
+    title: "Dosage Calculations",
+    description: "Practice and formulas for safe, accurate dosing.",
+    overview: "Practice and formulas for safe, accurate dosing. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Calculator,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Dosage Calculations folder?", answer: "Quick-reference guides and downloadable sheets covering dosage calculations. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-nclex-quick-sheets",
+    enum: "NURSING_NCLEX_SHEETS",
+    title: "NCLEX Quick Sheets",
+    description: "Condensed, high-yield sheets for fast NCLEX review.",
+    overview: "Condensed, high-yield sheets for fast NCLEX review. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: ListChecks,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the NCLEX Quick Sheets folder?", answer: "Quick-reference guides and downloadable sheets covering nclex quick sheets. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-lab-values",
+    enum: "NURSING_LAB_VALUES",
+    title: "Lab Values",
+    description: "Normal ranges and interpretation references.",
+    overview: "Normal ranges and interpretation references. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: FlaskConical,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Lab Values folder?", answer: "Quick-reference guides and downloadable sheets covering lab values. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-medical-terminology",
+    enum: "NURSING_MED_TERMINOLOGY",
+    title: "Medical Terminology",
+    description: "Prefixes, suffixes, and roots used across nursing.",
+    overview: "Prefixes, suffixes, and roots used across nursing. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: BookA,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Medical Terminology folder?", answer: "Quick-reference guides and downloadable sheets covering medical terminology. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-abbreviations",
+    enum: "NURSING_ABBREVIATIONS",
+    title: "Nursing Abbreviations",
+    description: "Approved abbreviations and safe charting shorthand.",
+    overview: "Approved abbreviations and safe charting shorthand. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: ClipboardList,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Nursing Abbreviations folder?", answer: "Quick-reference guides and downloadable sheets covering nursing abbreviations. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-head-to-toe-assessment",
+    enum: "NURSING_ASSESSMENT",
+    title: "Head-to-Toe Assessment",
+    description: "Checklists and normal-versus-abnormal findings.",
+    overview: "Checklists and normal-versus-abnormal findings. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Stethoscope,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Head-to-Toe Assessment folder?", answer: "Quick-reference guides and downloadable sheets covering head-to-toe assessment. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-vital-signs",
+    enum: "NURSING_VITAL_SIGNS",
+    title: "Vital Signs Guide",
+    description: "Normal ranges and documentation across age groups.",
+    overview: "Normal ranges and documentation across age groups. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Thermometer,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Vital Signs Guide folder?", answer: "Quick-reference guides and downloadable sheets covering vital signs guide. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-ecg-basics",
+    enum: "NURSING_ECG",
+    title: "ECG Basics",
+    description: "Reading strips and recognizing common rhythms.",
+    overview: "Reading strips and recognizing common rhythms. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: HeartPulse,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the ECG Basics folder?", answer: "Quick-reference guides and downloadable sheets covering ecg basics. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
+    ],
+  },
+  {
+    slug: "nursing-medication-administration",
+    enum: "NURSING_MED_ADMIN",
+    title: "Medication Administration",
+    description: "The rights of administration, routes, and safety checks.",
+    overview: "The rights of administration, routes, and safety checks. Practical, high-yield material for nursing students preparing for coursework, clinicals, and the NCLEX.",
+    icon: Syringe,
+    group: "nursing",
+    faqs: [
+      { question: "What is in the Medication Administration folder?", answer: "Quick-reference guides and downloadable sheets covering medication administration. Upload your own files anytime from the admin." },
+      { question: "How should I use these?", answer: "Review them alongside your coursework and clinical practice, and use them for fast recall before exams." },
     ],
   },
 ];

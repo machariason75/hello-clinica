@@ -90,6 +90,7 @@ export const primaryNav: NavItem[] = [
       { label: "Shadowing Guide", href: "/resources/shadowing-guide" },
       { label: "Study Resources", href: "/resources/study-resources" },
       { label: "Career Exploration", href: "/resources/career-exploration" },
+      { label: "Nursing Resources", href: "/resources/nursing-resources" },
     ],
   },
   {
@@ -108,6 +109,8 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: "Recommended Books", href: "/books/recommended-books" },
       { label: "Medical School Books", href: "/books/medical-school-books" },
+      { label: "Nursing Books", href: "/books/nursing-books" },
+      { label: "NCLEX Books", href: "/books/nclex-books" },
       { label: "Study Guides", href: "/books/study-guides" },
       { label: "Digital Downloads", href: "/books/digital-downloads" },
     ],

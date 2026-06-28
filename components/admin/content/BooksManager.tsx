@@ -41,6 +41,8 @@ export type BookRow = {
 const categoryLabels: Record<string, string> = {
   RECOMMENDED_BOOKS: "Recommended Books",
   MEDICAL_SCHOOL_BOOKS: "Medical School Books",
+  NURSING_BOOKS: "Nursing Books",
+  NCLEX_BOOKS: "NCLEX Books",
   STUDY_GUIDES: "Study Guides",
   DIGITAL_DOWNLOADS: "Digital Downloads",
 };
