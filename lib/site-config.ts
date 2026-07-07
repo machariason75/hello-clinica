@@ -115,6 +115,7 @@ export const primaryNav: NavItem[] = [
       { label: "Digital Downloads", href: "/books/digital-downloads" },
     ],
   },
+  { label: "Question Bank", href: "/question-bank" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

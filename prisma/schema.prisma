@@ -415,3 +415,102 @@ model EmailLog {
   @@index([status])
   @@map("email_logs")
 }
+
+// ============================================================
+// QUESTION BANK (Drop 1) — additive; new tables only.
+// ============================================================
+
+enum QuestionType {
+  SINGLE
+  MULTI
+  TRUE_FALSE
+}
+
+model QuizCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  icon        String? // lucide icon name (e.g. "Stethoscope")
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  quizzes Quiz[]
+
+  @@map("quiz_categories")
+}
+
+model Quiz {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  description      String
+  categoryId       String
+  difficulty       String   @default("Mixed")
+  timeLimitSeconds Int? // null = untimed
+  passThreshold    Int      @default(65) // percent needed to "pass"
+  published        Boolean  @default(false)
+  featured         Boolean  @default(false)
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  category QuizCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  QuizAttempt[]
+
+  @@index([categoryId])
+  @@index([published])
+  @@map("quizzes")
+}
+
+model Question {
+  id          String       @id @default(cuid())
+  quizId      String
+  type        QuestionType @default(SINGLE)
+  stem        String // the question text
+  topic       String       @default("General") // drives the per-topic report
+  explanation String // rationale: correct answer + why others are wrong + summary
+  points      Int          @default(1)
+  order       Int          @default(0)
+
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  choices Choice[]
+
+  @@index([quizId])
+  @@map("questions")
+}
+
+model Choice {
+  id         String  @id @default(cuid())
+  questionId String
+  text       String
+  isCorrect  Boolean @default(false)
+  order      Int     @default(0)
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+  @@map("choices")
+}
+
+model QuizAttempt {
+  id               String   @id @default(cuid())
+  quizId           String
+  userId           String? // null when not signed in
+  mode             String   @default("timed")
+  score            Int // percent 0-100
+  correctCount     Int
+  totalQuestions   Int
+  timeSpentSeconds Int      @default(0)
+  topicBreakdown   Json? // { topic: { correct, total } }
+  createdAt        DateTime @default(now())
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+  @@index([userId])
+  @@map("quiz_attempts")
+}
