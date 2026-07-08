@@ -8,6 +8,7 @@ import {
   type LinkRow,
   type CategoryOption,
 } from "@/components/admin/content/QuizBankManager";
+import { QuizzesManager, type QuizListRow } from "@/components/admin/content/QuizzesManager";
 
 export const dynamic = "force-dynamic";
 
@@ -62,14 +63,26 @@ export default async function AdminQuestionBankPage() {
     cats.map((c) => ({ id: c.id, title: c.title, parentId: c.parentId })),
   );
 
+  const quizRecords = await prisma.quiz.findMany({
+    orderBy: [{ createdAt: "desc" }],
+    include: { category: { select: { title: true } }, _count: { select: { questions: true } } },
+  });
+  const quizzes: QuizListRow[] = quizRecords.map((q) => ({
+    id: q.id, title: q.title, slug: q.slug, categoryTitle: q.category.title, kind: q.kind,
+    questionCount: q._count.questions, published: q.published,
+  }));
+
   return (
     <AdminShell adminName={admin.name || "Admin"}>
-      <div className="space-y-6">
+      <div className="space-y-8">
         <AdminPageHeader
           title="Question Bank"
-          description="Build the category tree (Nursing Exams, TEAS, HESI A2, and more), and tag external educational links to any section. Quizzes are managed per section."
+          description="Build the category tree (Nursing Exams, TEAS, HESI A2, and more), author quizzes and questions, and tag external educational links to any section."
         />
-        <QuizBankManager categories={categories} links={links} categoryOptions={categoryOptions} />
+        <QuizzesManager quizzes={quizzes} categoryOptions={categoryOptions} />
+        <div className="border-t border-deep-blue/10 pt-8">
+          <QuizBankManager categories={categories} links={links} categoryOptions={categoryOptions} />
+        </div>
       </div>
     </AdminShell>
   );

@@ -174,3 +174,55 @@ export const courseRequestSchema = z.object({
   message: z.string().trim().optional().or(z.literal("")),
 });
 export type CourseRequestInput = z.infer<typeof courseRequestSchema>;
+
+/* ----------------------- QUIZ AUTHORING (Drop A) ----------------------- */
+
+export const quizSchema = z.object({
+  title: z.string().trim().min(1, "Title is required."),
+  slug: z
+    .string()
+    .trim()
+    .min(1, "Slug is required.")
+    .regex(/^[a-z0-9-]+$/, "Use lowercase letters, numbers, and hyphens only."),
+  categoryId: z.string().trim().min(1, "Choose a section."),
+  description: z.string().trim().min(1, "A short description is required."),
+  kind: z.enum(["PRACTICE", "EXAM"]),
+  difficulty: z.string().trim().min(1, "Choose a difficulty."),
+  timeLimitMinutes: z.coerce.number().int("Whole minutes.").min(0, "Cannot be negative.").max(600, "That seems too long."),
+  passThreshold: z.coerce.number().int("Whole number.").min(1, "At least 1%.").max(100, "Max 100%."),
+  featured: z.boolean(),
+  published: z.boolean(),
+  order: z.coerce.number().int().min(0),
+});
+export type QuizFormInput = z.infer<typeof quizSchema>;
+
+export const questionChoiceSchema = z.object({
+  text: z.string().trim().min(1, "Choice text is required."),
+  isCorrect: z.boolean(),
+});
+
+export const questionSchema = z
+  .object({
+    type: z.enum(["SINGLE", "MULTI", "TRUE_FALSE", "FILL_BLANK"]),
+    stem: z.string().trim().min(1, "The question text is required."),
+    topic: z.string().trim().min(1, "A topic helps the results breakdown."),
+    explanation: z.string().trim().min(1, "Add a rationale so students learn from it."),
+    points: z.coerce.number().int().min(1, "At least 1 point.").max(20),
+    choices: z.array(questionChoiceSchema).min(2, "Add at least two choices."),
+  })
+  .refine((q) => q.choices.some((c) => c.isCorrect), {
+    message: "Mark at least one choice as correct.",
+    path: ["choices"],
+  })
+  .refine((q) => q.type !== "SINGLE" || q.choices.filter((c) => c.isCorrect).length === 1, {
+    message: "Single-answer questions need exactly one correct choice.",
+    path: ["choices"],
+  });
+export type QuestionFormInput = z.infer<typeof questionSchema>;
+
+/** Suggested exam time (minutes) for a question count — ~1.1 min/question, rounded to 5. */
+export function suggestedMinutes(questionCount: number): number {
+  if (questionCount <= 0) return 0;
+  const raw = questionCount * 1.1;
+  return Math.max(5, Math.round(raw / 5) * 5);
+}

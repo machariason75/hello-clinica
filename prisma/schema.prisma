@@ -477,6 +477,7 @@ model Quiz {
   title            String
   description      String
   categoryId       String
+  kind             String   @default("PRACTICE") // PRACTICE | EXAM
   difficulty       String   @default("Mixed")
   timeLimitSeconds Int? // null = untimed
   passThreshold    Int      @default(65) // percent needed to "pass"

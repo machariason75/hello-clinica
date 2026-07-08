@@ -451,3 +451,145 @@ export async function deleteAccessRequest(requestId: string): Promise<ContentAct
     return { success: false, message: "Could not delete." };
   }
 }
+
+/* --------------------- QUIZ AUTHORING (Drop A) ------------------------- */
+
+import {
+  quizSchema, questionSchema,
+  type QuizFormInput, type QuestionFormInput,
+} from "@/lib/admin/content-schemas";
+
+function refreshQuizAuthoring(quizId?: string) {
+  revalidatePath("/admin/question-bank");
+  if (quizId) revalidatePath(`/admin/question-bank/quiz/${quizId}`);
+  revalidatePath("/question-bank");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function createQuiz(input: QuizFormInput): Promise<ContentActionResult & { quizId?: string }> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    const quiz = await prisma.quiz.create({
+      data: {
+        title: d.title, slug: d.slug, categoryId: d.categoryId, description: d.description,
+        kind: d.kind, difficulty: d.difficulty,
+        timeLimitSeconds: d.timeLimitMinutes > 0 ? d.timeLimitMinutes * 60 : null,
+        passThreshold: d.passThreshold, featured: d.featured, published: d.published, order: d.order,
+      },
+    });
+    await recordAudit({ adminId: id, action: "CREATE", entity: "Quiz", entityId: quiz.id });
+    refreshQuizAuthoring(quiz.id);
+    return { success: true, quizId: quiz.id };
+  } catch {
+    return { success: false, message: "Could not create. The slug may already be in use." };
+  }
+}
+
+export async function updateQuiz(quizId: string, input: QuizFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    await prisma.quiz.update({
+      where: { id: quizId },
+      data: {
+        title: d.title, slug: d.slug, categoryId: d.categoryId, description: d.description,
+        kind: d.kind, difficulty: d.difficulty,
+        timeLimitSeconds: d.timeLimitMinutes > 0 ? d.timeLimitMinutes * 60 : null,
+        passThreshold: d.passThreshold, featured: d.featured, published: d.published, order: d.order,
+      },
+    });
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "Quiz", entityId: quizId });
+    refreshQuizAuthoring(quizId);
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update. The slug may already be in use." };
+  }
+}
+
+export async function setQuizPublished(quizId: string, published: boolean): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.quiz.update({ where: { id: quizId }, data: { published } });
+    await recordAudit({ adminId: id, action: published ? "PUBLISH" : "UNPUBLISH", entity: "Quiz", entityId: quizId });
+    refreshQuizAuthoring(quizId);
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update." };
+  }
+}
+
+export async function deleteQuiz(quizId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.quiz.delete({ where: { id: quizId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "Quiz", entityId: quizId });
+    refreshQuizAuthoring();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete the quiz." };
+  }
+}
+
+/** Create or update a question and (re)write its choices atomically. */
+export async function saveQuestion(
+  quizId: string,
+  questionId: string | null,
+  input: QuestionFormInput,
+): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = questionSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the question.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    if (questionId) {
+      await prisma.$transaction([
+        prisma.question.update({
+          where: { id: questionId },
+          data: { type: d.type as never, stem: d.stem, topic: d.topic, explanation: d.explanation, points: d.points },
+        }),
+        prisma.choice.deleteMany({ where: { questionId } }),
+        prisma.choice.createMany({
+          data: d.choices.map((c, i) => ({ questionId, text: c.text, isCorrect: c.isCorrect, order: i })),
+        }),
+      ]);
+      await recordAudit({ adminId: id, action: "UPDATE", entity: "Question", entityId: questionId });
+    } else {
+      const count = await prisma.question.count({ where: { quizId } });
+      await prisma.question.create({
+        data: {
+          quizId, type: d.type as never, stem: d.stem, topic: d.topic, explanation: d.explanation,
+          points: d.points, order: count,
+          choices: { create: d.choices.map((c, i) => ({ text: c.text, isCorrect: c.isCorrect, order: i })) },
+        },
+      });
+      await recordAudit({ adminId: id, action: "CREATE", entity: "Question", entityId: quizId });
+    }
+    refreshQuizAuthoring(quizId);
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not save the question." };
+  }
+}
+
+export async function deleteQuestion(questionId: string, quizId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.question.delete({ where: { id: questionId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "Question", entityId: questionId });
+    refreshQuizAuthoring(quizId);
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete the question." };
+  }
+}
