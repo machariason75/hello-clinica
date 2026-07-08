@@ -53,7 +53,7 @@ export default async function AdminAnalyticsPage() {
               <div key={d.date} className="flex flex-1 flex-col items-center gap-2">
                 <div className="flex w-full flex-1 items-end">
                   <div
-                    className="w-full rounded-t bg-medical-blue/80"
+                    className="w-full rounded-t bg-coral/80"
                     style={{ height: `${(d.count / maxDay) * 100}%`, minHeight: d.count > 0 ? "4px" : "0" }}
                     title={`${d.count} on ${d.label}`}
                   />

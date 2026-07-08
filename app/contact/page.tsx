@@ -6,7 +6,6 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
@@ -85,8 +84,6 @@ export default function ContactPage() {
           <FaqAccordion items={homepageFaqs} />
         </div>
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

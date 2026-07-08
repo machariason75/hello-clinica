@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, ListChecks, Clock, BarChart3 } from "lucide-reac
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
@@ -102,8 +101,6 @@ export default async function QuizCategoryPage({ params }: Params) {
           </StaggerGroup>
         )}
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

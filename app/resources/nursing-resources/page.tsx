@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { ResourceCard } from "@/components/cards/ResourceCard";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
@@ -62,8 +61,6 @@ export default async function NursingResourcesPage() {
           })}
         </StaggerGroup>
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

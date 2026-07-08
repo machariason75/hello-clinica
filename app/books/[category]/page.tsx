@@ -6,7 +6,6 @@ import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
 import { BookCard } from "@/components/cards/BookCard";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
@@ -67,8 +66,6 @@ export default async function BookCategoryPage({ params }: Params) {
           </StaggerGroup>
         )}
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

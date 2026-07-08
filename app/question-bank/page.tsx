@@ -3,7 +3,6 @@ import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { ResourceCard } from "@/components/cards/ResourceCard";
 import { EmptyState } from "@/components/common/EmptyState";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ListChecks } from "lucide-react";
@@ -61,8 +60,6 @@ export default async function QuestionBankPage() {
           </StaggerGroup>
         )}
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

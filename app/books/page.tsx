@@ -4,7 +4,6 @@ import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
 import { BookOpen } from "lucide-react";
 import { PageTransition } from "@/components/motion/PageTransition";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { BooksCatalog, type CatalogBook } from "@/components/books/BooksCatalog";
 import { buildMetadata } from "@/lib/seo";
 import { bookCategories, getBookCategoryByEnum } from "@/lib/data/book-categories";
@@ -59,8 +58,6 @@ export default async function BooksPage() {
           <BooksCatalog books={catalog} filters={filters} />
         )}
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

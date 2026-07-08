@@ -7,7 +7,6 @@ import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
@@ -61,7 +60,7 @@ export default async function ResourceCategoryPage({ params }: Params) {
             {resources.map((resource) => (
               <StaggerItem key={resource.id} className="h-full">
                 <article className="surface-card flex h-full flex-col p-6">
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-gradient text-white">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-medical-blue/10 text-medical-blue ring-1 ring-medical-blue/15">
                     <FileText className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="text-xl font-semibold text-deep-blue">{resource.title}</h3>
@@ -87,8 +86,6 @@ export default async function ResourceCategoryPage({ params }: Params) {
         <SectionHeading eyebrow="FAQ" title="Common questions" align="center" className="mb-10" />
         <FaqAccordion items={def.faqs} />
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }

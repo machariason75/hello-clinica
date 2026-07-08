@@ -7,7 +7,6 @@ import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { PackagesWithInquiry } from "@/components/packages/PackagesWithInquiry";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
@@ -105,8 +104,6 @@ export default async function AdvisingServicePage({ params }: Params) {
         <SectionHeading eyebrow="FAQ" title="Common questions" align="center" className="mb-10" />
         <FaqAccordion items={def.faqs} />
       </Section>
-
-      <NewsletterSection />
     </PageTransition>
   );
 }
