@@ -9,6 +9,13 @@ export type DashboardStats = {
   books: number;
   downloads: number;
   newConsultations: number; // status NEW (needs attention)
+  quizCategories: number;
+  quizzes: number;
+  externalLinks: number;
+  students: number;
+  studentsWithAccess: number;
+  accessRequests: number;
+  pendingRequests: number; // needs attention
 };
 
 export type ActivityItem = {
@@ -30,6 +37,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     books,
     downloads,
     newConsultations,
+    quizCategories,
+    quizzes,
+    externalLinks,
+    students,
+    studentsWithAccess,
+    accessRequests,
+    pendingRequests,
   ] = await Promise.all([
     prisma.consultation.count({ where: { archived: false } }),
     prisma.contactRequest.count({ where: { archived: false } }),
@@ -39,6 +53,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     prisma.book.count({ where: { archived: false } }),
     prisma.downloadLog.count(),
     prisma.consultation.count({ where: { archived: false, status: "NEW" } }),
+    prisma.quizCategory.count(),
+    prisma.quiz.count(),
+    prisma.quizExternalLink.count(),
+    prisma.student.count(),
+    prisma.student.count({ where: { hasAccess: true } }),
+    prisma.courseAccessRequest.count(),
+    prisma.courseAccessRequest.count({ where: { status: "pending" } }),
   ]);
 
   return {
@@ -50,6 +71,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     books,
     downloads,
     newConsultations,
+    quizCategories,
+    quizzes,
+    externalLinks,
+    students,
+    studentsWithAccess,
+    accessRequests,
+    pendingRequests,
   };
 }
 

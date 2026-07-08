@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Container } from "@/components/common/Container";
@@ -10,6 +13,8 @@ import { footerNav, siteConfig } from "@/lib/site-config";
  * section above the footer, so it is intentionally not repeated here.
  */
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
   const year = new Date().getFullYear();
 
   return (

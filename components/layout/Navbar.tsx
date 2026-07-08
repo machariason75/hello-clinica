@@ -23,8 +23,11 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+  const onAdmin = pathname?.startsWith("/admin") ?? false;
   const isHome = pathname === "/";
 
+
+  if (onAdmin) return null;
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-border/70 bg-white/85 backdrop-blur-md">
