@@ -1,33 +1,73 @@
 import { prisma } from "@/lib/prisma";
 
-/** Published quiz categories with a count of their published quizzes. */
-export async function getQuizCategories() {
+/** Top-level (parentless) published categories, in display order. */
+export async function getTopLevelQuizCategories() {
   return prisma.quizCategory.findMany({
-    where: { published: true },
+    where: { published: true, parentId: null },
     orderBy: [{ order: "asc" }, { title: "asc" }],
     include: {
-      _count: { select: { quizzes: { where: { published: true } } } },
+      _count: { select: { children: true, quizzes: true, externalLinks: true } },
     },
   });
 }
 
-export async function getQuizCategoryBySlug(slug: string) {
-  return prisma.quizCategory.findFirst({ where: { slug, published: true } });
-}
-
-/** Published quizzes in a category, each with its question count. */
-export async function getQuizzesByCategory(categoryId: string) {
-  return prisma.quiz.findMany({
-    where: { categoryId, published: true },
-    orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
-    include: { _count: { select: { questions: true } } },
+/** All published categories (used for admin parent pickers / counts). */
+export async function getAllQuizCategories() {
+  return prisma.quizCategory.findMany({
+    orderBy: [{ order: "asc" }, { title: "asc" }],
   });
 }
 
-/** A single published quiz with its questions + choices, fully ordered. */
+/**
+ * A single category node with everything needed to render its page:
+ * child folders, quizzes, and tagged external links. Returns null if missing
+ * or unpublished.
+ */
+export async function getQuizCategoryNode(slug: string) {
+  const node = await prisma.quizCategory.findFirst({
+    where: { slug, published: true },
+    include: {
+      children: {
+        where: { published: true },
+        orderBy: [{ order: "asc" }, { title: "asc" }],
+        include: { _count: { select: { children: true, quizzes: true, externalLinks: true } } },
+      },
+      quizzes: {
+        where: { published: true, archived: false },
+        orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
+        include: { _count: { select: { questions: true } } },
+      },
+      externalLinks: {
+        where: { published: true },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      },
+    },
+  });
+  return node;
+}
+
+/** Walks up the parent chain to build breadcrumb items (root → current). */
+export async function getCategoryAncestors(categoryId: string) {
+  const chain: { slug: string; title: string }[] = [];
+  let current = await prisma.quizCategory.findUnique({
+    where: { id: categoryId },
+    select: { slug: true, title: true, parentId: true },
+  });
+  while (current) {
+    chain.unshift({ slug: current.slug, title: current.title });
+    if (!current.parentId) break;
+    current = await prisma.quizCategory.findUnique({
+      where: { id: current.parentId },
+      select: { slug: true, title: true, parentId: true },
+    });
+  }
+  return chain;
+}
+
+/** A single quiz with its questions + choices, ready for the player. */
 export async function getQuizBySlug(slug: string) {
   return prisma.quiz.findFirst({
-    where: { slug, published: true },
+    where: { slug, published: true, archived: false },
     include: {
       category: true,
       questions: {
@@ -35,13 +75,5 @@ export async function getQuizBySlug(slug: string) {
         include: { choices: { orderBy: { order: "asc" } } },
       },
     },
-  });
-}
-
-/** For static params / sitemaps if needed later. */
-export async function getAllPublishedQuizSlugs() {
-  return prisma.quiz.findMany({
-    where: { published: true },
-    select: { slug: true, category: { select: { slug: true } } },
   });
 }

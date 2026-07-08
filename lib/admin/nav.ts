@@ -12,6 +12,7 @@ import {
   ScrollText,
   BarChart3,
   HelpCircle,
+  ListChecks,
 } from "lucide-react";
 
 export type AdminNavItem = {
@@ -54,6 +55,7 @@ export const adminNav: AdminNavGroup[] = [
     items: [
       { label: "Books", href: "/admin/books", icon: BookOpen },
       { label: "Resources", href: "/admin/resources", icon: FileText },
+      { label: "Question Bank", href: "/admin/question-bank", icon: ListChecks },
       { label: "Packages", href: "/admin/packages", icon: Package },
       { label: "Testimonials", href: "/admin/testimonials", icon: MessageSquareQuote },
       { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },

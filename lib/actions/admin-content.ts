@@ -251,3 +251,150 @@ export async function deleteResource(resourceId: string): Promise<ContentActionR
     return { success: false, message: "Could not delete. It may have related download records." };
   }
 }
+
+/* --------------------- QUESTION BANK (Slice 2) ------------------------- */
+
+import {
+  quizCategorySchema,
+  quizExternalLinkSchema,
+  type QuizCategoryFormInput,
+  type QuizExternalLinkFormInput,
+} from "@/lib/admin/content-schemas";
+
+function refreshQuizBank() {
+  revalidatePath("/admin/question-bank");
+  revalidatePath("/question-bank");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function createQuizCategory(input: QuizCategoryFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizCategorySchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    const created = await prisma.quizCategory.create({
+      data: {
+        title: d.title, slug: d.slug, description: d.description,
+        overview: d.overview || null, icon: d.icon || null,
+        parentId: d.parentId || null, order: d.order, featured: d.featured, published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "CREATE", entity: "QuizCategory", entityId: created.id });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not create. The slug may already be in use." };
+  }
+}
+
+export async function updateQuizCategory(categoryId: string, input: QuizCategoryFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizCategorySchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  if (d.parentId && d.parentId === categoryId) {
+    return { success: false, message: "A category cannot be its own parent." };
+  }
+  try {
+    await prisma.quizCategory.update({
+      where: { id: categoryId },
+      data: {
+        title: d.title, slug: d.slug, description: d.description,
+        overview: d.overview || null, icon: d.icon || null,
+        parentId: d.parentId || null, order: d.order, featured: d.featured, published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "QuizCategory", entityId: categoryId });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update. The slug may already be in use." };
+  }
+}
+
+export async function setQuizCategoryPublished(categoryId: string, published: boolean): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.quizCategory.update({ where: { id: categoryId }, data: { published } });
+    await recordAudit({ adminId: id, action: published ? "PUBLISH" : "UNPUBLISH", entity: "QuizCategory", entityId: categoryId });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update." };
+  }
+}
+
+export async function deleteQuizCategory(categoryId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.quizCategory.delete({ where: { id: categoryId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "QuizCategory", entityId: categoryId });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete. Remove or move its sub-sections, quizzes, and links first." };
+  }
+}
+
+export async function createQuizExternalLink(input: QuizExternalLinkFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizExternalLinkSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    const created = await prisma.quizExternalLink.create({
+      data: {
+        categoryId: d.categoryId, title: d.title, url: d.url,
+        description: d.description || null, thumbnailUrl: d.thumbnailUrl || null,
+        source: d.source || null, order: d.order, published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "CREATE", entity: "QuizExternalLink", entityId: created.id });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not create the link." };
+  }
+}
+
+export async function updateQuizExternalLink(linkId: string, input: QuizExternalLinkFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = quizExternalLinkSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    await prisma.quizExternalLink.update({
+      where: { id: linkId },
+      data: {
+        categoryId: d.categoryId, title: d.title, url: d.url,
+        description: d.description || null, thumbnailUrl: d.thumbnailUrl || null,
+        source: d.source || null, order: d.order, published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "QuizExternalLink", entityId: linkId });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update the link." };
+  }
+}
+
+export async function deleteQuizExternalLink(linkId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.quizExternalLink.delete({ where: { id: linkId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "QuizExternalLink", entityId: linkId });
+    refreshQuizBank();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete the link." };
+  }
+}

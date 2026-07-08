@@ -11,6 +11,10 @@ import {
   Baby,
   Syringe,
   ListChecks,
+  BookA,
+  Dna,
+  GraduationCap,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -28,6 +32,10 @@ const ICONS: Record<string, LucideIcon> = {
   Baby,
   Syringe,
   ListChecks,
+  BookA,
+  Dna,
+  GraduationCap,
+  Users,
 };
 
 export function resolveQuizIcon(name?: string | null): LucideIcon {

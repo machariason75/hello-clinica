@@ -120,3 +120,34 @@ export const faqSchema = z.object({
   published: z.boolean(),
 });
 export type FaqFormInput = z.infer<typeof faqSchema>;
+
+/* ----------------------- QUESTION BANK (Slice 2) ----------------------- */
+
+export const quizCategorySchema = z.object({
+  title: z.string().trim().min(1, "Title is required."),
+  slug: z
+    .string()
+    .trim()
+    .min(1, "Slug is required.")
+    .regex(/^[a-z0-9-]+$/, "Use lowercase letters, numbers, and hyphens only."),
+  description: z.string().trim().min(1, "Description is required."),
+  overview: z.string().trim().optional().or(z.literal("")),
+  icon: z.string().trim().optional().or(z.literal("")),
+  parentId: z.string().trim().optional().or(z.literal("")),
+  order: z.coerce.number().int("Whole number.").min(0, "Cannot be negative."),
+  featured: z.boolean(),
+  published: z.boolean(),
+});
+export type QuizCategoryFormInput = z.infer<typeof quizCategorySchema>;
+
+export const quizExternalLinkSchema = z.object({
+  categoryId: z.string().trim().min(1, "Choose a category."),
+  title: z.string().trim().min(1, "Title is required."),
+  url: z.string().trim().url("Enter a valid URL (including https://)."),
+  description: z.string().trim().optional().or(z.literal("")),
+  thumbnailUrl: z.string().trim().url("Enter a valid image URL.").optional().or(z.literal("")),
+  source: z.string().trim().optional().or(z.literal("")),
+  order: z.coerce.number().int("Whole number.").min(0, "Cannot be negative."),
+  published: z.boolean(),
+});
+export type QuizExternalLinkFormInput = z.infer<typeof quizExternalLinkSchema>;

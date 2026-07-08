@@ -431,15 +431,43 @@ model QuizCategory {
   slug        String   @unique
   title       String
   description String
+  overview    String? // optional longer intro shown on the category page
   icon        String? // lucide icon name (e.g. "Stethoscope")
+  parentId    String? // null = top-level; otherwise nests under another category
   order       Int      @default(0)
+  featured    Boolean  @default(false)
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  quizzes Quiz[]
+  parent        QuizCategory?      @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children      QuizCategory[]     @relation("CategoryTree")
+  quizzes       Quiz[]
+  externalLinks QuizExternalLink[]
 
+  @@index([parentId])
   @@map("quiz_categories")
+}
+
+/// A tagged external educational resource (website/social link) shown as a rich
+/// card with a thumbnail inside a Question Bank category.
+model QuizExternalLink {
+  id           String   @id @default(cuid())
+  categoryId   String
+  title        String
+  url          String
+  description  String?
+  thumbnailUrl String?
+  source       String? // display domain, e.g. "youtube.com"
+  order        Int      @default(0)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  category QuizCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@map("quiz_external_links")
 }
 
 model Quiz {

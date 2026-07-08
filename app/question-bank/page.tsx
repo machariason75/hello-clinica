@@ -7,7 +7,7 @@ import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ListChecks } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
-import { getQuizCategories } from "@/lib/queries/quizzes";
+import { getTopLevelQuizCategories } from "@/lib/queries/quizzes";
 import { resolveQuizIcon } from "@/lib/quiz-icons";
 
 export const revalidate = 300;
@@ -20,7 +20,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function QuestionBankPage() {
-  const categories = await getQuizCategories();
+  const categories = await getTopLevelQuizCategories();
 
   return (
     <PageTransition>
@@ -40,16 +40,20 @@ export default async function QuestionBankPage() {
         ) : (
           <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => {
-              const count = cat._count.quizzes;
+              const kids = cat._count.children;
+              const quizzes = cat._count.quizzes;
+              const meta =
+                kids > 0
+                  ? `${kids} ${kids === 1 ? "section" : "sections"}`
+                  : quizzes > 0
+                  ? `${quizzes} ${quizzes === 1 ? "quiz" : "quizzes"}`
+                  : "";
               return (
                 <StaggerItem key={cat.id} className="h-full">
                   <ResourceCard
                     data={{
                       title: cat.title,
-                      description:
-                        count > 0
-                          ? `${cat.description} (${count} ${count === 1 ? "quiz" : "quizzes"})`
-                          : cat.description,
+                      description: meta ? `${cat.description} (${meta})` : cat.description,
                       href: `/question-bank/${cat.slug}`,
                       icon: resolveQuizIcon(cat.icon),
                     }}
