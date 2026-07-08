@@ -33,7 +33,7 @@ export async function getQuizCategoryNode(slug: string) {
         include: { _count: { select: { children: true, quizzes: true, externalLinks: true } } },
       },
       quizzes: {
-        where: { published: true, archived: false },
+        where: { published: true },
         orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
         include: { _count: { select: { questions: true } } },
       },
@@ -48,17 +48,17 @@ export async function getQuizCategoryNode(slug: string) {
 
 /** Walks up the parent chain to build breadcrumb items (root → current). */
 export async function getCategoryAncestors(categoryId: string) {
-  const chain: { slug: string; title: string }[] = [];
+  const chain: { slug: string; title: string; premium: boolean }[] = [];
   let current = await prisma.quizCategory.findUnique({
     where: { id: categoryId },
-    select: { slug: true, title: true, parentId: true },
+    select: { slug: true, title: true, premium: true, parentId: true },
   });
   while (current) {
-    chain.unshift({ slug: current.slug, title: current.title });
+    chain.unshift({ slug: current.slug, title: current.title, premium: current.premium });
     if (!current.parentId) break;
     current = await prisma.quizCategory.findUnique({
       where: { id: current.parentId },
-      select: { slug: true, title: true, parentId: true },
+      select: { slug: true, title: true, premium: true, parentId: true },
     });
   }
   return chain;
@@ -67,7 +67,7 @@ export async function getCategoryAncestors(categoryId: string) {
 /** A single quiz with its questions + choices, ready for the player. */
 export async function getQuizBySlug(slug: string) {
   return prisma.quiz.findFirst({
-    where: { slug, published: true, archived: false },
+    where: { slug, published: true },
     include: {
       category: true,
       questions: {

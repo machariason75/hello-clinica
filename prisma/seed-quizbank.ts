@@ -28,18 +28,19 @@ type Cat = {
   parentId?: string;
   order?: number;
   featured?: boolean;
+  premium?: boolean;
 };
 
 // Ordered root → leaf so parents exist before children are attached.
 const CATEGORIES: Cat[] = [
   // ---- Top level ----
-  { id: "qbc-nursing-exams", slug: "nursing-exams", title: "Nursing Exams", icon: "ClipboardList", order: 1, featured: true,
+  { id: "qbc-nursing-exams", slug: "nursing-exams", title: "Nursing Exams", icon: "ClipboardList", order: 1, featured: true, premium: true,
     description: "Course-style practice across the core nursing subjects.",
     overview: "Practice by subject — fundamentals, med-surg, pharmacology, maternal and pediatric care, mental health and more. Each subject holds timed practice tests, study sets, and hand-picked resources." },
-  { id: "qbc-teas", slug: "teas", title: "TEAS", icon: "BookA", order: 2, featured: true,
+  { id: "qbc-teas", slug: "teas", title: "TEAS", icon: "BookA", order: 2, featured: true, premium: true,
     description: "ATI TEAS 7 practice across all four sections.",
     overview: "Get ready for the ATI TEAS Version 7 with section-by-section practice in Reading, Mathematics, Science, and English & Language Usage." },
-  { id: "qbc-hesi-a2", slug: "hesi-a2-certifications", title: "HESI A2 Certifications", icon: "FlaskConical", order: 3, featured: true,
+  { id: "qbc-hesi-a2", slug: "hesi-a2-certifications", title: "HESI A2 Certifications", icon: "FlaskConical", order: 3, featured: true, premium: true,
     description: "HESI A2 admission-assessment practice by topic.",
     overview: "Prepare for the HESI A2 admission assessment with focused practice in each tested area, from reading and vocabulary to biology, chemistry, and anatomy & physiology." },
   { id: "qbc-nursing-cert", slug: "nursing-certifications", title: "Nursing Certifications", icon: "Stethoscope", order: 4, featured: true,
@@ -137,12 +138,12 @@ async function main() {
       update: {
         slug: c.slug, title: c.title, description: c.description, overview: c.overview ?? null,
         icon: c.icon ?? null, parentId: c.parentId ?? null, order: c.order ?? 0,
-        featured: c.featured ?? false, published: true,
+        featured: c.featured ?? false, premium: c.premium ?? false, published: true,
       },
       create: {
         id: c.id, slug: c.slug, title: c.title, description: c.description, overview: c.overview ?? null,
         icon: c.icon ?? null, parentId: c.parentId ?? null, order: c.order ?? 0,
-        featured: c.featured ?? false, published: true,
+        featured: c.featured ?? false, premium: c.premium ?? false, published: true,
       },
     });
   }

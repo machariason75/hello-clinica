@@ -38,6 +38,7 @@ export const footerNav = {
     { label: "Question Bank", href: "/question-bank" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
+    { label: "My Account", href: "/account" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },

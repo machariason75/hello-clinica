@@ -398,3 +398,56 @@ export async function deleteQuizExternalLink(linkId: string): Promise<ContentAct
     return { success: false, message: "Could not delete the link." };
   }
 }
+
+/* --------------------- STUDENTS & ACCESS (Slice 3) --------------------- */
+
+function refreshStudents() {
+  revalidatePath("/admin/students");
+  revalidatePath("/admin/access-requests");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function setStudentAccess(studentId: string, hasAccess: boolean): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.student.update({ where: { id: studentId }, data: { hasAccess } });
+    await recordAudit({ adminId: id, action: hasAccess ? "GRANT_ACCESS" : "REVOKE_ACCESS", entity: "Student", entityId: studentId });
+    refreshStudents();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update access." };
+  }
+}
+
+export async function setRequestStatus(requestId: string, status: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const allowed = ["pending", "contacted", "granted", "closed"];
+  if (!allowed.includes(status)) return { success: false, message: "Invalid status." };
+  try {
+    const req = await prisma.courseAccessRequest.update({ where: { id: requestId }, data: { status } });
+    // Granting a request grants the linked student access, if any.
+    if (status === "granted" && req.studentId) {
+      await prisma.student.update({ where: { id: req.studentId }, data: { hasAccess: true } });
+    }
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "CourseAccessRequest", entityId: requestId });
+    refreshStudents();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update the request." };
+  }
+}
+
+export async function deleteAccessRequest(requestId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.courseAccessRequest.delete({ where: { id: requestId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "CourseAccessRequest", entityId: requestId });
+    refreshStudents();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete." };
+  }
+}

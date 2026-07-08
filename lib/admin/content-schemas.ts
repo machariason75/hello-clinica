@@ -151,3 +151,26 @@ export const quizExternalLinkSchema = z.object({
   published: z.boolean(),
 });
 export type QuizExternalLinkFormInput = z.infer<typeof quizExternalLinkSchema>;
+
+/* ----------------------- STUDENT ACCOUNTS (Slice 3) -------------------- */
+
+export const studentRegisterSchema = z.object({
+  name: z.string().trim().min(1, "Your name is required."),
+  email: z.string().trim().email("Enter a valid email."),
+  password: z.string().min(8, "Use at least 8 characters."),
+  university: z.string().trim().optional().or(z.literal("")),
+});
+export type StudentRegisterInput = z.infer<typeof studentRegisterSchema>;
+
+export const studentLoginSchema = z.object({
+  email: z.string().trim().email("Enter a valid email."),
+  password: z.string().min(1, "Enter your password."),
+});
+export type StudentLoginInput = z.infer<typeof studentLoginSchema>;
+
+export const courseRequestSchema = z.object({
+  university: z.string().trim().min(1, "Tell us your college or university."),
+  course: z.string().trim().min(1, "Tell us your course or program."),
+  message: z.string().trim().optional().or(z.literal("")),
+});
+export type CourseRequestInput = z.infer<typeof courseRequestSchema>;

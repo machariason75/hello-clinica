@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/seo";
-import { getQuizBySlug } from "@/lib/queries/quizzes";
+import { getQuizBySlug, getCategoryAncestors } from "@/lib/queries/quizzes";
+import { getStudent } from "@/lib/student/auth";
 import { QuizPlayer, type QuizPlayerData } from "@/components/quiz/QuizPlayer";
+import { PageHero } from "@/components/common/PageHero";
+import { Section } from "@/components/common/Section";
+import { PageTransition } from "@/components/motion/PageTransition";
+import { PremiumLock } from "@/components/quiz/PremiumLock";
 
 // Interactive; do not statically cache the player shell.
 export const dynamic = "force-dynamic";
@@ -24,6 +29,21 @@ export default async function QuizPage({ params }: Params) {
   const { quiz } = await params;
   const q = await getQuizBySlug(quiz);
   if (!q) notFound();
+
+  // Premium gate: if this quiz's category (or any ancestor) is premium and the
+  // student lacks access, show the lock instead of the player.
+  const [ancestors, student] = await Promise.all([getCategoryAncestors(q.categoryId), getStudent()]);
+  const premiumBranch = ancestors.some((a) => a.premium);
+  if (premiumBranch && !student?.hasAccess) {
+    return (
+      <PageTransition>
+        <PageHero eyebrow="Premium · Question Bank" title={q.title} description={q.description} />
+        <Section ariaLabel="Premium content">
+          <PremiumLock signedIn={!!student} />
+        </Section>
+      </PageTransition>
+    );
+  }
 
   // Shape the data for the client player (only what it needs).
   const data: QuizPlayerData = {

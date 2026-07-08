@@ -436,6 +436,7 @@ model QuizCategory {
   parentId    String? // null = top-level; otherwise nests under another category
   order       Int      @default(0)
   featured    Boolean  @default(false)
+  premium     Boolean  @default(false) // paid section — gated behind an account with access
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -541,4 +542,40 @@ model QuizAttempt {
   @@index([quizId])
   @@index([userId])
   @@map("quiz_attempts")
+}
+
+// ─────────────────────────────────────────────────────────────
+// STUDENT ACCOUNTS (Slice 3) — separate from admin auth
+// ─────────────────────────────────────────────────────────────
+
+model Student {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  university   String?
+  hasAccess    Boolean  @default(false) // admin grants after payment (manual for now)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  requests CourseAccessRequest[]
+
+  @@map("students")
+}
+
+model CourseAccessRequest {
+  id         String   @id @default(cuid())
+  studentId  String?
+  name       String
+  email      String
+  university String
+  course     String
+  message    String?
+  status     String   @default("pending") // pending | contacted | granted | closed
+  createdAt  DateTime @default(now())
+
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@map("course_access_requests")
 }

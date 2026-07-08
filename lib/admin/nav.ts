@@ -13,6 +13,8 @@ import {
   BarChart3,
   HelpCircle,
   ListChecks,
+  GraduationCap,
+  KeyRound,
 } from "lucide-react";
 
 export type AdminNavItem = {
@@ -48,6 +50,13 @@ export const adminNav: AdminNavGroup[] = [
       { label: "Contact Requests", href: "/admin/contact-requests", icon: Mail },
       { label: "Package Inquiries", href: "/admin/package-inquiries", icon: Package },
       { label: "Newsletter", href: "/admin/newsletter", icon: Users },
+    ],
+  },
+  {
+    heading: "Students",
+    items: [
+      { label: "Students", href: "/admin/students", icon: GraduationCap },
+      { label: "Access Requests", href: "/admin/access-requests", icon: KeyRound },
     ],
   },
   {
