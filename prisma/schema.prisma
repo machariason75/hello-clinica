@@ -530,18 +530,24 @@ model QuizAttempt {
   id               String   @id @default(cuid())
   quizId           String
   userId           String? // null when not signed in
+  studentId        String? // linked student account (signed-in attempts)
   mode             String   @default("timed")
+  kind             String   @default("PRACTICE") // snapshot of the quiz type at attempt time
   score            Int // percent 0-100
   correctCount     Int
   totalQuestions   Int
+  passed           Boolean  @default(false)
   timeSpentSeconds Int      @default(0)
   topicBreakdown   Json? // { topic: { correct, total } }
+  answers          Json? // { questionId: [choiceIds] } snapshot for review
   createdAt        DateTime @default(now())
 
-  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
 
   @@index([quizId])
   @@index([userId])
+  @@index([studentId])
   @@map("quiz_attempts")
 }
 
@@ -560,6 +566,7 @@ model Student {
   updatedAt    DateTime @updatedAt
 
   requests CourseAccessRequest[]
+  attempts QuizAttempt[]
 
   @@map("students")
 }

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PremiumBanner } from "@/components/marketing/PremiumBanner";
 import { Toaster } from "@/components/common/Toaster";
 import { JsonLd } from "@/components/common/JsonLd";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
+        <PremiumBanner />
         <Toaster />
         <SpeedInsights />
       </body>

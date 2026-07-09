@@ -1,49 +1,60 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+import { getStudent } from "@/lib/student/auth";
 
 /**
- * GET /api/download?type=resource|book&id=<id>
- * Logs the download (DownloadLog), increments book download counts, then
- * redirects to the stored file URL. Published + non-archived items only.
+ * Download endpoint (premium-gated).
+ *   /api/download?type=resource|book&id=<id>
+ *
+ * Free users can READ content on the site, but only premium students may
+ * download the file to their device. Non-premium requests are redirected to
+ * the account page with a friendly upgrade note. Premium requests are logged
+ * and 307-redirected to the file.
  */
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const type = searchParams.get("type");
-  const id = searchParams.get("id");
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const type = url.searchParams.get("type");
+  const id = url.searchParams.get("id");
+  const origin = url.origin;
 
-  if (!id || (type !== "resource" && type !== "book")) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  if ((type !== "resource" && type !== "book") || !id) {
+    return NextResponse.redirect(`${origin}/`, { status: 307 });
   }
 
+  // Resolve the file for this item.
   let fileUrl: string | null = null;
-
   if (type === "resource") {
-    const resource = await prisma.resource.findUnique({ where: { id } });
-    if (!resource || !resource.published || resource.archived) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
-    }
-    fileUrl = resource.resourceFile;
-    await prisma.downloadLog.create({ data: { resourceId: id, ipAddress: ip } });
+    const r = await prisma.resource.findUnique({ where: { id }, select: { resourceFile: true } });
+    fileUrl = r?.resourceFile ?? null;
   } else {
-    const book = await prisma.book.findUnique({ where: { id } });
-    if (!book || !book.published || book.archived) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
-    }
-    fileUrl = book.fileUrl;
-    await prisma.$transaction([
-      prisma.downloadLog.create({ data: { bookId: id, ipAddress: ip } }),
-      prisma.book.update({ where: { id }, data: { downloadCount: { increment: 1 } } }),
-    ]);
+    const b = await prisma.book.findUnique({ where: { id }, select: { fileUrl: true } });
+    fileUrl = b?.fileUrl ?? null;
   }
 
   if (!fileUrl) {
-    return NextResponse.json({ error: "No file attached" }, { status: 404 });
+    return NextResponse.redirect(`${origin}/account?need=download`, { status: 307 });
   }
 
-  return NextResponse.redirect(fileUrl);
+  // Premium gate.
+  const student = await getStudent();
+  if (!student?.hasAccess) {
+    return NextResponse.redirect(`${origin}/account?need=download`, { status: 307 });
+  }
+
+  // Log the download (best-effort).
+  try {
+    const ipHeader = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip");
+    const ipAddress = ipHeader ? ipHeader.split(",")[0]?.trim() || null : null;
+    await prisma.downloadLog.create({
+      data: {
+        resourceId: type === "resource" ? id : null,
+        bookId: type === "book" ? id : null,
+        ipAddress,
+      },
+    });
+  } catch {
+    /* non-critical */
+  }
+
+  return NextResponse.redirect(fileUrl, { status: 307 });
 }
