@@ -155,7 +155,7 @@ export function QuizzesManager({ quizzes, categoryOptions }: { quizzes: QuizList
             </div>
           </div>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
             <Button onClick={create} disabled={isPending}>Create & add questions</Button>
           </div>
         </DialogContent>
@@ -167,7 +167,7 @@ export function QuizzesManager({ quizzes, categoryOptions }: { quizzes: QuizList
           <DialogTitle>Delete quiz?</DialogTitle>
           <DialogDescription>{toDelete ? `"${toDelete.title}" and all its questions will be removed. This cannot be undone.` : ""}</DialogDescription>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setToDelete(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setToDelete(null)}>Cancel</Button>
             <Button variant="destructive" onClick={doDelete} disabled={isPending}>Delete</Button>
           </div>
         </DialogContent>

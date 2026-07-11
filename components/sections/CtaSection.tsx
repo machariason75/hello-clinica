@@ -36,7 +36,7 @@ export function CtaSection({
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-2 border-medical-blue/30 bg-transparent text-medical-blue hover:bg-medical-blue/5">
+              <Button asChild variant="secondary" size="lg" className="border-2 border-medical-blue/30 bg-transparent text-medical-blue hover:bg-medical-blue/5">
                 <Link href={secondaryHref}>{secondaryLabel}</Link>
               </Button>
             </div>

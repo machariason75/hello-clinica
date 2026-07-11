@@ -60,7 +60,7 @@ export function ReaderView({
           <p className="truncate font-semibold text-deep-blue">{title}</p>
           <p className="hidden text-xs text-muted-foreground sm:block">Reading mode · use Ctrl/⌘+F to search inside the document</p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => setNotesOpen((o) => !o)}>
+        <Button variant="secondary" size="sm" onClick={() => setNotesOpen((o) => !o)}>
           <StickyNote className="mr-1.5 h-4 w-4" /> Notes{notes.length > 0 ? ` (${notes.length})` : ""}
         </Button>
         {isPremium ? (

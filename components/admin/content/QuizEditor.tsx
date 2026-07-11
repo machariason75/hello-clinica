@@ -204,7 +204,7 @@ export function QuizEditor({
             <Label>Time limit (minutes, 0 = untimed)</Label>
             <div className="flex items-center gap-2">
               <Input type="number" value={settings.timeLimitMinutes} onChange={(e) => setSettings((s) => ({ ...s, timeLimitMinutes: Number(e.target.value) }))} />
-              <Button type="button" variant="outline" size="sm" onClick={() => setSettings((s) => ({ ...s, timeLimitMinutes: suggested }))} title={`Suggest ${suggested} min for ${questions.length} questions`}>
+              <Button type="button" variant="secondary" size="sm" onClick={() => setSettings((s) => ({ ...s, timeLimitMinutes: suggested }))} title={`Suggest ${suggested} min for ${questions.length} questions`}>
                 <Wand2 className="mr-1 h-4 w-4" /> {suggested}m
               </Button>
             </div>
@@ -308,7 +308,7 @@ export function QuizEditor({
               </div>
               {qErrors.choices && <p className="mt-1 text-xs text-red-500">{qErrors.choices}</p>}
               {qForm.type !== "TRUE_FALSE" && (
-                <Button variant="outline" size="sm" className="mt-2" onClick={addChoice}><Plus className="mr-1 h-4 w-4" /> Add choice</Button>
+                <Button variant="secondary" size="sm" className="mt-2" onClick={addChoice}><Plus className="mr-1 h-4 w-4" /> Add choice</Button>
               )}
             </div>
 
@@ -319,7 +319,7 @@ export function QuizEditor({
             </div>
           </div>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setQOpen(false)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setQOpen(false)}>Cancel</Button>
             <Button onClick={submitQuestion} disabled={isPending}>{qEditingId ? "Save question" : "Add question"}</Button>
           </div>
         </DialogContent>
@@ -331,7 +331,7 @@ export function QuizEditor({
           <DialogTitle>Delete question?</DialogTitle>
           <DialogDescription>{qDelete ? "This question and its choices will be removed." : ""}</DialogDescription>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setQDelete(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setQDelete(null)}>Cancel</Button>
             <Button variant="destructive" onClick={doDeleteQ} disabled={isPending}>Delete</Button>
           </div>
         </DialogContent>

@@ -149,7 +149,7 @@ export function PackagesManager({ rows }: { rows: PackageRow[] }) {
             </div>
           </div>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
             <Button onClick={submit} disabled={isPending}>{editingId ? "Save changes" : "Create"}</Button>
           </div>
         </DialogContent>
@@ -161,7 +161,7 @@ export function PackagesManager({ rows }: { rows: PackageRow[] }) {
           <DialogTitle>Delete package?</DialogTitle>
           <DialogDescription>{toDelete ? `"${toDelete.packageName}" will be removed.` : ""}</DialogDescription>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setToDelete(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setToDelete(null)}>Cancel</Button>
             <Button variant="destructive" onClick={doDelete} disabled={isPending}>Delete</Button>
           </div>
         </DialogContent>

@@ -63,7 +63,7 @@ export function StudentsManager({ rows }: { rows: StudentRow[] }) {
                 <td className="px-4 py-3 text-deep-blue/70">{r.requestCount}</td>
                 <td className="px-4 py-3"><YesNoPill value={r.hasAccess} /></td>
                 <td className="px-4 py-3 text-right">
-                  <Button size="sm" variant={r.hasAccess ? "outline" : "primary"} disabled={isPending} onClick={() => toggle(r)}>
+                  <Button size="sm" variant={r.hasAccess ? "secondary" : "primary"} disabled={isPending} onClick={() => toggle(r)}>
                     {r.hasAccess ? "Revoke" : "Grant access"}
                   </Button>
                 </td>

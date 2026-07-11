@@ -338,7 +338,7 @@ export function QuizBankManager({
             </div>
           </div>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setCatOpen(false)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setCatOpen(false)}>Cancel</Button>
             <Button onClick={submitCat} disabled={isPending}>{catEditingId ? "Save changes" : "Create"}</Button>
           </div>
         </DialogContent>
@@ -394,7 +394,7 @@ export function QuizBankManager({
             </div>
           </div>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setLinkOpen(false)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setLinkOpen(false)}>Cancel</Button>
             <Button onClick={submitLink} disabled={isPending}>{linkEditingId ? "Save changes" : "Add link"}</Button>
           </div>
         </DialogContent>
@@ -408,7 +408,7 @@ export function QuizBankManager({
             {catDelete ? `"${catDelete.title}" and everything inside it (sub-sections, quizzes, links) will be removed. This cannot be undone.` : ""}
           </DialogDescription>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setCatDelete(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setCatDelete(null)}>Cancel</Button>
             <Button variant="destructive" onClick={doDeleteCat} disabled={isPending}>Delete</Button>
           </div>
         </DialogContent>
@@ -418,7 +418,7 @@ export function QuizBankManager({
           <DialogTitle>Delete link?</DialogTitle>
           <DialogDescription>{linkDelete ? `"${linkDelete.title}" will be removed.` : ""}</DialogDescription>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setLinkDelete(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setLinkDelete(null)}>Cancel</Button>
             <Button variant="destructive" onClick={doDeleteLink} disabled={isPending}>Delete</Button>
           </div>
         </DialogContent>
