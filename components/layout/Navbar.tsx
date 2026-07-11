@@ -23,7 +23,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
-  const onAdmin = pathname?.startsWith("/admin") ?? false;
+  const onAdmin = (pathname?.startsWith("/admin") || pathname?.startsWith("/read")) ?? false;
   const isHome = pathname === "/";
 
 

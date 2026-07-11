@@ -567,6 +567,7 @@ model Student {
 
   requests CourseAccessRequest[]
   attempts QuizAttempt[]
+  readerNotes ReaderNote[]
 
   @@map("students")
 }
@@ -586,4 +587,28 @@ model CourseAccessRequest {
 
   @@index([status])
   @@map("course_access_requests")
+}
+
+// ─────────────────────────────────────────────────────────────
+// READER NOTES (Drop C) — highlights & notes saved while reading
+// ─────────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────
+// READER NOTES (Drop C) — personal study notes on books/resources
+// ─────────────────────────────────────────────────────────────
+
+model ReaderNote {
+  id         String   @id @default(cuid())
+  studentId  String
+  itemType   String // "book" | "resource"
+  itemId     String
+  page       Int? // optional page reference
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, itemType, itemId])
+  @@map("reader_notes")
 }
