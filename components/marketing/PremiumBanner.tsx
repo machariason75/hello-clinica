@@ -55,9 +55,9 @@ export function PremiumBanner() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={reduce ? { opacity: 0 } : { opacity: 0, x: 120 }}
-          animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
-          exit={reduce ? { opacity: 0 } : { opacity: 0, x: 120 }}
+          initial={{ opacity: 0, x: reduce ? 0 : 120 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: reduce ? 0 : 120 }}
           transition={{ type: "spring", stiffness: 260, damping: 26 }}
           className="fixed bottom-5 right-5 z-40 w-[300px] max-w-[calc(100vw-2.5rem)]"
           role="complementary"

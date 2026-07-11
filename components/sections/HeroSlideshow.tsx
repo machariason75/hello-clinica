@@ -73,8 +73,8 @@ export function HeroSlideshow() {
       </div>
 
       <motion.div
-        initial={reduce ? false : { opacity: 0, scale: 0.97 }}
-        animate={reduce ? undefined : { opacity: 1, scale: 1 }}
+        initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
         onClick={advance}
         className="relative aspect-[4/3] cursor-pointer overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5"
