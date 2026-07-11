@@ -160,6 +160,41 @@ export const testimonials: TestimonialData[] = [
     story:
       "I worried everything would be med-school focused, but the guidance spoke to pharmacy too. It helped me plan rotations and stay organized.",
   },
+  {
+    studentName: "Priya S.",
+    program: "TEAS 7 Applicant",
+    headline: "The TEAS practice felt just like exam day.",
+    story:
+      "Working through the timed reading and science sets built my pacing. I walked in calm and hit my target score.",
+  },
+  {
+    studentName: "Marcus O.",
+    program: "HESI A2 Applicant",
+    headline: "HESI A2 stopped feeling scary.",
+    story:
+      "The topic breakdown showed me exactly where I was weak. A week of focused practice and my score jumped.",
+  },
+  {
+    studentName: "Lindiwe M.",
+    program: "ATI Nursing Student",
+    headline: "The rationales are what made it stick.",
+    story:
+      "Every ATI-style question explained why the wrong answers were wrong. That's how I actually learned the content.",
+  },
+  {
+    studentName: "Kevin T.",
+    program: "USMLE Step 1",
+    headline: "Consistent practice, real progress.",
+    story:
+      "Tracking my attempts and grades kept me honest. I could see myself improving week over week toward Step 1.",
+  },
+  {
+    studentName: "Aisha B.",
+    program: "NCLEX-RN Candidate",
+    headline: "Passed the NCLEX on my first try.",
+    story:
+      "The mix of practice and real-exam mode got me ready for the pressure. The review history was my secret weapon.",
+  },
 ];
 
 export const homepageFaqs: FaqItem[] = [

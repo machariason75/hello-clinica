@@ -41,8 +41,8 @@ export function PremiumBanner() {
     return () => { clearTimeout(first); clearTimeout(hideTimer); clearInterval(interval); };
   }, [eligible]);
 
-  // Never on admin or the account/auth screens.
-  if (pathname?.startsWith("/admin") || pathname?.startsWith("/account")) return null;
+  // Only on the home dashboard — never once the user is engaging elsewhere.
+  if (pathname !== "/") return null;
   if (!eligible) return null;
 
   function dismiss() {

@@ -7,10 +7,9 @@ import { usePathname } from "next/navigation";
 import { Menu, Search as SearchIcon, ChevronDown } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { BackButton } from "@/components/common/BackButton";
-import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { SearchModal } from "@/components/navigation/SearchModal";
-import { siteConfig, primaryNav, primaryCta, type NavItem } from "@/lib/site-config";
+import { siteConfig, primaryNav, type NavItem } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 /**
@@ -66,10 +65,6 @@ export function Navbar() {
               <SearchIcon className="h-4 w-4" aria-hidden="true" />
               <span className="hidden md:inline">Search</span>
             </button>
-
-            <Button asChild size="sm" className="hidden lg:inline-flex">
-              <Link href={primaryCta.href}>{primaryCta.label}</Link>
-            </Button>
 
             {/* Hamburger — mobile/tablet only */}
             <button

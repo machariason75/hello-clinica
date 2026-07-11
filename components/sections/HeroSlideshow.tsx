@@ -15,7 +15,7 @@ const SLIDES = [
 ];
 
 // Standby rotation speed — brisk enough to feel alive, calm enough not to distract.
-const INTERVAL_MS = 5600;
+const INTERVAL_MS = 60000;
 
 /**
  * Hero image — a gentle auto-rotating slideshow that cross-dissolves through
@@ -108,21 +108,6 @@ export function HeroSlideshow() {
               />
             </motion.div>
           </AnimatePresence>
-        )}
-
-        {/* subtle progress dots */}
-        {!reduce && (
-          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-            {SLIDES.map((_, i) => (
-              <span
-                key={i}
-                className={
-                  "h-1.5 rounded-full transition-all " +
-                  (i === index ? "w-5 bg-white" : "w-1.5 bg-white/50")
-                }
-              />
-            ))}
-          </div>
         )}
       </motion.div>
     </div>

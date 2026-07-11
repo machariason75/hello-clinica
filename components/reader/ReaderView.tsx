@@ -83,7 +83,7 @@ export function ReaderView({
               <p className="text-muted-foreground">This item doesn't have a file yet. Please check back soon.</p>
             </div>
           ) : isPdf ? (
-            <iframe title={title} src={`${fileUrl}#toolbar=1&view=FitH`} className="h-full w-full border-0" />
+            <iframe title={title} src={`${fileUrl}#toolbar=0&navpanes=0&view=FitH`} className="h-full w-full border-0" />
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
               <FileText className="h-10 w-10 text-medical-blue/50" />
