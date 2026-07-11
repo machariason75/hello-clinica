@@ -255,7 +255,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
               label="Cover image (optional)"
               endpoint="bookCover"
               kind="image"
-              value={form.coverImage}
+              value={form.coverImage ?? ""}
               onChange={(url) => setForm({ ...form, coverImage: url })}
               error={errors.coverImage}
             />
@@ -263,7 +263,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
               label="Book file (optional)"
               endpoint="bookFile"
               kind="file"
-              value={form.fileUrl}
+              value={form.fileUrl ?? ""}
               onChange={(url) => setForm({ ...form, fileUrl: url })}
               error={errors.fileUrl}
             />

@@ -259,7 +259,7 @@ export function ResourcesManager({ rows }: { rows: ResourceRow[] }) {
               label="Thumbnail (optional)"
               endpoint="resourceThumbnail"
               kind="image"
-              value={form.thumbnail}
+              value={form.thumbnail ?? ""}
               onChange={(url) => setForm({ ...form, thumbnail: url })}
               error={errors.thumbnail}
             />
@@ -267,7 +267,7 @@ export function ResourcesManager({ rows }: { rows: ResourceRow[] }) {
               label="Resource file (optional)"
               endpoint="resourceFile"
               kind="file"
-              value={form.resourceFile}
+              value={form.resourceFile ?? ""}
               onChange={(url) => setForm({ ...form, resourceFile: url })}
               error={errors.resourceFile}
             />
