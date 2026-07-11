@@ -7,3 +7,6 @@ export async function getPackages() {
     orderBy: [{ sortOrder: "asc" }, { totalCost: "asc" }],
   });
 }
+
+/** Alias kept for existing callers (e.g. the advising [service] page). */
+export const getPublishedPackages = getPackages;
