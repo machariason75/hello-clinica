@@ -8,29 +8,15 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPackagesPage() {
   const admin = await requireAdmin();
-  const records = await prisma.package.findMany({
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
-  });
-
-  const rows: PackageRow[] = records.map((r) => ({
-    id: r.id,
-    packageName: r.packageName,
-    description: r.description,
-    totalHours: r.totalHours,
-    totalCost: r.totalCost,
-    features: r.features,
-    buttonText: r.buttonText,
-    published: r.published,
-    archived: r.archived,
+  const packages = await prisma.package.findMany({ where: { archived: false }, orderBy: [{ sortOrder: "asc" }] });
+  const rows: PackageRow[] = packages.map((p) => ({
+    id: p.id, packageName: p.packageName, description: p.description, totalHours: p.totalHours,
+    totalCost: p.totalCost, features: p.features, buttonText: p.buttonText, sortOrder: p.sortOrder, published: p.published,
   }));
-
   return (
     <AdminShell adminName={admin.name || "Admin"}>
       <div className="space-y-6">
-        <AdminPageHeader
-          title="Consultation Packages"
-          description="Create packages, set pricing and hours, edit features, reorder, duplicate, and archive."
-        />
+        <AdminPageHeader title="Packages" description="Consultation & premium packages shown on the Advising page. Set prices, benefits, and publish state." />
         <PackagesManager rows={rows} />
       </div>
     </AdminShell>

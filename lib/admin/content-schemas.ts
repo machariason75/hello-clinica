@@ -80,6 +80,7 @@ export const packageSchema = z.object({
     .array(z.string().trim().min(1))
     .min(1, "Add at least one feature."),
   buttonText: z.string().trim().min(1, "Button text is required."),
+  sortOrder: z.coerce.number().int().min(0).optional().default(0),
   published: z.boolean(),
 });
 export type PackageFormInput = z.infer<typeof packageSchema>;

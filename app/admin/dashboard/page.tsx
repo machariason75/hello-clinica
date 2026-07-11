@@ -161,6 +161,7 @@ export default async function AdminDashboardPage() {
                 { label: "Question Bank", sub: `${stats.quizCategories} sections · ${stats.quizzes} quizzes`, href: "/admin/question-bank", icon: FolderTree },
                 { label: "Students", sub: `${stats.studentsWithAccess} with premium access`, href: "/admin/students", icon: GraduationCap },
                 { label: "Access Requests", sub: `${stats.pendingRequests} pending`, href: "/admin/access-requests", icon: KeyRound },
+                { label: "Packages", sub: "Prices & premium benefits", href: "/admin/packages", icon: FolderTree },
                 { label: "Resources & Books", sub: `${stats.resources} resources · ${stats.books} books`, href: "/admin/resources", icon: FileText },
               ].map((q) => {
                 const Icon = q.icon;

@@ -593,3 +593,70 @@ export async function deleteQuestion(questionId: string, quizId: string): Promis
     return { success: false, message: "Could not delete the question." };
   }
 }
+
+/* --------------------------- PACKAGES (Drop D) ------------------------- */
+
+import { packageSchema, type PackageFormInput } from "@/lib/admin/content-schemas";
+
+function refreshPackages() {
+  revalidatePath("/admin/packages");
+  revalidatePath("/advising");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function createPackage(input: PackageFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = packageSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    const created = await prisma.package.create({ data: { ...d } });
+    await recordAudit({ adminId: id, action: "CREATE", entity: "Package", entityId: created.id });
+    refreshPackages();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not create the package." };
+  }
+}
+
+export async function updatePackage(packageId: string, input: PackageFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = packageSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  try {
+    await prisma.package.update({ where: { id: packageId }, data: { ...parsed.data } });
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "Package", entityId: packageId });
+    refreshPackages();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update the package." };
+  }
+}
+
+export async function setPackagePublished(packageId: string, published: boolean): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.package.update({ where: { id: packageId }, data: { published } });
+    await recordAudit({ adminId: id, action: published ? "PUBLISH" : "UNPUBLISH", entity: "Package", entityId: packageId });
+    refreshPackages();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update." };
+  }
+}
+
+export async function deletePackage(packageId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.package.delete({ where: { id: packageId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "Package", entityId: packageId });
+    refreshPackages();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete. It may have inquiries attached." };
+  }
+}
