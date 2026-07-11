@@ -92,7 +92,7 @@ export function UploadField({
                   toast.error("Upload finished but no file URL was returned.");
                 }
               }}
-              onUploadError={(e: Error) => toast.error(e.message || "Upload failed.")}
+              onUploadError={(e: Error) => { toast.error(e.message || "Upload failed."); }}
               appearance={{
                 button:
                   "ut-ready:bg-medical-blue ut-uploading:bg-medical-blue/70 bg-medical-blue text-white text-sm font-semibold rounded-xl px-4 h-10",
