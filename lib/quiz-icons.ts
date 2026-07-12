@@ -15,6 +15,8 @@ import {
   Dna,
   GraduationCap,
   Users,
+  Scale,
+  Compass,
   type LucideIcon,
 } from "lucide-react";
 
@@ -36,6 +38,8 @@ const ICONS: Record<string, LucideIcon> = {
   Dna,
   GraduationCap,
   Users,
+  Scale,
+  Compass,
 };
 
 export function resolveQuizIcon(name?: string | null): LucideIcon {

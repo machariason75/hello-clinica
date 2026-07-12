@@ -7,10 +7,11 @@ import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ListChecks } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
-import { getTopLevelQuizCategories } from "@/lib/queries/quizzes";
+import { getTopLevelQuizCategories, getQuickAccessItems } from "@/lib/queries/quizzes";
+import { QuickAccess } from "@/components/quiz/QuickAccess";
 import { resolveQuizIcon } from "@/lib/quiz-icons";
 
-export const revalidate = 300;
+export const revalidate = 60;
 
 export const metadata: Metadata = buildMetadata({
   title: "Question Bank",
@@ -20,7 +21,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function QuestionBankPage() {
-  const categories = await getTopLevelQuizCategories();
+  const [categories, quickItems] = await Promise.all([
+    getTopLevelQuizCategories(),
+    getQuickAccessItems(),
+  ]);
 
   return (
     <PageTransition>
@@ -38,7 +42,14 @@ export default async function QuestionBankPage() {
             description="We're preparing practice questions. Subscribe below to be notified when they're published."
           />
         ) : (
-          <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <>
+            {quickItems.length > 0 && (
+              <div className="mb-12">
+                <QuickAccess items={quickItems} />
+              </div>
+            )}
+
+            <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => {
               const kids = cat._count.children;
               const quizzes = cat._count.quizzes;
@@ -62,6 +73,7 @@ export default async function QuestionBankPage() {
               );
             })}
           </StaggerGroup>
+          </>
         )}
       </Section>
     </PageTransition>
