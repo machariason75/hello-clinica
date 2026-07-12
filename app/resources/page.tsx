@@ -29,27 +29,40 @@ export default async function ResourcesPage() {
       />
 
       <Section ariaLabel="Resource categories">
+        {/*
+          Only surface categories that actually hold guides, plus the gateway
+          categories (Nursing Resources) that lead somewhere substantial. This
+          keeps the page honest about what the site contains rather than showing
+          a long wall of empty folders. Add a guide in the admin and its category
+          appears here automatically.
+        */}
         <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {resourceCategories
             .filter((category) => category.group !== "nursing")
+            .filter((category) => {
+              const count = counts.get(category.enum) ?? 0;
+              // Nursing Resources is a gateway to its own 12-topic library.
+              const isGateway = category.slug === "nursing-resources";
+              return count > 0 || isGateway;
+            })
             .map((category) => {
-            const count = counts.get(category.enum) ?? 0;
-            return (
-              <StaggerItem key={category.slug} className="h-full">
-                <ResourceCard
-                  data={{
-                    title: category.title,
-                    description:
-                      count > 0
-                        ? `${category.description} (${count} ${count === 1 ? "guide" : "guides"})`
-                        : category.description,
-                    href: `/resources/${category.slug}`,
-                    icon: category.icon,
-                  }}
-                />
-              </StaggerItem>
-            );
-          })}
+              const count = counts.get(category.enum) ?? 0;
+              return (
+                <StaggerItem key={category.slug} className="h-full">
+                  <ResourceCard
+                    data={{
+                      title: category.title,
+                      description:
+                        count > 0
+                          ? `${category.description} (${count} ${count === 1 ? "guide" : "guides"})`
+                          : category.description,
+                      href: `/resources/${category.slug}`,
+                      icon: category.icon,
+                    }}
+                  />
+                </StaggerItem>
+              );
+            })}
         </StaggerGroup>
       </Section>
     </PageTransition>

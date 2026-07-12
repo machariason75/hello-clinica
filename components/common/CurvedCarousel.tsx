@@ -91,24 +91,6 @@ export function CurvedCarousel<T>({
           );
         })}
       </div>
-
-      <div className="mt-7 flex items-center justify-center gap-4">
-        <div className="flex items-center gap-2">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Go to item ${i + 1}`}
-              aria-current={i === active}
-              className={cn(
-                "h-2 rounded-full transition-all",
-                i === active ? "w-6 bg-medical-blue" : "w-2 bg-medical-blue/30 hover:bg-medical-blue/50"
-              )}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
