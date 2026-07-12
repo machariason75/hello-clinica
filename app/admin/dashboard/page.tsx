@@ -97,7 +97,7 @@ export default async function AdminDashboardPage() {
               )}
             </div>
           </div>
-          {/* Decorative floating photos (desktop) */}
+          {/* Decorative floating photos — desktop collage */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 lg:block">
             <div className="absolute right-6 top-5 h-24 w-24 rotate-3 overflow-hidden rounded-2xl shadow-card ring-1 ring-black/5">
               <Image src="/images/medics/medic-2.jpg" alt="" fill sizes="96px" className="object-cover" />
@@ -108,6 +108,23 @@ export default async function AdminDashboardPage() {
             <div className="absolute right-10 bottom-3 h-16 w-16 rotate-6 overflow-hidden rounded-2xl shadow-card ring-1 ring-black/5">
               <Image src="/images/medics/medic-3.jpg" alt="" fill sizes="64px" className="object-cover" />
             </div>
+          </div>
+
+          {/* Same photos on phones/tablets — a tilted row under the text, so the
+              dashboard keeps its warmth on small screens instead of going bare. */}
+          <div aria-hidden="true" className="mt-5 flex gap-3 lg:hidden">
+            {[
+              { src: "/images/medics/medic-2.jpg", tilt: "rotate-2" },
+              { src: "/images/medics/medic-5.jpg", tilt: "-rotate-2" },
+              { src: "/images/medics/medic-3.jpg", tilt: "rotate-1" },
+            ].map((p) => (
+              <div
+                key={p.src}
+                className={`relative h-20 flex-1 overflow-hidden rounded-2xl shadow-card ring-1 ring-black/5 ${p.tilt}`}
+              >
+                <Image src={p.src} alt="" fill sizes="(max-width: 1024px) 33vw, 96px" className="object-cover" />
+              </div>
+            ))}
           </div>
         </div>
 

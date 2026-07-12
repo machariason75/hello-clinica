@@ -9,6 +9,7 @@ import { ListChecks } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { getTopLevelQuizCategories, getQuickAccessItems } from "@/lib/queries/quizzes";
 import { QuickAccess } from "@/components/quiz/QuickAccess";
+import { QuestionBankHero } from "@/components/quiz/QuestionBankHero";
 import { resolveQuizIcon } from "@/lib/quiz-icons";
 
 export const revalidate = 60;
@@ -43,6 +44,8 @@ export default async function QuestionBankPage() {
           />
         ) : (
           <>
+            <QuestionBankHero />
+
             {quickItems.length > 0 && (
               <div className="mb-12">
                 <QuickAccess items={quickItems} />
