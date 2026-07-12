@@ -1,9 +1,10 @@
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
-import { testimonials } from "@/lib/data/homepage-content";
+import { getTestimonials } from "@/lib/queries/testimonials";
 
-export function Testimonials() {
+export async function Testimonials() {
+  const testimonials = await getTestimonials();
   return (
     <section className="section">
       <Container>

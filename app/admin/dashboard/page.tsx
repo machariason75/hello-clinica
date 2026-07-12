@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   CalendarClock, Mail, Package, Users, FileText, BookOpen, Download,
-  ArrowRight, ListChecks, GraduationCap, KeyRound, Link2, FolderTree, Sparkles,
+  ArrowRight, ListChecks, GraduationCap, KeyRound, Link2, FolderTree, Sparkles, ShieldCheck,
 } from "lucide-react";
 import { requireAdmin } from "@/lib/admin/auth-helpers";
 import { getDashboardStats, getRecentActivity } from "@/lib/admin/dashboard-data";
@@ -85,7 +85,12 @@ export default async function AdminDashboardPage() {
                   {stats.pendingRequests} access request{stats.pendingRequests === 1 ? "" : "s"} pending <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               )}
-              {stats.newConsultations === 0 && stats.pendingRequests === 0 && (
+              {stats.pendingResets > 0 && (
+                <Link href="/admin/password-resets" className="inline-flex items-center gap-1.5 rounded-full bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white">
+                  {stats.pendingResets} password reset{stats.pendingResets === 1 ? "" : "s"} in progress <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              )}
+              {stats.newConsultations === 0 && stats.pendingRequests === 0 && stats.pendingResets === 0 && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600">
                   <Sparkles className="h-3.5 w-3.5" /> All caught up
                 </span>
@@ -162,6 +167,7 @@ export default async function AdminDashboardPage() {
                 { label: "Students", sub: `${stats.studentsWithAccess} with premium access`, href: "/admin/students", icon: GraduationCap },
                 { label: "Access Requests", sub: `${stats.pendingRequests} pending`, href: "/admin/access-requests", icon: KeyRound },
                 { label: "Packages", sub: "Prices & premium benefits", href: "/admin/packages", icon: FolderTree },
+                { label: "Password Resets", sub: `${stats.pendingResets} in progress`, href: "/admin/password-resets", icon: ShieldCheck },
                 { label: "Resources & Books", sub: `${stats.resources} resources · ${stats.books} books`, href: "/admin/resources", icon: FileText },
               ].map((q) => {
                 const Icon = q.icon;

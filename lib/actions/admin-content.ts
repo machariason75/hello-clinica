@@ -660,3 +660,92 @@ export async function deletePackage(packageId: string): Promise<ContentActionRes
     return { success: false, message: "Could not delete. It may have inquiries attached." };
   }
 }
+
+/* ----------------------- TESTIMONIALS (admin-editable) ----------------- */
+
+import { testimonialSchema, type TestimonialFormInput } from "@/lib/admin/content-schemas";
+
+function refreshTestimonials() {
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/"); // homepage shows them
+  revalidatePath("/admin/dashboard");
+}
+
+export async function createTestimonial(input: TestimonialFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = testimonialSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    const created = await prisma.testimonial.create({
+      data: {
+        studentName: d.studentName,
+        program: d.program || null,
+        headline: d.headline,
+        content: d.content,
+        photo: d.photo || null,
+        featured: d.featured,
+        published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "CREATE", entity: "Testimonial", entityId: created.id });
+    refreshTestimonials();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not create the review." };
+  }
+}
+
+export async function updateTestimonial(testimonialId: string, input: TestimonialFormInput): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  const parsed = testimonialSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: collectErrors(parsed.error.issues) };
+  const d = parsed.data;
+  try {
+    await prisma.testimonial.update({
+      where: { id: testimonialId },
+      data: {
+        studentName: d.studentName,
+        program: d.program || null,
+        headline: d.headline,
+        content: d.content,
+        photo: d.photo || null,
+        featured: d.featured,
+        published: d.published,
+      },
+    });
+    await recordAudit({ adminId: id, action: "UPDATE", entity: "Testimonial", entityId: testimonialId });
+    refreshTestimonials();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update the review." };
+  }
+}
+
+export async function setTestimonialPublished(testimonialId: string, published: boolean): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.testimonial.update({ where: { id: testimonialId }, data: { published } });
+    await recordAudit({ adminId: id, action: published ? "PUBLISH" : "UNPUBLISH", entity: "Testimonial", entityId: testimonialId });
+    refreshTestimonials();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not update." };
+  }
+}
+
+export async function deleteTestimonial(testimonialId: string): Promise<ContentActionResult> {
+  const id = await adminId();
+  if (!id) return { success: false, message: "Not authorized." };
+  try {
+    await prisma.testimonial.delete({ where: { id: testimonialId } });
+    await recordAudit({ adminId: id, action: "DELETE", entity: "Testimonial", entityId: testimonialId });
+    refreshTestimonials();
+    return { success: true };
+  } catch {
+    return { success: false, message: "Could not delete." };
+  }
+}

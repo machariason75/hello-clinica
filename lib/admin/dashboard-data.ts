@@ -16,6 +16,7 @@ export type DashboardStats = {
   studentsWithAccess: number;
   accessRequests: number;
   pendingRequests: number; // needs attention
+  pendingResets: number;   // reset links issued but not yet used
 };
 
 export type ActivityItem = {
@@ -44,6 +45,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     studentsWithAccess,
     accessRequests,
     pendingRequests,
+    pendingResets,
   ] = await Promise.all([
     prisma.consultation.count({ where: { archived: false } }),
     prisma.contactRequest.count({ where: { archived: false } }),
@@ -60,6 +62,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     prisma.student.count({ where: { hasAccess: true } }),
     prisma.courseAccessRequest.count(),
     prisma.courseAccessRequest.count({ where: { status: "pending" } }),
+    prisma.passwordResetToken.count({ where: { usedAt: null, expiresAt: { gt: new Date() } } }),
   ]);
 
   return {
@@ -78,6 +81,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     studentsWithAccess,
     accessRequests,
     pendingRequests,
+    pendingResets,
   };
 }
 

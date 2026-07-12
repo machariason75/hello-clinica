@@ -8,28 +8,28 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminTestimonialsPage() {
   const admin = await requireAdmin();
-  const records = await prisma.testimonial.findMany({ orderBy: { createdAt: "desc" } });
-
-  const rows: TestimonialRow[] = records.map((r) => ({
-    id: r.id,
-    studentName: r.studentName,
-    program: r.program,
-    headline: r.headline,
-    content: r.content,
-    photo: r.photo,
-    featured: r.featured,
-    published: r.published,
-    archived: r.archived,
+  const rows = await prisma.testimonial.findMany({
+    where: { archived: false },
+    orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+  });
+  const data: TestimonialRow[] = rows.map((t) => ({
+    id: t.id,
+    studentName: t.studentName,
+    program: t.program,
+    headline: t.headline,
+    content: t.content,
+    photo: t.photo,
+    featured: t.featured,
+    published: t.published,
   }));
-
   return (
     <AdminShell adminName={admin.name || "Admin"}>
       <div className="space-y-6">
         <AdminPageHeader
-          title="Testimonials"
-          description="Create, edit, feature, archive, and remove student testimonials."
+          title="Student Reviews"
+          description="The testimonials shown on the homepage. Add real student reviews here — until you do, the original starter reviews are displayed."
         />
-        <TestimonialsManager rows={rows} />
+        <TestimonialsManager rows={data} />
       </div>
     </AdminShell>
   );
