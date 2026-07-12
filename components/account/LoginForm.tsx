@@ -45,6 +45,11 @@ export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) 
         <Input type="password" value={form.password} onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} />
         {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
       </div>
+      <div className="text-right">
+        <Link href="/account/forgot-password" className="text-sm font-medium text-medical-blue hover:underline">
+          Forgot your password?
+        </Link>
+      </div>
       <Button className="w-full" onClick={submit} disabled={isPending}>{isPending ? "Signing in…" : "Sign in"}</Button>
       <p className="text-center text-sm text-muted-foreground">
         New here?{" "}

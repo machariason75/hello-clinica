@@ -178,6 +178,8 @@ model NewsletterSubscriber {
   email        String   @unique
   consent      Boolean  @default(true) // [additive] consent statement is required
   archived     Boolean  @default(false) // [additive]
+  unsubscribed Boolean  @default(false) // honoured by every campaign send
+  unsubToken   String?  @unique // secret token used by the one-click unsubscribe link
   subscribedAt DateTime @default(now())
 
   @@map("newsletter_subscribers")
@@ -568,6 +570,7 @@ model Student {
   requests CourseAccessRequest[]
   attempts QuizAttempt[]
   readerNotes ReaderNote[]
+  resetTokens PasswordResetToken[]
 
   @@map("students")
 }
@@ -612,3 +615,38 @@ model ReaderNote {
   @@index([studentId, itemType, itemId])
   @@map("reader_notes")
 }
+
+// ─────────────────────────────────────────────────────────────
+// EMAIL: campaigns + password resets
+// ─────────────────────────────────────────────────────────────
+
+/// A newsletter written in the admin and sent to all active subscribers.
+model NewsletterCampaign {
+  id          String    @id @default(cuid())
+  subject     String
+  body        String // HTML or plain text written by the admin
+  status      String    @default("DRAFT") // DRAFT | SENDING | SENT | FAILED
+  sentAt      DateTime?
+  sentCount   Int       @default(0)
+  failedCount Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("newsletter_campaigns")
+}
+
+/// Single-use, expiring token for student password resets.
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  studentId String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@map("password_reset_tokens")
+}
+

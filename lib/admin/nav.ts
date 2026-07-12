@@ -15,6 +15,8 @@ import {
   ListChecks,
   GraduationCap,
   KeyRound,
+  Send,
+  UserCog,
 } from "lucide-react";
 
 export type AdminNavItem = {
@@ -73,6 +75,8 @@ export const adminNav: AdminNavGroup[] = [
   {
     heading: "System",
     items: [
+      { label: "Send Newsletters", href: "/admin/newsletter-campaigns", icon: Send },
+      { label: "Admin Account", href: "/admin/account", icon: UserCog },
       { label: "Settings", href: "/admin/settings", icon: Settings },
       { label: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText },
     ],
