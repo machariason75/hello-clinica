@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { ArrowLeft, Download, StickyNote, X, Trash2, ExternalLink, Search, FileText } from "lucide-react";
@@ -11,12 +11,13 @@ import { addReaderNote, deleteReaderNote } from "@/lib/reader/notes";
 export type ReaderNoteItem = { id: string; content: string; page: number | null; createdAt: string };
 
 export function ReaderView({
-  itemType, itemId, title, fileUrl, backHref, signedIn, isPremium, initialNotes,
+  itemType, itemId, title, hasFile, isPdf, backHref, signedIn, isPremium, initialNotes,
 }: {
   itemType: "book" | "resource";
   itemId: string;
   title: string;
-  fileUrl: string | null;
+  hasFile: boolean;
+  isPdf: boolean;
   backHref: string;
   signedIn: boolean;
   isPremium: boolean;
@@ -27,7 +28,40 @@ export function ReaderView({
   const [draft, setDraft] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const isPdf = !!fileUrl && /\.pdf($|\?)/i.test(fileUrl);
+
+  /**
+   * Level 1 deterrence (non-premium only): intercept the common "save this file"
+   * shortcuts so a casual Ctrl+S doesn't quietly pull the PDF down, and nudge the
+   * reader toward upgrading instead.
+   *
+   * This is deterrence, NOT protection — anyone who opens devtools can still get
+   * at a file their browser has rendered. The real safeguard is that the storage
+   * URL is never exposed (the file streams through /api/read-file), and that
+   * /api/download stays premium-gated.
+   */
+  useEffect(() => {
+    if (isPremium) return; // premium users may save freely
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const mod = e.ctrlKey || e.metaKey;
+      if (!mod) return;
+      const key = e.key.toLowerCase();
+      if (key === "s" || key === "p") {
+        e.preventDefault();
+        toast.info("Downloading and printing are premium features — reading is free.");
+      }
+    };
+    const onContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("contextmenu", onContextMenu);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("contextmenu", onContextMenu);
+    };
+  }, [isPremium]);
 
   function save() {
     const text = draft.trim();
@@ -77,18 +111,18 @@ export function ReaderView({
       <div className="flex min-h-0 flex-1">
         {/* Document */}
         <main className="min-w-0 flex-1">
-          {!fileUrl ? (
+          {!hasFile ? (
             <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
               <FileText className="h-10 w-10 text-medical-blue/40" />
               <p className="text-muted-foreground">This item doesn't have a file yet. Please check back soon.</p>
             </div>
           ) : isPdf ? (
-            <iframe title={title} src={`${fileUrl}#toolbar=0&navpanes=0&view=FitH`} className="h-full w-full border-0" />
+            <iframe title={title} src={`/api/read-file?type=${itemType}&id=${itemId}#toolbar=0&navpanes=0&view=FitH`} className="h-full w-full border-0" />
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
               <FileText className="h-10 w-10 text-medical-blue/50" />
               <p className="text-muted-foreground">This file opens in a new tab.</p>
-              <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2 text-sm font-semibold text-white">
+              <a href={`/api/read-file?type=${itemType}&id=${itemId}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2 text-sm font-semibold text-white">
                 <ExternalLink className="h-4 w-4" /> Open document
               </a>
             </div>

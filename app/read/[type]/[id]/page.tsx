@@ -51,7 +51,8 @@ export default async function ReaderPage({ params }: Params) {
       itemType={type}
       itemId={id}
       title={title}
-      fileUrl={fileUrl}
+      hasFile={!!fileUrl}
+      isPdf={!!fileUrl && /\.pdf($|\?)/i.test(fileUrl)}
       backHref={backHref}
       signedIn={!!student}
       isPremium={!!student?.hasAccess}
