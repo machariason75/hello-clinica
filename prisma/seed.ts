@@ -168,7 +168,7 @@ async function main() {
 
   const resourceCount = await prisma.resource.count();
   if (resourceCount === 0) {
-    await prisma.resource.createMany({ data: sampleResources() });
+    await prisma.resource.createMany({ data: sampleResources() as never });
     console.log(`[seed] Inserted ${CATEGORIES.length * 2} SAMPLE resources.`);
   } else {
     console.log(`[seed] Resources already present (${resourceCount}) — skipping sample insert.`);
@@ -176,7 +176,7 @@ async function main() {
 
   const bookCount = await prisma.book.count();
   if (bookCount === 0) {
-    await prisma.book.createMany({ data: sampleBooks() });
+    await prisma.book.createMany({ data: sampleBooks() as never });
     console.log(`[seed] Inserted ${sampleBooks().length} SAMPLE books.`);
   } else {
     console.log(`[seed] Books already present (${bookCount}) — skipping sample insert.`);
