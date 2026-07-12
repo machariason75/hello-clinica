@@ -62,7 +62,7 @@ export default async function AdvisingPage() {
                 <StaggerItem key={pkg.id} className="h-full">
                   <div className={"surface-card relative flex h-full flex-col p-7 " + (featured ? "ring-2 ring-coral" : "")}>
                     {featured && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-coral px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-coral to-[#E8613F] px-3 py-1 text-xs font-semibold text-white shadow-sm">
                         Most popular
                       </span>
                     )}
@@ -91,7 +91,7 @@ export default async function AdvisingPage() {
 
                     <Link
                       href={`/request-consultation?package=${encodeURIComponent(pkg.packageName)}`}
-                      className={"focus-ring mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold transition " + (featured ? "bg-coral text-white hover:opacity-90" : "border-2 border-medical-blue/30 text-medical-blue hover:bg-medical-blue/5")}
+                      className={"focus-ring mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold transition " + (featured ? "bg-gradient-to-r from-coral to-[#E8613F] text-white hover:opacity-90" : "border-2 border-medical-blue/30 text-medical-blue hover:bg-medical-blue/5")}
                     >
                       {pkg.buttonText || "Get started"}
                       <ArrowRight className="h-4 w-4" />

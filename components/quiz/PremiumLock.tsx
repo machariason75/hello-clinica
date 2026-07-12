@@ -39,7 +39,7 @@ export function PremiumLock({
           {signedIn ? (
             <Link
               href="/question-bank/colleges-universities"
-              className="focus-ring inline-flex items-center justify-center gap-1.5 rounded-xl bg-coral px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
+              className="focus-ring inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
             >
               Request access <ArrowRight className="h-4 w-4" />
             </Link>
@@ -47,7 +47,7 @@ export function PremiumLock({
             <>
               <Link
                 href="/account/register"
-                className="focus-ring inline-flex items-center justify-center gap-1.5 rounded-xl bg-coral px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
+                className="focus-ring inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
               >
                 Create free account <ArrowRight className="h-4 w-4" />
               </Link>

@@ -83,7 +83,7 @@ export default async function HistoryPage() {
                     <Link href={`/account/history/${a.id}`} className="inline-flex items-center gap-1 rounded-lg border border-medical-blue/30 px-3 py-1.5 text-xs font-semibold text-medical-blue hover:bg-medical-blue/5">
                       <Eye className="h-3.5 w-3.5" /> Review
                     </Link>
-                    <Link href={`/question-bank/${a.quiz.category.slug}/${a.quiz.slug}`} className="inline-flex items-center gap-1 rounded-lg bg-coral px-3 py-1.5 text-xs font-semibold text-white hover:opacity-90">
+                    <Link href={`/question-bank/${a.quiz.category.slug}/${a.quiz.slug}`} className="inline-flex items-center gap-1 rounded-lg bg-gradient-to-r from-coral to-[#E8613F] px-3 py-1.5 text-xs font-semibold text-white hover:opacity-90">
                       <RotateCcw className="h-3.5 w-3.5" /> Retake
                     </Link>
                   </div>

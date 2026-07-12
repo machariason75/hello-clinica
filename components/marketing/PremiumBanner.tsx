@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Sparkles, X, ArrowRight, Crown } from "lucide-react";
 
 const SHOW_MS = 9000;      // visible for ~9s
-const INTERVAL_MS = 75000; // reappears about every 75s
+const INTERVAL_MS = 180000; // reappears about every 3 minutes
 const FIRST_DELAY_MS = 6000;
 const DISMISS_KEY = "hc_premium_banner_dismissed";
 

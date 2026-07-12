@@ -39,8 +39,8 @@ export function StudentsManager({ rows }: { rows: StudentRow[] }) {
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-deep-blue/40" />
         <Input className="pl-9" placeholder="Search name, email, school…" value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
-      <div className="overflow-hidden rounded-xl border border-deep-blue/10 bg-white">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto rounded-xl border border-deep-blue/10 bg-white">
+        <table className="w-full min-w-[640px] text-sm">
           <thead className="bg-[#F3E9DD]/60 text-left text-deep-blue/70">
             <tr>
               <th className="px-4 py-3 font-medium">Student</th>

@@ -76,8 +76,8 @@ export function QuizzesManager({ quizzes, categoryOptions }: { quizzes: QuizList
         <Button onClick={openCreate}><Plus className="mr-1.5 h-4 w-4" /> New quiz</Button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-deep-blue/10 bg-white">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto rounded-xl border border-deep-blue/10 bg-white">
+        <table className="w-full min-w-[640px] text-sm">
           <thead className="bg-[#F3E9DD]/60 text-left text-deep-blue/70">
             <tr>
               <th className="px-4 py-3 font-medium">Quiz</th>

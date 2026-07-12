@@ -31,7 +31,7 @@ export function DownloadButton({
     <div className="flex flex-wrap items-center gap-3">
       <Link
         href={`/read/${type}/${id}`}
-        className="focus-ring inline-flex items-center gap-2 rounded-xl bg-coral px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
+        className="focus-ring inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
       >
         <BookOpen className="h-4 w-4" /> Read online
       </Link>

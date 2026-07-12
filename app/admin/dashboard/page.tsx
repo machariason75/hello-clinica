@@ -76,7 +76,7 @@ export default async function AdminDashboardPage() {
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {stats.newConsultations > 0 && (
-                <Link href="/admin/consultations" className="inline-flex items-center gap-1.5 rounded-full bg-coral px-3 py-1.5 text-xs font-semibold text-white">
+                <Link href="/admin/consultations" className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-coral to-[#E8613F] px-3 py-1.5 text-xs font-semibold text-white">
                   {stats.newConsultations} new consultation{stats.newConsultations === 1 ? "" : "s"} <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               )}

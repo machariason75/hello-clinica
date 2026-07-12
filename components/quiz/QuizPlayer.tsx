@@ -151,6 +151,8 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
         totalQuestions: total,
         timeSpentSeconds: spent < 0 ? 0 : spent,
         topicBreakdown: results.byTopic,
+        passed: results.passed,
+        answers,
       }),
     }).catch(() => {
       /* best-effort; report still shows */
@@ -560,7 +562,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
                 type="button"
                 onClick={() => setChecked((p) => ({ ...p, [q.id]: true }))}
                 disabled={selected.length === 0}
-                className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-coral px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-40"
+                className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-40"
               >
                 <Check className="h-4 w-4" /> Check answer
               </button>
@@ -633,7 +635,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
             <button
               type="button"
               onClick={finish}
-              className="focus-ring mt-5 w-full rounded-full bg-coral px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+              className="focus-ring mt-5 w-full rounded-full bg-gradient-to-r from-coral to-[#E8613F] px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
             >
               Submit test
             </button>

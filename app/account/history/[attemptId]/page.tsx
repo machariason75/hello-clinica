@@ -60,7 +60,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ attempt
                 {attempt.correctCount}/{attempt.totalQuestions} correct · {formatDuration(attempt.timeSpentSeconds)} · {new Date(attempt.createdAt).toLocaleDateString()}
               </p>
             </div>
-            <Link href={`/question-bank/${attempt.quiz.category.slug}/${attempt.quiz.slug}`} className="inline-flex items-center gap-1.5 rounded-xl bg-coral px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
+            <Link href={`/question-bank/${attempt.quiz.category.slug}/${attempt.quiz.slug}`} className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
               <RotateCcw className="h-4 w-4" /> Retake
             </Link>
           </div>

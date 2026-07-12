@@ -9,7 +9,6 @@ const SLIDES = [
   { src: "/images/medics/medic-1.jpg", alt: "Smiling nurse in blue scrubs" },
   { src: "/images/medics/medic-2.jpg", alt: "Smiling doctor in a white coat" },
   { src: "/images/medics/medic-3.jpg", alt: "Smiling clinician in a white coat" },
-  { src: "/images/medics/medic-4.jpg", alt: "Smiling doctor with a stethoscope" },
   { src: "/images/medics/medic-5.jpg", alt: "Smiling clinician in blue scrubs" },
   { src: "/images/medics/medic-6.jpg", alt: "Smiling healthcare professional" },
 ];
@@ -61,7 +60,7 @@ export function HeroSlideshow() {
     <div className="relative">
       {/* Decorative floating accents (not photos) — varied colours for warmth */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20">
-        <span className="absolute -left-3 top-12 flex h-11 w-11 items-center justify-center rounded-full bg-coral text-white shadow-lg">
+        <span className="absolute -left-3 top-12 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-r from-coral to-[#E8613F] text-white shadow-lg">
           <HeartPulse className="h-5 w-5" />
         </span>
         <span className="absolute -right-3 top-8 flex h-11 w-11 items-center justify-center rounded-full bg-[#E7A64B] text-white shadow-lg">

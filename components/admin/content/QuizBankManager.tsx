@@ -178,14 +178,14 @@ export function QuizBankManager({
           <button
             type="button"
             onClick={() => setView("categories")}
-            className={"inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition " + (view === "categories" ? "bg-coral text-white" : "text-deep-blue/70 hover:text-deep-blue")}
+            className={"inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition " + (view === "categories" ? "bg-gradient-to-r from-coral to-[#E8613F] text-white" : "text-deep-blue/70 hover:text-deep-blue")}
           >
             <FolderTree className="h-4 w-4" /> Sections ({categories.length})
           </button>
           <button
             type="button"
             onClick={() => setView("links")}
-            className={"inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition " + (view === "links" ? "bg-coral text-white" : "text-deep-blue/70 hover:text-deep-blue")}
+            className={"inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition " + (view === "links" ? "bg-gradient-to-r from-coral to-[#E8613F] text-white" : "text-deep-blue/70 hover:text-deep-blue")}
           >
             <Link2 className="h-4 w-4" /> Resource links ({links.length})
           </button>
@@ -199,8 +199,8 @@ export function QuizBankManager({
 
       {/* Categories table */}
       {view === "categories" && (
-        <div className="overflow-hidden rounded-xl border border-deep-blue/10 bg-white">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-xl border border-deep-blue/10 bg-white">
+          <table className="w-full min-w-[640px] text-sm">
             <thead className="bg-[#F3E9DD]/60 text-left text-deep-blue/70">
               <tr>
                 <th className="px-4 py-3 font-medium">Section</th>
@@ -239,8 +239,8 @@ export function QuizBankManager({
 
       {/* Links table */}
       {view === "links" && (
-        <div className="overflow-hidden rounded-xl border border-deep-blue/10 bg-white">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-xl border border-deep-blue/10 bg-white">
+          <table className="w-full min-w-[640px] text-sm">
             <thead className="bg-[#F3E9DD]/60 text-left text-deep-blue/70">
               <tr>
                 <th className="px-4 py-3 font-medium">Link</th>

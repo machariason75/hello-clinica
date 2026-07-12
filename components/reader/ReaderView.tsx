@@ -98,7 +98,7 @@ export function ReaderView({
           <StickyNote className="mr-1.5 h-4 w-4" /> Notes{notes.length > 0 ? ` (${notes.length})` : ""}
         </Button>
         {isPremium ? (
-          <a href={`/api/download?type=${itemType}&id=${itemId}`} className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-coral px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">
+          <a href={`/api/download?type=${itemType}&id=${itemId}`} className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">
             <Download className="h-4 w-4" /> Download
           </a>
         ) : (
