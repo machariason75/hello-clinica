@@ -54,14 +54,16 @@ export function PremiumBanner() {
   return (
     <AnimatePresence>
       {visible && (
+        <div
+          className="fixed bottom-5 right-5 z-40 w-[300px] max-w-[calc(100vw-2.5rem)]"
+          role="complementary"
+          aria-label="Premium offer"
+        >
         <motion.div
           initial={{ opacity: 0, x: reduce ? 0 : 120 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: reduce ? 0 : 120 }}
           transition={{ type: "spring", stiffness: 260, damping: 26 }}
-          className="fixed bottom-5 right-5 z-40 w-[300px] max-w-[calc(100vw-2.5rem)]"
-          role="complementary"
-          aria-label="Premium offer"
         >
           <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-[#0C3C4C] via-[#14586b] to-[#C2461A] p-5 text-white shadow-2xl">
             {/* soft glow */}
@@ -92,6 +94,7 @@ export function PremiumBanner() {
             </div>
           </div>
         </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
