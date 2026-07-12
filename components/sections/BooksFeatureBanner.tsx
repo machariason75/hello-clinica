@@ -1,41 +1,44 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Books feature banner — the NCLEX study scene sits softly blurred behind the
- * text (so no branded cover reads prominently), with a white gradient keeping
- * the copy crisp and accessible.
+ * Books feature banner.
+ *
+ * The NCLEX study photo now genuinely SHOWS — previously it sat behind a heavy
+ * blur and a white gradient, so it was effectively invisible. It now sits in its
+ * own panel beside the copy, at full resolution, using the image's natural 3:2
+ * proportions so nothing is cropped awkwardly — and it's visible on phones too
+ * (it stacks above the text), not just on laptops.
  */
 export function BooksFeatureBanner() {
   return (
     <Container>
       <Reveal>
-        <div className="relative overflow-hidden rounded-card border border-white/50 shadow-card">
-          {/* Blurred study scene + readability gradient */}
-          <div aria-hidden="true" className="absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/study-nclex.jpg"
-              alt=""
-              className="h-full w-full scale-110 object-cover blur-2xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/55" />
-          </div>
+        <div className="surface-card overflow-hidden">
+          <div className="grid items-center gap-0 lg:grid-cols-2">
+            {/* Photo — full resolution, natural proportions, on every device */}
+            <div className="relative order-1 aspect-[3/2] w-full lg:h-full lg:min-h-[22rem]">
+              <Image
+                src="/images/study-nclex.jpg"
+                alt="A nursing student revising with NCLEX preparation books"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+                priority
+              />
+            </div>
 
-          <div className="relative grid gap-6 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
-            <div className="max-w-md">
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">
-                Study smarter
-              </p>
-              <h2 className="text-h2 mt-3 text-deep-blue">
-                Books &amp; study guides that move the needle
-              </h2>
+            {/* Copy */}
+            <div className="order-2 p-8 sm:p-10 lg:p-12">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Study smarter</p>
+              <h2 className="text-h2 mt-3 text-deep-blue">Books &amp; study guides that move the needle</h2>
               <p className="text-body mt-4 text-deep-blue/70">
-                Curated exam prep, core texts, and digital downloads — chosen to help you focus on
-                what matters and study with confidence.
+                Curated exam prep, core texts, and digital downloads — chosen to help you focus on what matters and
+                study with confidence. Read any title online, right here on the site.
               </p>
               <div className="mt-7">
                 <Button asChild>
@@ -46,7 +49,6 @@ export function BooksFeatureBanner() {
                 </Button>
               </div>
             </div>
-            <div aria-hidden="true" className="hidden lg:block" />
           </div>
         </div>
       </Reveal>
