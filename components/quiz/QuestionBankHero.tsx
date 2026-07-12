@@ -23,18 +23,18 @@ export function QuestionBankHero() {
 
   return (
     <div className="mb-12">
-      <div aria-hidden="true" className="flex gap-3 sm:gap-4">
+      <div aria-hidden="true" className="mx-auto flex max-w-3xl gap-3 sm:gap-4">
         {photos.map((p) => (
           <div
             key={p.src}
-            className={`relative h-24 flex-1 overflow-hidden rounded-2xl shadow-card ring-1 ring-black/5 transition-transform duration-300 hover:rotate-0 sm:h-32 lg:h-40 ${p.tilt}`}
+            className={`relative aspect-[4/3] flex-1 overflow-hidden rounded-2xl shadow-card ring-1 ring-black/5 transition-transform duration-300 hover:rotate-0 ${p.tilt}`}
           >
             <Image
               src={p.src}
               alt=""
               fill
-              sizes="(max-width: 1024px) 33vw, 320px"
-              className="object-cover"
+              sizes="(max-width: 768px) 32vw, 240px"
+              className="object-cover object-top"
             />
           </div>
         ))}
