@@ -3,6 +3,7 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { sendNotificationEmail } from "@/lib/email";
+import { checkFormAllowed, clientIp } from "@/lib/security/rate-limit";
 import { emailShell, emailButton, siteUrl, makeToken } from "@/lib/email-templates";
 
 export type ResetResult = { success: boolean; message?: string };
@@ -17,6 +18,14 @@ const TOKEN_TTL_MINUTES = 60;
  * addresses have accounts.
  */
 export async function requestPasswordReset(email: string): Promise<ResetResult> {
+  // Limit reset requests per IP — stops someone spamming a student's inbox
+  // (and burning your email quota).
+  const ip = await clientIp();
+  const gate = await checkFormAllowed("password-reset", ip, 3);
+  if (!gate.allowed) {
+    return { success: false, message: gate.message ?? "Please wait a few minutes and try again." };
+  }
+
   const normalized = email.trim().toLowerCase();
   const generic = {
     success: true,

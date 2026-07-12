@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { newsletterSchema } from "@/lib/validations";
 import { sendNotificationEmail, esc } from "@/lib/email";
+import { checkFormAllowed, clientIp } from "@/lib/security/rate-limit";
 
 export type ActionResult = {
   success: boolean;
@@ -19,6 +20,13 @@ export async function subscribeToNewsletter(
   _prev: ActionResult | null,
   formData: FormData
 ): Promise<ActionResult> {
+  // Anti-spam: cap sign-ups per IP.
+  const ip = await clientIp();
+  const rl = await checkFormAllowed("newsletter", ip, 5);
+  if (!rl.allowed) {
+    return { success: false, message: rl.message ?? "Please wait a few minutes and try again." };
+  }
+
   const raw = {
     name: String(formData.get("name") ?? ""),
     email: String(formData.get("email") ?? ""),

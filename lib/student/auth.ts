@@ -9,6 +9,7 @@ import {
   verifySessionToken,
   studentCookieOptions,
 } from "@/lib/student/session";
+import { checkLoginAllowed, recordLoginAttempt, clientIp } from "@/lib/security/rate-limit";
 import {
   studentRegisterSchema,
   studentLoginSchema,
@@ -70,9 +71,18 @@ export async function loginStudent(input: StudentLoginInput): Promise<AuthResult
   if (!parsed.success) return { success: false, message: "Please check the fields.", fieldErrors: fieldErrors(parsed.error.issues) };
   const normEmail = parsed.data.email.toLowerCase().trim();
 
+  // Brute-force protection: refuse further attempts after repeated failures.
+  const ip = await clientIp();
+  const gate = await checkLoginAllowed(normEmail, ip);
+  if (!gate.allowed) return { success: false, message: gate.message ?? "Too many attempts. Please try again later." };
+
   const student = await prisma.student.findUnique({ where: { email: normEmail } });
   const valid = student ? await bcrypt.compare(parsed.data.password, student.passwordHash) : false;
-  if (!student || !valid) return { success: false, message: "Invalid email or password." };
+  if (!student || !valid) {
+    await recordLoginAttempt(normEmail, ip, false);
+    return { success: false, message: "Invalid email or password." };
+  }
+  await recordLoginAttempt(normEmail, ip, true);
 
   (await cookies()).set(STUDENT_COOKIE, createSessionToken(student.id), studentCookieOptions);
   return { success: true };

@@ -5,6 +5,7 @@ import { contactSchema } from "@/lib/validations";
 import { sendNotificationEmail, esc } from "@/lib/email";
 import { siteConfig } from "@/lib/site-config";
 import type { ActionResult } from "./newsletter";
+import { checkFormAllowed, clientIp } from "@/lib/security/rate-limit";
 
 /**
  * Submit the contact form.
@@ -16,6 +17,13 @@ export async function submitContactRequest(
   _prev: ActionResult | null,
   formData: FormData
 ): Promise<ActionResult> {
+  // Anti-spam: cap submissions per IP.
+  const ip = await clientIp();
+  const rl = await checkFormAllowed("contact", ip, 5);
+  if (!rl.allowed) {
+    return { success: false, message: rl.message ?? "Please wait a few minutes and try again." };
+  }
+
   const raw = {
     firstName: String(formData.get("firstName") ?? ""),
     lastName: String(formData.get("lastName") ?? ""),
