@@ -8,7 +8,6 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { BookCard } from "@/components/cards/BookCard";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { bookHasAudio } from "@/lib/queries/audio";
-import { ReadOnlineButton } from "@/components/reader/ReadOnlineButton";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Reveal } from "@/components/motion/Reveal";
@@ -78,28 +77,23 @@ export default async function BookDetailPage({ params }: Params) {
             <p className="text-body mt-6 text-muted-foreground">{book.description}</p>
 
             <div className="mt-8">
-              {book.fileUrl && (
-                <div className="mb-3">
-                  <ReadOnlineButton type="book" id={book.id} label="Read online" />
-                </div>
-              )}
-              {hasAudio && (
-                <div className="mb-3">
-                  <Link
-                    href={`/listen/${book.id}`}
-                    className="focus-ring inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:shadow-md"
-                  >
-                    <Headphones className="h-4 w-4" aria-hidden="true" />
-                    Listen to the audiobook
-                  </Link>
-                </div>
-              )}
               <DownloadButton
                 type="book"
                 id={book.id}
                 fileUrl={book.fileUrl}
                 label="Download book"
               />
+              {hasAudio && (
+                <div className="mt-3">
+                  <Link
+                    href={`/listen/${book.id}`}
+                    className="focus-ring inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-medical-blue to-deep-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:shadow-md"
+                  >
+                    <Headphones className="h-4 w-4" aria-hidden="true" />
+                    Listen to the audiobook
+                  </Link>
+                </div>
+              )}
               {!book.fileUrl && (
                 <p className="mt-3 text-sm text-muted-foreground">
                   This title is part of our recommended reading. A download will appear here when available.
