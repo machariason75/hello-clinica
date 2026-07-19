@@ -2,7 +2,7 @@
   "name": "hello-clinica",
   "version": "1.0.0",
   "private": true,
-  "description": "Hello Clinica — Medical Education & Advising Platform (Phase 1: Foundation)",
+  "description": "Hello Clinica \u2014 Medical Education & Advising Platform (Phase 1: Foundation)",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
@@ -31,7 +31,7 @@
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-select": "2.1.2",
     "@radix-ui/react-slot": "1.1.0",
-    "@uploadthing/react": "^6.8.0",
+    "@uploadthing/react": "^7",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
@@ -45,7 +45,7 @@
     "sonner": "1.7.0",
     "tailwind-merge": "2.5.4",
     "tailwindcss-animate": "1.0.7",
-    "uploadthing": "^6.13.3",
+    "uploadthing": "^7",
     "zod": "3.23.8"
   },
   "devDependencies": {
