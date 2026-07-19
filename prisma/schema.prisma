@@ -444,7 +444,9 @@ model QuizCategory {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  parent        QuizCategory?      @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Cascade)
+  /// Restrict (not Cascade): deleting a section that still has sub-sections
+  /// would silently destroy everything beneath it. The owner must empty it first.
+  parent        QuizCategory?      @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
   children      QuizCategory[]     @relation("CategoryTree")
   quizzes       Quiz[]
   externalLinks QuizExternalLink[]
@@ -468,7 +470,8 @@ model QuizExternalLink {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  category QuizCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  /// Restrict: links must be removed deliberately, not as collateral.
+  category QuizCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@index([categoryId])
   @@map("quiz_external_links")
@@ -490,7 +493,8 @@ model Quiz {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  category QuizCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  /// Restrict: never let deleting a section quietly delete months of quiz authoring.
+  category QuizCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   questions Question[]
   attempts  QuizAttempt[]
 

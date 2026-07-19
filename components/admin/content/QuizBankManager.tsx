@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, FolderTree, Link2, ExternalLink } from "lucide-react";
@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { getCategoryDeletionImpact, type DeletionImpact } from "@/lib/actions/admin-quizbank-safety";
 import { Checkbox } from "@/components/ui/checkbox";
 import { YesNoPill } from "@/components/admin/ui/StatusPill";
 import {
@@ -120,6 +121,18 @@ export function QuizBankManager({
       else toast.error(res.message || "Could not update.");
     });
   }
+  // What would actually be lost — fetched when the confirm dialog opens.
+  const [impact, setImpact] = useState<DeletionImpact | null>(null);
+  const [impactLoading, setImpactLoading] = useState(false);
+
+  useEffect(() => {
+    if (!catDelete) { setImpact(null); return; }
+    setImpactLoading(true);
+    getCategoryDeletionImpact(catDelete.id)
+      .then((r) => setImpact(r))
+      .finally(() => setImpactLoading(false));
+  }, [catDelete]);
+
   function doDeleteCat() {
     if (!catDelete) return;
     startTransition(async () => {
@@ -405,11 +418,50 @@ export function QuizBankManager({
         <DialogContent className="sm:max-w-md">
           <DialogTitle>Delete section?</DialogTitle>
           <DialogDescription>
-            {catDelete ? `"${catDelete.title}" and everything inside it (sub-sections, quizzes, links) will be removed. This cannot be undone.` : ""}
+            {catDelete ? `"${catDelete.title}" will be permanently deleted.` : ""}
           </DialogDescription>
+
+          {/* Spell out the damage. A vague warning is easy to click past; a
+              count of what disappears is not. */}
+          {impactLoading && (
+            <p className="mt-3 text-sm text-muted-foreground">Checking what&apos;s inside…</p>
+          )}
+          {impact && !impactLoading && (
+            impact.isEmpty ? (
+              <p className="mt-3 rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700">
+                This section is empty — nothing else will be lost.
+              </p>
+            ) : (
+              <div className="mt-3 rounded-lg border border-red-300/60 bg-red-50 px-3 py-2.5 text-sm">
+                <p className="font-semibold text-red-900">This will also permanently delete:</p>
+                <ul className="mt-1.5 space-y-0.5 text-red-800">
+                  {impact.subSections > 0 && (
+                    <li>• {impact.subSections} sub-section{impact.subSections === 1 ? "" : "s"}</li>
+                  )}
+                  {impact.quizzes > 0 && (
+                    <li>• {impact.quizzes} quiz{impact.quizzes === 1 ? "" : "zes"}</li>
+                  )}
+                  {impact.questions > 0 && (
+                    <li>• {impact.questions} question{impact.questions === 1 ? "" : "s"} you have written</li>
+                  )}
+                  {impact.links > 0 && (
+                    <li>• {impact.links} external link{impact.links === 1 ? "" : "s"}</li>
+                  )}
+                  {impact.attempts > 0 && (
+                    <li>• {impact.attempts} student attempt{impact.attempts === 1 ? "" : "s"} and their results</li>
+                  )}
+                </ul>
+                <p className="mt-2 text-xs text-red-700">This cannot be undone.</p>
+              </div>
+            )
+          )}
           <div className="mt-6 flex justify-end gap-2">
             <Button variant="secondary" onClick={() => setCatDelete(null)}>Cancel</Button>
-            <Button variant="destructive" onClick={doDeleteCat} disabled={isPending}>Delete</Button>
+            <Button variant="destructive" onClick={doDeleteCat} disabled={isPending || impactLoading}>
+              {impact && !impact.isEmpty
+                ? `Delete section and ${impact.quizzes + impact.subSections} item${impact.quizzes + impact.subSections === 1 ? "" : "s"}`
+                : "Delete"}
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
