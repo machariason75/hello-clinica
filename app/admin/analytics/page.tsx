@@ -3,12 +3,14 @@ import { requireAdmin } from "@/lib/admin/auth-helpers";
 import { getAnalytics } from "@/lib/admin/analytics-data";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { getDepartmentAnalytics } from "@/lib/admin/analytics-departments";
+import { DepartmentAnalyticsView } from "@/components/admin/DepartmentAnalytics";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminAnalyticsPage() {
   const admin = await requireAdmin();
-  const data = await getAnalytics();
+  const [data, departments] = await Promise.all([getAnalytics(), getDepartmentAnalytics(30)]);
 
   const totalTiles = [
     { label: "Consultations", value: data.totals.consultations, sub: `${data.last30.consultations} in 30d`, icon: CalendarClock },
@@ -25,7 +27,12 @@ export default async function AdminAnalyticsPage() {
   return (
     <AdminShell adminName={admin.name || "Admin"}>
       <div className="space-y-8">
-        <AdminPageHeader title="Analytics" description="Activity and engagement across your site." />
+        <AdminPageHeader
+          title="Analytics"
+          description="How each part of the site is performing, and where students need the most help."
+        />
+
+        <DepartmentAnalyticsView data={departments} />
 
         {/* Total tiles */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
