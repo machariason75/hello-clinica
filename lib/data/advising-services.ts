@@ -1,7 +1,7 @@
 import {
   Compass,
   FileText,
-  MessagesSquare,
+  Target,
   HeartHandshake,
   type LucideIcon,
 } from "lucide-react";
@@ -60,21 +60,25 @@ export const advisingServiceDefs: AdvisingServiceDef[] = [
     ],
   },
   {
-    slug: "interview-coaching",
-    title: "Interview Coaching",
-    description: "Mock interviews and tailored feedback to build confidence.",
+    slug: "exam-coaching",
+    title: "Exam Coaching",
+    description: "One-on-one coaching for the exam standing between you and the next step.",
     overview:
-      "Practice with realistic mock interviews across formats — traditional, panel, and MMI — and receive specific feedback to help you communicate clearly under pressure.",
-    icon: MessagesSquare,
+      "Whether it's the NCLEX, USMLE, TEAS, HESI, or NAPLEX, most people don't fail for lack of effort — they fail because their preparation isn't aimed at how the exam actually tests them. We build a study plan around your timeline, work through your weak areas, and teach you to read questions the way examiners write them. It pairs naturally with the Question Bank, so what you practise between sessions is the same material we review together.",
+    icon: Target,
     includes: [
-      "Realistic mock interviews",
-      "Traditional, panel, and MMI formats",
-      "Specific, actionable feedback",
-      "Strategies for telling your story",
+      "A study plan built around your exam date",
+      "Diagnostic review to find your real weak areas",
+      "Question-reading and test-taking technique",
+      "Timing and pacing strategy for the exam room",
+      "Managing exam anxiety and burnout",
+      "Guided practice using the Hello Clinica Question Bank",
     ],
     faqs: [
-      { question: "Which interview formats do you cover?", answer: "Traditional one-on-one, panel, and multiple mini-interview (MMI) formats, tailored to the schools you're preparing for." },
-      { question: "How should I prepare?", answer: "Come ready to practice as if it's the real thing. We'll debrief afterward with concrete ways to improve." },
+      { question: "Which exams do you coach for?", answer: "NCLEX-RN and NCLEX-PN, USMLE Steps 1-3, TEAS, HESI A2, and the pharmacy licensing exams (NAPLEX and MPJE). If your exam isn't listed, ask — the approach transfers to most standardised health-science exams." },
+      { question: "How soon before my exam should we start?", answer: "Six to eight weeks gives us room to diagnose weak areas and rebuild them properly. That said, focused coaching helps even a week or two out — at that point we concentrate on strategy, pacing, and steadying your nerves rather than new content." },
+      { question: "I've already failed once. Can coaching help?", answer: "Yes, and this is some of the most rewarding work we do. A retake needs a different plan, not simply more hours. We start by working out what actually went wrong — content gaps, timing, question interpretation, or anxiety — and rebuild from there." },
+      { question: "Do I need Question Bank access as well?", answer: "It isn't required, but it helps a great deal. Coaching works best when you practise between sessions and we review your results together, so we can see exactly which topics need attention." },
     ],
   },
   {

@@ -33,7 +33,7 @@ const categoryLabels: Record<string, string> = {
   GENERAL: "General",
   ADMISSIONS_ADVISING: "Admissions Advising",
   APPLICATION_REVIEW: "Application Review",
-  INTERVIEW_COACHING: "Interview Coaching",
+  INTERVIEW_COACHING: "Exam Coaching",
   CONSULTATION_PACKAGES: "Consultation Packages",
   BOOKS: "Books",
   RESOURCES: "Resources",

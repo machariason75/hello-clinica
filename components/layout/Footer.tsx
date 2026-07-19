@@ -14,7 +14,12 @@ import { footerNav, siteConfig } from "@/lib/site-config";
  */
 export function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/admin") || pathname?.startsWith("/read")) return null;
+  if (
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/read") ||
+    pathname?.startsWith("/listen")
+  )
+    return null;
   const year = new Date().getFullYear();
 
   return (

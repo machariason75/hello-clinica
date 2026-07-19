@@ -227,3 +227,29 @@ export function suggestedMinutes(questionCount: number): number {
   const raw = questionCount * 1.1;
   return Math.max(5, Math.round(raw / 5) * 5);
 }
+/* --------------------------- AUDIOBOOK TRACKS -------------------------- */
+
+export const audioTrackSchema = z
+  .object({
+    title: z.string().trim().min(1, "Track title is required."),
+    source: z.enum(["upload", "external"]),
+    audioUrl: z.string().trim().optional().or(z.literal("")),
+    externalUrl: z
+      .string()
+      .trim()
+      .url("Please enter a valid link (starting with http).")
+      .optional()
+      .or(z.literal("")),
+    narrator: z.string().trim().optional().or(z.literal("")),
+    durationSeconds: z.coerce.number().int().min(0).optional(),
+    order: z.coerce.number().int().min(0),
+    published: z.boolean(),
+  })
+  // A track is useless without something to play, so require the field that
+  // matches the chosen source rather than accepting a half-filled record.
+  .refine((d) => (d.source === "upload" ? !!d.audioUrl : !!d.externalUrl), {
+    message: "Add the audio file (or a link, if this is an external track).",
+    path: ["audioUrl"],
+  });
+
+export type AudioTrackFormInput = z.infer<typeof audioTrackSchema>;

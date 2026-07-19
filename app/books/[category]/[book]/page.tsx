@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, BookOpen, User } from "lucide-react";
+import { ArrowLeft, BookOpen, User, Headphones } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { BookCard } from "@/components/cards/BookCard";
 import { DownloadButton } from "@/components/common/DownloadButton";
+import { bookHasAudio } from "@/lib/queries/audio";
+import { ReadOnlineButton } from "@/components/reader/ReadOnlineButton";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Reveal } from "@/components/motion/Reveal";
@@ -34,6 +36,9 @@ export default async function BookDetailPage({ params }: Params) {
   const def = getBookCategoryBySlug(category);
   const book = await getBookById(bookId);
   if (!def || !book) notFound();
+
+  // Show the Listen button only when this book actually has published audio.
+  const hasAudio = await bookHasAudio(book.id);
 
   const catLabel = getBookCategoryByEnum(book.category)?.title ?? def.title;
   const related = await getRelatedBooks({ id: book.id, category: book.category });
@@ -73,6 +78,22 @@ export default async function BookDetailPage({ params }: Params) {
             <p className="text-body mt-6 text-muted-foreground">{book.description}</p>
 
             <div className="mt-8">
+              {book.fileUrl && (
+                <div className="mb-3">
+                  <ReadOnlineButton type="book" id={book.id} label="Read online" />
+                </div>
+              )}
+              {hasAudio && (
+                <div className="mb-3">
+                  <Link
+                    href={`/listen/${book.id}`}
+                    className="focus-ring inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:shadow-md"
+                  >
+                    <Headphones className="h-4 w-4" aria-hidden="true" />
+                    Listen to the audiobook
+                  </Link>
+                </div>
+              )}
               <DownloadButton
                 type="book"
                 id={book.id}

@@ -205,6 +205,7 @@ model Book {
   updatedAt     DateTime      @updatedAt
 
   downloadLogs  DownloadLog[]
+  audioTracks   AudioTrack[]
 
   @@index([category])
   @@index([published])
@@ -571,6 +572,7 @@ model Student {
   attempts QuizAttempt[]
   readerNotes ReaderNote[]
   resetTokens PasswordResetToken[]
+  audioProgress AudioProgress[]
 
   @@map("students")
 }
@@ -650,3 +652,58 @@ model PasswordResetToken {
   @@map("password_reset_tokens")
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// AUDIO BOOKS
+// A book can have any number of audio tracks (chapters). Each track is either
+// an uploaded file or a link to an external audiobook — the player treats both
+// the same way, so the owner can mix them freely.
+// ─────────────────────────────────────────────────────────────
+
+model AudioTrack {
+  id     String @id @default(cuid())
+  bookId String
+  title  String // e.g. "Chapter 3 — Fluid & Electrolyte Balance"
+  order  Int    @default(0)
+
+  /// Uploaded audio (streamed through /api/read-audio so the real URL stays hidden)
+  audioUrl String?
+  /// OR a link to an audiobook hosted elsewhere (opens externally)
+  externalUrl String?
+  /// "upload" | "external" — kept explicit so the UI never has to guess
+  source String @default("upload")
+
+  durationSeconds Int? // shown in the track list; optional
+  narrator        String?
+  published       Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  book     Book            @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  progress AudioProgress[]
+
+  @@index([bookId])
+  @@index([published])
+  @@map("audio_tracks")
+}
+
+/// Where each student left off in each track.
+/// The @@unique constraint is deliberate: it makes duplicate progress rows
+/// impossible, so listening stats can never double-count or conflict.
+model AudioProgress {
+  id              String   @id @default(cuid())
+  studentId       String
+  trackId         String
+  positionSeconds Int      @default(0)
+  completed       Boolean  @default(false)
+  listenCount     Int      @default(0)
+  updatedAt       DateTime @updatedAt
+
+  student Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  track   AudioTrack @relation(fields: [trackId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, trackId])
+  @@index([trackId])
+  @@map("audio_progress")
+}

@@ -102,7 +102,7 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: "Admissions Advising", href: "/advising#admissions-advising" },
       { label: "Application Review", href: "/advising#application-review" },
-      { label: "Interview Coaching", href: "/advising#interview-coaching" },
+      { label: "Exam Coaching", href: "/advising#exam-coaching" },
       { label: "Consultation Packages", href: "/advising#consultation-packages" },
     ],
   },

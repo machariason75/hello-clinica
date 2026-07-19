@@ -15,25 +15,14 @@ export const newsletterSchema = z.object({
 export type NewsletterInput = z.infer<typeof newsletterSchema>;
 
 export const cadreOptions = [
-  "Pre-Nursing",
-  "Nursing Student",
-  "BSN Student",
-  "Accelerated BSN",
-  "RN",
-  "LPN",
-  "LVN",
-  "MSN Student",
-  "DNP Student",
-  "Nurse Practitioner",
   "Pre-Med",
   "Medical Student",
   "International Medical Graduate",
+  "Nursing Student",
+  "Nurse Practitioner Student",
+  "Physician Assistant Student",
+  "Dental Student",
   "Pharmacy Student",
-  "Physician Assistant",
-  "Dentistry",
-  "Physical Therapy",
-  "Occupational Therapy",
-  "Respiratory Therapy",
   "Other",
 ] as const;
 
@@ -41,7 +30,7 @@ export const contactReasonOptions = [
   "General Question",
   "Advising Services",
   "Application Review",
-  "Interview Coaching",
+  "Exam Coaching",
   "Consultation Packages",
   "Books & Resources",
   "Other",

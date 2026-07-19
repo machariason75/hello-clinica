@@ -5,6 +5,7 @@ import {
   CalendarClock,
   Microscope,
   GraduationCap,
+  Target,
   HeartHandshake,
   Compass,
   type LucideIcon,
@@ -90,10 +91,10 @@ export const advisingServices: ServiceCardData[] = [
     icon: FileText,
   },
   {
-    title: "Interview Coaching",
-    description: "Mock interviews and tailored feedback to help you communicate clearly under pressure.",
+    title: "Exam Coaching",
+    description: "Targeted coaching for the NCLEX, USMLE, TEAS, HESI, and pharmacy boards — built around your exam date.",
     href: "/advising",
-    icon: MessagesSquare,
+    icon: Target,
   },
   {
     title: "Consultation Packages",

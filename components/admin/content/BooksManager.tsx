@@ -2,9 +2,10 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { toast } from "sonner";
 import {
-  Search, Plus, Pencil, Archive, ArchiveRestore, Star, Trash2,
+  Search, Plus, Pencil, Archive, ArchiveRestore, Star, Trash2, Music,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -205,6 +206,9 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
                     <td className="px-4 py-3"><YesNoPill value={r.published} /></td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-1">
+                        <Button variant="ghost" size="sm" asChild aria-label="Audio chapters">
+                          <Link href={`/admin/books/${r.id}/audio`}><Music className="h-4 w-4" /></Link>
+                        </Button>
                         <Button variant="ghost" size="sm" onClick={() => openEdit(r)} aria-label="Edit"><Pencil className="h-4 w-4" /></Button>
                         <Button variant="ghost" size="sm" disabled={isPending}
                           onClick={() => runAction(() => setBookArchived(r.id, !r.archived), r.archived ? "Restored." : "Archived.")}

@@ -35,6 +35,14 @@ export const ourFileRouter = {
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
 
+  /**
+   * Audiobook track. Kept generous because spoken-word chapters are large;
+   * anything longer than this should be added as an EXTERNAL link instead.
+   */
+  bookAudio: f({ audio: { maxFileSize: "64MB", maxFileCount: 1 } })
+    .middleware(requireAdminUpload)
+    .onUploadComplete(async ({ file }) => ({ url: file.url })),
+
   // Resource thumbnail image
   resourceThumbnail: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(requireAdminUpload)
