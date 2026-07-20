@@ -10,6 +10,8 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { PackagesWithInquiry } from "@/components/packages/PackagesWithInquiry";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
+import { JsonLd } from "@/components/common/JsonLd";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { getAdvisingServiceBySlug } from "@/lib/data/advising-services";
@@ -48,6 +50,16 @@ export default async function AdvisingServicePage({ params }: Params) {
 
   return (
     <PageTransition>
+      {/* FAQ markup is the highest-value schema on the site: Google renders
+          these as expandable questions in the results, which takes up far more
+          of the page than a plain link. */}
+      {def.faqs.length > 0 && <JsonLd data={faqJsonLd(def.faqs)} />}
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Advising", path: "/advising" },
+          { name: def.title, path: `/advising/${def.slug}` },
+        ])}
+      />
       <PageHero eyebrow="Advising Services" title={def.title} description={def.overview} />
 
       <Section ariaLabel={def.title}>

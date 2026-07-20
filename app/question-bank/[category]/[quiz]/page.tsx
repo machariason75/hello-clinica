@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, quizJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { getQuizBySlug, getCategoryAncestors } from "@/lib/queries/quizzes";
 import { getStudent } from "@/lib/student/auth";
 import { QuizPlayer, type QuizPlayerData } from "@/components/quiz/QuizPlayer";
@@ -8,6 +8,7 @@ import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { PremiumLock } from "@/components/quiz/PremiumLock";
+import { JsonLd } from "@/components/common/JsonLd";
 
 // Interactive; do not statically cache the player shell.
 export const dynamic = "force-dynamic";
@@ -70,5 +71,28 @@ export default async function QuizPage({ params }: Params) {
     })),
   };
 
-  return <QuizPlayer quiz={data} />;
+  // Structured data: lets Google show this as a rich result rather than a
+  // plain blue link. Emitted even for premium quizzes — the PAGE is indexable,
+  // the questions are what's gated.
+  const schema = quizJsonLd({
+    title: q.title,
+    description: q.description,
+    path: `/question-bank/${q.category.slug}/${q.slug}`,
+    questionCount: q.questions.length,
+    isFree: !premiumBranch,
+    category: q.category.title,
+  });
+  const crumbs = breadcrumbJsonLd([
+    { name: "Question Bank", path: "/question-bank" },
+    { name: q.category.title, path: `/question-bank/${q.category.slug}` },
+    { name: q.title, path: `/question-bank/${q.category.slug}/${q.slug}` },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={schema} />
+      <JsonLd data={crumbs} />
+      <QuizPlayer quiz={data} />
+    </>
+  );
 }

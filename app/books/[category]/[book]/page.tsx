@@ -8,6 +8,8 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { BookCard } from "@/components/cards/BookCard";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { bookHasAudio } from "@/lib/queries/audio";
+import { JsonLd } from "@/components/common/JsonLd";
+import { bookJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Reveal } from "@/components/motion/Reveal";
@@ -44,6 +46,22 @@ export default async function BookDetailPage({ params }: Params) {
 
   return (
     <PageTransition>
+      <JsonLd
+        data={bookJsonLd({
+          title: book.title,
+          author: book.author,
+          description: book.description,
+          path: `/books/${def.slug}/${book.id}`,
+          image: book.coverImage,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Books", path: "/books" },
+          { name: def.title, path: `/books/${def.slug}` },
+          { name: book.title, path: `/books/${def.slug}/${book.id}` },
+        ])}
+      />
       <Section ariaLabel={book.title}>
         <Link
           href={`/books/${def.slug}`}
