@@ -75,6 +75,14 @@ export type DepartmentAnalytics = {
     newConsultations: number; // status = new / unhandled
   };
 
+  dailyQuestion: {
+    participants: Trend;     // unique people, deduped by the day-key constraint
+    correctPct: number;
+    freeSetsClaimed: number;
+    conversionToSetPct: number; // of those who answered, how many took a set
+    signedInShare: number;      // how many participants had accounts
+  };
+
   communications: {
     subscribers: Trend;
     totalSubscribers: number;
@@ -180,6 +188,12 @@ export async function getDepartmentAnalytics(days = 30): Promise<DepartmentAnaly
     inqNow,
     inqPrev,
     newConsultations,
+    // Question of the Day
+    dailyNow,
+    dailyPrev,
+    dailyCorrect,
+    dailyClaimed,
+    dailySignedIn,
     // Communications
     subsNow,
     subsPrev,
@@ -253,6 +267,11 @@ export async function getDepartmentAnalytics(days = 30): Promise<DepartmentAnaly
     prisma.packageInquiry.count({ where: { createdAt: inPrevPeriod } }),
     prisma.consultation.count({ where: { status: "NEW" } }),
 
+    prisma.dailyQuestionAttempt.count({ where: { createdAt: inPeriod, answered: true } }),
+    prisma.dailyQuestionAttempt.count({ where: { createdAt: inPrevPeriod, answered: true } }),
+    prisma.dailyQuestionAttempt.count({ where: { createdAt: inPeriod, answered: true, wasCorrect: true } }),
+    prisma.dailyQuestionAttempt.count({ where: { createdAt: inPeriod, claimedQuizId: { not: null } } }),
+    prisma.dailyQuestionAttempt.count({ where: { createdAt: inPeriod, studentId: { not: null } } }),
     prisma.newsletterSubscriber.count({ where: { subscribedAt: inPeriod } }),
     prisma.newsletterSubscriber.count({ where: { subscribedAt: inPrevPeriod } }),
     prisma.newsletterSubscriber.count({ where: { unsubscribed: false, archived: false } }),
@@ -341,6 +360,14 @@ export async function getDepartmentAnalytics(days = 30): Promise<DepartmentAnaly
       contactRequests: trend(contactNow, contactPrev),
       packageInquiries: trend(inqNow, inqPrev),
       newConsultations,
+    },
+
+    dailyQuestion: {
+      participants: trend(dailyNow, dailyPrev),
+      correctPct: dailyNow > 0 ? Math.round((dailyCorrect / dailyNow) * 100) : 0,
+      freeSetsClaimed: dailyClaimed,
+      conversionToSetPct: dailyNow > 0 ? Math.round((dailyClaimed / dailyNow) * 100) : 0,
+      signedInShare: dailySignedIn,
     },
 
     communications: {

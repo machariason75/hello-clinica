@@ -577,6 +577,7 @@ model Student {
   readerNotes ReaderNote[]
   resetTokens PasswordResetToken[]
   audioProgress AudioProgress[]
+  dailyAttempts DailyQuestionAttempt[]
 
   @@map("students")
 }
@@ -710,4 +711,40 @@ model AudioProgress {
   @@unique([studentId, trackId])
   @@index([trackId])
   @@map("audio_progress")
+}
+
+// ─────────────────────────────────────────────────────────────
+// QUESTION OF THE DAY
+// ─────────────────────────────────────────────────────────────
+
+// One row per person per day — no matter how many times they replay the daily
+// question. That's enforced by the unique constraint below rather than by
+// application code, so the admin numbers can't drift.
+//
+// identityKey is "student:<id>" for signed-in users and "visitor:<uuid>" for
+// anonymous ones, so a single unique index covers both cases cleanly.
+model DailyQuestionAttempt {
+  id          String  @id @default(cuid())
+  identityKey String
+  studentId   String? // set once known, for admin reporting
+  dayKey      String // e.g. "2026-07-20"
+  questionId  String
+  answered    Boolean @default(false)
+  wasCorrect  Boolean @default(false)
+
+  // The one free full practice set they may claim that day.
+  claimedQuizId String?
+  claimedAt     DateTime?
+  completedSet  Boolean   @default(false)
+  setScore      Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+
+  @@unique([identityKey, dayKey])
+  @@index([dayKey])
+  @@index([studentId])
+  @@map("daily_question_attempts")
 }

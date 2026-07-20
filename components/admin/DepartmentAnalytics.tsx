@@ -6,6 +6,7 @@ import {
   Headphones,
   Inbox,
   Mail,
+  CalendarDays,
   TrendingUp,
   TrendingDown,
   Minus,
@@ -125,6 +126,7 @@ export function DepartmentAnalyticsView({ data }: { data: DepartmentAnalytics })
   const au = data.audio;
   const ld = data.leads;
   const cm = data.communications;
+  const dq = data.dailyQuestion;
 
   return (
     <div className="space-y-6">
@@ -228,6 +230,20 @@ export function DepartmentAnalyticsView({ data }: { data: DepartmentAnalytics })
           <Row label="Contact requests" value={ld.contactRequests.current} />
           <Row label="Package inquiries" value={ld.packageInquiries.current} />
           <Row label="Unhandled" value={ld.newConsultations} />
+        </Panel>
+
+        {/* QUESTION OF THE DAY — the top of the funnel */}
+        <Panel
+          icon={CalendarDays}
+          title="Question of the Day"
+          headline={dq.participants.current}
+          headlineLabel="people answered"
+          trend={dq.participants}
+        >
+          <Row label="Answered correctly" value={`${dq.correctPct}%`} />
+          <Row label="Had an account" value={dq.signedInShare} />
+          <Row label="Free sets claimed" value={dq.freeSetsClaimed} />
+          <Row label="Went on to a set" value={`${dq.conversionToSetPct}%`} />
         </Panel>
 
         {/* COMMUNICATIONS */}

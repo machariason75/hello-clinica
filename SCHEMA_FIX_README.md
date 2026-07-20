@@ -1,16 +1,21 @@
-# Fix — duplicate NewsletterCampaign / PasswordResetToken models
+# Fix — invalid comment syntax in schema.prisma
 
-Your schema already had these two models (from the earlier email work), and my
-pack appended a second copy of each, so `prisma db push` refused to run.
-This schema.prisma keeps ONE of each (identical fields either way) and preserves
-the new unsubscribe fields (unsubscribed, unsubToken) and the Student.resetTokens
-relation.
+## My mistake
+I used a /** ... */ block comment above the new DailyQuestionAttempt model.
+Prisma's schema language does NOT support block comments — only // line
+comments (and /// for documentation comments). Every line of that block was
+read as an invalid statement, which is why you got 8 errors for one comment.
+
+## The fix
+Converted it to // line comments. Nothing else changed — same model, same
+fields, same unique constraint. Verified: 30 models, braces balanced, and no
+other block comments anywhere in the file.
 
 ## Install
-1. Extract the CONTENTS into your project -> Replace all (1 file: prisma/schema.prisma).
-2. npx prisma db push        <- should now succeed
-3. npx tsc --noEmit          <- expect no errors
+1. Extract the CONTENTS -> Replace all (1 file: prisma/schema.prisma).
+2. npx prisma db push      <- should now succeed
+3. npx tsc --noEmit        <- expect no errors
    npm run dev
 4. git add .
-   git commit -m "emails, newsletters, unsubscribe, account management"
+   git commit -m "growth: daily question with free daily set, shareable results"
    git push

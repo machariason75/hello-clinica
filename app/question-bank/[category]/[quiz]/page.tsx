@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { buildMetadata, quizJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { getQuizBySlug, getCategoryAncestors } from "@/lib/queries/quizzes";
 import { getStudent } from "@/lib/student/auth";
+import { claimFreeSet, hasFreeSetFor } from "@/lib/student/daily-question";
 import { QuizPlayer, type QuizPlayerData } from "@/components/quiz/QuizPlayer";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
@@ -35,7 +36,16 @@ export default async function QuizPage({ params }: Params) {
   // student lacks access, show the lock instead of the player.
   const [ancestors, student] = await Promise.all([getCategoryAncestors(q.categoryId), getStudent()]);
   const premiumBranch = ancestors.some((a) => a.premium);
-  if (premiumBranch && !student?.hasAccess) {
+
+  // The Question of the Day earns a signed-in student ONE complete set per day,
+  // any section. Claiming happens here, on opening the quiz — so the entitlement
+  // is spent on something they actually chose to start.
+  let unlockedByDaily = false;
+  if (premiumBranch && student && !student.hasAccess) {
+    unlockedByDaily = (await hasFreeSetFor(q.id)) || (await claimFreeSet(q.id));
+  }
+
+  if (premiumBranch && !student?.hasAccess && !unlockedByDaily) {
     return (
       <PageTransition>
         <PageHero eyebrow="Premium · Question Bank" title={q.title} description={q.description} />

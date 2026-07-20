@@ -18,6 +18,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ShareResult } from "@/components/quiz/ShareResult";
 
 // ---------- types ----------
 export type QuizChoice = { id: string; text: string; isCorrect: boolean };
@@ -302,6 +303,22 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
               {mode === "timed" || elapsed > 0 ? <> in {fmtClock(elapsed)}</> : null}. Passing
               is {quiz.passThreshold}%.
             </p>
+
+            {/* Sharing is how this spreads: nursing and med cohorts are small,
+                competitive, and talk constantly. */}
+            <div className="mt-5">
+              <ShareResult
+                score={results.score}
+                quizTitle={quiz.title}
+                categoryTitle={quiz.categoryTitle}
+                passed={results.passed}
+                url={
+                  typeof window !== "undefined"
+                    ? `${window.location.origin}/question-bank/${quiz.categorySlug}/${quiz.slug}`
+                    : `/question-bank/${quiz.categorySlug}/${quiz.slug}`
+                }
+              />
+            </div>
           </div>
 
           {/* topic breakdown */}
