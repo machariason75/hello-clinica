@@ -22,15 +22,15 @@ async function requireAdminUpload() {
 
 export const ourFileRouter = {
   // Book cover image
-  bookCover: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+  bookCover: f({ image: { maxFileSize: "16MB", maxFileCount: 1 } })
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
 
   // Downloadable book file (PDF / e-book / document)
   bookFile: f({
-    pdf: { maxFileSize: "32MB", maxFileCount: 1 },
-    "application/epub+zip": { maxFileSize: "32MB", maxFileCount: 1 },
-    blob: { maxFileSize: "32MB", maxFileCount: 1 },
+    pdf: { maxFileSize: "512MB", maxFileCount: 1 },
+    "application/epub+zip": { maxFileSize: "256MB", maxFileCount: 1 },
+    blob: { maxFileSize: "512MB", maxFileCount: 1 },
   })
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
@@ -39,19 +39,19 @@ export const ourFileRouter = {
    * Audiobook track. Kept generous because spoken-word chapters are large;
    * anything longer than this should be added as an EXTERNAL link instead.
    */
-  bookAudio: f({ audio: { maxFileSize: "64MB", maxFileCount: 1 } })
+  bookAudio: f({ audio: { maxFileSize: "512MB", maxFileCount: 1 } })
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
 
   // Resource thumbnail image
-  resourceThumbnail: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+  resourceThumbnail: f({ image: { maxFileSize: "16MB", maxFileCount: 1 } })
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
 
   // Downloadable resource file (PDF / document)
   resourceFile: f({
-    pdf: { maxFileSize: "32MB", maxFileCount: 1 },
-    blob: { maxFileSize: "32MB", maxFileCount: 1 },
+    pdf: { maxFileSize: "256MB", maxFileCount: 1 },
+    blob: { maxFileSize: "256MB", maxFileCount: 1 },
   })
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),

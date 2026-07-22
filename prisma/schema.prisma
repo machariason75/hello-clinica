@@ -645,12 +645,16 @@ model NewsletterCampaign {
 
 /// Single-use, expiring token for student password resets.
 model PasswordResetToken {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   studentId String
-  token     String   @unique
+  token     String    @unique
   expiresAt DateTime
   usedAt    DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+
+  // How many times this person asked for a link in the current cycle. A burst of
+  // requests on one account is worth the admin noticing.
+  requestCount Int @default(1)
 
   student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 

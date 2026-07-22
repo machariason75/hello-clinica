@@ -70,6 +70,7 @@ export default async function AdminPasswordResetsPage() {
                 <tr>
                   <th className="px-4 py-3 font-medium">Student</th>
                   <th className="px-4 py-3 font-medium">Requested</th>
+                  <th className="px-4 py-3 font-medium">Requests</th>
                   <th className="px-4 py-3 font-medium">Status</th>
                   <th className="px-4 py-3 font-medium">Completed</th>
                 </tr>
@@ -90,6 +91,18 @@ export default async function AdminPasswordResetsPage() {
                           hour: "numeric",
                           minute: "2-digit",
                         })}
+                      </td>
+                      <td className="px-4 py-3">
+                        {r.requestCount > 1 ? (
+                          <span
+                            className="inline-flex items-center rounded-full bg-amber-500/15 px-2 py-0.5 text-xs font-semibold text-amber-700"
+                            title="This person asked for a link more than once. Usually harmless — the email went to spam, or the window lapsed."
+                          >
+                            {r.requestCount}× requested
+                          </span>
+                        ) : (
+                          <span className="text-xs text-deep-blue/45">once</span>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         <span className={"inline-flex items-center gap-1.5 font-medium " + s.tone}>

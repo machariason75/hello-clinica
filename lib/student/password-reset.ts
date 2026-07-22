@@ -8,7 +8,11 @@ import { emailShell, emailButton, siteUrl, makeToken } from "@/lib/email-templat
 
 export type ResetResult = { success: boolean; message?: string };
 
-const TOKEN_TTL_MINUTES = 60;
+// 15 minutes. Short on purpose: a reset link is a bearer credential — anyone
+// holding it can take the account. A link left in a shared inbox, a borrowed
+// phone, or a browser someone forgot to sign out of stops being dangerous
+// quickly. Users who miss the window can simply request another.
+const TOKEN_TTL_MINUTES = 15;
 
 /**
  * Sends a password-reset link.
@@ -39,7 +43,17 @@ export async function requestPasswordReset(email: string): Promise<ResetResult> 
   const student = await prisma.student.findUnique({ where: { email: normalized } });
   if (!student) return generic; // don't reveal whether the account exists
 
-  // Invalidate any outstanding tokens, then issue a fresh one.
+  // How many times have they asked in this cycle? Counted BEFORE the old tokens
+  // are cleared, so the number carries across a resend and the admin can see a
+  // burst of requests on one account.
+  const priorRequests = await prisma.passwordResetToken.count({
+    where: { studentId: student.id, usedAt: null },
+  });
+
+  // Invalidate any outstanding tokens, then issue a fresh one. This is what
+  // makes a resend safe: the previous link stops working the moment a new one is
+  // sent, so a link sitting in someone else's inbox or on a borrowed device is
+  // already dead.
   await prisma.passwordResetToken.deleteMany({ where: { studentId: student.id, usedAt: null } });
 
   const token = makeToken();
@@ -48,6 +62,7 @@ export async function requestPasswordReset(email: string): Promise<ResetResult> 
       studentId: student.id,
       token,
       expiresAt: new Date(Date.now() + TOKEN_TTL_MINUTES * 60 * 1000),
+      requestCount: priorRequests + 1,
     },
   });
 

@@ -264,7 +264,7 @@ export function AudioTracksManager({
                   error={errors.audioUrl}
                 />
                 <p className="mt-1 text-xs text-deep-blue/45">
-                  Up to 64 MB per chapter. For anything longer, host it elsewhere and use a link instead.
+                  Up to 512 MB per chapter. For anything larger, host it elsewhere and use a link instead.
                 </p>
               </div>
             ) : (
