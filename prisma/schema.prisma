@@ -578,6 +578,7 @@ model Student {
   resetTokens PasswordResetToken[]
   audioProgress AudioProgress[]
   dailyAttempts DailyQuestionAttempt[]
+  subscriptions Subscription[]
 
   @@map("students")
 }
@@ -747,4 +748,61 @@ model DailyQuestionAttempt {
   @@index([dayKey])
   @@index([studentId])
   @@map("daily_question_attempts")
+}
+
+// ─────────────────────────────────────────────────────────────
+// PAYMENTS
+// ─────────────────────────────────────────────────────────────
+
+// A paid subscription. Deliberately provider-agnostic: `provider` and
+// `providerRef` are plain strings, so Paystack, Flutterwave, M-Pesa or a manual
+// bank transfer all record the same way.
+//
+// This does NOT replace Student.hasAccess. That flag stays as the owner's
+// manual override — someone who paid by other means still needs granting. A
+// student is premium if EITHER is true, which is computed in one place
+// (lib/student/entitlement.ts) so no gate can drift.
+model Subscription {
+  id          String    @id @default(cuid())
+  studentId   String
+  plan        String // e.g. "monthly", "quarterly", "annual"
+  status      String    @default("active") // active | past_due | cancelled | expired
+  provider    String // paystack | flutterwave | mpesa | manual
+  providerRef String? // the provider's own id, for reconciliation
+  amountMinor Int       @default(0) // smallest currency unit (cents)
+  currency    String    @default("KES")
+
+  startedAt        DateTime  @default(now())
+  currentPeriodEnd DateTime? // null = no expiry (a lifetime or manual grant)
+  cancelledAt      DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerRef])
+  @@index([studentId])
+  @@index([status])
+  @@map("subscriptions")
+}
+
+// Every webhook received, stored before it is acted on.
+//
+// Payment webhooks are retried by providers and can arrive twice, out of order,
+// or be forged. Recording them first gives an audit trail when money is
+// disputed, and the unique constraint makes duplicate processing impossible.
+model PaymentEvent {
+  id          String   @id @default(cuid())
+  provider    String
+  eventType   String
+  providerRef String?
+  payload     Json
+  processed   Boolean  @default(false)
+  error       String?
+  createdAt   DateTime @default(now())
+
+  @@unique([provider, eventType, providerRef])
+  @@index([processed])
+  @@map("payment_events")
 }
