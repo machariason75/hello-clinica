@@ -1,67 +1,70 @@
-# Content Wave 1 — BLS & ACLS  (60 questions)
+# Content Wave 2 — Antibiotics & Antimicrobials  (39 questions)
 
-## What's in it
-Three quizzes, seeded into the Emergency & Life Support branch:
+Seeded into Foundational Sciences → Pharmacology → Antibiotics & Antimicrobials.
 
-  BLS Provider — Practice Set 1      30 questions, untimed
-  ACLS Provider — Practice Set 1     30 questions, untimed
-  ACLS — Timed Exam 1                the same 30 items, 35-minute limit
+## Why this topic second
+Pharmacology is where candidates consistently score worst, and antimicrobials are
+the highest-yield slice of it across NCLEX, USMLE and the pharmacy boards. It is
+also a topic where the principles travel — mechanism, class effects and
+characteristic toxicity are the same everywhere, even where local formularies
+differ.
 
-Every question has four options, exactly one correct answer, and a full rationale
-that explains the REASONING — not just which letter is right. That's the part
-that teaches, and the part that makes your bank worth paying for.
+## Two quizzes
+  Antibiotics & Antimicrobials — Practice Set 1   39 questions, untimed
+  Antibiotics & Antimicrobials — Timed Exam 1     same items, 45 minutes
 
-## Topic coverage (22 distinct topics)
-BLS   Initial Assessment · Compressions · CPR Ratios · CPR Quality · Ventilation
-      Defibrillation · Choking · Paediatric BLS · Chain of Survival · Safety
-      Special Situations · Team Dynamics
+## Six topics, chosen so the weak-area reports are actionable
+  Mechanisms of Action   cell wall, 30S, 50S, DNA gyrase, folate, RNA polymerase
+  Resistance             mecA/PBP2a, beta-lactamase, ESBL, VRE, stewardship
+  Adverse Effects        the ones that matter clinically and are examined
+  Clinical Selection     choosing the right agent for the organism and site
+  Monitoring             levels, PK/PD, time-above-MIC vs concentration-dependent
+  Stewardship            de-escalation, IV-to-oral switch, cultures first
 
-ACLS  Cardiac Arrest Algorithm · Non-Shockable Rhythms · Pharmacology
-      Tachycardia · Bradycardia · Electrical Therapy · Reversible Causes
-      Monitoring · Post-Arrest Care · Vascular Access · Team Dynamics
+A student who scores badly on "Resistance" but well on "Adverse Effects" gets a
+genuinely useful signal — that's what the six-topic split is for.
 
-That spread matters: the per-topic breakdown on the results screen, the weak-area
-report in the readiness assessment, and the "where students struggle most" panel
-in your analytics all read from these topic labels. Twenty-two topics means those
-reports say something useful instead of "General: 18/30".
+## Some of the points it teaches
+  - Why beta-lactamase inhibitors do nothing against MRSA (altered target, not
+    an enzyme problem)
+  - Why daptomycin fails in pneumonia (inactivated by surfactant)
+  - Why ertapenem is the carbapenem that does NOT cover Pseudomonas
+  - Why oral vancomycin treats C. difficile but intravenous vancomycin does not
+  - Why trimethoprim causes hyperkalaemia (it acts like amiloride)
+  - Why most reported penicillin allergy should be reassessed rather than
+    accepted for life
 
 ## Install
-1. Extract the CONTENTS -> Replace all (1 file: prisma/seed-acls-bls.ts).
-2. Make sure the taxonomy exists first (it creates the sections these live in):
+1. Extract the CONTENTS -> Replace all (1 file: prisma/seed-antibiotics.ts).
+2. The section must exist first (skip if already run):
        npx tsx prisma/seed-medical-taxonomy.ts
-3. Seed the content:
-       npx tsx prisma/seed-acls-bls.ts
-   Expect: three lines confirming 30 questions each.
-   Safe to re-run — it replaces the questions rather than duplicating them.
+3. Seed:
+       npx tsx prisma/seed-antibiotics.ts
+   Expect two lines confirming 39 questions each.
+   Safe to re-run — replaces rather than duplicates.
 4. npm run dev
-   Question Bank -> Emergency & Life Support -> BLS or ACLS -> play a set.
+   Question Bank -> Foundational Sciences -> Pharmacology ->
+   Antibiotics & Antimicrobials
 5. git add .
-   git commit -m "content: BLS and ACLS practice sets"
+   git commit -m "content: antibiotics and antimicrobials practice sets"
    git push
 
-## ⚠ Please review before promoting it for certification
-These are original questions following the widely taught resuscitation sequences.
-Resuscitation guidelines are revised periodically, and details like drug doses and
-energy settings do change between editions.
+## ⚠ Antimicrobial guidance is local
+Spectrum, resistance patterns and first-line choices vary by country, by
+hospital, and over time. These questions deliberately test principles rather than
+institution-specific protocols — but review them against your local formulary
+before promoting any of it as definitive, and edit anything that differs.
 
-Read through them once against your current national guideline and edit anything
-that has moved. Admin -> Question Bank -> the quiz -> the pencil icon on any
-question lets you change the stem, options, correct answer, topic and rationale.
+## Running total
+  Wave 1  BLS 30 + ACLS 30  (plus a timed ACLS exam)
+  Wave 2  Antibiotics 39    (plus a timed exam)
+  ————
+  99 original questions across 28 topics
 
-I'd rather flag this than have you discover a superseded dose after a student
-sat an exam on it.
-
-## Everything here is yours to edit
-Nothing is locked. In Admin -> Question Bank you can rewrite any question, add
-more, delete ones you disagree with, move quizzes between sections, rename or
-reorder sections, and create entirely new ones. The seed is a starting point,
-not a fixture.
-
-## Next waves
-Say which and I'll write it:
-  - Antibiotics & Antimicrobials
-  - Cardiovascular (physiology -> cardiology -> drugs as one arc)
+## Next waves — say which
+  - Cardiovascular (physiology -> cardiology -> drugs, as one connected arc)
   - Microbiology (bacteriology, virology, parasitology)
   - Gross Anatomy + Neuroanatomy
   - Obstetrics & Gynaecology
   - Paediatrics
+  - Pathology
