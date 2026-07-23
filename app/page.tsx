@@ -10,9 +10,18 @@ import { QuestionOfTheDay } from "@/components/sections/QuestionOfTheDay";
 import { getQuestionOfTheDay } from "@/lib/queries/question-of-day";
 import { getDailyState } from "@/lib/student/daily-question";
 
-// Refresh hourly so the Question of the Day actually rolls over at midnight
-// rather than being frozen in a static build.
-export const revalidate = 3600;
+// The Question of the Day changes at UTC midnight, so the cached homepage must
+// expire quickly or it would keep serving yesterday's question for up to an
+// hour. Sixty seconds means the rollover is effectively automatic — it does not
+// wait for anyone to visit, and no one sees a stale question.
+//
+// (Next.js requires this to be a literal, so it can't be computed as "seconds
+// until midnight". A short fixed window achieves the same result.)
+//
+// The cost is negligible: since the day's question is now stored in
+// daily_question_picks, resolving it is two indexed lookups rather than loading
+// the whole question pool.
+export const revalidate = 60;
 
 /**
  * Homepage — assembles the nine frozen sections in order. The Footer (section

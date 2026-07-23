@@ -810,3 +810,21 @@ model PaymentEvent {
   @@index([processed])
   @@map("payment_events")
 }
+// The question chosen for a given day, locked once decided.
+//
+// Without this, the daily question was picked as eligible[dayNumber % poolSize].
+// That looks deterministic but is not: every time new questions are seeded the
+// pool size changes, so the SAME day resolves to a DIFFERENT question — the
+// question could change under a student mid-answer.
+//
+// Persisting the choice makes the day's question immutable once set, regardless
+// of how much content is added afterwards. It also makes the lookup cheap: one
+// indexed row plus one question, instead of loading the entire pool to pick one.
+model DailyQuestionPick {
+  id         String   @id @default(cuid())
+  dayKey     String   @unique // "YYYY-MM-DD" in UTC
+  questionId String
+  createdAt  DateTime @default(now())
+
+  @@map("daily_question_picks")
+}
