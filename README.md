@@ -1,46 +1,41 @@
-# Content Wave 11 — Endocrinology  (75 questions)
+# Content Wave 12 — Surgery & Orthopaedics  (75 questions)
 
-## NEW STRUCTURE, as you asked
-Larger practice sets and exactly two exams:
+Current structure: three 25-question practice sets and two exams.
 
   PRACTICE
-    Endocrinology — Practice Set 1   25   thyroid, parathyroid, adrenal
-    Endocrinology — Practice Set 2   25   diabetes
-    Endocrinology — Practice Set 3   25   pituitary, bone, reproductive, metabolic
+    General Surgery — Practice Set 1                    25
+    Orthopaedics & Trauma — Practice Set 1              25
+    Perioperative Care & Neurosurgery — Practice Set 1  25
 
   EXAMS
-    Endocrinology — Timed Exam 1     50   Sets 1+2, 60 minutes
-    Endocrinology — Timed Exam 2     75   everything, 90 minutes
+    Surgery & Orthopaedics — Timed Exam 1   50   Sets 1+2, 60 minutes
+    Surgery & Orthopaedics — Timed Exam 2   75   everything, 90 minutes
 
-Sets are now 25 questions rather than 15, and there are two exams rather than
-three. Exam 1 is a substantial paper in its own right; Exam 2 is the full
-comprehensive.
+Fills four previously empty sections: General Surgery, Orthopaedics & Trauma,
+Peri-operative Care and Neurosurgery.
 
-Sets 1, 2 and both exams sit under Clinical Specialties → Internal Medicine →
-Endocrinology. Set 3 sits under Foundational Sciences → Physiology → Endocrine,
-since it is the more mechanism-heavy material.
-
-## Why endocrinology suits this treatment
-Almost every endocrine disorder is a feedback loop broken in one of three
-places — hypothalamus, pituitary, or end organ. The rationales point back to
-that structure repeatedly, so the subject becomes one idea applied many times
-rather than a list to memorise.
+## Taught as decision-making, not operative technique
+Which presentations are time-critical, what must be excluded before acting, and
+why the SEQUENCE of steps matters. That is what is examined, and more
+importantly it is what protects patients.
 
 ## Some of the reasoning it teaches
-  - Why a raised TSH in hypothyroidism is the pituitary working CORRECTLY
-  - Why iodine must be given AFTER the antithyroid drug in thyroid storm
-  - Why secondary adrenal insufficiency spares potassium but Addison's doesn't
-  - Why alpha-blockade must precede beta-blockade in phaeochromocytoma
-  - Why potassium plummets after starting insulin in DKA
-  - Why euglycaemic DKA is missed — the glucose looks reassuring
-  - Why SGLT2 inhibitors protect kidneys mechanically, not metabolically
-  - Why prolactin is the one pituitary hormone under INHIBITORY control, and
-    what that explains about antipsychotics and about treatment
-  - Why hydrocortisone comes before imaging in pituitary apoplexy
-  - The single principle behind all dynamic testing: suppress to prove excess,
-    stimulate to prove deficiency
+  - Why appendicitis pain migrates, and why a hungry patient makes it less likely
+  - How to spot a bowel obstruction that has STRANGULATED — the moment it stops
+    being a conservative problem
+  - Why femoral hernias strangulate more readily than inguinal ones
+  - Why barium is contraindicated when perforation is suspected
+  - Why pain out of proportion to examination means mesenteric ischaemia or
+    necrotising fasciitis — and both are emergencies
+  - Why pulselessness in compartment syndrome is a LATE sign, not a screening one
+  - Why scaphoid, femoral head and talus all share avascular necrosis risk —
+    one principle, three sites
+  - Why the pelvic binder goes on the GREATER TROCHANTERS, not the iliac crests
+  - Why 'GCS 8, intubate'
+  - Why lumbar puncture before imaging can cause herniation
+  - Why neurogenic shock needs vasopressors and not just fluids
 
-Connection retry is built in.
+32 topics. Connection retry built in.
 
 ## INSTALL — full commands
 
@@ -49,17 +44,18 @@ Connection retry is built in.
    C:\Users\user\Documents\hello-clinica → Replace all.
 
 2. SEED THE QUESTIONS
-       npx tsx prisma/seed-endocrinology.ts
+       npx tsx prisma/seed-surgery.ts
    Expect five confirmation lines. Safe to re-run.
 
 3. RUN LOCALLY
        npm run dev
-   Question Bank → Clinical Specialties → Internal Medicine → Endocrinology
-   Question Bank → Foundational Sciences → Physiology → Endocrine
+   Question Bank → Clinical Specialties → Surgery → General Surgery
+   Question Bank → Clinical Specialties → Surgery → Orthopaedics & Trauma
+   Question Bank → Clinical Specialties → Surgery → Peri-operative Care
 
 4. PUSH TO GITHUB
        git add .
-       git commit -m "content: endocrinology - thyroid, adrenal, diabetes, pituitary, bone"
+       git commit -m "content: surgery, orthopaedics, perioperative care and neurosurgery"
        git push
 
 5. GO LIVE
@@ -68,22 +64,19 @@ Connection retry is built in.
 No prisma db push — content only.
 
 ## Running total
-  Waves 1–11: 713 original questions · 278 topics · 68 quizzes
+  Waves 1–12: 788 original questions · 310 topics · 73 quizzes
 
-## ⚠ STILL TO DO — expanding the earlier waves
-  Wave 1  BLS (30) · ACLS (30)   → larger sets + 2 exams
-  Wave 2  Antibiotics (39)       → larger sets + 2 exams
-  Wave 3  Cardiovascular (45)    → larger sets + 2 exams
-  Wave 4  Microbiology (44)      → larger sets + 2 exams
-  Waves 5–10 use 15-question sets and 3 exams — worth restructuring to the new
-  shape too, once the remaining subjects are done.
+## ⚠ RESTRUCTURING STILL TO DO
+  Waves 1–4  (BLS/ACLS, Antibiotics, Cardiovascular, Microbiology)
+  Waves 5–10 (Respiratory, Renal, Anatomy, Pathology, Obs&Gyn, Paediatrics)
+  → all to be rebuilt as 25-question sets with two exams, matching Waves 11–12.
 
 ## Next subject waves — say which
-  - General Surgery / Orthopaedics
   - Psychiatry & Mental Health
   - Gastroenterology & Hepatology
   - Neurology (clinical)
+  - Haematology
   - Biochemistry
   - Histology
   - Fluids, Electrolytes & Acid-Base
-  - Haematology
+  - Infectious Diseases (clinical)
