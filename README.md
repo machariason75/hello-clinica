@@ -1,41 +1,43 @@
-# Content Wave 12 — Surgery & Orthopaedics  (75 questions)
+# Content Wave 13 — Psychiatry & Mental Health  (60 questions)
 
-Current structure: three 25-question practice sets and two exams.
+## Built in the CORRECT structure this time
+Two practice sets per item, two exams — the shape you asked for:
 
   PRACTICE
-    General Surgery — Practice Set 1                    25
-    Orthopaedics & Trauma — Practice Set 1              25
-    Perioperative Care & Neurosurgery — Practice Set 1  25
+    Psychiatry — Practice Set 1   30 questions
+    Psychiatry — Practice Set 2   30 questions   (entirely fresh, no overlap)
 
   EXAMS
-    Surgery & Orthopaedics — Timed Exam 1   50   Sets 1+2, 60 minutes
-    Surgery & Orthopaedics — Timed Exam 2   75   everything, 90 minutes
+    Psychiatry — Timed Exam 1     30 questions, 40 minutes
+    Psychiatry — Timed Exam 2     60 questions, 75 minutes (comprehensive)
 
-Fills four previously empty sections: General Surgery, Orthopaedics & Trauma,
-Peri-operative Care and Neurosurgery.
+Sets are 30 rather than 25 here, since psychiatry is a single examinable item.
 
-## Taught as decision-making, not operative technique
-Which presentations are time-critical, what must be excluded before acting, and
-why the SEQUENCE of steps matters. That is what is examined, and more
-importantly it is what protects patients.
+## A note on how this is written
+Risk assessment questions focus on RECOGNITION and appropriate response —
+identifying who is at risk, how to ask, and what to do next — because that is
+what changes outcomes. The material is written for clinicians assessing and
+supporting patients.
 
 ## Some of the reasoning it teaches
-  - Why appendicitis pain migrates, and why a hungry patient makes it less likely
-  - How to spot a bowel obstruction that has STRANGULATED — the moment it stops
-    being a conservative problem
-  - Why femoral hernias strangulate more readily than inguinal ones
-  - Why barium is contraindicated when perforation is suspected
-  - Why pain out of proportion to examination means mesenteric ischaemia or
-    necrotising fasciitis — and both are emergencies
-  - Why pulselessness in compartment syndrome is a LATE sign, not a screening one
-  - Why scaphoid, femoral head and talus all share avascular necrosis risk —
-    one principle, three sites
-  - Why the pelvic binder goes on the GREATER TROCHANTERS, not the iliac crests
-  - Why 'GCS 8, intubate'
-  - Why lumbar puncture before imaging can cause herniation
-  - Why neurogenic shock needs vasopressors and not just fluids
+  - Why asking directly about suicidal thoughts does NOT increase risk, and why
+    avoiding the question is the greater danger
+  - Why risk assessment SCALES predict poorly for individuals and must not
+    determine who receives care
+  - Why the period straight after psychiatric discharge carries elevated risk
+  - Why a manic episode in the history changes antidepressant prescribing
+    completely
+  - Why akathisia is worsened by increasing the antipsychotic — and is itself
+    associated with raised suicide risk
+  - Why thiamine goes in before glucose
+  - Why refeeding syndrome kills through phosphate, not calories
+  - Why delirium is a SYMPTOM, not a diagnosis — sedation treats the behaviour
+    while the cause continues
+  - Why Lewy body dementia changes prescribing (antipsychotic sensitivity)
+  - What diagnostic overshadowing is, and why it contributes to people with
+    severe mental illness dying substantially younger
 
-32 topics. Connection retry built in.
+17 topics. Connection retry built in.
 
 ## INSTALL — full commands
 
@@ -44,18 +46,16 @@ importantly it is what protects patients.
    C:\Users\user\Documents\hello-clinica → Replace all.
 
 2. SEED THE QUESTIONS
-       npx tsx prisma/seed-surgery.ts
-   Expect five confirmation lines. Safe to re-run.
+       npx tsx prisma/seed-psychiatry.ts
+   Expect four confirmation lines. Safe to re-run.
 
 3. RUN LOCALLY
        npm run dev
-   Question Bank → Clinical Specialties → Surgery → General Surgery
-   Question Bank → Clinical Specialties → Surgery → Orthopaedics & Trauma
-   Question Bank → Clinical Specialties → Surgery → Peri-operative Care
+   Question Bank → Clinical Specialties → Psychiatry & Mental Health
 
 4. PUSH TO GITHUB
        git add .
-       git commit -m "content: surgery, orthopaedics, perioperative care and neurosurgery"
+       git commit -m "content: psychiatry and mental health"
        git push
 
 5. GO LIVE
@@ -63,20 +63,26 @@ importantly it is what protects patients.
 
 No prisma db push — content only.
 
-## Running total
-  Waves 1–12: 788 original questions · 310 topics · 73 quizzes
+## ⚠ Review before promoting for certification
+Mental health legislation, service structures and prescribing guidance vary
+substantially between countries. These test clinical principles rather than any
+single jurisdiction's law — review against local guidance and edit what differs.
 
-## ⚠ RESTRUCTURING STILL TO DO
-  Waves 1–4  (BLS/ACLS, Antibiotics, Cardiovascular, Microbiology)
-  Waves 5–10 (Respiratory, Renal, Anatomy, Pathology, Obs&Gyn, Paediatrics)
-  → all to be rebuilt as 25-question sets with two exams, matching Waves 11–12.
+## Running total
+  Waves 1–13: 848 original questions · 327 topics · 77 quizzes
+
+## ⚠ RESTRUCTURING QUEUE
+  Waves 1–12 all need bringing to this shape: TWO practice sets per examinable
+  item plus two exams. Surgery (Wave 12) in particular has only one practice set
+  per section and needs a second for each of General Surgery, Orthopaedics and
+  Perioperative Care.
 
 ## Next subject waves — say which
-  - Psychiatry & Mental Health
   - Gastroenterology & Hepatology
   - Neurology (clinical)
   - Haematology
+  - Infectious Diseases (clinical)
   - Biochemistry
   - Histology
   - Fluids, Electrolytes & Acid-Base
-  - Infectious Diseases (clinical)
+  - Dermatology
