@@ -1,88 +1,67 @@
-# Content Wave 13 — Psychiatry & Mental Health  (60 questions)
+# Answer-order fix, v2 — RESUMABLE
 
-## Built in the CORRECT structure this time
-Two practice sets per item, two exams — the shape you asked for:
+## Why v1 stopped
+Two mistakes, both mine.
 
-  PRACTICE
-    Psychiatry — Practice Set 1   30 questions
-    Psychiatry — Practice Set 2   30 questions   (entirely fresh, no overlap)
+1. MY RETRY MISSED THE ERROR.
+   I checked for the word "Connection" with a capital C. The actual message was
+   "Server has closed the connection" — lowercase. So P1017, the precise error
+   the retry existed to catch, went straight past it and killed the run.
 
-  EXAMS
-    Psychiatry — Timed Exam 1     30 questions, 40 minutes
-    Psychiatry — Timed Exam 2     60 questions, 75 minutes (comprehensive)
+2. IT WASN'T RESUMABLE.
+   2,223 questions (exams hold their own copies of questions, which is why the
+   number is higher than 788) at four writes each is roughly 8,900 updates in
+   one go. On a free-tier pooled connection that is asking for trouble — and a
+   drop meant starting from zero.
 
-Sets are 30 rather than 25 here, since psychiatry is a single examinable item.
-
-## A note on how this is written
-Risk assessment questions focus on RECOGNITION and appropriate response —
-identifying who is at risk, how to ask, and what to do next — because that is
-what changes outcomes. The material is written for clinicians assessing and
-supporting patients.
-
-## Some of the reasoning it teaches
-  - Why asking directly about suicidal thoughts does NOT increase risk, and why
-    avoiding the question is the greater danger
-  - Why risk assessment SCALES predict poorly for individuals and must not
-    determine who receives care
-  - Why the period straight after psychiatric discharge carries elevated risk
-  - Why a manic episode in the history changes antidepressant prescribing
-    completely
-  - Why akathisia is worsened by increasing the antipsychotic — and is itself
-    associated with raised suicide risk
-  - Why thiamine goes in before glucose
-  - Why refeeding syndrome kills through phosphate, not calories
-  - Why delirium is a SYMPTOM, not a diagnosis — sedation treats the behaviour
-    while the cause continues
-  - Why Lewy body dementia changes prescribing (antipsychotic sensitivity)
-  - What diagnostic overshadowing is, and why it contributes to people with
-    severe mental illness dying substantially younger
-
-17 topics. Connection retry built in.
+## What v2 changes
+  - RESUMABLE: it skips any question whose correct answer has already moved off
+    position A. Your first run fixed roughly 200 questions and those are now
+    permanently done. Re-running continues from there.
+  - HALF THE WRITES: it swaps the correct answer into a random slot instead of
+    rewriting every choice — two updates per question rather than four.
+  - RETRY THAT ACTUALLY WORKS: matching is now case-insensitive and explicitly
+    includes P1017 and timeouts, with five attempts and increasing backoff.
+  - BREATHING ROOM: a short pause every 50 questions, which keeps a pooled
+    connection far healthier over a long run.
+  - If it does stop, it tells you plainly that progress is saved and to run it
+    again.
 
 ## INSTALL — full commands
 
 1. EXTRACT
    Open the zip → go INTO `hello-clinica` → drag the `prisma` folder into
-   C:\Users\user\Documents\hello-clinica → Replace all.
+   C:\Users\user\Documents\hello-clinica → Replace all (1 file).
 
-2. SEED THE QUESTIONS
-       npx tsx prisma/seed-psychiatry.ts
-   Expect four confirmation lines. Safe to re-run.
+2. RUN IT
+       npx tsx prisma/fix-answer-order.ts
 
-3. RUN LOCALLY
-       npm run dev
-   Question Bank → Clinical Specialties → Psychiatry & Mental Health
+   It opens by telling you where it stands, e.g.
 
-4. PUSH TO GITHUB
+       2223 questions total
+       213 already randomised (skipping)
+       2010 still to fix
+
+3. IF IT STOPS AGAIN, JUST RUN THE SAME COMMAND AGAIN.
+   Each run completes more. Repeat until it prints:
+
+       Correct answer positions now:  A:556   B:558   C:554   D:555
+       Done. Answers are distributed across the options.
+
+   If Supabase is paused, resume it in the dashboard first.
+
+4. PUSH
        git add .
-       git commit -m "content: psychiatry and mental health"
+       git commit -m "fix: randomise correct answer positions across question bank"
        git push
 
 5. GO LIVE
-   Vercel → Deployments → wait for Ready → Ctrl+Shift+R on the live site.
+   Vercel → Deployments → Ready → Ctrl+Shift+R
 
-No prisma db push — content only.
+The repair writes directly to your database, so the live site is corrected as
+soon as the script finishes. The push is only for the script file itself.
 
-## ⚠ Review before promoting for certification
-Mental health legislation, service structures and prescribing guidance vary
-substantially between countries. These test clinical principles rather than any
-single jurisdiction's law — review against local guidance and edit what differs.
-
-## Running total
-  Waves 1–13: 848 original questions · 327 topics · 77 quizzes
-
-## ⚠ RESTRUCTURING QUEUE
-  Waves 1–12 all need bringing to this shape: TWO practice sets per examinable
-  item plus two exams. Surgery (Wave 12) in particular has only one practice set
-  per section and needs a second for each of General Surgery, Orthopaedics and
-  Perioperative Care.
-
-## Next subject waves — say which
-  - Gastroenterology & Hepatology
-  - Neurology (clinical)
-  - Haematology
-  - Infectious Diseases (clinical)
-  - Biochemistry
-  - Histology
-  - Fluids, Electrolytes & Acid-Base
-  - Dermatology
+## Note on the numbers
+You will see about 2,223 questions rather than 788. That is expected — every
+exam holds its own copies of the questions it contains, so the same item exists
+several times in the database. All copies get fixed.
