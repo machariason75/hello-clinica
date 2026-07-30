@@ -1,7 +1,8 @@
-# Do this — Histology and Dermatology
+# Do this — Fluids & Electrolytes
 
-**Content only.** No website code changes, so this is short: three steps, about
-5 minutes.
+**Content only.** Three steps, about 3 minutes.
+
+This is the last of the five empty sections you listed.
 
 ---
 
@@ -21,7 +22,7 @@ The zip is in your **Downloads** folder.
 3. If Windows asks about existing files, choose **"Replace the files in the
    destination."**
 
-You're only adding two new files. Nothing existing is overwritten.
+One new file only. Nothing existing is overwritten.
 
 ---
 
@@ -30,47 +31,38 @@ You're only adding two new files. Nothing existing is overwritten.
 In VS Code: **File → Open Folder** → `hello-clinica`, then
 **Terminal → New Terminal**.
 
-Paste these **one at a time**, waiting for each to finish:
+Paste this and press Enter:
 
 ```
-npx tsx prisma/seed-histology.ts
+npx tsx prisma/seed-fluids-electrolytes.ts
 ```
 
-```
-npx tsx prisma/seed-dermatology.ts
-```
-
-Each ends with **"Done."**
-
-The Dermatology one will also print a line near the top:
+Near the top you'll see:
 
 ```
-  + Created section: Clinical Specialties → Dermatology
+  + Created section: Clinical Specialties → Internal Medicine → Fluids & Electrolytes
 ```
 
-That's expected — there was no Dermatology section in your Question Bank, so
-this creates it. If you run the script again later it reuses that section rather
-than making a second one.
+That's expected — the section doesn't exist yet, so this creates it. Run the
+script again later and it reuses that section rather than making a second one.
 
-**The questions are live on your website now.** No `git push`, no Vercel.
+Then four green ticks and **"Done."**
 
-Check it:
-- Question Bank → **Foundational Sciences → Anatomy → Histology**
-- Question Bank → **Clinical Specialties → Dermatology**
+**Live on your website immediately.** No `git push`, no Vercel.
+
+Check it: Question Bank → **Clinical Specialties → Internal Medicine → Fluids &
+Electrolytes**.
 
 ---
 
-## OPTIONAL — keep the files in your project history
-
-Not required. The questions are already live either way; this just backs the
-files up alongside the rest of your code.
+## OPTIONAL — keep the file in your project history
 
 ```
 git add .
 ```
 
 ```
-git commit -m "histology and dermatology question banks"
+git commit -m "fluids and electrolytes question bank"
 ```
 
 ```
@@ -81,25 +73,33 @@ git push
 
 # IF IT DOESN'T WORK
 
-**"Category fs-histology not found"** or **"Parent clinical-specialties not
-found"** — your Question Bank structure is missing. Run this once, then try
-again:
+**"Parent cs-internal-medicine not found"** — run this once, then try again:
 
 ```
 npx tsx prisma/seed-medical-taxonomy.ts
 ```
 
-**A connection error** — the script retries three times by itself, so a
-persistent failure means something else. Copy the whole message into the chat.
+**A connection error** — the script retries three times by itself. If it still
+fails, copy the whole message into the chat.
 
-Nothing here can damage existing content. Each script only creates or replaces
-its own four quizzes.
+Nothing here can damage existing content.
+
+---
+
+# WHERE IT SITS, AND WHY
+
+You already have **Foundational Sciences → Renal & Fluid Balance**, which covers
+the physiology — how the kidney filters, how the body maintains balance.
+
+This new section is the **clinical** counterpart: what to hang, how much, how
+fast, and what to do when a result is dangerous. Putting it under Internal
+Medicine keeps the two from competing — a student looking for "how does the
+kidney handle sodium" and one looking for "what do I do about a sodium of 118"
+now land in different, correctly-named places.
 
 ---
 
 # WHAT YOU'RE GETTING
-
-Each subject follows the same shape as Haematology:
 
 | Quiz | Questions | Timing |
 |---|---|---|
@@ -108,33 +108,49 @@ Each subject follows the same shape as Haematology:
 | Timed Exam 1 | 30 | 40 minutes |
 | Timed Exam 2 — Comprehensive | 60 | 75 minutes |
 
-**Histology** — Set 1 covers the four basic tissues (epithelium, connective
-tissue, muscle, nerve, blood and marrow). Set 2 covers organ histology and
-laboratory technique including stains.
+Set 1 covers fluid compartments, choosing and prescribing IV fluid, sodium and
+water disorders, bedside volume assessment, and fluids in heart failure, DKA,
+refeeding and burns.
 
-**Dermatology** — Set 1 covers skin structure, eczema, psoriasis, acne and skin
-infections. Set 2 covers skin cancer, pigmentary disorders, blistering diseases,
-severe drug reactions and hair, nail and systemic signs.
-
-The two practice sets in each subject share no questions, so Set 2 is genuine
-retesting rather than a repeat. Every question has a written explanation, and
-answer options are shuffled so the correct one isn't always in the same place.
-
-Safe to run more than once.
+Set 2 covers potassium emergencies, calcium, magnesium and phosphate,
+systematic acid-base interpretation, and rehydration in childhood diarrhoeal
+illness.
 
 ---
 
-# ONE THING WORTH KNOWING ABOUT THE DERMATOLOGY SET
+# TWO THINGS WORTH KNOWING
 
-Standard dermatology textbooks describe pale skin as the default. Students
-trained only on those images consistently under-read severity and miss diagnoses
-in the patients they'll actually be treating.
+**Oral rehydration gets a full topic, not a mention.** In this region childhood
+diarrhoeal illness is the commonest life-threatening fluid problem a graduate
+will actually meet, and ORS is among the highest-impact interventions in all of
+medicine. Imported question banks treat it as a footnote. This set covers why
+glucose is essential to the formulation, why low-osmolarity ORS replaced the old
+one, the signs of severe dehydration in a child, zinc, and continued feeding.
 
-So this set gives sustained attention to pigmented skin throughout — how to judge
-inflammation when redness is masked, why post-inflammatory pigment change is
-often the patient's main concern, keloid risk, the dangers of skin-lightening
-products, and the fact that the melanomas that matter most in African patients
-arise on palms, soles and nail beds rather than sun-exposed skin.
+**This is the most guideline-sensitive set so far — please review it.**
+Correction rates, maintenance volumes and first-line fluids differ between
+national guidelines and get revised. I wrote the questions to test *principles* —
+why correct sodium slowly, why balanced crystalloid, why calcium doesn't lower
+potassium — because principles travel and numbers don't. But before you promote
+this section to students, it's worth having someone check anything numerical
+against Kenyan guidance. Everything is editable in Admin → Question Bank.
 
-That's a genuine differentiator for Hello Clinica against imported question
-banks, and it's worth mentioning in how you describe the section to students.
+---
+
+# THAT COMPLETES THE FIVE
+
+Infectious Diseases · Biochemistry · Histology · Dermatology · Fluids &
+Electrolytes — **300 questions**, each section with two non-overlapping practice
+sets and two timed exams.
+
+Next up are the earlier sections that were under-supplied with practice and exam
+sets, which you wanted revisited once these empty ones were filled.
+
+Before that, two small jobs from the earlier review are still outstanding and
+worth clearing:
+
+1. **The answer-order fix** — if you haven't yet run
+   `npx tsx prisma/fix-choice-order.ts`, the older sections still have the
+   correct answer sitting first almost every time.
+2. **Resend** — password reset emails still aren't sending. That one's only
+   doable by you, and it's the last thing blocking student account recovery.
