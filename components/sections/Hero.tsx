@@ -10,11 +10,17 @@ import { siteConfig } from "@/lib/site-config";
 
 /**
  * Homepage hero — warm, bright treatment (owner-directed, File 17 visual layer).
- * Soft peach/cream gradient with floating colour blobs and a live medic
- * slideshow in the illustration slot. Text is dark on the light field; the
- * primary CTA uses the coral brand action colour.
+ *
+ * PALETTE NOTE: the glow blobs previously used #F97360 and #2563EB. The latter
+ * is a pre-override medical blue, which Amendment Register v1.2 explicitly
+ * forbids reintroducing. Both now come from the sanctioned tokens — coral for
+ * the warm side, cyan accent for the cool side — so the hero can't drift out of
+ * the brand again when someone edits this file.
+ *
+ * `slotIndex` decides which medic photo shows. It is computed on the server (see
+ * lib/hero-rotation.ts) so the photo is final before the page paints.
  */
-export function Hero() {
+export function Hero({ slotIndex = 0 }: { slotIndex?: number }) {
   const reduce = useReducedMotion();
 
   const container = {
@@ -28,18 +34,14 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      {/* Soft coral + blue glow behind the hero image (over the shared canvas) */}
+      {/* Soft coral + cyan glow behind the hero image (over the shared canvas) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[6%] top-8 h-80 w-80 rounded-full bg-[#F97360]/15 blur-3xl" />
-        <div className="absolute right-1/3 bottom-0 h-72 w-72 rounded-full bg-[#2563EB]/12 blur-3xl" />
+        <div className="absolute right-[6%] top-8 h-80 w-80 rounded-full bg-coral/15 blur-3xl" />
+        <div className="absolute right-1/3 bottom-0 h-72 w-72 rounded-full bg-accent-blue/12 blur-3xl" />
       </div>
 
       <Container className="relative grid gap-12 py-16 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-24">
-        <motion.div
-          variants={container}
-          initial={reduce ? "visible" : "hidden"}
-          animate="visible"
-        >
+        <motion.div variants={container} initial={reduce ? "visible" : "hidden"} animate="visible">
           <motion.span
             variants={item}
             className="inline-flex items-center gap-2 rounded-full border border-coral/20 bg-white/70 px-4 py-1.5 text-sm font-medium text-deep-blue shadow-sm backdrop-blur-sm"
@@ -48,10 +50,7 @@ export function Hero() {
             Guidance for future healthcare professionals
           </motion.span>
 
-          <motion.h1
-            variants={item}
-            className="text-h1 mt-6 text-balance text-deep-blue"
-          >
+          <motion.h1 variants={item} className="text-h1 mt-6 text-balance text-deep-blue">
             {siteConfig.tagline}
           </motion.h1>
 
@@ -63,10 +62,7 @@ export function Hero() {
             pre-med to practice with clarity and confidence.
           </motion.p>
 
-          <motion.div
-            variants={item}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
-          >
+          <motion.div variants={item} className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="primary" size="lg">
               <Link href="/advising">
                 Explore advising
@@ -79,14 +75,14 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Live medic slideshow (replaces the AI illustration placeholder) */}
+        {/* Medic photo — settled, not mid-transition. */}
         <motion.div
           initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut", delay: reduce ? 0 : 0.2 }}
           className="relative px-4 sm:px-8 lg:px-2"
         >
-          <HeroSlideshow />
+          <HeroSlideshow slotIndex={slotIndex} />
         </motion.div>
       </Container>
     </section>

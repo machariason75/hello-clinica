@@ -9,7 +9,6 @@ import { CtaSection } from "@/components/sections/CtaSection";
 import { QuestionOfTheDay } from "@/components/sections/QuestionOfTheDay";
 import { getQuestionOfTheDay } from "@/lib/queries/question-of-day";
 import { getDailyState } from "@/lib/student/daily-question";
-import { heroSlotIndex } from "@/lib/hero-rotation";
 
 // The Question of the Day changes at UTC midnight, so the cached homepage must
 // expire quickly or it would keep serving yesterday's question for up to an
@@ -35,7 +34,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero slotIndex={heroSlotIndex()} />
+      <Hero />
       <TrustIndicators />
       {daily && <QuestionOfTheDay question={daily} initialState={dailyState} />}
       <FeaturedResources />

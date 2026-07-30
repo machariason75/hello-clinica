@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { HeartPulse, Plus, GraduationCap } from "lucide-react";
+import { HERO_SLIDE_COUNT } from "@/lib/hero-rotation";
 
 const SLIDES = [
   { src: "/images/medics/medic-1.jpg", alt: "Smiling nurse in blue scrubs" },
@@ -13,101 +13,65 @@ const SLIDES = [
   { src: "/images/medics/medic-6.jpg", alt: "Smiling healthcare professional" },
 ];
 
-// Standby rotation speed — brisk enough to feel alive, calm enough not to distract.
-const INTERVAL_MS = 60000;
+// A mismatch here would silently break the rotation, so fail loudly in dev.
+if (process.env.NODE_ENV !== "production" && SLIDES.length !== HERO_SLIDE_COUNT) {
+  console.warn(
+    `HeroSlideshow: SLIDES has ${SLIDES.length} photos but HERO_SLIDE_COUNT is ${HERO_SLIDE_COUNT}. Update lib/hero-rotation.ts.`
+  );
+}
 
 /**
- * Hero image — a gentle auto-rotating slideshow that cross-dissolves through
- * ALL photos (not just the first two). It starts on a deterministic photo so
- * the server and client render identically (no hydration mismatch), then the
- * client advances the index on a timer and whenever the visitor taps the image.
- * Reduced-motion users see a single still image.
+ * Hero photo — ONE photo, held still for the whole visit.
+ *
+ * The photo to show is decided by the server (see lib/hero-rotation.ts) and
+ * passed in, so it is already correct in the first HTML. There is deliberately
+ * no interval, no AnimatePresence and no cross-dissolve:
+ *
+ *   - Arriving visitors find a finished photo, never a transition in progress.
+ *   - The photo cannot change while someone is reading the dashboard.
+ *   - It changes between visits — browse elsewhere for a while, return, and the
+ *     10-minute window has usually moved on to a new face.
+ *
+ * The only motion left is a single fade-and-settle on first paint, which belongs
+ * to the page-load sequence rather than to the photo itself.
  */
-export function HeroSlideshow() {
+export function HeroSlideshow({ slotIndex = 0 }: { slotIndex?: number }) {
   const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  function schedule() {
-    if (timer.current) clearInterval(timer.current);
-    timer.current = setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
-    }, INTERVAL_MS);
-  }
-
-  useEffect(() => {
-    if (reduce) return;
-    // Client-only random starting photo → a different face greets each visit.
-    // SSR/first render is slide 0, so this update causes no hydration mismatch.
-    setIndex(Math.floor(Math.random() * SLIDES.length));
-    schedule();
-    return () => {
-      if (timer.current) clearInterval(timer.current);
-    };
-  }, [reduce]);
-
-  // Tapping the photo advances immediately (and resets the standby timer),
-  // so every interaction surfaces a different face.
-  function advance() {
-    if (reduce) return;
-    setIndex((i) => (i + 1) % SLIDES.length);
-    schedule();
-  }
-
-  const active = SLIDES[index];
+  // Defensive: an out-of-range index from a stale server build must not blank
+  // the hero.
+  const active = SLIDES[((slotIndex % SLIDES.length) + SLIDES.length) % SLIDES.length] ?? SLIDES[0];
 
   return (
     <div className="relative">
-      {/* Decorative floating accents (not photos) — varied colours for warmth */}
+      {/* Decorative floating accents (not photos). Palette per Amendment
+          Register v1.2: coral CTA family, cyan accent, deep teal brand. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20">
-        <span className="absolute -left-3 top-12 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-r from-coral to-[#E8613F] text-white shadow-lg">
+        <span className="absolute -left-3 top-12 flex h-11 w-11 items-center justify-center rounded-full bg-coral text-white shadow-lg">
           <HeartPulse className="h-5 w-5" />
         </span>
-        <span className="absolute -right-3 top-8 flex h-11 w-11 items-center justify-center rounded-full bg-[#E7A64B] text-white shadow-lg">
+        <span className="absolute -right-3 top-8 flex h-11 w-11 items-center justify-center rounded-full bg-accent-blue text-white shadow-lg">
           <Plus className="h-5 w-5" />
         </span>
-        <span className="absolute -left-4 bottom-14 flex h-11 w-11 items-center justify-center rounded-full bg-coral-dark text-white shadow-lg">
+        <span className="absolute -left-4 bottom-14 flex h-11 w-11 items-center justify-center rounded-full bg-medical-blue text-white shadow-lg">
           <GraduationCap className="h-5 w-5" />
         </span>
       </div>
 
       <motion.div
-        initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.97 }}
+        initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        onClick={advance}
-        className="relative aspect-[4/3] cursor-pointer overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5"
+        transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut" }}
+        className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5"
       >
-        {reduce ? (
-          <Image
-            src={SLIDES[0].src}
-            alt={SLIDES[0].alt}
-            fill
-            priority
-            sizes="(max-width: 1024px) 90vw, 600px"
-            className="object-cover"
-          />
-        ) : (
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 1.7, ease: "easeInOut" }, scale: { duration: INTERVAL_MS / 1000 + 1.5, ease: "linear" } }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={active.src}
-                alt={active.alt}
-                fill
-                priority={index === 0}
-                sizes="(max-width: 1024px) 90vw, 600px"
-                className="object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
-        )}
+        <Image
+          src={active.src}
+          alt={active.alt}
+          fill
+          priority
+          sizes="(max-width: 1024px) 90vw, 600px"
+          className="object-cover"
+        />
       </motion.div>
     </div>
   );
