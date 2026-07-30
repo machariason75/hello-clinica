@@ -1,7 +1,7 @@
-# Do this — Biochemistry questions
+# Do this — Histology and Dermatology
 
-This one is **content only**. No website code changes, so it's much shorter than
-the last drop: three steps, about 3 minutes.
+**Content only.** No website code changes, so this is short: three steps, about
+5 minutes.
 
 ---
 
@@ -21,8 +21,7 @@ The zip is in your **Downloads** folder.
 3. If Windows asks about existing files, choose **"Replace the files in the
    destination."**
 
-You're only adding one new file: `prisma/seed-biochemistry.ts`. Nothing existing
-is overwritten.
+You're only adding two new files. Nothing existing is overwritten.
 
 ---
 
@@ -31,40 +30,47 @@ is overwritten.
 In VS Code: **File → Open Folder** → `hello-clinica`, then
 **Terminal → New Terminal**.
 
-Paste this into the bottom panel and press Enter:
+Paste these **one at a time**, waiting for each to finish:
 
 ```
-npx tsx prisma/seed-biochemistry.ts
+npx tsx prisma/seed-histology.ts
 ```
 
-You should see four lines appear, then **"Done."**:
-
 ```
-  ✓ Biochemistry — Practice Set 1 — 30 questions (answers shuffled)
-  ✓ Biochemistry — Practice Set 2 — 30 questions (answers shuffled)
-  ✓ Biochemistry — Timed Exam 1 — 30 questions (answers shuffled)
-  ✓ Biochemistry — Timed Exam 2 (Comprehensive) — 60 questions (answers shuffled)
+npx tsx prisma/seed-dermatology.ts
 ```
 
-**That's it — the questions are live on your website now.** No `git push`, no
-Vercel, no waiting. Questions go straight to your database.
+Each ends with **"Done."**
 
-Check it: open your live site → **Question Bank** → **Foundational Sciences** →
-**Biochemistry**.
+The Dermatology one will also print a line near the top:
+
+```
+  + Created section: Clinical Specialties → Dermatology
+```
+
+That's expected — there was no Dermatology section in your Question Bank, so
+this creates it. If you run the script again later it reuses that section rather
+than making a second one.
+
+**The questions are live on your website now.** No `git push`, no Vercel.
+
+Check it:
+- Question Bank → **Foundational Sciences → Anatomy → Histology**
+- Question Bank → **Clinical Specialties → Dermatology**
 
 ---
 
-## OPTIONAL — keep the file in your project history
+## OPTIONAL — keep the files in your project history
 
-Not required, and the questions are already live either way. But it means the
-file is backed up with the rest of your code rather than only on this computer:
+Not required. The questions are already live either way; this just backs the
+files up alongside the rest of your code.
 
 ```
 git add .
 ```
 
 ```
-git commit -m "biochemistry question bank"
+git commit -m "histology and dermatology question banks"
 ```
 
 ```
@@ -75,23 +81,25 @@ git push
 
 # IF IT DOESN'T WORK
 
-**"Category fs-biochemistry not found"** — the Biochemistry section is missing
-from your Question Bank. Run this first, then try again:
+**"Category fs-histology not found"** or **"Parent clinical-specialties not
+found"** — your Question Bank structure is missing. Run this once, then try
+again:
 
 ```
 npx tsx prisma/seed-medical-taxonomy.ts
 ```
 
-**"Cannot find module" or a connection error** — copy the whole message into the
-chat. Most likely the database connection dropped; the script retries three times
-on its own, so a persistent failure means something else.
+**A connection error** — the script retries three times by itself, so a
+persistent failure means something else. Copy the whole message into the chat.
 
-**Anything else** — paste it into the chat. Nothing here can damage existing
-content: the script only creates or replaces its own four Biochemistry quizzes.
+Nothing here can damage existing content. Each script only creates or replaces
+its own four quizzes.
 
 ---
 
 # WHAT YOU'RE GETTING
+
+Each subject follows the same shape as Haematology:
 
 | Quiz | Questions | Timing |
 |---|---|---|
@@ -100,15 +108,33 @@ content: the script only creates or replaces its own four Biochemistry quizzes.
 | Timed Exam 1 | 30 | 40 minutes |
 | Timed Exam 2 — Comprehensive | 60 | 75 minutes |
 
-Set 1 covers enzymes, carbohydrates, lipids, amino acids and vitamins.
-Set 2 covers molecular biology, nucleotides, bioenergetics, metabolic
-integration and inherited metabolic disease.
+**Histology** — Set 1 covers the four basic tissues (epithelium, connective
+tissue, muscle, nerve, blood and marrow). Set 2 covers organ histology and
+laboratory technique including stains.
 
-The two practice sets share no questions, so a student who finishes Set 1 gets 30
-genuinely new ones in Set 2 — then the exams recombine them under time pressure.
+**Dermatology** — Set 1 covers skin structure, eczema, psoriasis, acne and skin
+infections. Set 2 covers skin cancer, pigmentary disorders, blistering diseases,
+severe drug reactions and hair, nail and systemic signs.
 
-Every question has a written explanation, and answer options are shuffled so the
-correct one isn't always in the same position.
+The two practice sets in each subject share no questions, so Set 2 is genuine
+retesting rather than a repeat. Every question has a written explanation, and
+answer options are shuffled so the correct one isn't always in the same place.
 
-Safe to run more than once. It replaces its own four quizzes and touches nothing
-else.
+Safe to run more than once.
+
+---
+
+# ONE THING WORTH KNOWING ABOUT THE DERMATOLOGY SET
+
+Standard dermatology textbooks describe pale skin as the default. Students
+trained only on those images consistently under-read severity and miss diagnoses
+in the patients they'll actually be treating.
+
+So this set gives sustained attention to pigmented skin throughout — how to judge
+inflammation when redness is masked, why post-inflammatory pigment change is
+often the patient's main concern, keloid risk, the dangers of skin-lightening
+products, and the fact that the melanomas that matter most in African patients
+arise on palms, soles and nail beds rather than sun-exposed skin.
+
+That's a genuine differentiator for Hello Clinica against imported question
+banks, and it's worth mentioning in how you describe the section to students.
