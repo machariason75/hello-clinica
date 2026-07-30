@@ -1,32 +1,21 @@
 /**
- * Reshuffle stored answer order.
+ * Randomise answer order across the entire question bank.
  *
- * THE PROBLEM THIS FIXES
+ * VERSION 2 — now randomises EVERY quiz, not only the badly skewed ones.
  *
- * In the earlier content waves — pathology, microbiology, renal, anatomy,
- * respiratory, surgery, endocrinology and others — each question's choices were
- * inserted in the order they were written in the seed file:
+ * The earlier version only touched quizzes where the correct answer sat first
+ * in 60% or more of questions. That fixed the worst offenders but left sets
+ * sitting at 40–55% — still well above the ~25% you'd get by chance with four
+ * options, and still learnable. Randomising everything removes the pattern
+ * completely and costs nothing.
  *
- *     choices: { create: q.choices.map((c, i) => ({ ..., order: i })) }
- *
- * and the correct answer is written FIRST in every one of those files, because
- * that is how they are readable to author and review. The consequence is that
- * the correct choice sits at order 0, and the player renders by order — so the
- * first option is right almost every time.
- *
- * Students find that pattern quickly, and once they have, the question bank
- * stops measuring knowledge. Haematology fixed it going forward by shuffling on
- * insert; this repairs the sets that were already written.
- *
- * WHY THIS IS SAFE FOR PAST ATTEMPTS
- *
- * QuizAttempt stores `answers` as a JSON snapshot of choice IDs, and this script
- * changes only the `order` column — never a choice's id, text or isCorrect. Past
- * attempts therefore still review correctly.
+ * WHAT IT TOUCHES: only the `order` column on choices. Never a choice's id,
+ * text or isCorrect flag. Past student attempts store choice IDs, so their
+ * results and reviews are unaffected.
  *
  * Usage:
- *   npx tsx prisma/fix-choice-order.ts            # report only, changes nothing
- *   npx tsx prisma/fix-choice-order.ts --apply    # actually reshuffle
+ *   npx tsx prisma/fix-choice-order.ts            # audit only — changes nothing
+ *   npx tsx prisma/fix-choice-order.ts --apply    # randomise everything
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -43,62 +32,89 @@ function shuffled<T>(items: T[]): T[] {
   return a;
 }
 
-async function main() {
-  console.log(APPLY ? "Reshuffling answer order…\n" : "Auditing answer order (no changes)…\n");
+type Row = { slug: string; eligible: number; first: number; pct: number };
 
+async function survey(): Promise<Row[]> {
   const quizzes = await prisma.quiz.findMany({
     select: {
-      id: true,
       slug: true,
-      title: true,
       questions: {
-        select: {
-          id: true,
-          choices: { select: { id: true, order: true, isCorrect: true }, orderBy: { order: "asc" } },
-        },
+        select: { id: true, choices: { select: { id: true, isCorrect: true }, orderBy: { order: "asc" } } },
       },
     },
     orderBy: { slug: "asc" },
   });
 
-  let totalQuestions = 0;
-  let totalFirstPosition = 0;
-  let quizzesTouched = 0;
+  return quizzes
+    .map((q) => {
+      const eligible = q.questions.filter((x) => x.choices.filter((c) => c.isCorrect).length === 1);
+      const first = eligible.filter((x) => x.choices[0]?.isCorrect).length;
+      return {
+        slug: q.slug,
+        eligible: eligible.length,
+        first,
+        pct: eligible.length ? Math.round((first / eligible.length) * 100) : 0,
+      };
+    })
+    .filter((r) => r.eligible > 0);
+}
 
+async function main() {
+  console.log(APPLY ? "Randomising answer order across the bank…\n" : "Auditing answer order (no changes)…\n");
+
+  const before = await survey();
+  if (!before.length) {
+    console.log("No quizzes with single-answer questions found.");
+    return;
+  }
+
+  for (const r of before) {
+    const flag = r.pct >= 60 ? "⚠" : r.pct >= 40 ? "·" : " ";
+    console.log(`${flag} ${r.slug.padEnd(46)} answer first in ${String(r.first).padStart(3)}/${String(r.eligible).padEnd(3)} (${r.pct}%)`);
+  }
+
+  const totalQ = before.reduce((s, r) => s + r.eligible, 0);
+  const totalF = before.reduce((s, r) => s + r.first, 0);
+  console.log(`\nBEFORE — correct answer first in ${totalF}/${totalQ} questions (${Math.round((totalF / totalQ) * 100)}%).`);
+  console.log("Chance alone with four options would be about 25%.\n");
+
+  if (!APPLY) {
+    console.log("Re-run with --apply to randomise every quiz.");
+    return;
+  }
+
+  const quizzes = await prisma.quiz.findMany({
+    select: { slug: true, questions: { select: { id: true, choices: { select: { id: true } } } } },
+    orderBy: { slug: "asc" },
+  });
+
+  let touched = 0;
   for (const quiz of quizzes) {
-    // Only single-correct questions can be skewed in a way that matters here.
-    const eligible = quiz.questions.filter((q) => q.choices.filter((c) => c.isCorrect).length === 1);
-    if (eligible.length === 0) continue;
-
-    const firstPosition = eligible.filter((q) => q.choices[0]?.isCorrect).length;
-    const pct = Math.round((firstPosition / eligible.length) * 100);
-
-    totalQuestions += eligible.length;
-    totalFirstPosition += firstPosition;
-
-    // With four options, chance alone puts the answer first about 25% of the
-    // time. Anything at or above 60% is a seeding artefact, not luck.
-    const skewed = pct >= 60;
-    const flag = skewed ? "⚠" : " ";
-    console.log(`${flag} ${quiz.slug} — answer first in ${firstPosition}/${eligible.length} (${pct}%)`);
-
-    if (!APPLY || !skewed) continue;
-
-    for (const q of eligible) {
+    for (const q of quiz.questions) {
+      if (q.choices.length < 2) continue;
       const order = shuffled(q.choices.map((c) => c.id));
       for (let i = 0; i < order.length; i++) {
         await prisma.choice.update({ where: { id: order[i] }, data: { order: i } });
       }
+      touched++;
     }
-    quizzesTouched++;
-    console.log(`    → reshuffled ${eligible.length} questions`);
+    process.stdout.write(`  randomised ${quiz.slug}\r`);
   }
+  console.log(`\n  randomised ${touched} questions across ${quizzes.length} quizzes.\n`);
 
-  const overall = totalQuestions ? Math.round((totalFirstPosition / totalQuestions) * 100) : 0;
-  console.log(
-    `\nOverall: correct answer in first position for ${totalFirstPosition}/${totalQuestions} questions (${overall}%).`
-  );
-  console.log(APPLY ? `Reshuffled ${quizzesTouched} quiz(zes).` : "Re-run with --apply to fix the flagged sets.");
+  // Verify rather than assume. If the after-figure isn't near 25%, something
+  // is wrong and you should know before students see it.
+  const after = await survey();
+  const aQ = after.reduce((s, r) => s + r.eligible, 0);
+  const aF = after.reduce((s, r) => s + r.first, 0);
+  const pct = Math.round((aF / aQ) * 100);
+  console.log(`AFTER  — correct answer first in ${aF}/${aQ} questions (${pct}%).`);
+
+  if (pct >= 40) {
+    console.log("\n⚠ That is still higher than expected. Re-run the audit and send me the output.");
+  } else {
+    console.log("\n✓ Distribution now looks random. The first-option pattern is gone.");
+  }
 }
 
 main()
