@@ -1,10 +1,6 @@
-# Fixing the "can't reach database" crash
+# Do this — Pharmacology Set 4
 
-Your instinct was right — it was doing too much at once. But the bigger fault
-was mine: I put retry logic in the seed files and forgot it in the generator, so
-the first dropped connection killed the whole run.
-
-Both are fixed. Two commands.
+Two commands. About 3 minutes.
 
 ---
 
@@ -14,136 +10,113 @@ Both are fixed. Two commands.
 2. Open your **hello-clinica** folder. **Ctrl + V**.
 3. Choose **"Replace the files in the destination."**
 
-This replaces `generate-exams.ts` with the fixed version and adds a new
-diagnostic tool.
-
 Then in VS Code: **Terminal → New Terminal**.
 
 ---
 
-## STEP 2 — Find out what's actually wrong
+## STEP 2 — Add Set 4
 
 ```
-npx tsx prisma/db-check.ts
+npx tsx prisma/seed-pharmacology-set-4.ts
 ```
 
-Changes nothing. It tests your connection three ways and tells you in plain
-English which of these it is:
-
-- the database is asleep or unreachable
-- the connection works but is slow
-- the connection works but drops under sustained use
-
-**Read what it says at the end.** If it tells you to add DIRECT_URL, do Step 3.
-If it says the connection looks healthy, skip to Step 4.
+60 questions. Pharmacology now holds **221 unique questions** across four sets.
 
 ---
 
-## STEP 3 — Only if db-check told you to
-
-This is the one thing I can't automate, because it involves your database
-password.
-
-Supabase gives you two ways in:
-
-- a **pooled** connection on port **6543** — fast for a website, but it closes
-  connections that stay open, which is exactly what a long script does
-- a **direct** connection on port **5432** — slower to open, but it stays put
-
-Your `.env` probably only has the pooled one. To add the direct one:
-
-1. In VS Code's file list on the left, click the file called **`.env`**
-2. Find the line starting `DATABASE_URL=`
-3. Copy that whole line and paste it underneath as a new line
-4. On the **new** line only, change `DATABASE_URL` to `DIRECT_URL`
-5. On that same new line, change the port number **6543** to **5432**
-6. If the line ends with `?pgbouncer=true` or similar, delete that part
-7. Press **Ctrl + S**
-
-You should end up with two lines that are identical except for the name, the
-port, and the removed `?pgbouncer=true`:
-
-```
-DATABASE_URL="postgresql://...@...supabase.com:6543/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://...@...supabase.com:5432/postgres"
-```
-
-Then run `npx tsx prisma/db-check.ts` again — it should now say it's using
-DIRECT_URL.
-
-**If you can't find `.env`** or the lines don't look like that, paste what you
-see into the chat and I'll tell you exactly what to change. Don't paste the
-password itself — replace it with the word PASSWORD first.
-
----
-
-## STEP 4 — Generate the papers
+## STEP 3 — Refresh the exam papers
 
 ```
 npx tsx prisma/generate-exams.ts fs-pharmacology --size=70
 ```
 
-If it still fails, do them one at a time:
+Worth doing after every new set. The papers are regenerated from the enlarged
+pool, so all seven now draw on Set 4 as well — and because there are four tiers
+to spread across instead of three, the difficulty gradient between Paper 1 and
+Paper 7 is noticeably wider than last time.
+
+**The pool now supports larger papers.** If you want the exams to bite harder:
 
 ```
-npx tsx prisma/generate-exams.ts fs-pharmacology --size=70 --paper=1
+npx tsx prisma/generate-exams.ts fs-pharmacology --size=100
 ```
 
-then `--paper=2`, `--paper=3`, and so on up to 7. Each paper is independent, so
-stopping between them loses nothing, and you can pick up where it stopped.
+100 questions in 2 hours. At 221 in the pool that still leaves plenty of
+variation between papers.
 
 ---
 
-# WHAT I CHANGED
+## OPTIONAL — save to project history
 
-**It was making about 504 database calls.** For each of seven papers it created
-seventy questions one at a time, each with its choices attached. Long before the
-end, Supabase's pooler had closed the connection.
+```
+git add .
+```
+```
+git commit -m "pharmacology set 4: special populations"
+```
+```
+git push
+```
 
-It now writes in batches — all seventy questions in one statement, then all 280
-choices in two more:
+---
 
-| | before | now |
+# WHERE PHARMACOLOGY STANDS
+
+| | | |
 |---|---|---|
-| calls per paper | 72 | 6 |
-| calls for 7 papers | 504 | 42 |
+| Set 1 | Foundations | 51 ✓ |
+| Set 2 | Core Drug Classes | 50 ✓ |
+| Set 3 | Applied Therapeutics | 60 ✓ |
+| Set 4 | Special Populations | 60 ✓ |
+| Set 5 | Toxicity & Overdose | next |
+| Set 6 | Clinical Reasoning | |
+| Set 7 | Expert & Edge Cases | |
 
-**Every call now retries, and reconnects between attempts.** That last part
-matters: once the pooler has closed the socket, retrying on the same dead
-connection fails every time. It now drops the connection and makes a fresh one,
-waiting a little longer each attempt.
-
-I checked the retry only triggers on connection problems. A real error — a bad
-value, a duplicate slug — still fails immediately and shows you the message,
-rather than being retried five times and buried.
-
-**It prefers DIRECT_URL when one exists**, and tells you which it's using on the
-first line of output.
-
-**And it's resumable.** `--paper=3` does just that paper.
+**221 of roughly 380.** Three drops to finish.
 
 ---
 
-# IF IT STILL FAILS
+# WHAT'S IN SET 4
 
-Copy the whole error into the chat. But check one thing first:
+This is the tier that separates someone who has memorised drug facts from
+someone who can actually prescribe. Ten areas, six questions each:
 
-**Is your Supabase project paused?** Open your Supabase dashboard. Free projects
-pause themselves after a period without traffic, and everything reports "can't
-reach database" until you resume them. It takes a minute to wake up.
+pregnancy principles · prescribing in pregnancy · breastfeeding · neonates and
+infants · children and adolescents · older adults · frailty and falls · obesity
+and weight-based dosing · palliative and end-of-life care · multimorbidity and
+guideline conflict
+
+A few of these deserve saying out loud, because they're the ones most often
+missing from imported question banks:
+
+**Breastfeeding.** The default advice to "stop breastfeeding" is usually wrong
+and causes real harm. The set covers what actually determines infant exposure,
+why timing doses around feeds works, and which infant is genuinely vulnerable.
+
+**Multimorbidity.** Four single-disease guidelines applied additively is how a
+patient ends up on fifteen medicines that each look justified. Prescribing
+cascades, treatment burden and time-to-benefit are covered as clinical concepts,
+not as commentary.
+
+**End-of-life care.** Anticipatory prescribing, the subcutaneous route, opioids
+for breathlessness, and what to say to a family who fear that morphine will
+hasten death. Under-treating pain out of that fear causes avoidable suffering,
+and the reasoning is worth a student having ready.
 
 ---
 
-# ONE THING WORTH KNOWING
+# HOW IT WAS CHECKED
 
-The same batching problem will appear as sections get bigger — a 350-question
-practice pool generating 100-question papers is a lot more writing than what
-you're running now.
+60 questions, 60 correct answers, 240 choices, ten topics evenly weighted.
 
-The seed files are already safe: they retry, they reconnect, and they write one
-question at a time deliberately so a failure halfway leaves the earlier
-questions in place. Slower, but restartable. The generator can batch because if
-a paper fails it's simply regenerated from scratch — nothing is lost.
+Zero exact duplicates against Sets 1–3 or any of the five earlier subject waves.
 
-So: seeds are slow and safe, the generator is fast and disposable. That's
-intentional now rather than accidental.
+I also ran a similarity check for questions that differ in wording but test the
+same thing — Set 3 already covered organ impairment and older patients, so there
+was real scope for overlap. Two pairs flagged; both turned out to share
+vocabulary while testing entirely different things (heparin characteristics
+versus heparin dosing in obesity). Nothing needed rewriting.
+
+⚠ Specific agents and thresholds vary by guideline. These test the reasoning
+that decides the choice, which travels — but review anything numerical against
+Kenyan guidance before promoting the section.
