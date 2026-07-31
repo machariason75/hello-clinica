@@ -1,4 +1,4 @@
-# Do this — Pathology Set 1
+# Do this — Pathology Set 2
 
 Two commands. About 3 minutes.
 
@@ -14,28 +14,26 @@ Then in VS Code: **Terminal → New Terminal**.
 
 ---
 
-## STEP 2 — Add Set 1
+## STEP 2 — Add Set 2
 
 ```
-npx tsx prisma/seed-pathology-set-1.ts
+npx tsx prisma/seed-pathology-set-2.ts
 ```
 
-**60 questions.** Pathology now holds **135** — the 75 already there plus these.
+**70 questions.** Pathology now holds **205**.
 
 ---
 
-## STEP 3 — Regenerate the pathology exams
+## STEP 3 — Regenerate the exams
 
 ```
 npx tsx prisma/generate-exams.ts fs-pathology --size=70
 ```
 
-This replaces the three old exams — which were just the practice sets joined
-together — with seven properly generated papers drawing on all 135 questions.
+At 205 in the pool, `--size=100` also works comfortably now.
 
-⚠ **Do NOT run `npx tsx prisma/seed-pathology.ts`.** That is the old file and it
-still deletes before it writes. It would wipe anything you have added by hand.
-It stays untouched until I convert it.
+⚠ Still do **not** run `npx tsx prisma/seed-pathology.ts` — the old file deletes
+before it writes.
 
 ---
 
@@ -45,7 +43,7 @@ It stays untouched until I convert it.
 git add .
 ```
 ```
-git commit -m "pathology set 1: foundations"
+git commit -m "pathology set 2: core processes"
 ```
 ```
 git push
@@ -53,81 +51,58 @@ git push
 
 ---
 
-# ABOUT THE FIVE SETS ALREADY THERE
+# WHAT'S IN SET 2
 
-Pathology is the first section we have rebuilt that already had real content —
-75 questions in five 15-question sets (general pathology 1 and 2, neoplasia 1
-and 2, systemic pathology 1). They are good questions and they are staying.
+Set 1 covered how cells are injured, die and repair. Set 2 covers what is built
+on top of that. Ten topics, seven questions each:
 
-**I read all of them before writing a word of this set.** That mattered: the old
-General Pathology Set 1 covers reversible versus irreversible injury, apoptosis
-versus necrosis, hypertrophy versus hyperplasia — exactly the ground a
-foundations set would naturally take.
+oedema and effusions · thrombosis and embolism in depth · infarction and
+ischaemia · shock and organ failure · vascular pathology · immunopathology ·
+genetic basis of disease · carcinogenesis · infection and host response ·
+environmental and nutritional pathology
 
-So this set goes **deeper on the same territory instead of restating it**:
+As with Set 1, this goes **beneath** the existing five sets rather than beside
+them. The old General Pathology Set 2 asks what Virchow's triad is; this asks
+why arterial and venous thrombi differ in composition and what follows for
+treatment — the reason antiplatelets dominate arterial disease and
+anticoagulants dominate venous disease.
 
-| The existing set asks | This set asks |
-|---|---|
-| What distinguishes apoptosis from necrosis? | How do the intrinsic and extrinsic apoptotic pathways differ, and what does p53 do when damage is irreparable? |
-| Which necrosis type occurs in the brain? | What produces caseous necrosis, and what does fibrinoid necrosis in a vessel wall tell you? |
-| What is reversible cell injury? | Why does sustained calcium influx mark the transition to irreversibility? |
+## Three areas worth pointing out
 
-A student who has done the old set is never asked the same thing twice.
+**Environmental and nutritional pathology is regionally weighted.** Kwashiorkor
+versus marasmus gets a full question — the distinction that explains why a child
+with oedema can look less thin while being more critically unwell, and why
+rehydration needs care rather than the volumes used for simple dehydration.
+Indoor cooking smoke is covered as a genuine cause of COPD in people who have
+never smoked, disproportionately affecting women and young children. Silica
+exposure is covered alongside its effect on tuberculosis risk.
 
-## The plan for those five sets
+**Tuberculosis pathology is treated properly.** The Ghon complex as the
+anatomical basis of latency, and why post-primary disease favours the apices and
+cavitates — high oxygen tension suiting an aerobe, and caseous material
+discharging into a bronchus, which is the moment the patient becomes highly
+infectious. The Infectious Diseases wave covered TB clinically; this covers what
+is actually happening in the tissue.
 
-They stay published while the ladder is built. Once Pathology Sets 1–7 are
-complete, my recommendation is to **unpublish the five old fragments** — and
-here is the useful part: the exam generator does not filter on published status,
-so **their 75 questions stay in the exam pool**.
-
-The result is a clean seven-set ladder for practice, plus 75 questions that
-appear only in exams. Exams containing material students have not drilled is a
-feature, not a gap.
-
-Nothing is deleted at any point, and it is reversible.
-
----
-
-# WHAT'S IN SET 1
-
-Ten topics, six questions each:
-
-mechanisms of cell injury · patterns of necrosis · apoptosis and its regulation ·
-cellular accumulations and pigments · calcification and amyloid · the cells of
-acute inflammation · chemical mediators · chronic inflammation and granulomas ·
-systemic effects of inflammation · tissue repair
-
-Some of it connects directly to things already covered elsewhere in the bank —
-the bradykinin question explains why ACE inhibitors cause cough and angioedema,
-the TNF question explains why TNF inhibitors need TB screening first, the
-hepcidin question explains why ferritin is normal in anaemia of chronic disease.
-Pathology is the section that ties the others together, and the questions are
-written to do that rather than to sit in isolation.
+**Shock is covered as mechanism rather than protocol.** Why the peripheries are
+warm in septic shock and cold in cardiogenic shock, why hypotension is a late
+sign marking failure of compensation rather than the onset of shock, and why
+multi-organ dysfunction can progress after the original insult has been
+controlled — the patient failing from the response rather than the cause.
 
 ---
 
 # HOW IT WAS CHECKED
 
-60 questions, 60 correct answers, 240 choices, ten topics of exactly six, no
+70 questions, 70 correct answers, 280 choices, ten topics of exactly seven, no
 duplicates within the file.
 
-Checked against the 32 existing pathology stems I could read, and against all
-twelve previous sets across every subject.
+Zero exact overlap with Pathology Set 1, the 32 existing pathology stems, or any
+of the twelve sets across the other subjects.
 
-**Four pairs flagged, and I want to be straight about one of them.** Three were
-pure grammatical coincidence — "what is the difference between X and Y?" matching
-across unrelated content.
-
-The fourth is a genuine, if mild, adjacency: the existing question *"chronic
-hepatitis B and C predispose to which malignancy?"* has an explanation that
-mentions repeated injury and regeneration increasing mutation opportunity — and
-this set has *"why can chronic inflammation predispose to malignancy?"* as a
-question in its own right. They are not the same question, and one is a specific
-association while the other is the general mechanism. But they touch. I have
-left it, because a student meeting the mechanism explicitly after seeing it
-mentioned in passing is reinforcement rather than repetition — say the word and
-I will replace it.
+One near-duplicate flagged at 0.33 — "the difference between AL and AA
+amyloidosis" against "the difference between central and peripheral tolerance".
+Same grammar, unrelated content. No action needed.
 
 ---
 
@@ -135,9 +110,10 @@ I will replace it.
 
 | | | |
 |---|---|---|
-| *(existing five sets)* | thematic, 15 each | 75 |
+| *(existing five sets)* | thematic | 75 |
 | Set 1 | Foundations | 60 ✓ |
-| Set 2 | Core Processes | next |
-| Sets 3–7 | | |
+| Set 2 | Core Processes | 70 ✓ |
+| Set 3 | Systemic Pathology | next |
+| Sets 4–7 | | |
 
-**135 questions.** Six more drops completes the ladder.
+**205 questions.** Five more drops completes the ladder.
