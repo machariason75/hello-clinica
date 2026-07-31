@@ -1,4 +1,4 @@
-# Do this — Pharmacology Set 5
+# Do this — Pharmacology Set 6
 
 Two commands. About 3 minutes.
 
@@ -14,30 +14,28 @@ Then in VS Code: **Terminal → New Terminal**.
 
 ---
 
-## STEP 2 — Add Set 5
+## STEP 2 — Add Set 6
 
 ```
-npx tsx prisma/seed-pharmacology-set-5.ts
+npx tsx prisma/seed-pharmacology-set-6.ts
 ```
 
-**70 questions.** Pharmacology now holds **291 unique questions** across five
-sets.
+**70 questions.** Pharmacology now holds **361 unique questions** across six sets.
+
+That figure passes the 350 target for a completed section — with one set still
+to come.
 
 ---
 
-## STEP 3 — Regenerate the exams, bigger
+## STEP 3 — Regenerate the exams
 
 ```
 npx tsx prisma/generate-exams.ts fs-pharmacology --size=100
 ```
 
-At 291 in the pool, 100-question papers now have real room to differ from each
-other — and with five tiers to spread across, the gap between Paper 1 and Paper 7
-is wider again.
-
-If you want to push further, `--size=120` still works comfortably at this pool
-size. Each paper runs to 2 hours 24 minutes at that length, which is a serious
-sitting.
+With six tiers in the pool the difficulty gradient is now close to its full
+range. `--size=120` is comfortable at this pool size if you want the later
+papers to be a genuine endurance test.
 
 ---
 
@@ -47,7 +45,7 @@ sitting.
 git add .
 ```
 ```
-git commit -m "pharmacology set 5: toxicity and overdose"
+git commit -m "pharmacology set 6: clinical reasoning"
 ```
 ```
 git push
@@ -55,44 +53,51 @@ git push
 
 ---
 
-# WHERE PHARMACOLOGY STANDS
+# THIS SET IS WRITTEN DIFFERENTLY
 
-| | | |
-|---|---|---|
-| Set 1 | Foundations | 51 ✓ |
-| Set 2 | Core Drug Classes | 50 ✓ |
-| Set 3 | Applied Therapeutics | 60 ✓ |
-| Set 4 | Special Populations | 60 ✓ |
-| Set 5 | Toxicity & Overdose | 70 ✓ |
-| Set 6 | Clinical Reasoning | next |
-| Set 7 | Expert & Edge Cases | |
+Sets 1–5 test whether a fact is known. Set 6 tests whether facts can be
+**combined under uncertainty**. Every question is a situation, and the answer
+requires holding two or three things at once — the drug, the patient, and what
+else could explain what you are seeing.
 
-**291 questions. Two drops to finish.**
+The stems are roughly twice as long as earlier sets, because a reasoning
+question needs a scenario before it can ask anything.
+
+**The wrong answers are deliberately tempting.** Several are exactly what a
+competent person would do if they stopped thinking one step too early:
+
+- reaching for a diuretic when a calcium channel blocker caused the ankle oedema
+- switching to an ARB for a cough in a patient who is actually decompensating
+- escalating asthma treatment past an unrecognised inhaler technique problem
+- broadening the antibiotic when the real problem is an undrained abscess
+- increasing an insulin dose when the readings and the HbA1c disagree
+- withholding anticoagulation from a faller whose stroke risk is far higher
+
+That failure mode — stopping one step early — is the whole reason this tier
+exists.
 
 ---
 
-# ONE TOPIC IS DELIBERATELY DIFFERENT
+# THE TEN AREAS
 
-Seven of these seventy questions cover **Environmental & Non-Pharmaceutical
-Poisoning**, and they were chosen for where your students will actually practise
-rather than for what appears in an American question bank:
+is this the drug? · the deteriorating patient on treatment · treatment failure
+or non-adherence · competing risks and trade-offs · the confused older patient ·
+interpreting the number · handover, transitions and error · emergency decisions
+under uncertainty · stopping, switching or continuing · when guidelines don't fit
 
-- organophosphate pesticide, and why under-dosing atropine is what kills —
-  the requirement can be many times any dose used elsewhere, and unfamiliarity
-  with that quantity is the usual error
-- paraffin ingestion in a child, and why inducing vomiting makes it worse
-- snakebite first aid, including the interventions that cause harm
-- methanol in illicit alcohol, and why one case should prompt a search for others
-- traditional and herbal remedy toxicity in unexplained organ failure — asked
-  about directly, because patients don't volunteer it
-- corrosive ingestion, and why neutralising burns twice
-- carbon monoxide, and why the oximeter reads normal
+Two are worth pointing out.
 
-Elsewhere in the set, the G6PD question lists the oxidant drugs to avoid, which
-matters here where both G6PD deficiency and antimalarial prescribing are common.
+**Interpreting the number** covers the situations where the result and the
+patient disagree: a level taken at the wrong time, a therapeutic phenytoin level
+in a patient with low albumin who is clearly toxic, a raised CK after a weekend
+of heavy work, an eGFR flattered by low muscle mass. Treating the number instead
+of the person is one of the most reliable ways to cause harm.
 
-That regional weighting is a genuine differentiator against imported banks, and
-it's worth saying explicitly when you describe the section to students.
+**Handover and error** includes what to do in the minutes after realising you
+have given a tenfold overdose. The correct sequence — patient first, then
+openness, then reporting — is worth a student having rehearsed before they need
+it, because the instinct to reach for paperwork or silence is strong and both
+delay the only action that changes the outcome.
 
 ---
 
@@ -100,23 +105,17 @@ it's worth saying explicitly when you describe the section to students.
 
 70 questions, 70 correct answers, 280 choices, ten topics of exactly seven.
 
-Zero exact duplicates against Sets 1–4 or any of the five earlier subject waves.
+Zero exact duplicates against Sets 1–5 or the five earlier subject waves.
 
-I also ran a similarity scan for questions worded differently but testing the
-same thing. Five pairs flagged — all turned out to share only grammatical shape
-("which features suggest X toxicity" for digoxin versus lithium), not content.
-The closest, SSRI versus benzodiazepine tapering, tests different mechanisms and
-different consequences: one is a discontinuation syndrome mistaken for relapse,
-the other is seizure risk over a months-long taper. Nothing needed rewriting.
+The similarity scan initially flagged one pair — a Set 3 question about
+prescribing an unfamiliar drug in organ impairment shared its phrasing with a
+question here about prescribing overnight with incomplete records. Different
+content, but the wording collided, so I rewrote the new one. Highest remaining
+similarity to any prior question is now below the threshold.
 
-Careful attention was paid to not repeating earlier material. Set 1 already
-covered the paracetamol mechanism, so this set covers level timing, risk factors,
-the acetylcysteine infusion reaction and markers of established liver failure
-instead. Set 2 covered the tricyclic overdose mechanism, so this covers its
-management. Set 2 covered digoxin's toxic features, so this covers reversal and
-the role of potassium.
+Average stem length confirms the intended shift: 57 characters in Set 1, 108
+here.
 
-⚠ Antidote doses, decontamination thresholds and dialysis criteria vary by
-guideline and by what is actually stocked. These test recognition and reasoning,
-which travel — but check specifics against your own poisons service and
-formulary before promoting the section.
+⚠ Local availability and guideline specifics vary. These test the reasoning
+process, which travels — but review anything numerical against Kenyan guidance
+before promoting the section.
