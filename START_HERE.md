@@ -1,4 +1,4 @@
-# Do this — Pharmacology Set 7 (the last one)
+# Do this — Pathology Set 1
 
 Two commands. About 3 minutes.
 
@@ -14,38 +14,28 @@ Then in VS Code: **Terminal → New Terminal**.
 
 ---
 
-## STEP 2 — Add Set 7
+## STEP 2 — Add Set 1
 
 ```
-npx tsx prisma/seed-pharmacology-set-7.ts
+npx tsx prisma/seed-pathology-set-1.ts
 ```
 
-**70 questions.**
+**60 questions.** Pathology now holds **135** — the 75 already there plus these.
 
 ---
 
-## STEP 3 — Generate the full exam suite
+## STEP 3 — Regenerate the pathology exams
 
 ```
-npx tsx prisma/generate-exams.ts fs-pharmacology --size=120
+npx tsx prisma/generate-exams.ts fs-pathology --size=70
 ```
 
-With all seven tiers in the pool, the difficulty gradient across the seven
-papers is now at its full range — Paper 1 sits mostly on foundations, Paper 7 on
-expert material, each with a deliberate minority from elsewhere.
+This replaces the three old exams — which were just the practice sets joined
+together — with seven properly generated papers drawing on all 135 questions.
 
-120 questions is 2 hours 24 minutes per paper. At 430 in the pool that still
-leaves plenty of variation between papers.
-
----
-
-## STEP 4 — Confirm
-
-```
-npx tsx prisma/audit-question-bank.ts
-```
-
-Pharmacology should now show a **✓** and the word COMPLETE.
+⚠ **Do NOT run `npx tsx prisma/seed-pathology.ts`.** That is the old file and it
+still deletes before it writes. It would wipe anything you have added by hand.
+It stays untouched until I convert it.
 
 ---
 
@@ -55,7 +45,7 @@ Pharmacology should now show a **✓** and the word COMPLETE.
 git add .
 ```
 ```
-git commit -m "pharmacology set 7: expert and edge cases — section complete"
+git commit -m "pathology set 1: foundations"
 ```
 ```
 git push
@@ -63,100 +53,91 @@ git push
 
 ---
 
-# PHARMACOLOGY IS COMPLETE
+# ABOUT THE FIVE SETS ALREADY THERE
 
-| | | |
-|---|---|---|
-| Set 1 | Foundations | 51 |
-| Set 2 | Core Drug Classes | 50 |
-| Set 3 | Applied Therapeutics | 60 |
-| Set 4 | Special Populations | 60 |
-| Set 5 | Toxicity & Overdose | 70 |
-| Set 6 | Clinical Reasoning | 70 |
-| Set 7 | Expert & Edge Cases | 70 |
-| | **7 sets** | **430 questions** |
+Pathology is the first section we have rebuilt that already had real content —
+75 questions in five 15-question sets (general pathology 1 and 2, neoplasia 1
+and 2, systemic pathology 1). They are good questions and they are staying.
 
-**430 written, 430 unique — zero duplicates across the whole section.** The
-target was 350. Plus seven generated exam papers of up to 120 questions each.
+**I read all of them before writing a word of this set.** That mattered: the old
+General Pathology Set 1 covers reversible versus irreversible injury, apoptosis
+versus necrosis, hypertrophy versus hyperplasia — exactly the ground a
+foundations set would naturally take.
 
-It started at 30 questions in two 15-question fragments.
+So this set goes **deeper on the same territory instead of restating it**:
+
+| The existing set asks | This set asks |
+|---|---|
+| What distinguishes apoptosis from necrosis? | How do the intrinsic and extrinsic apoptotic pathways differ, and what does p53 do when damage is irreparable? |
+| Which necrosis type occurs in the brain? | What produces caseous necrosis, and what does fibrinoid necrosis in a vessel wall tell you? |
+| What is reversible cell injury? | Why does sustained calcium influx mark the transition to irreversibility? |
+
+A student who has done the old set is never asked the same thing twice.
+
+## The plan for those five sets
+
+They stay published while the ladder is built. Once Pathology Sets 1–7 are
+complete, my recommendation is to **unpublish the five old fragments** — and
+here is the useful part: the exam generator does not filter on published status,
+so **their 75 questions stay in the exam pool**.
+
+The result is a clean seven-set ladder for practice, plus 75 questions that
+appear only in exams. Exams containing material students have not drilled is a
+feature, not a gap.
+
+Nothing is deleted at any point, and it is reversible.
 
 ---
 
-# WHAT SET 7 DOES THAT THE OTHERS COULDN'T
+# WHAT'S IN SET 1
 
-**The exceptions.** Sets 1–6 taught rules. This set covers where each one stops
-applying:
+Ten topics, six questions each:
 
-- *start low and go slow* — except in sepsis or status epilepticus, where
-  cautious titration is under-treatment with a reassuring name
-- *reduce the dose in renal impairment* — except in augmented renal clearance,
-  where a young septic or burns patient clears drug **faster** than normal and
-  standard doses are sub-therapeutic
-- *narrow the antibiotic once sensitivities are known* — except in polymicrobial
-  infection, profound neutropenia, or where a combination is deliberate
-- *beta blockers are contraindicated in asthma* — too absolute; cardioselective
-  agents are often tolerated and the cardiac benefit can outweigh the risk
-- *stop the drug if a reaction occurs* — except in tuberculosis therapy, where
-  interruption breeds resistance and mild reactions are often treated through
+mechanisms of cell injury · patterns of necrosis · apoptosis and its regulation ·
+cellular accumulations and pigments · calcification and amyloid · the cells of
+acute inflammation · chemical mediators · chronic inflammation and granulomas ·
+systemic effects of inflammation · tissue repair
 
-Knowing where a rule ends is a different kind of knowledge from knowing the rule,
-and it is what this tier is for.
-
-**The depth a strong candidate has.** Pharmacogenomics with the alleles that
-actually change practice — HLA-B*57:01 before abacavir, HLA-B*15:02 before
-carbamazepine, DPYD before fluorouracil, and why warfarin genotyping never
-replaced the INR. How to read the evidence behind a drug: relative versus
-absolute risk, what number needed to treat depends on, why surrogate endpoints
-mislead, what a non-inferiority trial actually claims. Resistance mechanisms
-beyond naming them. And the modalities that postdate most textbooks — checkpoint
-inhibitors and immune-related toxicity, CAR-T and cytokine release syndrome,
-biosimilars, antibody-drug conjugates.
-
-One area is regionally weighted again: **substandard and falsified medicines**
-are covered as a clinical problem, not a regulatory footnote — because a
-sub-potent antimalarial looks exactly like treatment failure and drives
-resistance while doing it.
+Some of it connects directly to things already covered elsewhere in the bank —
+the bradykinin question explains why ACE inhibitors cause cough and angioedema,
+the TNF question explains why TNF inhibitors need TB screening first, the
+hepcidin question explains why ferritin is normal in anaemia of chronic disease.
+Pathology is the section that ties the others together, and the questions are
+written to do that rather than to sit in isolation.
 
 ---
 
 # HOW IT WAS CHECKED
 
-70 questions, 70 correct answers, 280 choices, ten topics of exactly seven.
+60 questions, 60 correct answers, 240 choices, ten topics of exactly six, no
+duplicates within the file.
 
-Zero exact duplicates against Sets 1–6 or the five earlier subject waves.
+Checked against the 32 existing pathology stems I could read, and against all
+twelve previous sets across every subject.
 
-Highest similarity to any prior question was 0.33 — "what is the difference
-between an agonist and an antagonist" against "what is the difference between
-off-label and unlicensed use". Identical grammar, unrelated content. No action
-needed.
+**Four pairs flagged, and I want to be straight about one of them.** Three were
+pure grammatical coincidence — "what is the difference between X and Y?" matching
+across unrelated content.
 
-Across the whole section: **430 questions written, 430 unique.** Not one
-duplicate in seven sets.
+The fourth is a genuine, if mild, adjacency: the existing question *"chronic
+hepatitis B and C predispose to which malignancy?"* has an explanation that
+mentions repeated injury and regeneration increasing mutation opportunity — and
+this set has *"why can chronic inflammation predispose to malignancy?"* as a
+question in its own right. They are not the same question, and one is a specific
+association while the other is the general mechanism. But they touch. I have
+left it, because a student meeting the mechanism explicitly after seeing it
+mentioned in passing is reinforcement rather than repetition — say the word and
+I will replace it.
 
 ---
 
-# WHAT NEXT
+# WHERE PATHOLOGY STANDS
 
-Pharmacology is now the worked template. Every future section follows its shape:
-seven laddered practice sets, 50 minimum and more where the content is broad,
-exam papers generated from the pool.
+| | | |
+|---|---|---|
+| *(existing five sets)* | thematic, 15 each | 75 |
+| Set 1 | Foundations | 60 ✓ |
+| Set 2 | Core Processes | next |
+| Sets 3–7 | | |
 
-Two things worth doing before starting the next section:
-
-**1. Run the audit** and send me the output. The picture has changed since the
-first one — the stubs are hidden, exams are generated rather than written, and
-the outstanding figure is roughly half what it was. It will rank sections by
-closest-to-complete, which is the right order to work in.
-
-**2. Decide the order.** My suggestion, unless the audit says otherwise:
-Pathology and Microbiology next. Both already hold five practice sets, both
-underpin every clinical specialty on the site, and both are what a prospective
-subscriber opens to judge whether the question bank is serious.
-
-And still outstanding from much earlier, in case it has slipped:
-
-- **Resend** — password reset emails still are not sending. Only you can do it.
-- **The cron route** — `pruneOldAttempts()` and `expireLapsedSubscriptions()`
-  are written and still called by nothing. A lapsed subscription currently keeps
-  access forever.
+**135 questions.** Six more drops completes the ladder.
