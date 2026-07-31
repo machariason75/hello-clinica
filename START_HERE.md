@@ -1,167 +1,149 @@
-# Do this — hide the empty stubs, add Pharmacology Set 2
+# Fixing the "can't reach database" crash
 
-Two commands after pasting. About 5 minutes.
+Your instinct was right — it was doing too much at once. But the bigger fault
+was mine: I put retry logic in the seed files and forgot it in the generator, so
+the first dropped connection killed the whole run.
+
+Both are fixed. Two commands.
 
 ---
 
 ## STEP 1 — Unzip and paste
 
-1. Double-click the zip in **Downloads**. Press **Ctrl + A**, then **Ctrl + C**.
-2. Open your **hello-clinica** folder. Press **Ctrl + V**.
+1. Double-click the zip in **Downloads**. **Ctrl + A**, then **Ctrl + C**.
+2. Open your **hello-clinica** folder. **Ctrl + V**.
 3. Choose **"Replace the files in the destination."**
+
+This replaces `generate-exams.ts` with the fixed version and adds a new
+diagnostic tool.
 
 Then in VS Code: **Terminal → New Terminal**.
 
 ---
 
-## STEP 2 — See the placeholder sections
+## STEP 2 — Find out what's actually wrong
 
 ```
-npx tsx prisma/stub-check.ts
+npx tsx prisma/db-check.ts
 ```
 
-Changes nothing. It lists every quiz holding fewer than 15 questions and tells
-you which are currently visible to students.
+Changes nothing. It tests your connection three ways and tells you in plain
+English which of these it is:
 
-You'll see about eleven — NAPLEX with 3 questions, USMLE Step 1 with 4, TEAS
-Reading with 6, and so on.
+- the database is asleep or unreachable
+- the connection works but is slow
+- the connection works but drops under sustained use
+
+**Read what it says at the end.** If it tells you to add DIRECT_URL, do Step 3.
+If it says the connection looks healthy, skip to Step 4.
 
 ---
 
-## STEP 3 — Hide them
+## STEP 3 — Only if db-check told you to
+
+This is the one thing I can't automate, because it involves your database
+password.
+
+Supabase gives you two ways in:
+
+- a **pooled** connection on port **6543** — fast for a website, but it closes
+  connections that stay open, which is exactly what a long script does
+- a **direct** connection on port **5432** — slower to open, but it stays put
+
+Your `.env` probably only has the pooled one. To add the direct one:
+
+1. In VS Code's file list on the left, click the file called **`.env`**
+2. Find the line starting `DATABASE_URL=`
+3. Copy that whole line and paste it underneath as a new line
+4. On the **new** line only, change `DATABASE_URL` to `DIRECT_URL`
+5. On that same new line, change the port number **6543** to **5432**
+6. If the line ends with `?pgbouncer=true` or similar, delete that part
+7. Press **Ctrl + S**
+
+You should end up with two lines that are identical except for the name, the
+port, and the removed `?pgbouncer=true`:
 
 ```
-npx tsx prisma/stub-check.ts --hide
+DATABASE_URL="postgresql://...@...supabase.com:6543/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://...@...supabase.com:5432/postgres"
 ```
 
-This unpublishes those quizzes. **Nothing is deleted.** They come straight back
-with:
+Then run `npx tsx prisma/db-check.ts` again — it should now say it's using
+DIRECT_URL.
 
-```
-npx tsx prisma/stub-check.ts --show
-```
-
-or automatically as soon as we fill them with real content.
-
-**Why do this.** A student who opens "USMLE Step 1", finds four questions and a
-scoreboard doesn't think *this section is incomplete*. They think *this site is
-a shell* — and they don't stay to find out whether Haematology is any better.
-Those eleven stubs are costing you more credibility than they earn in traffic,
-and they'd keep costing it for the whole year it takes to fill them.
-
-If you'd rather leave any of them visible, skip this step and hide individual
-quizzes in Admin instead.
+**If you can't find `.env`** or the lines don't look like that, paste what you
+see into the chat and I'll tell you exactly what to change. Don't paste the
+password itself — replace it with the word PASSWORD first.
 
 ---
 
-## STEP 4 — Add Pharmacology Set 2
+## STEP 4 — Generate the papers
 
 ```
-npx tsx prisma/seed-pharmacology-set-2.ts
+npx tsx prisma/generate-exams.ts fs-pharmacology --size=70
 ```
 
-50 questions. Live immediately.
+If it still fails, do them one at a time:
+
+```
+npx tsx prisma/generate-exams.ts fs-pharmacology --size=70 --paper=1
+```
+
+then `--paper=2`, `--paper=3`, and so on up to 7. Each paper is independent, so
+stopping between them loses nothing, and you can pick up where it stopped.
 
 ---
 
-## OPTIONAL — save to project history
+# WHAT I CHANGED
 
-```
-git add .
-```
-```
-git commit -m "stub check, pharmacology set 2"
-```
-```
-git push
-```
+**It was making about 504 database calls.** For each of seven papers it created
+seventy questions one at a time, each with its choices attached. Long before the
+end, Supabase's pooler had closed the connection.
 
----
+It now writes in batches — all seventy questions in one statement, then all 280
+choices in two more:
 
-# WHAT THE STOCKTAKE ACTUALLY TOLD US
+| | before | now |
+|---|---|---|
+| calls per paper | 72 | 6 |
+| calls for 7 papers | 504 | 42 |
 
-Three things worth knowing.
+**Every call now retries, and reconnects between attempts.** That last part
+matters: once the pooler has closed the socket, retrying on the same dead
+connection fails every time. It now drops the connection and makes a fresh one,
+waiting a little longer each attempt.
 
-**1. The bank is smaller than the numbers suggest.** 3,423 question placements,
-but only **1,389 unique questions**. Nearly 60% is the same questions counted
-twice, because exams were built by joining practice sets together. My own five
-waves did this too — `infectious-diseases-exam-1` is practice set 1, question
-for question. That was my error and it inflates every figure on the report.
+I checked the retry only triggers on connection problems. A real error — a bad
+value, a duplicate slug — still fails immediately and shows you the message,
+rather than being retried five times and buried.
 
-**2. Eleven sections are placeholder stubs.** 3 to 6 questions each. That's what
-steps 2 and 3 address, and it's the most urgent thing on the whole list — not
-because it's the biggest gap, but because it's the one actively costing you
-subscribers today.
+**It prefers DIRECT_URL when one exists**, and tells you which it's using on the
+first line of output.
 
-**3. The "biggest gaps" ranking at the bottom of that report is the wrong work
-order.** It sorts by emptiness, which is why MPJE and Pharmacy Calculations came
-top. Emptiness isn't urgency. I've set out the order I'd actually work in below.
+**And it's resumable.** `--paper=3` does just that paper.
 
 ---
 
-# THE PLAN, WITH REAL NUMBERS
+# IF IT STILL FAILS
 
-The stocktake says **30,877 questions outstanding** against your specification.
-At 100–150 per drop that's roughly 250 drops — about two years at a steady pace.
+Copy the whole error into the chat. But check one thing first:
 
-I don't think you should accept that number, because most of it comes from one
-decision that I'd now push back on.
-
-## The exam question
-
-Your spec asks for 7 exam sets of 50 **completely separate** questions per
-section. That's 350 exam questions per section — **half the entire build**, for
-the half of the library students use least. A practice set gets worked through
-repeatedly; an exam gets sat once or twice.
-
-**What I'd recommend instead:** build 7 practice sets of 50 unique questions per
-section — 350 genuinely unique questions, exactly as you specified — and
-generate each exam paper as a different randomised 50-question selection from
-that pool.
-
-You still get:
-
-- 7 practice sets, unique, laddered in difficulty, each independently extendable
-- 7 exam papers, each a different mix, none identical to any practice set
-- Every question reused rather than written once and rarely seen
-
-And it halves the build from ~250 drops to ~125. When you later add 20 questions
-to a set, every future exam paper draws on them too.
-
-This is how the large commercial question banks work, and it needs no code
-change — just different seed logic.
-
-**Say the word and I'll build it that way. Otherwise I'll continue with fully
-separate exam sets as you originally specified.** Both are legitimate; one is
-twice the work.
-
-## The order I'd build in
-
-**Phase 1 — Stop the bleeding.** Hide the eleven stubs. Done in step 3 above.
-
-**Phase 2 — Finish Pharmacology as the template.** It touches every clinical
-specialty on the site and currently holds 15-question fragments. Sets 1 and 2
-are done. Five more drops completes it, and it becomes the worked example every
-other section is built against.
-
-**Phase 3 — The six flagship sections.** Pathology, Microbiology, Physiology,
-Anatomy, Internal Medicine, Paediatrics. These are what a prospective subscriber
-opens first.
-
-**Phase 4 — Everything else**, including the exam-prep sections once the medical
-core is solid.
+**Is your Supabase project paused?** Open your Supabase dashboard. Free projects
+pause themselves after a period without traffic, and everything reports "can't
+reach database" until you resume them. It takes a minute to wake up.
 
 ---
 
-# WHAT'S IN SET 2
+# ONE THING WORTH KNOWING
 
-Tier 2 of 7 — the drug classes themselves, assuming the principles from Set 1
-and not re-testing them.
+The same batching problem will appear as sections get bigger — a 350-question
+practice pool generating 100-question papers is a lot more writing than what
+you're running now.
 
-antihypertensives · heart failure and antiarrhythmics · anticoagulants and
-antiplatelets · antibiotic classes · antivirals, antifungals and antiparasitics ·
-respiratory · gastrointestinal · psychotropics · antiepileptics ·
-immunosuppressants and biologics
+The seed files are already safe: they retry, they reconnect, and they write one
+question at a time deliberately so a failure halfway leaves the earlier
+questions in place. Slower, but restartable. The generator can batch because if
+a paper fails it's simply regenerated from scratch — nothing is lost.
 
-Checked before packaging: 50 questions, 50 correct answers, zero duplicates
-within the set, and zero overlap with Set 1 or any earlier wave.
+So: seeds are slow and safe, the generator is fast and disposable. That's
+intentional now rather than accidental.

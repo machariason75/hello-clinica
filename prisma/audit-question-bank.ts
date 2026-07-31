@@ -1,22 +1,29 @@
 /**
- * Question bank inventory — measures every section against the target standard.
+ * Question bank inventory — VERSION 2, for the pool-and-draw model.
  *
- * TARGET (set by the owner):
- *   · 7+ practice sets per section, 50+ questions each, all unique
- *   · 7+ exam sets per section, 50+ questions each, all unique
+ * WHAT CHANGED
  *
- * This prints where every section actually stands and how much is outstanding,
- * so the rebuild runs off real numbers instead of impressions.
+ * Version 1 measured practice and exams as two separate writing jobs and
+ * reported 30,877 questions outstanding. Under the agreed model exam papers are
+ * DRAWN from the practice pool, so exam questions are no longer written — they
+ * are generated. The real outstanding figure is roughly half what v1 said.
  *
- * It also flags DUPLICATE STEMS across the whole bank. That matters more than
- * it sounds: exams in the older seeds were assembled by concatenating practice
- * sets, so the same question exists in several quizzes. Those duplicates have to
- * be found before sets can be extended independently.
+ * The target is now expressed against the practice pool:
+ *
+ *   · 7+ practice sets per section
+ *   · 50+ questions each, more where the content is broad
+ *   · 350 unique questions in the pool as the working minimum
+ *   · exam papers generated from that pool by generate-exams.ts
+ *
+ * Duplicate reporting has changed too. A question appearing in both a practice
+ * set and an exam paper is now EXPECTED — that is the design. What matters is
+ * duplication between two practice sets, which means a set was written twice
+ * and breaks the promise that sets are independent.
  *
  * Changes nothing. Safe to run any time.
  *
  * Usage:  npx tsx prisma/audit-question-bank.ts
- *         npx tsx prisma/audit-question-bank.ts --duplicates   (full dup list)
+ *         npx tsx prisma/audit-question-bank.ts --duplicates
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -25,24 +32,24 @@ const prisma = new PrismaClient();
 const SHOW_DUPES = process.argv.includes("--duplicates");
 
 const TARGET_SETS = 7;
-const TARGET_QUESTIONS = 50;
+const MIN_PER_SET = 50;
+const TARGET_POOL = TARGET_SETS * MIN_PER_SET; // 350
 
 async function main() {
   const cats = await prisma.quizCategory.findMany({
     select: {
+      id: true,
       slug: true,
       title: true,
       parentId: true,
-      id: true,
       quizzes: {
-        select: { slug: true, title: true, kind: true, _count: { select: { questions: true } } },
+        select: { slug: true, kind: true, published: true, _count: { select: { questions: true } } },
         orderBy: { slug: "asc" },
       },
     },
     orderBy: [{ order: "asc" }, { title: "asc" }],
   });
 
-  const titleById = new Map(cats.map((c) => [c.id, c.title]));
   const path = (c: (typeof cats)[number]) => {
     const parts = [c.title];
     let p = c.parentId;
@@ -56,93 +63,96 @@ async function main() {
     return parts.join(" › ");
   };
 
-  const withQuizzes = cats.filter((c) => c.quizzes.length > 0);
+  // Unique practice stems per category — the pool that actually matters.
+  const practiceQuestions = await prisma.question.findMany({
+    select: { stem: true, quiz: { select: { slug: true, kind: true, categoryId: true } } },
+  });
+
+  const poolByCat = new Map<string, Set<string>>();
+  const practiceStemToQuizzes = new Map<string, string[]>();
+  for (const q of practiceQuestions) {
+    if (q.quiz.kind !== "PRACTICE") continue;
+    const key = q.stem.trim().toLowerCase();
+    if (!poolByCat.has(q.quiz.categoryId)) poolByCat.set(q.quiz.categoryId, new Set());
+    poolByCat.get(q.quiz.categoryId)!.add(key);
+    practiceStemToQuizzes.set(key, [...(practiceStemToQuizzes.get(key) ?? []), q.quiz.slug]);
+  }
 
   console.log("\n══════════════════════════════════════════════════════════════");
-  console.log(` QUESTION BANK INVENTORY  —  target ${TARGET_SETS} sets × ${TARGET_QUESTIONS} questions`);
+  console.log(` PRACTICE POOL INVENTORY — target ${TARGET_SETS} sets, ${TARGET_POOL}+ unique questions`);
+  console.log(" (exam papers are generated from the pool, not written separately)");
   console.log("══════════════════════════════════════════════════════════════\n");
 
-  let totalQ = 0;
-  let neededQ = 0;
-  const worklist: { section: string; missing: number }[] = [];
+  let outstanding = 0;
+  let poolTotal = 0;
+  const worklist: { section: string; slug: string; missing: number; sets: number }[] = [];
 
-  for (const c of withQuizzes) {
+  for (const c of cats) {
     const practice = c.quizzes.filter((q) => q.kind === "PRACTICE");
     const exams = c.quizzes.filter((q) => q.kind === "EXAM");
-    const pq = practice.reduce((s, q) => s + q._count.questions, 0);
-    const eq = exams.reduce((s, q) => s + q._count.questions, 0);
-    totalQ += pq + eq;
+    if (!practice.length && !exams.length) continue;
 
-    // What's still owed to reach the standard.
-    const wantP = TARGET_SETS * TARGET_QUESTIONS;
-    const wantE = TARGET_SETS * TARGET_QUESTIONS;
-    const shortP = Math.max(0, wantP - pq);
-    const shortE = Math.max(0, wantE - eq);
-    const short = shortP + shortE;
-    neededQ += short;
+    const pool = poolByCat.get(c.id)?.size ?? 0;
+    poolTotal += pool;
+    const short = Math.max(0, TARGET_POOL - pool);
+    outstanding += short;
 
-    const ok = practice.length >= TARGET_SETS && exams.length >= TARGET_SETS && short === 0;
-    const mark = ok ? "✓" : short > 600 ? "✗" : "·";
+    const complete = practice.length >= TARGET_SETS && short === 0;
+    const mark = complete ? "✓" : pool === 0 ? "✗" : "·";
 
     console.log(`${mark} ${path(c)}`);
     console.log(
-      `    practice: ${String(practice.length).padStart(2)} sets / ${String(pq).padStart(4)} questions` +
-        `     exams: ${String(exams.length).padStart(2)} sets / ${String(eq).padStart(4)} questions`
+      `    practice: ${String(practice.length).padStart(2)} sets` +
+        `   pool: ${String(pool).padStart(4)} unique` +
+        `   exams: ${String(exams.length).padStart(2)} papers` +
+        (short ? `   outstanding: ${short}` : `   COMPLETE`)
     );
-    if (!ok) {
-      console.log(`    outstanding: ${short} questions  (${shortP} practice, ${shortE} exam)`);
-      worklist.push({ section: path(c), missing: short });
-    }
-    const thin = c.quizzes.filter((q) => q._count.questions < TARGET_QUESTIONS);
+
+    const thin = practice.filter((q) => q._count.questions < MIN_PER_SET);
     if (thin.length) {
-      console.log(
-        `    below ${TARGET_QUESTIONS}: ` + thin.map((q) => `${q.slug}(${q._count.questions})`).join(", ")
-      );
+      console.log(`    sets under ${MIN_PER_SET}: ` + thin.map((q) => `${q.slug}(${q._count.questions})`).join(", "));
+    }
+    if (pool > 0 && pool < 70 && exams.length > 0) {
+      console.log(`    ⚠ pool too small for meaningful exam papers — papers will resemble each other`);
     }
     console.log("");
+
+    if (short > 0) worklist.push({ section: path(c), slug: c.slug, missing: short, sets: practice.length });
   }
 
-  /* ── duplicate stems across the bank ─────────────────────────────────── */
+  /* ── duplication that actually matters ───────────────────────────────── */
 
-  const questions = await prisma.question.findMany({
-    select: { stem: true, quiz: { select: { slug: true } } },
-  });
-  const stemMap = new Map<string, string[]>();
-  for (const q of questions) {
-    const key = q.stem.trim().toLowerCase();
-    stemMap.set(key, [...(stemMap.get(key) ?? []), q.quiz.slug]);
-  }
-  const dupes = [...stemMap.entries()].filter(([, quizzes]) => quizzes.length > 1);
-  const dupTotal = dupes.reduce((s, [, q]) => s + q.length - 1, 0);
+  const crossSetDupes = [...practiceStemToQuizzes.entries()].filter(([, quizzes]) => new Set(quizzes).size > 1);
 
   console.log("══════════════════════════════════════════════════════════════");
   console.log(" SUMMARY");
   console.log("══════════════════════════════════════════════════════════════\n");
-  console.log(`  Sections with content        ${withQuizzes.length}`);
-  console.log(`  Questions in the bank        ${totalQ}`);
-  console.log(`  Unique question stems        ${stemMap.size}`);
-  console.log(`  Duplicated placements        ${dupTotal}   (same question in more than one quiz)`);
-  console.log(`  Outstanding to hit target    ${neededQ}\n`);
+  console.log(`  Unique questions in practice pools   ${poolTotal}`);
+  console.log(`  Outstanding to hit target            ${outstanding}`);
+  console.log(`  Sections still short                 ${worklist.length}`);
+  console.log(`  Duplicates BETWEEN practice sets     ${crossSetDupes.length}   ${crossSetDupes.length ? "← should be 0" : "✓"}\n`);
 
-  if (dupTotal > 0) {
-    console.log(`  ${dupes.length} stems appear in more than one quiz. In the older seeds`);
-    console.log(`  exams were built by combining practice sets, so this is expected —`);
-    console.log(`  but those exams need their own questions before sets can grow`);
-    console.log(`  independently. Run with --duplicates for the full list.\n`);
+  if (crossSetDupes.length) {
+    console.log("  These questions appear in more than one PRACTICE set, which breaks");
+    console.log("  the promise that sets are independent. Mostly a legacy of the older");
+    console.log("  seeds. Run with --duplicates to list them.\n");
     if (SHOW_DUPES) {
-      for (const [stem, quizzes] of dupes.slice(0, 200)) {
-        console.log(`    "${stem.slice(0, 70)}${stem.length > 70 ? "…" : ""}"`);
-        console.log(`       ${quizzes.join(", ")}`);
+      for (const [stem, quizzes] of crossSetDupes.slice(0, 100)) {
+        console.log(`    "${stem.slice(0, 66)}${stem.length > 66 ? "…" : ""}"`);
+        console.log(`       ${[...new Set(quizzes)].join(", ")}`);
       }
-      if (dupes.length > 200) console.log(`    … and ${dupes.length - 200} more`);
-      console.log("");
+      if (crossSetDupes.length > 100) console.log(`    … and ${crossSetDupes.length - 100} more\n`);
     }
   }
 
-  worklist.sort((a, b) => b.missing - a.missing);
-  console.log("  BIGGEST GAPS — sensible order to work through:\n");
+  // Sections closest to completion first — finishing one is worth more than
+  // starting three, and a nearly-full section becomes usable soonest.
+  worklist.sort((a, b) => a.missing - b.missing);
+  console.log("  CLOSEST TO COMPLETE — best value to finish next:\n");
   worklist.slice(0, 15).forEach((w, i) => {
-    console.log(`    ${String(i + 1).padStart(2)}. ${w.section.padEnd(52)} ${w.missing} questions`);
+    console.log(
+      `    ${String(i + 1).padStart(2)}. ${w.section.slice(0, 50).padEnd(52)} ${String(w.missing).padStart(4)} to go  (${w.sets} sets)`
+    );
   });
   console.log("");
 }
