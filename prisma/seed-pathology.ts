@@ -24,7 +24,7 @@ import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { PATHOLOGY_SET_1 } from "./pathology/set-1";
 import { PATHOLOGY_SET_2 } from "./pathology/set-2";
-// import { PATHOLOGY_SET_3 } from "./pathology/set-3";
+import { PATHOLOGY_SET_3 } from "./pathology/set-3";
 // import { PATHOLOGY_SET_4 } from "./pathology/set-4";
 // import { PATHOLOGY_SET_5 } from "./pathology/set-5";
 // import { PATHOLOGY_SET_6 } from "./pathology/set-6";
@@ -49,7 +49,14 @@ const SETS = [
     difficulty: "Foundational" as const,
     questions: PATHOLOGY_SET_2,
   },
-  // { n: 3, title: "Tissue Repair, Regeneration & Wound Healing", …, questions: PATHOLOGY_SET_3 },
+  {
+    n: 3,
+    title: "Tissue Repair, Regeneration & Wound Healing",
+    description:
+      "Regeneration versus scar, growth factors and the extracellular matrix, angiogenesis and granulation tissue, the phases of healing, wound strength over time, the factors that impair healing, abnormal healing from keloid to dehiscence, and organ fibrosis.",
+    difficulty: "Intermediate" as const,
+    questions: PATHOLOGY_SET_3,
+  },
   // { n: 4, title: "Hemodynamics, Thrombosis & Shock", …, questions: PATHOLOGY_SET_4 },
   // { n: 5, title: "Neoplasia I — Biology & Carcinogenesis", …, questions: PATHOLOGY_SET_5 },
   // { n: 6, title: "Neoplasia II — Clinical Oncology & Tumor Markers", …, questions: PATHOLOGY_SET_6 },
