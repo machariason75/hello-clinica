@@ -1,19 +1,20 @@
 /**
  * SCHEMA PATCHER — edits prisma/schema.prisma for you. Idempotent.
  *
- * Two changes are needed before the expanded question bank can land:
+ * One change is needed before the expanded question bank can land:
  *
- *   1. `model Question` has no image columns, so pictorial items (EKG strips,
+ *   `model Question` has no image columns, so pictorial items (EKG strips,
  *      blood smears, growth charts, imaging) cannot be stored at all.
  *      Adds: imageUrl String?  /  imageAlt String?
  *
- *   2. `lib/admin/content-schemas.ts` already offers a FILL_BLANK question
- *      type, but the Prisma `QuestionType` enum doesn't contain it. An admin
- *      selecting it hits a runtime error today.
- *      Adds: FILL_BLANK to the enum.
+ * This change is ADDITIVE. No column is dropped, renamed or retyped, so no
+ * existing data is at risk.
  *
- * Both are ADDITIVE. No column is dropped, renamed or retyped, so no existing
- * data is at risk.
+ * NOTE: an earlier version of this script also added FILL_BLANK to the
+ * QuestionType enum. That broke the production build — the quiz player's
+ * QuizQuestion type accepts only SINGLE, MULTI and TRUE_FALSE, so widening the
+ * database enum let an unrenderable question type reach it. That part has been
+ * removed. See prisma/fix-fillblank.ts.
  *
  * SAFETY
  * ------
@@ -76,30 +77,6 @@ if (/^\s*imageUrl\s/m.test(questionBlock[0])) {
 
   schema = schema.replace(questionBlock[0], patchedBlock);
   done.push("Added imageUrl and imageAlt to model Question");
-}
-
-/* ─────────────── 2. QuestionType.FILL_BLANK ─────────────── */
-
-const enumBlock = schema.match(/enum QuestionType \{[^}]*\}/);
-if (!enumBlock) {
-  fail("Could not locate `enum QuestionType` in schema.prisma.");
-}
-
-if (/\bFILL_BLANK\b/.test(enumBlock[0])) {
-  skipped.push("QuestionType.FILL_BLANK already present");
-} else {
-  const lastMember = enumBlock[0].match(/^([ \t]*)TRUE_FALSE\s*$/m);
-  if (!lastMember) {
-    fail("Found `enum QuestionType` but not its TRUE_FALSE member — the enum has changed shape.");
-  }
-
-  const patchedEnum = enumBlock[0].replace(
-    lastMember[0],
-    `${lastMember[0]}\n${lastMember[1]}FILL_BLANK`
-  );
-
-  schema = schema.replace(enumBlock[0], patchedEnum);
-  done.push("Added FILL_BLANK to enum QuestionType");
 }
 
 /* ─────────────── write ─────────────── */

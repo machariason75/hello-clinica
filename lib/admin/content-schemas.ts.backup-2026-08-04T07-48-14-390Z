@@ -204,7 +204,7 @@ export const questionChoiceSchema = z.object({
 
 export const questionSchema = z
   .object({
-    type: z.enum(["SINGLE", "MULTI", "TRUE_FALSE"]),
+    type: z.enum(["SINGLE", "MULTI", "TRUE_FALSE", "FILL_BLANK"]),
     stem: z.string().trim().min(1, "The question text is required."),
     topic: z.string().trim().min(1, "A topic helps the results breakdown."),
     explanation: z.string().trim().min(1, "Add a rationale so students learn from it."),
