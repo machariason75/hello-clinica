@@ -23,7 +23,7 @@
 import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { PATHOLOGY_SET_1 } from "./pathology/set-1";
-// import { PATHOLOGY_SET_2 } from "./pathology/set-2";
+import { PATHOLOGY_SET_2 } from "./pathology/set-2";
 // import { PATHOLOGY_SET_3 } from "./pathology/set-3";
 // import { PATHOLOGY_SET_4 } from "./pathology/set-4";
 // import { PATHOLOGY_SET_5 } from "./pathology/set-5";
@@ -41,7 +41,14 @@ const SETS = [
     difficulty: "Foundational" as const,
     questions: PATHOLOGY_SET_1,
   },
-  // { n: 2, title: "Acute & Chronic Inflammation", …, questions: PATHOLOGY_SET_2 },
+  {
+    n: 2,
+    title: "Acute & Chronic Inflammation",
+    description:
+      "Vascular changes and edema, the leukocyte recruitment cascade, phagocytosis and killing, chemical mediators from histamine to the eicosanoids, complement, the acute phase response, and the granulomatous patterns of chronic inflammation.",
+    difficulty: "Foundational" as const,
+    questions: PATHOLOGY_SET_2,
+  },
   // { n: 3, title: "Tissue Repair, Regeneration & Wound Healing", …, questions: PATHOLOGY_SET_3 },
   // { n: 4, title: "Hemodynamics, Thrombosis & Shock", …, questions: PATHOLOGY_SET_4 },
   // { n: 5, title: "Neoplasia I — Biology & Carcinogenesis", …, questions: PATHOLOGY_SET_5 },
