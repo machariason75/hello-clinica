@@ -427,7 +427,6 @@ enum QuestionType {
   SINGLE
   MULTI
   TRUE_FALSE
-  FILL_BLANK
 }
 
 model QuizCategory {
@@ -513,8 +512,6 @@ model Question {
   explanation String // rationale: correct answer + why others are wrong + summary
   points      Int          @default(1)
   order       Int          @default(0)
-  imageUrl    String?      // figure: EKG strip, smear, chart, imaging
-  imageAlt    String?      // required when imageUrl is set — accessibility
 
   quiz    Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
   choices Choice[]
