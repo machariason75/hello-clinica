@@ -71,6 +71,11 @@ export type SetDef = {
 export type ExamDef = {
   /** 1-7. */
   n: number;
+  /**
+   * Practice sets this exam draws from. In partial mode the exam is skipped
+   * until all of them exist, so a half-built subject still seeds cleanly.
+   */
+  requires?: number[];
   title: string;
   description: string;
   difficulty: "Foundational" | "Intermediate" | "Advanced";
@@ -92,6 +97,12 @@ export type SubjectConfig = {
   minPerSet?: number;
   /** Minimum questions per exam. Defaults to 70. */
   minPerExam?: number;
+  /**
+   * Partial mode: seed whatever sets are present and skip exams whose sets
+   * aren't written yet. Lets a subject go live one set at a time instead of
+   * waiting for all seven. Set to false for the final run.
+   */
+  partial?: boolean;
   sets: SetDef[];
   exams: ExamDef[];
   /** Printed after a successful run — regional caveats, review notes. */
@@ -209,8 +220,15 @@ function validate(cfg: SubjectConfig, pool: Pool, papers: Map<number, Q[]>): Pro
   const warn = (m: string) => problems.push({ level: "warn", message: m });
 
   /* ---- structure ---- */
-  if (cfg.sets.length !== 7) err(`Expected 7 practice sets, found ${cfg.sets.length}.`);
-  if (cfg.exams.length !== 7) err(`Expected 7 exam sets, found ${cfg.exams.length}.`);
+  if (cfg.partial) {
+    warn(
+      `PARTIAL BUILD — ${cfg.sets.length}/7 practice sets, ${cfg.exams.length}/7 exams. ` +
+        `Structural checks relaxed until the subject is complete.`
+    );
+  } else {
+    if (cfg.sets.length !== 7) err(`Expected 7 practice sets, found ${cfg.sets.length}.`);
+    if (cfg.exams.length !== 7) err(`Expected 7 exam sets, found ${cfg.exams.length}.`);
+  }
 
   const setNumbers = cfg.sets.map((s) => s.n).sort((a, b) => a - b);
   if (new Set(setNumbers).size !== setNumbers.length) err("Duplicate practice set numbers.");
@@ -290,7 +308,7 @@ function validate(cfg: SubjectConfig, pool: Pool, papers: Map<number, Q[]>): Pro
   const examined = new Set<string>();
   for (const paper of papers.values()) for (const q of paper) examined.add(normalize(q.stem));
   const unreachable = [...allStems.entries()].filter(([k]) => !examined.has(k));
-  if (unreachable.length)
+  if (unreachable.length && !cfg.partial)
     warn(
       `${unreachable.length} practice question(s) appear on no exam — e.g. ${unreachable[0][1]}. ` +
         `Students who only sit exams will never meet them.`
@@ -435,7 +453,19 @@ async function writeQuiz(o: {
 export async function seedSubject(cfg: SubjectConfig): Promise<void> {
   console.log(`\n═══ ${cfg.subject} ═══\n`);
 
+  const available = new Set(cfg.sets.map((s) => s.n));
   const pool = new Pool(new Map(cfg.sets.map((s) => [s.n, s.questions])));
+
+  // Skip exams whose source sets don't exist yet.
+  const buildable = cfg.exams.filter((e) => {
+    const missing = (e.requires ?? []).filter((n) => !available.has(n));
+    if (missing.length) {
+      console.log(`  · Exam ${e.n} deferred — needs Set ${missing.join(", ")}`);
+      return false;
+    }
+    return true;
+  });
+  cfg = { ...cfg, exams: buildable };
 
   // Build every paper up front so validation sees the finished article.
   const papers = new Map<number, Q[]>();
