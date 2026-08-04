@@ -25,7 +25,7 @@ import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 import { PATHOLOGY_SET_1 } from "./pathology/set-1";
 import { PATHOLOGY_SET_2 } from "./pathology/set-2";
 import { PATHOLOGY_SET_3 } from "./pathology/set-3";
-// import { PATHOLOGY_SET_4 } from "./pathology/set-4";
+import { PATHOLOGY_SET_4 } from "./pathology/set-4";
 // import { PATHOLOGY_SET_5 } from "./pathology/set-5";
 // import { PATHOLOGY_SET_6 } from "./pathology/set-6";
 // import { PATHOLOGY_SET_7 } from "./pathology/set-7";
@@ -57,7 +57,14 @@ const SETS = [
     difficulty: "Intermediate" as const,
     questions: PATHOLOGY_SET_3,
   },
-  // { n: 4, title: "Hemodynamics, Thrombosis & Shock", …, questions: PATHOLOGY_SET_4 },
+  {
+    n: 4,
+    title: "Hemodynamic Disorders, Thrombosis, Embolism & Shock",
+    description:
+      "Edema and the Starling forces, congestion and hemorrhage, hemostasis and the coagulation cascade, Virchow's triad and thrombophilia, embolic syndromes from pulmonary to amniotic fluid, infarction patterns, the shock states with their hemodynamic profiles, DIC, and coagulation lab interpretation.",
+    difficulty: "Intermediate" as const,
+    questions: PATHOLOGY_SET_4,
+  },
   // { n: 5, title: "Neoplasia I — Biology & Carcinogenesis", …, questions: PATHOLOGY_SET_5 },
   // { n: 6, title: "Neoplasia II — Clinical Oncology & Tumor Markers", …, questions: PATHOLOGY_SET_6 },
   // { n: 7, title: "Systemic & Integrated Pathology", …, questions: PATHOLOGY_SET_7 },
