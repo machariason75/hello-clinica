@@ -283,7 +283,7 @@ export function QuizEditor({
 
             <div>
               <div className="mb-1 flex items-center justify-between">
-                <Label>{"Choices"}</Label>
+                <Label>{qForm.type === "FILL_BLANK" ? "Accepted answers (mark all correct)" : "Choices"}</Label>
                 <span className="text-xs text-muted-foreground">{singleCorrect ? "Pick one correct" : "Mark all that are correct"}</span>
               </div>
               <div className="space-y-2">
