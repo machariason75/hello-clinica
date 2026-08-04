@@ -1,113 +1,249 @@
 /**
- * REVERT FILL_BLANK — unblocks the Vercel build.
+ * REVERT FILL_BLANK — repo-wide sweep.
  *
- * WHAT WENT WRONG
- * ---------------
- * Wave 0 added FILL_BLANK to the Prisma `QuestionType` enum, because
- * lib/admin/content-schemas.ts already offered that option while the database
- * did not recognise it. Closing that gap from the database side was the wrong
- * direction: it widened the type that flows into the quiz player, whose
- * `QuizQuestion` type accepts only SINGLE, MULTI and TRUE_FALSE. TypeScript
- * correctly refused to build a page that could be handed a question it has no
- * way to render.
+ * The previous version of this script guessed at file paths and missed
+ * components/admin/content/QuizEditor.tsx, which cost you another failed
+ * build. This one does not guess: it walks your entire project and finds every
+ * occurrence, whatever file it lives in.
  *
- * THE RIGHT FIX
- * -------------
- * Close the gap from the other side. Remove FILL_BLANK from BOTH the database
- * enum and the admin validator, so nothing anywhere offers a question type the
- * player cannot display.
+ * BACKGROUND
+ * ----------
+ * Wave 0 added FILL_BLANK to the Prisma QuestionType enum. Your quiz player's
+ * type accepts only SINGLE, MULTI and TRUE_FALSE, so widening the database
+ * enum let an unrenderable question type reach it and TypeScript refused to
+ * build. Fill-in-the-blank needs a text input, answer matching and a marking
+ * rule to work at all — it is a feature, not a list entry — so the fix is to
+ * remove it everywhere rather than teach each consumer to ignore it.
  *
- * Fill-in-the-blank is worth having eventually — it is a real NCLEX item type
- * and the natural fit for pharmacy dose calculations. But it needs an input
- * field, answer matching (case, whitespace, significant figures, alternative
- * spellings) and a marking rule. That is a feature, not an enum value.
+ * WHAT IT HANDLES
+ *   · Prisma enum members            FILL_BLANK
+ *   · Zod / string arrays            "FILL_BLANK",
+ *   · TypeScript unions              | "FILL_BLANK"
+ *   · Dropdown option objects        { value: "FILL_BLANK", label: "…" },
+ *   · Switch cases and if-branches   reported, not deleted (see below)
  *
- * SAFETY
- * ------
- * Removing an unused enum value is safe: no question in your database has
- * type FILL_BLANK, because the admin screen could never successfully save one.
- * Every file is backed up before it is touched, and re-running does nothing.
+ * WHAT IT WILL NOT DO
+ * -------------------
+ * If an occurrence sits inside logic — a `case "FILL_BLANK":` block, a
+ * conditional, a function body — the script reports it and leaves it alone.
+ * Deleting code it does not understand is how a "fix" takes working features
+ * offline. You will get a precise list of anything it skipped.
  *
- * Run:  npx tsx prisma/fix-fillblank.ts
+ * Dry run by default. Nothing is written until you pass --apply.
+ *
+ * Run:  npx tsx prisma/fix-fillblank.ts             (preview)
+ *       npx tsx prisma/fix-fillblank.ts --apply     (writes)
  */
 
-import { readFileSync, writeFileSync, copyFileSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, writeFileSync, copyFileSync, readdirSync, statSync } from "node:fs";
+import { join, relative, resolve } from "node:path";
 
+const ROOT = process.cwd();
+
+/*
+ * Exclude this script from its own sweep. Without this it happily rewrites its
+ * own documentation and regexes — caught in testing, and it would have left
+ * you with a corrupted file that no longer does its job.
+ */
+const SELF = resolve(ROOT, "prisma", "fix-fillblank.ts");
+const APPLY = process.argv.includes("--apply");
 const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-const done: string[] = [];
-const skipped: string[] = [];
 
-function patch(relPath: string, transform: (text: string) => string | null, label: string) {
-  const path = resolve(process.cwd(), relPath);
-  if (!existsSync(path)) {
-    skipped.push(`${relPath} not found — nothing to do`);
-    return;
+const SKIP_DIRS = new Set([
+  "node_modules",
+  ".next",
+  ".git",
+  ".vercel",
+  "dist",
+  "build",
+  "out",
+  "coverage",
+  ".turbo",
+]);
+
+const EXTENSIONS = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".prisma"];
+
+/* ─────────────── find candidate files ─────────────── */
+
+function walk(dir: string, found: string[] = []): string[] {
+  let entries: string[];
+  try {
+    entries = readdirSync(dir);
+  } catch {
+    return found;
   }
 
-  const before = readFileSync(path, "utf8");
-  const after = transform(before);
+  for (const entry of entries) {
+    if (entry.startsWith(".") && entry !== ".prisma") continue;
+    const full = join(dir, entry);
 
-  if (after === null || after === before) {
-    skipped.push(`${relPath} already clean`);
-    return;
+    let stats;
+    try {
+      stats = statSync(full);
+    } catch {
+      continue;
+    }
+
+    if (stats.isDirectory()) {
+      if (SKIP_DIRS.has(entry)) continue;
+      walk(full, found);
+    } else {
+      if (entry.includes(".backup-")) continue;
+      if (resolve(full) === SELF) continue;
+      if (!EXTENSIONS.some((e) => entry.endsWith(e))) continue;
+      found.push(full);
+    }
   }
-
-  copyFileSync(path, `${path}.backup-${stamp}`);
-  writeFileSync(path, after, "utf8");
-  done.push(label);
+  return found;
 }
 
-/* ─────── 1. the Prisma enum ─────── */
+/* ─────────────── transformations ─────────────── */
 
-patch(
-  "prisma/schema.prisma",
-  (text) => {
-    const block = text.match(/enum QuestionType \{[^}]*\}/);
-    if (!block || !/\bFILL_BLANK\b/.test(block[0])) return null;
-    // Drop the whole line, including its indentation and newline.
-    const cleaned = block[0].replace(/^[ \t]*FILL_BLANK[ \t]*\r?\n/m, "");
-    return text.replace(block[0], cleaned);
-  },
-  "Removed FILL_BLANK from enum QuestionType"
-);
+type Edit = { line: number; before: string; after: string | null; kind: string };
 
-/* ─────── 2. the admin validator ─────── */
-
-const ADMIN_FILES = [
-  "lib/admin/content-schemas.ts",
-  "lib/admin/content-schema.ts",
-  "lib/admin/schemas.ts",
+/** Lines where FILL_BLANK sits inside logic — reported, never auto-edited. */
+const LOGIC = [
+  /\bcase\s+["']FILL_BLANK["']/,
+  /\bif\s*\(/,
+  /\?\s*$/,
+  /=>\s*$/,
+  /\bfunction\b/,
+  /\breturn\b/,
 ];
 
-for (const file of ADMIN_FILES) {
-  patch(
-    file,
-    (text) => {
-      if (!/\bFILL_BLANK\b/.test(text)) return null;
-      // Handles "FILL_BLANK" whether it sits first, last or mid-list.
-      return text
-        .replace(/,\s*["']FILL_BLANK["']/g, "")
-        .replace(/["']FILL_BLANK["']\s*,\s*/g, "")
-        .replace(/["']FILL_BLANK["']/g, "");
-    },
-    `Removed FILL_BLANK from ${file}`
-  );
+function analyzeLine(raw: string): { after: string | null; kind: string } | null {
+  if (!raw.includes("FILL_BLANK")) return null;
+
+  const trimmed = raw.trim();
+
+  // Logic — hands off.
+  if (LOGIC.some((p) => p.test(trimmed))) {
+    return { after: raw, kind: "LOGIC — skipped, needs a human" };
+  }
+
+  // A whole option object on one line: { value: "FILL_BLANK", label: "…" },
+  if (/^\{.*["']FILL_BLANK["'].*\},?$/.test(trimmed)) {
+    return { after: null, kind: "dropdown option — line removed" };
+  }
+
+  // A bare Prisma enum member.
+  if (/^FILL_BLANK,?$/.test(trimmed)) {
+    return { after: null, kind: "Prisma enum member — line removed" };
+  }
+
+  // A lone quoted string on its own line inside an array.
+  if (/^["']FILL_BLANK["'],?$/.test(trimmed)) {
+    return { after: null, kind: "array entry — line removed" };
+  }
+
+  // Inline within an array or union: strip just the entry.
+  let out = raw
+    .replace(/\s*\|\s*["']FILL_BLANK["']/g, "") //  | "FILL_BLANK"
+    .replace(/["']FILL_BLANK["']\s*\|\s*/g, "") //  "FILL_BLANK" |
+    .replace(/,\s*["']FILL_BLANK["']/g, "") //     , "FILL_BLANK"
+    .replace(/["']FILL_BLANK["']\s*,\s*/g, "") //  "FILL_BLANK",
+    .replace(/,\s*FILL_BLANK\b/g, "") //           , FILL_BLANK
+    .replace(/\bFILL_BLANK\s*,\s*/g, ""); //       FILL_BLANK,
+
+  if (out !== raw && !out.includes("FILL_BLANK")) {
+    return { after: out, kind: "inline entry — removed" };
+  }
+
+  // Anything else: a comment, or a shape not recognised.
+  if (/^\/\/|^\s*\*|^\/\*/.test(trimmed)) {
+    return { after: raw, kind: "comment — left alone" };
+  }
+
+  return { after: raw, kind: "UNRECOGNISED — skipped, needs a human" };
 }
 
-/* ─────── report ─────── */
+/* ─────────────── run ─────────────── */
 
-if (!done.length) {
-  console.log("\n✓ Nothing to change — FILL_BLANK is already gone.\n");
-  for (const s of skipped) console.log(`  · ${s}`);
-  console.log("");
+const files = walk(ROOT);
+const touched: { file: string; edits: Edit[] }[] = [];
+const needsHuman: { file: string; line: number; text: string; kind: string }[] = [];
+
+for (const file of files) {
+  let text: string;
+  try {
+    text = readFileSync(file, "utf8");
+  } catch {
+    continue;
+  }
+  if (!text.includes("FILL_BLANK")) continue;
+
+  const lines = text.split(/\r?\n/);
+  const keep: string[] = [];
+  const edits: Edit[] = [];
+
+  lines.forEach((raw, i) => {
+    const result = analyzeLine(raw);
+    if (!result) {
+      keep.push(raw);
+      return;
+    }
+
+    if (result.kind.includes("needs a human") || result.kind.includes("left alone")) {
+      if (result.kind.includes("needs a human"))
+        needsHuman.push({ file, line: i + 1, text: raw.trim(), kind: result.kind });
+      keep.push(raw);
+      return;
+    }
+
+    edits.push({ line: i + 1, before: raw.trim(), after: result.after, kind: result.kind });
+    if (result.after !== null) keep.push(result.after);
+  });
+
+  if (!edits.length) continue;
+
+  touched.push({ file, edits });
+
+  if (APPLY) {
+    copyFileSync(file, `${file}.backup-${stamp}`);
+    writeFileSync(file, keep.join("\n"), "utf8");
+  }
+}
+
+/* ─────────────── report ─────────────── */
+
+console.log(
+  APPLY ? "\nREMOVING FILL_BLANK (writing)…\n" : "\nDRY RUN — nothing will be written.\n"
+);
+console.log(`  Scanned ${files.length} files.\n`);
+
+if (!touched.length && !needsHuman.length) {
+  console.log("  ✓ No occurrences found. Already clean.\n");
   process.exit(0);
 }
 
-console.log("\n✓ Reverted.\n");
-for (const d of done) console.log(`  · ${d}`);
-for (const s of skipped) console.log(`  · ${s}`);
-console.log(`\n  Backups saved alongside each file (.backup-${stamp})`);
-console.log("\n  Next commands:");
-console.log("    npx prisma db push");
-console.log("    npm run build\n");
+for (const { file, edits } of touched) {
+  console.log(`  ${relative(ROOT, file)}`);
+  for (const e of edits) {
+    console.log(`    line ${e.line}: ${e.kind}`);
+    console.log(`      − ${e.before}`);
+    if (e.after !== null) console.log(`      + ${e.after.trim()}`);
+  }
+  console.log("");
+}
+
+if (needsHuman.length) {
+  console.log(`  ─── NEEDS A HUMAN (${needsHuman.length}) ───`);
+  console.log("  These sit inside logic. Deleting code I don't understand is how");
+  console.log("  a fix breaks something else, so they were left untouched.\n");
+  for (const n of needsHuman) {
+    console.log(`    ${relative(ROOT, n.file)}:${n.line}`);
+    console.log(`      ${n.text}`);
+  }
+  console.log("\n  Send these to me and I'll handle them.\n");
+}
+
+console.log(`  Files changed: ${touched.length}`);
+
+if (!APPLY) {
+  console.log("\n  Dry run only. Re-run with --apply to write.\n");
+} else {
+  console.log(`  Backups saved alongside each file (.backup-${stamp})\n`);
+  console.log("  Next commands:");
+  console.log("    npx prisma db push");
+  console.log("    npm run build\n");
+}

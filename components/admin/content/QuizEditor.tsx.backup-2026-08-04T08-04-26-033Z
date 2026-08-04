@@ -24,6 +24,7 @@ const TYPES: { value: QuestionFormInput["type"]; label: string }[] = [
   { value: "SINGLE", label: "Single answer" },
   { value: "MULTI", label: "Select all that apply" },
   { value: "TRUE_FALSE", label: "True / False" },
+  { value: "FILL_BLANK", label: "Fill in the blank" },
 ];
 
 export type EditorQuiz = {
