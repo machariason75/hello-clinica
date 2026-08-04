@@ -26,7 +26,7 @@ import { PATHOLOGY_SET_1 } from "./pathology/set-1";
 import { PATHOLOGY_SET_2 } from "./pathology/set-2";
 import { PATHOLOGY_SET_3 } from "./pathology/set-3";
 import { PATHOLOGY_SET_4 } from "./pathology/set-4";
-// import { PATHOLOGY_SET_5 } from "./pathology/set-5";
+import { PATHOLOGY_SET_5 } from "./pathology/set-5";
 // import { PATHOLOGY_SET_6 } from "./pathology/set-6";
 // import { PATHOLOGY_SET_7 } from "./pathology/set-7";
 
@@ -65,7 +65,14 @@ const SETS = [
     difficulty: "Intermediate" as const,
     questions: PATHOLOGY_SET_4,
   },
-  // { n: 5, title: "Neoplasia I — Biology & Carcinogenesis", …, questions: PATHOLOGY_SET_5 },
+  {
+    n: 5,
+    title: "Neoplasia I — Tumor Biology & Carcinogenesis",
+    description:
+      "Nomenclature and grading, the hallmarks of cancer, oncogenes and tumor suppressors, evasion of apoptosis and senescence, invasion and metastasis, tumor angiogenesis, chemical and radiation carcinogenesis, oncogenic viruses, and the inherited cancer syndromes.",
+    difficulty: "Advanced" as const,
+    questions: PATHOLOGY_SET_5,
+  },
   // { n: 6, title: "Neoplasia II — Clinical Oncology & Tumor Markers", …, questions: PATHOLOGY_SET_6 },
   // { n: 7, title: "Systemic & Integrated Pathology", …, questions: PATHOLOGY_SET_7 },
 ];
