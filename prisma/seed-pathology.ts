@@ -28,7 +28,7 @@ import { PATHOLOGY_SET_3 } from "./pathology/set-3";
 import { PATHOLOGY_SET_4 } from "./pathology/set-4";
 import { PATHOLOGY_SET_5 } from "./pathology/set-5";
 import { PATHOLOGY_SET_6 } from "./pathology/set-6";
-// import { PATHOLOGY_SET_7 } from "./pathology/set-7";
+import { PATHOLOGY_SET_7 } from "./pathology/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
 
@@ -81,7 +81,14 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: PATHOLOGY_SET_6,
   },
-  // { n: 7, title: "Systemic & Integrated Pathology", …, questions: PATHOLOGY_SET_7 },
+  {
+    n: 7,
+    title: "Systemic & Integrated Pathology",
+    description:
+      "Organ-by-organ disease drawing on everything established in Sets 1-6: cardiovascular, respiratory, gastrointestinal, hepatobiliary, renal, endocrine, neurologic, musculoskeletal, hematologic, dermatologic and reproductive pathology, closing with integrated reasoning across systems.",
+    difficulty: "Advanced" as const,
+    questions: PATHOLOGY_SET_7,
+  },
 ];
 
 /* ═══════════════════ EXAM LADDER ═══════════════════ */
@@ -154,11 +161,25 @@ const EXAMS = [
       "Lab panels, blood gases, smears and gross specimens. Reading the data rather than recalling the fact.",
     difficulty: "Advanced" as const,
     minutes: 110,
+    /*
+     * Originally this drew figure items plus one interpretation topic plus a
+     * sample of 50 — about 54 questions, below the 70 floor, because no figure
+     * items exist until the image columns are in use. Widened to every
+     * data-interpretation topic across the subject, which is what this paper was
+     * always meant to be.
+     */
     draw: (p: any) =>
       merge(
         p.withFigures(),
-        p.byTopic("Injury Marker Interpretation"),
-        sample(p.all(), 50, 6)
+        p.byTopic(
+          "Injury Marker Interpretation",
+          "Inflammatory Marker Interpretation",
+          "Coagulation Lab Interpretation",
+          "Clinical Wound Assessment",
+          "Histologic & Molecular Diagnostics",
+          "Tumor Markers"
+        ),
+        sample(p.all(), 90, 6)
       ),
   },
   {
@@ -180,7 +201,7 @@ runWave(() =>
     subject: "Pathology",
     slugBase: "pathology",
     categorySlug: "fs-pathology",
-    partial: true, // ← switch to false once Set 7 has landed
+    partial: false, // Set 7 has landed — full strictness, including the gap check
     sets: SETS,
     exams: EXAMS,
     footnote:
