@@ -407,41 +407,56 @@ async function writeQuiz(o: {
     `upsert ${o.slug}`
   );
 
-  await withRetry(
-    () => prisma.question.deleteMany({ where: { quizId: quiz.id } }),
-    `clear ${o.slug}`
-  );
+  /*
+   * WHY THE RETRY WRAPS THE WHOLE REBUILD, NOT EACH BATCH
+   * ----------------------------------------------------
+   * The previous version retried each batch of inserts individually. When the
+   * connection dropped after some rows in a batch had already committed, the
+   * retry re-inserted the entire batch — duplicating everything that had
+   * succeeded. That is how Practice Set 5 ended up with 129 rows for 93
+   * questions and Exam 1 with 199 for 181.
+   *
+   * Retrying from the DELETE makes a replay harmless: every attempt starts
+   * from an empty question list, so the quiz can only ever end up with exactly
+   * one copy of each question. Slower on failure, correct on failure.
+   */
+  await withRetry(async () => {
+    await prisma.question.deleteMany({ where: { quizId: quiz.id } });
 
-  // Batched rather than one-at-a-time: 700 sequential round trips per subject
-  // is minutes of wall clock and many more chances to drop the connection.
-  const BATCH = 20;
-  for (let i = 0; i < o.questions.length; i += BATCH) {
-    const chunk = o.questions.slice(i, i + BATCH);
-    await withRetry(
-      () =>
-        Promise.all(
-          chunk.map((q, k) =>
-            prisma.question.create({
-              data: {
-                quizId: quiz.id,
-                type: q.type ?? "SINGLE",
-                stem: q.stem,
-                topic: q.topic,
-                explanation: q.explanation,
-                points: 1,
-                order: i + k,
-                choices: {
-                  create: q.choices.map((c, ci) => ({
-                    text: c.text,
-                    isCorrect: !!c.isCorrect,
-                    order: ci,
-                  })),
-                },
+    const BATCH = 20;
+    for (let i = 0; i < o.questions.length; i += BATCH) {
+      const chunk = o.questions.slice(i, i + BATCH);
+      await Promise.all(
+        chunk.map((q, k) =>
+          prisma.question.create({
+            data: {
+              quizId: quiz.id,
+              type: q.type ?? "SINGLE",
+              stem: q.stem,
+              topic: q.topic,
+              explanation: q.explanation,
+              points: 1,
+              order: i + k,
+              choices: {
+                create: q.choices.map((c, ci) => ({
+                  text: c.text,
+                  isCorrect: !!c.isCorrect,
+                  order: ci,
+                })),
               },
-            })
-          )
-        ),
-      `write ${o.slug} [${i + 1}-${i + chunk.length}]`
+            },
+          })
+        )
+      );
+    }
+  }, `rebuild ${o.slug}`);
+
+  // Verify: the row count must match what we intended to write.
+  const written = await prisma.question.count({ where: { quizId: quiz.id } });
+  if (written !== o.questions.length) {
+    throw new Error(
+      `${o.slug}: wrote ${written} questions but expected ${o.questions.length}. ` +
+        `Re-run the seed — the quiz is in an inconsistent state.`
     );
   }
 

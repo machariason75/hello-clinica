@@ -27,7 +27,7 @@ import { PATHOLOGY_SET_2 } from "./pathology/set-2";
 import { PATHOLOGY_SET_3 } from "./pathology/set-3";
 import { PATHOLOGY_SET_4 } from "./pathology/set-4";
 import { PATHOLOGY_SET_5 } from "./pathology/set-5";
-// import { PATHOLOGY_SET_6 } from "./pathology/set-6";
+import { PATHOLOGY_SET_6 } from "./pathology/set-6";
 // import { PATHOLOGY_SET_7 } from "./pathology/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
@@ -73,7 +73,14 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: PATHOLOGY_SET_5,
   },
-  // { n: 6, title: "Neoplasia II — Clinical Oncology & Tumor Markers", …, questions: PATHOLOGY_SET_6 },
+  {
+    n: 6,
+    title: "Neoplasia II — Clinical Oncology",
+    description:
+      "Tumor markers and paraneoplastic syndromes, cancer epidemiology and US screening programs, staging and prognosis in practice, the principles of chemotherapy, targeted and immunotherapy, radiation therapy, the oncologic emergencies, cachexia and supportive care, metastatic patterns, and histologic and molecular diagnostics.",
+    difficulty: "Advanced" as const,
+    questions: PATHOLOGY_SET_6,
+  },
   // { n: 7, title: "Systemic & Integrated Pathology", …, questions: PATHOLOGY_SET_7 },
 ];
 
