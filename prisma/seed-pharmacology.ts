@@ -22,7 +22,7 @@
 import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { PHARMACOLOGY_SET_1 } from "./pharmacology/set-1";
-// import { PHARMACOLOGY_SET_2 } from "./pharmacology/set-2";
+import { PHARMACOLOGY_SET_2 } from "./pharmacology/set-2";
 // import { PHARMACOLOGY_SET_3 } from "./pharmacology/set-3";
 // import { PHARMACOLOGY_SET_4 } from "./pharmacology/set-4";
 // import { PHARMACOLOGY_SET_5 } from "./pharmacology/set-5";
@@ -40,7 +40,14 @@ const SETS = [
     difficulty: "Foundational" as const,
     questions: PHARMACOLOGY_SET_1,
   },
-  // { n: 2, title: "Autonomic Pharmacology", …, questions: PHARMACOLOGY_SET_2 },
+  {
+    n: 2,
+    title: "Autonomic Pharmacology",
+    description:
+      "Cholinergic and adrenergic transmission, receptor subtypes and the tissue effects that follow from them, direct and indirect agonists, anticholinesterases, muscarinic antagonists, neuromuscular blockers, alpha and beta blockade, and the toxidromes with their antidotes.",
+    difficulty: "Foundational" as const,
+    questions: PHARMACOLOGY_SET_2,
+  },
   // { n: 3, title: "Cardiovascular Drugs", …, questions: PHARMACOLOGY_SET_3 },
   // { n: 4, title: "CNS Drugs", …, questions: PHARMACOLOGY_SET_4 },
   // { n: 5, title: "Antimicrobials I — Antibacterials", …, questions: PHARMACOLOGY_SET_5 },
