@@ -27,7 +27,7 @@ import { PHARMACOLOGY_SET_3 } from "./pharmacology/set-3";
 import { PHARMACOLOGY_SET_4 } from "./pharmacology/set-4";
 import { PHARMACOLOGY_SET_5 } from "./pharmacology/set-5";
 import { PHARMACOLOGY_SET_6 } from "./pharmacology/set-6";
-// import { PHARMACOLOGY_SET_7 } from "./pharmacology/set-7";
+import { PHARMACOLOGY_SET_7 } from "./pharmacology/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
 
@@ -80,7 +80,14 @@ const SETS = [
     difficulty: "Intermediate" as const,
     questions: PHARMACOLOGY_SET_6,
   },
-  // { n: 7, title: "Endocrine, GI, Analgesia & Toxicology", …, questions: PHARMACOLOGY_SET_7 },
+  {
+    n: 7,
+    title: "Endocrine, GI, Analgesia & Toxicology",
+    description:
+      "The remaining prescribing domains and the capstone: diabetes (insulin and non-insulin agents), thyroid, corticosteroids and adrenal, bone and sex hormones, acid-peptic and GI drugs, NSAIDs and acetaminophen, gout and immunomodulators, and toxicology with its antidotes and toxidromes.",
+    difficulty: "Advanced" as const,
+    questions: PHARMACOLOGY_SET_7,
+  },
 ];
 
 /* ═══════════════════ EXAM LADDER ═══════════════════ */
@@ -192,7 +199,7 @@ runWave(() =>
     subject: "Pharmacology",
     slugBase: "pharmacology",
     categorySlug: "fs-pharmacology",
-    partial: true, // ← switch to false once Set 7 has landed
+    partial: false, // Set 7 has landed — full strictness on, all exams build
     sets: SETS,
     exams: EXAMS,
     footnote:
