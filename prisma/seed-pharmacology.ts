@@ -25,8 +25,8 @@ import { PHARMACOLOGY_SET_1 } from "./pharmacology/set-1";
 import { PHARMACOLOGY_SET_2 } from "./pharmacology/set-2";
 import { PHARMACOLOGY_SET_3 } from "./pharmacology/set-3";
 import { PHARMACOLOGY_SET_4 } from "./pharmacology/set-4";
-// import { PHARMACOLOGY_SET_5 } from "./pharmacology/set-5";
-// import { PHARMACOLOGY_SET_6 } from "./pharmacology/set-6";
+import { PHARMACOLOGY_SET_5 } from "./pharmacology/set-5";
+import { PHARMACOLOGY_SET_6 } from "./pharmacology/set-6";
 // import { PHARMACOLOGY_SET_7 } from "./pharmacology/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
@@ -64,8 +64,22 @@ const SETS = [
     difficulty: "Intermediate" as const,
     questions: PHARMACOLOGY_SET_4,
   },
-  // { n: 5, title: "Antimicrobials I — Antibacterials", …, questions: PHARMACOLOGY_SET_5 },
-  // { n: 6, title: "Antimicrobials II — Antivirals, Antifungals, Antiparasitics", …, questions: PHARMACOLOGY_SET_6 },
+  {
+    n: 5,
+    title: "Antimicrobials I — Antibacterials",
+    description:
+      "The antibacterial classes by mechanism: penicillins, cephalosporins and other cell-wall agents, aminoglycosides, tetracyclines, macrolides and lincosamides, other protein-synthesis inhibitors, fluoroquinolones, folate antagonists, the antimycobacterials, and the major mechanisms of bacterial resistance.",
+    difficulty: "Intermediate" as const,
+    questions: PHARMACOLOGY_SET_5,
+  },
+  {
+    n: 6,
+    title: "Antimicrobials II — Antivirals, Antifungals, Antiparasitics",
+    description:
+      "The non-bacterial antimicrobials: anti-herpesvirus and anti-influenza agents, the HIV and hepatitis antivirals, polyene, azole and echinocandin antifungals, the antimalarials and other antiprotozoals, the anthelmintics, and the principle of selective toxicity that ties them together.",
+    difficulty: "Intermediate" as const,
+    questions: PHARMACOLOGY_SET_6,
+  },
   // { n: 7, title: "Endocrine, GI, Analgesia & Toxicology", …, questions: PHARMACOLOGY_SET_7 },
 ];
 
