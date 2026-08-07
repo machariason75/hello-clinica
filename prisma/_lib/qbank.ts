@@ -329,6 +329,62 @@ function validate(cfg: SubjectConfig, pool: Pool, papers: Map<number, Q[]>): Pro
 
 /* ═══════════════════════ WRITE LAYER ═══════════════════════ */
 
+/*
+ * TUNABLES FOR LARGE SEEDS
+ * ------------------------
+ * Dropping several sets in one wave means one seed run writes far more rows.
+ * The database does not fall over from volume — it stalls from CONCURRENCY.
+ * The old loop fired Promise.all over batches of 20, i.e. up to 20 nested
+ * inserts at once. Prisma's pooled connection limit is ~9-17, so a big seed
+ * would exceed the pool and throw "Timed out fetching a new connection from
+ * the connection pool" partway through. These knobs bound that, and can be
+ * turned down further from the shell if a run ever stalls:
+ *
+ *   QBANK_CONCURRENCY=4  QBANK_PAUSE_MS=250  npx tsx prisma/seed-<subject>.ts
+ *
+ * QBANK_ONLY lets a multi-set drop be written a few sets at a time, so you
+ * never hold a huge write open. See seedSubject for the recipe.
+ */
+const WRITE_CONCURRENCY = clampInt(process.env.QBANK_CONCURRENCY, 8, 1, 32);
+const PAUSE_BETWEEN_QUIZZES_MS = clampInt(process.env.QBANK_PAUSE_MS, 120, 0, 5000);
+const SEED_ONLY = parseSetList(process.env.QBANK_ONLY);
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+function clampInt(v: string | undefined, dflt: number, lo: number, hi: number): number {
+  const n = v ? parseInt(v, 10) : NaN;
+  return Number.isFinite(n) ? Math.min(hi, Math.max(lo, n)) : dflt;
+}
+
+function parseSetList(v: string | undefined): Set<number> | undefined {
+  if (!v) return undefined;
+  const nums = v
+    .split(",")
+    .map((s) => parseInt(s.trim(), 10))
+    .filter((n) => Number.isFinite(n));
+  return nums.length ? new Set(nums) : undefined;
+}
+
+/**
+ * Run `fn` over `items` with at most `limit` in flight at once. Preserves the
+ * original index so question `order` stays stable regardless of completion
+ * order. This is the bounded replacement for the old Promise.all(batch of 20).
+ */
+async function mapLimit<T>(
+  items: T[],
+  limit: number,
+  fn: (item: T, index: number) => Promise<unknown>
+): Promise<void> {
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const idx = cursor++;
+      await fn(items[idx], idx);
+    }
+  });
+  await Promise.all(workers);
+}
+
 /**
  * The pooled connection drops during long seeds. Retry with backoff rather
  * than losing an hour of writes to one transient socket error.
@@ -423,32 +479,29 @@ async function writeQuiz(o: {
   await withRetry(async () => {
     await prisma.question.deleteMany({ where: { quizId: quiz.id } });
 
-    const BATCH = 20;
-    for (let i = 0; i < o.questions.length; i += BATCH) {
-      const chunk = o.questions.slice(i, i + BATCH);
-      await Promise.all(
-        chunk.map((q, k) =>
-          prisma.question.create({
-            data: {
-              quizId: quiz.id,
-              type: q.type ?? "SINGLE",
-              stem: q.stem,
-              topic: q.topic,
-              explanation: q.explanation,
-              points: 1,
-              order: i + k,
-              choices: {
-                create: q.choices.map((c, ci) => ({
-                  text: c.text,
-                  isCorrect: !!c.isCorrect,
-                  order: ci,
-                })),
-              },
-            },
-          })
-        )
-      );
-    }
+    // Bounded concurrency: never more than WRITE_CONCURRENCY inserts in flight,
+    // so a large seed cannot exhaust the connection pool. `order` is the item's
+    // stable index, not its completion order.
+    await mapLimit(o.questions, WRITE_CONCURRENCY, (q, idx) =>
+      prisma.question.create({
+        data: {
+          quizId: quiz.id,
+          type: q.type ?? "SINGLE",
+          stem: q.stem,
+          topic: q.topic,
+          explanation: q.explanation,
+          points: 1,
+          order: idx,
+          choices: {
+            create: q.choices.map((c, ci) => ({
+              text: c.text,
+              isCorrect: !!c.isCorrect,
+              order: ci,
+            })),
+          },
+        },
+      })
+    );
   }, `rebuild ${o.slug}`);
 
   // Verify: the row count must match what we intended to write.
@@ -467,6 +520,33 @@ async function writeQuiz(o: {
 
 export async function seedSubject(cfg: SubjectConfig): Promise<void> {
   console.log(`\n═══ ${cfg.subject} ═══\n`);
+
+  /*
+   * INCREMENTAL WRITES (QBANK_ONLY)
+   * -------------------------------
+   * A wave may ship several set files at once, but you don't have to write them
+   * all in one run. QBANK_ONLY restricts THIS run to the named sets, so a big
+   * drop lands in small, safe passes:
+   *
+   *   QBANK_ONLY=3,4 npx tsx prisma/seed-pharmacology.ts   # writes sets 3 & 4
+   *   QBANK_ONLY=5,6 npx tsx prisma/seed-pharmacology.ts   # then 5 & 6
+   *   npx tsx prisma/seed-pharmacology.ts                  # then everything +
+   *                                                        # all now-buildable exams
+   *
+   * Exams only build from sets that are present this run, so early passes seed
+   * sets and defer exams automatically; the final unfiltered pass writes the
+   * exams once their source sets all exist. Nothing is ever half-written: each
+   * quiz is rebuilt atomically (delete-then-insert) and row-count verified.
+   */
+  if (SEED_ONLY) {
+    const before = cfg.sets.length;
+    cfg = { ...cfg, sets: cfg.sets.filter((s) => SEED_ONLY.has(s.n)) };
+    console.log(
+      `  ⓘ QBANK_ONLY=${[...SEED_ONLY].sort((a, b) => a - b).join(",")} — ` +
+        `writing ${cfg.sets.length} of ${before} present set(s) this run; ` +
+        `exams needing absent sets are deferred.`
+    );
+  }
 
   const available = new Set(cfg.sets.map((s) => s.n));
   const pool = new Pool(new Map(cfg.sets.map((s) => [s.n, s.questions])));
@@ -522,6 +602,7 @@ export async function seedSubject(cfg: SubjectConfig): Promise<void> {
       questions: set.questions,
     });
     console.log(`  ✓ Practice Set ${set.n} — ${set.questions.length} questions · ${set.title}`);
+    if (PAUSE_BETWEEN_QUIZZES_MS) await sleep(PAUSE_BETWEEN_QUIZZES_MS);
   }
 
   for (const exam of [...cfg.exams].sort((a, b) => a.n - b.n)) {
@@ -542,6 +623,7 @@ export async function seedSubject(cfg: SubjectConfig): Promise<void> {
     console.log(
       `  ✓ Exam ${exam.n} — ${questions.length} questions · ${exam.minutes} min · ${exam.title}`
     );
+    if (PAUSE_BETWEEN_QUIZZES_MS) await sleep(PAUSE_BETWEEN_QUIZZES_MS);
   }
 
   const totalUnique = pool.all().length;

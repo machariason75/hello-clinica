@@ -23,8 +23,8 @@ import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { PHARMACOLOGY_SET_1 } from "./pharmacology/set-1";
 import { PHARMACOLOGY_SET_2 } from "./pharmacology/set-2";
-// import { PHARMACOLOGY_SET_3 } from "./pharmacology/set-3";
-// import { PHARMACOLOGY_SET_4 } from "./pharmacology/set-4";
+import { PHARMACOLOGY_SET_3 } from "./pharmacology/set-3";
+import { PHARMACOLOGY_SET_4 } from "./pharmacology/set-4";
 // import { PHARMACOLOGY_SET_5 } from "./pharmacology/set-5";
 // import { PHARMACOLOGY_SET_6 } from "./pharmacology/set-6";
 // import { PHARMACOLOGY_SET_7 } from "./pharmacology/set-7";
@@ -48,8 +48,22 @@ const SETS = [
     difficulty: "Foundational" as const,
     questions: PHARMACOLOGY_SET_2,
   },
-  // { n: 3, title: "Cardiovascular Drugs", …, questions: PHARMACOLOGY_SET_3 },
-  // { n: 4, title: "CNS Drugs", …, questions: PHARMACOLOGY_SET_4 },
+  {
+    n: 3,
+    title: "Cardiovascular Drugs",
+    description:
+      "Diuretics across the nephron, the RAAS inhibitors, calcium channel blockers, sympatholytics and direct vasodilators, antianginals, guideline-directed heart failure therapy, cardiac glycosides, the Vaughan Williams antiarrhythmics, lipid-lowering agents, and the anticoagulant, antiplatelet and thrombolytic drugs.",
+    difficulty: "Intermediate" as const,
+    questions: PHARMACOLOGY_SET_3,
+  },
+  {
+    n: 4,
+    title: "CNS Drugs",
+    description:
+      "Sedative-hypnotics and anxiolytics, antiepileptics, general and local anesthetics, the antidepressant classes and their toxidromes, mood stabilizers, antipsychotics and their movement disorders, antiparkinsonian and neurodegenerative-disease drugs, opioid analgesics, and the pharmacology of abused substances and stimulants.",
+    difficulty: "Intermediate" as const,
+    questions: PHARMACOLOGY_SET_4,
+  },
   // { n: 5, title: "Antimicrobials I — Antibacterials", …, questions: PHARMACOLOGY_SET_5 },
   // { n: 6, title: "Antimicrobials II — Antivirals, Antifungals, Antiparasitics", …, questions: PHARMACOLOGY_SET_6 },
   // { n: 7, title: "Endocrine, GI, Analgesia & Toxicology", …, questions: PHARMACOLOGY_SET_7 },
