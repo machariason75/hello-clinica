@@ -185,6 +185,35 @@ export function shuffle<T>(items: T[], seed: number): T[] {
 }
 
 /** Deterministic sample without replacement. */
+/**
+ * ANSWER-POSITION RANDOMIZATION
+ * -----------------------------
+ * If the correct choice is always written first, every SINGLE answer is "A" and
+ * a student can pass by pattern alone. This spreads the key across positions.
+ *
+ * The seed is a hash of the STEM, so the shuffle is:
+ *   - deterministic  — the same question lays out identically on every re-seed
+ *     and in every exam it appears in, so review stays stable;
+ *   - pattern-free   — the key lands in a different position from item to item,
+ *     with no exploitable run of A/B/C/D/E.
+ *
+ * TRUE_FALSE is left alone: it must read "True" then "False". Balance there is a
+ * property of how many items are true vs false, not of option order.
+ */
+function hashString(s: string): number {
+  let h = 2166136261 >>> 0; // FNV-1a
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+export function orderedChoices(q: Q): Choice[] {
+  if ((q.type ?? "SINGLE") === "TRUE_FALSE") return q.choices;
+  return shuffle(q.choices, hashString(q.stem));
+}
+
 export function sample<T>(items: T[], count: number, seed: number): T[] {
   return shuffle(items, seed).slice(0, count);
 }
@@ -247,13 +276,14 @@ function validate(cfg: SubjectConfig, pool: Pool, papers: Map<number, Q[]>): Pro
 
     if (type === "SINGLE") {
       if (correct !== 1) err(`${where}: SINGLE needs exactly one correct choice, found ${correct}.`);
-      if (q.choices.length < 5)
-        warn(`${where}: ${q.choices.length} options — US board style is five.`);
+      // US boards vary the option count (4–7) by item; four is the floor, and a
+      // deliberate mix of counts is more authentic than forcing every item to five.
+      if (q.choices.length < 4) err(`${where}: SINGLE needs at least four options, found ${q.choices.length}.`);
     }
     if (type === "MULTI") {
       if (correct < 2) err(`${where}: MULTI needs at least two correct choices.`);
       if (correct === q.choices.length) err(`${where}: MULTI has every option correct.`);
-      if (q.choices.length < 5) warn(`${where}: SATA items read better with five or more options.`);
+      if (q.choices.length < 4) err(`${where}: MULTI needs at least four options, found ${q.choices.length}.`);
     }
     if (type === "TRUE_FALSE") {
       if (q.choices.length !== 2) err(`${where}: TRUE_FALSE must have exactly two choices.`);
@@ -493,7 +523,7 @@ async function writeQuiz(o: {
           points: 1,
           order: idx,
           choices: {
-            create: q.choices.map((c, ci) => ({
+            create: orderedChoices(q).map((c, ci) => ({
               text: c.text,
               isCorrect: !!c.isCorrect,
               order: ci,

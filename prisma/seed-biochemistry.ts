@@ -30,10 +30,10 @@ import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { BIOCHEMISTRY_SET_1 } from "./biochemistry/set-1";
 import { BIOCHEMISTRY_SET_2 } from "./biochemistry/set-2";
-// import { BIOCHEMISTRY_SET_3 } from "./biochemistry/set-3";
-// import { BIOCHEMISTRY_SET_4 } from "./biochemistry/set-4";
-// import { BIOCHEMISTRY_SET_5 } from "./biochemistry/set-5";
-// import { BIOCHEMISTRY_SET_6 } from "./biochemistry/set-6";
+import { BIOCHEMISTRY_SET_3 } from "./biochemistry/set-3";
+import { BIOCHEMISTRY_SET_4 } from "./biochemistry/set-4";
+import { BIOCHEMISTRY_SET_5 } from "./biochemistry/set-5";
+import { BIOCHEMISTRY_SET_6 } from "./biochemistry/set-6";
 // import { BIOCHEMISTRY_SET_7 } from "./biochemistry/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
@@ -55,10 +55,38 @@ const SETS = [
     difficulty: "Foundational" as const,
     questions: BIOCHEMISTRY_SET_2,
   },
-  // { n: 3, title: "Carbohydrate Metabolism", …, questions: BIOCHEMISTRY_SET_3 },
-  // { n: 4, title: "Lipid Metabolism", …, questions: BIOCHEMISTRY_SET_4 },
-  // { n: 5, title: "Nitrogen Metabolism & Nucleotides", …, questions: BIOCHEMISTRY_SET_5 },
-  // { n: 6, title: "Molecular Biology & Genetics", …, questions: BIOCHEMISTRY_SET_6 },
+  {
+    n: 3,
+    title: "Carbohydrate Metabolism",
+    description:
+      "Where the sugar goes: glycogen synthesis and breakdown with its storage diseases, gluconeogenesis, the pentose phosphate pathway, fructose and galactose metabolism, hormonal control of blood glucose, and the biochemistry of diabetes and carbohydrate digestion.",
+    difficulty: "Intermediate" as const,
+    questions: BIOCHEMISTRY_SET_3,
+  },
+  {
+    n: 4,
+    title: "Lipid Metabolism",
+    description:
+      "Fat from mouth to mitochondrion: digestion and transport, beta-oxidation and the carnitine shuttle, ketone bodies, fatty-acid and cholesterol synthesis, the lipoproteins and dyslipidemias, eicosanoids, and the sphingolipid and lysosomal storage diseases.",
+    difficulty: "Intermediate" as const,
+    questions: BIOCHEMISTRY_SET_4,
+  },
+  {
+    n: 5,
+    title: "Nitrogen Metabolism & Nucleotides",
+    description:
+      "Handling nitrogen and building the bases: amino-acid nitrogen removal, the full urea cycle and its disorders, ammonia transport and toxicity, the amino-acid catabolic diseases, one-carbon and folate metabolism, heme synthesis and degradation, and purine and pyrimidine metabolism through to gout.",
+    difficulty: "Advanced" as const,
+    questions: BIOCHEMISTRY_SET_5,
+  },
+  {
+    n: 6,
+    title: "Molecular Biology & Genetics",
+    description:
+      "The flow of genetic information: DNA structure, replication and repair; transcription, RNA processing and translation; gene regulation; mutations; the core laboratory techniques; inheritance patterns; and population and cancer genetics.",
+    difficulty: "Advanced" as const,
+    questions: BIOCHEMISTRY_SET_6,
+  },
   // { n: 7, title: "Vitamins, Nutrition & Integrated Metabolism", …, questions: BIOCHEMISTRY_SET_7 },
 ];
 
