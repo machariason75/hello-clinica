@@ -159,6 +159,7 @@ runWave(() =>
     subject: "Biochemistry",
     slugBase: "biochemistry",
     categorySlug: "fs-biochemistry",
+    minPerSet: 90,  // firm floor — the seeder refuses to run if any set is under 90
     partial: true, // ← switch to false once Set 7 has landed
     sets: SETS,
     exams: EXAMS,

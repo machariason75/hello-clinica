@@ -8,13 +8,14 @@
  * regulation. Pairs with Set 2 (Bioenergetics) to build Exam 1, the Foundations
  * Block.
  *
- * 80 questions across 12 topics:
+ * 92 questions across 12 topics:
  *   Amino Acid Chemistry · Protein Structure · Protein Folding & Denaturation ·
  *   Enzyme Catalysis · Enzyme Kinetics · Enzyme Inhibition · Enzyme Regulation ·
  *   Cofactors & Coenzymes · Hemoglobin & Oxygen Transport · Collagen & Structural
  *   Proteins · Clinical Enzymology · Clinical Application
  *
- * Item mix: 60 single-answer, 10 select-all-that-apply, 10 true/false.
+ * Item mix: 72 single-answer, 12 select-all-that-apply, 8 true/false.
+ * Includes lab-report panels, kinetics data tables, and ward scenarios.
  * US conventional units and standard biochemical nomenclature throughout.
  */
 
@@ -948,5 +949,259 @@ export const BIOCHEMISTRY_SET_1: Q[] = [
       { text: "Has no catalytic activity" },
       { text: "Is present only in red blood cells" },
     ],
+  },
+  /* ══════════════ EXPANSION — clinical, data & scenario items (harder) ══════════════ */
+  {
+    stem: "An enzyme follows Michaelis-Menten kinetics with Vmax = 100 micromol/min and Km = 5 mM. At a substrate concentration of 15 mM, the reaction velocity is closest to:",
+    topic: "Enzyme Kinetics",
+    explanation:
+      "V = Vmax·[S]/(Km+[S]) = 100·15/(5+15) = 1500/20 = 75 micromol/min. At [S] = 3×Km the enzyme runs at three-quarters of Vmax, illustrating how velocity approaches but never reaches Vmax as substrate rises.",
+    choices: [
+      { text: "75 micromol/min", isCorrect: true },
+      { text: "50 micromol/min" },
+      { text: "100 micromol/min" },
+      { text: "33 micromol/min" },
+      { text: "15 micromol/min" },
+    ],
+  },
+  {
+    stem: "A kineticist runs an enzyme with and without an inhibitor and reports:\n\n| Condition | Vmax | Km |\n|---|---|---|\n| No inhibitor | 120 | 4 mM |\n| + Inhibitor | 120 | 12 mM |\n\nWhich type of inhibition is present?",
+    topic: "Enzyme Inhibition",
+    explanation:
+      "Vmax is unchanged while Km rises (apparent affinity falls) — the signature of competitive inhibition, which can be overcome by raising substrate. Noncompetitive inhibition would lower Vmax with Km unchanged; uncompetitive lowers both.",
+    choices: [
+      { text: "Competitive inhibition", isCorrect: true },
+      { text: "Pure noncompetitive inhibition" },
+      { text: "Uncompetitive inhibition" },
+      { text: "Irreversible inhibition" },
+      { text: "Allosteric activation" },
+    ],
+  },
+  {
+    stem: "A second inhibitor gives this profile:\n\n| Condition | Vmax | Km |\n|---|---|---|\n| No inhibitor | 120 | 4 mM |\n| + Inhibitor | 60 | 4 mM |\n\nAdding more substrate does not restore activity. This is:",
+    topic: "Enzyme Inhibition",
+    explanation:
+      "Vmax falls while Km is unchanged and the effect is not relieved by excess substrate — pure noncompetitive inhibition, in which the inhibitor binds an allosteric site on both free enzyme and the enzyme-substrate complex.",
+    choices: [
+      { text: "Pure noncompetitive inhibition", isCorrect: true },
+      { text: "Competitive inhibition" },
+      { text: "Substrate activation" },
+      { text: "Feed-forward activation" },
+      { text: "Cofactor depletion" },
+    ],
+  },
+  {
+    stem: "On a Lineweaver-Burk plot comparing an enzyme with and without a drug, the two lines cross exactly on the y-axis (identical y-intercepts) but have different x-intercepts. The drug is acting as a(n):",
+    topic: "Enzyme Kinetics",
+    explanation:
+      "A shared y-intercept means Vmax is unchanged (1/Vmax is the y-intercept), while a less-negative x-intercept means Km increased. Unchanged Vmax with increased Km is the graphical fingerprint of a competitive inhibitor.",
+    choices: [
+      { text: "Competitive inhibitor", isCorrect: true },
+      { text: "Noncompetitive inhibitor" },
+      { text: "Uncompetitive inhibitor" },
+      { text: "Irreversible inhibitor" },
+      { text: "Allosteric activator" },
+    ],
+  },
+  {
+    stem: "A 34-year-old with malaise and dark urine has this liver panel:\n\n| Test | Result | Reference |\n|---|---|---|\n| AST | 690 U/L | 10-40 |\n| ALT | 880 U/L | 7-56 |\n| ALP | 130 U/L | 44-147 |\n| Total bilirubin | 3.4 mg/dL | 0.1-1.2 |\n\nThe pattern is best described as:",
+    topic: "Clinical Enzymology",
+    explanation:
+      "Aminotransferases (AST, ALT) are markedly elevated with only mild alkaline phosphatase change — a hepatocellular pattern, typical of viral or toxic hepatitis, where ALT usually exceeds AST. A cholestatic pattern would show ALP disproportionately high.",
+    choices: [
+      { text: "Hepatocellular injury", isCorrect: true },
+      { text: "Cholestatic (obstructive) injury" },
+      { text: "Bone turnover" },
+      { text: "Cardiac muscle injury" },
+      { text: "Pancreatic injury" },
+    ],
+  },
+  {
+    stem: "A 58-year-old with jaundice and pale stools has this panel:\n\n| Test | Result | Reference |\n|---|---|---|\n| AST | 70 U/L | 10-40 |\n| ALT | 65 U/L | 7-56 |\n| ALP | 640 U/L | 44-147 |\n| GGT | 410 U/L | 8-61 |\n| Total bilirubin | 7.8 mg/dL | 0.1-1.2 |\n\nThis pattern most likely reflects:",
+    topic: "Clinical Enzymology",
+    explanation:
+      "Alkaline phosphatase and GGT are disproportionately elevated with conjugated hyperbilirubinemia and only mild transaminase change — a cholestatic pattern from biliary obstruction. A concurrently high GGT confirms the ALP is of hepatobiliary rather than bony origin.",
+    choices: [
+      { text: "Biliary obstruction (cholestasis)", isCorrect: true },
+      { text: "Acute viral hepatitis" },
+      { text: "Myocardial infarction" },
+      { text: "Rhabdomyolysis" },
+      { text: "Hemolysis alone" },
+    ],
+  },
+  {
+    stem: "An elderly patient has an isolated alkaline phosphatase of 520 U/L with a normal GGT, normal transaminases, and normal bilirubin. The most likely source of the enzyme is:",
+    topic: "Clinical Enzymology",
+    explanation:
+      "A high alkaline phosphatase with a normal GGT points away from the liver and toward bone (for example Paget disease or healing fracture). GGT tracks with ALP when the source is hepatobiliary, so a normal GGT effectively fractionates the ALP to a bony origin.",
+    choices: [
+      { text: "Bone", isCorrect: true },
+      { text: "Bile ducts" },
+      { text: "Cardiac muscle" },
+      { text: "Pancreas" },
+      { text: "Red blood cells" },
+    ],
+  },
+  {
+    stem: "Which statements about cardiac biomarkers after an acute myocardial infarction are correct? Select all that apply.",
+    type: "MULTI",
+    topic: "Clinical Enzymology",
+    explanation:
+      "Troponin is the most cardiac-specific marker and stays elevated for days, while CK-MB rises and falls sooner, making it useful for detecting reinfarction. Myoglobin rises earliest but is nonspecific. ALT is a liver marker, not a cardiac one.",
+    choices: [
+      { text: "Troponin is the most specific marker and remains elevated for several days", isCorrect: true },
+      { text: "CK-MB falls sooner and helps detect early reinfarction", isCorrect: true },
+      { text: "Myoglobin rises earliest but lacks cardiac specificity", isCorrect: true },
+      { text: "ALT is the preferred marker for myocardial injury" },
+      { text: "A normal troponin at 6 hours excludes all future cardiac disease" },
+    ],
+  },
+  {
+    stem: "A 3-month-old is given a topical teething anesthetic and becomes dusky. Blood drawn appears chocolate-brown, and the pulse-oximeter reads 85% despite high-flow oxygen. Arterial PaO2 is normal. The most likely problem is:",
+    topic: "Clinical Application",
+    explanation:
+      "Oxidation of heme iron to the ferric (Fe3+) state produces methemoglobin, which cannot bind oxygen and gives brown blood, cyanosis, and a saturation gap that does not correct with oxygen. Local anesthetics such as benzocaine are classic precipitants; methylene blue is the antidote.",
+    choices: [
+      { text: "Methemoglobinemia (heme iron oxidized to Fe3+)", isCorrect: true },
+      { text: "Carbon monoxide poisoning" },
+      { text: "Sickle cell crisis" },
+      { text: "Simple iron-deficiency anemia" },
+      { text: "Cyanide poisoning" },
+    ],
+  },
+  {
+    stem: "Hemoglobin electrophoresis on a child with recurrent pain crises shows: HbS 88%, HbF 9%, HbA2 3%, HbA 0%. This result indicates:",
+    topic: "Hemoglobin & Oxygen Transport",
+    explanation:
+      "The complete absence of HbA with a dominant HbS band indicates sickle cell disease (homozygous HbSS), not trait, in which HbA would still be present. The modestly raised HbF is common and partly protective because it inhibits sickling.",
+    choices: [
+      { text: "Sickle cell disease (HbSS)", isCorrect: true },
+      { text: "Sickle cell trait (HbAS)" },
+      { text: "Normal adult pattern" },
+      { text: "Beta-thalassemia minor" },
+      { text: "Hereditary methemoglobinemia" },
+    ],
+  },
+  {
+    stem: "A blood sample has a measured P50 (the PO2 at 50% saturation) of 34 mmHg, compared with a normal ~27 mmHg. This shift indicates:",
+    topic: "Hemoglobin & Oxygen Transport",
+    explanation:
+      "A higher P50 means more oxygen pressure is needed to half-saturate hemoglobin — a right shift with decreased oxygen affinity, which favors unloading to tissues. Acidosis, high CO2, fever, and elevated 2,3-BPG all raise P50.",
+    choices: [
+      { text: "Decreased oxygen affinity (right-shifted curve)", isCorrect: true },
+      { text: "Increased oxygen affinity (left-shifted curve)" },
+      { text: "Complete loss of cooperativity" },
+      { text: "Conversion to methemoglobin" },
+      { text: "No change from normal physiology" },
+    ],
+  },
+  {
+    stem: "Which inherited connective-tissue problems are correctly paired with their underlying defect? Select all that apply.",
+    type: "MULTI",
+    topic: "Collagen & Structural Proteins",
+    explanation:
+      "Osteogenesis imperfecta arises from defective type I collagen; Ehlers-Danlos from defects in collagen structure or processing; scurvy from failed prolyl/lysyl hydroxylation due to vitamin C deficiency; Menkes disease from copper-dependent lysyl oxidase dysfunction. Marfan syndrome is a fibrillin defect, not a collagen one.",
+    choices: [
+      { text: "Osteogenesis imperfecta — defective type I collagen", isCorrect: true },
+      { text: "Ehlers-Danlos syndrome — abnormal collagen structure/processing", isCorrect: true },
+      { text: "Scurvy — impaired hydroxylation of proline and lysine", isCorrect: true },
+      { text: "Marfan syndrome — defective type I collagen" },
+      { text: "Osteogenesis imperfecta — deficiency of elastin only" },
+    ],
+  },
+  {
+    stem: "A young adult has hypermobile joints, skin that stretches excessively and bruises easily, and a family history of arterial rupture. The biochemical process most likely disrupted is:",
+    topic: "Collagen & Structural Proteins",
+    explanation:
+      "These features describe Ehlers-Danlos syndrome, caused by defects in collagen synthesis or processing (for example type III collagen or in the enzymes that cross-link and process procollagen), weakening skin, joints, and vessel walls. It is distinct from the fibrillin defect of Marfan syndrome.",
+    choices: [
+      { text: "Collagen synthesis and cross-linking", isCorrect: true },
+      { text: "Fibrillin microfibril assembly only" },
+      { text: "Keratin filament bundling" },
+      { text: "Hemoglobin tetramer formation" },
+      { text: "Glycogen branching" },
+    ],
+  },
+  {
+    stem: "Match each coenzyme to its vitamin precursor. Select all pairs that are correct.",
+    type: "MULTI",
+    topic: "Cofactors & Coenzymes",
+    explanation:
+      "Thiamine pyrophosphate derives from B1, FAD from riboflavin (B2), NAD+ from niacin (B3), and pyridoxal phosphate from B6. Biotin is its own vitamin (B7) and is not derived from vitamin C, so that pairing is wrong.",
+    choices: [
+      { text: "Thiamine pyrophosphate — vitamin B1", isCorrect: true },
+      { text: "FAD — riboflavin (B2)", isCorrect: true },
+      { text: "NAD+ — niacin (B3)", isCorrect: true },
+      { text: "Pyridoxal phosphate — vitamin B6", isCorrect: true },
+      { text: "Biotin — vitamin C" },
+    ],
+  },
+  {
+    stem: "A patient started on isoniazid for tuberculosis develops a peripheral neuropathy. Supplementation with which vitamin, the precursor of a key transamination coenzyme, prevents this?",
+    topic: "Cofactors & Coenzymes",
+    explanation:
+      "Isoniazid depletes pyridoxal phosphate, the vitamin B6-derived coenzyme for transamination and neurotransmitter synthesis, producing a peripheral neuropathy that co-administered pyridoxine (B6) prevents. This links a drug side effect directly to coenzyme biochemistry.",
+    choices: [
+      { text: "Vitamin B6 (pyridoxine)", isCorrect: true },
+      { text: "Vitamin B12 (cobalamin)" },
+      { text: "Vitamin C (ascorbate)" },
+      { text: "Vitamin D" },
+      { text: "Vitamin K" },
+    ],
+  },
+  {
+    stem: "Acute pancreatitis can follow premature activation of pancreatic proenzymes within the gland. Normally, which event first converts trypsinogen to active trypsin in the duodenum?",
+    topic: "Enzyme Regulation",
+    explanation:
+      "Duodenal enteropeptidase (enterokinase) cleaves trypsinogen to trypsin, which then activates the other zymogens. Keeping these proteases inactive until secreted protects the pancreas; premature intraglandular activation causes autodigestion and pancreatitis.",
+    choices: [
+      { text: "Cleavage of trypsinogen by enteropeptidase (enterokinase)", isCorrect: true },
+      { text: "Phosphorylation of trypsinogen by protein kinase A" },
+      { text: "Binding of trypsinogen to 2,3-BPG" },
+      { text: "Oxidation of a heme group in trypsinogen" },
+      { text: "Spontaneous folding without any cleavage" },
+    ],
+  },
+  {
+    stem: "The isoelectric point (pI) of glycine, whose alpha-carboxyl pKa is 2.3 and alpha-amino pKa is 9.6, is approximately:",
+    topic: "Amino Acid Chemistry",
+    explanation:
+      "For an amino acid with no ionizable side chain, pI is the average of the two flanking pKa values: (2.3 + 9.6)/2 = 5.95. At this pH the molecule carries no net charge and will not migrate in an electric field.",
+    choices: [
+      { text: "5.95", isCorrect: true },
+      { text: "2.3" },
+      { text: "9.6" },
+      { text: "7.0" },
+      { text: "11.9" },
+    ],
+  },
+  {
+    stem: "A misfolded protein escapes chaperone-mediated refolding and instead aggregates into insoluble, beta-sheet-rich deposits resistant to degradation. This process underlies:",
+    topic: "Protein Folding & Denaturation",
+    explanation:
+      "Conversion of soluble protein into stable, beta-sheet-rich fibrils is the basis of amyloid formation, seen in Alzheimer disease and systemic amyloidoses. The abnormal secondary structure resists proteolysis and accumulates in tissue.",
+    choices: [
+      { text: "Amyloid fibril formation", isCorrect: true },
+      { text: "Normal disulfide isomerization" },
+      { text: "Zymogen activation" },
+      { text: "Allosteric cooperativity" },
+      { text: "Reversible thermal denaturation" },
+    ],
+  },
+  {
+    stem: "True or False: A catalyst lowers the activation energy of a reaction and therefore speeds the forward and reverse reactions to the same extent, without changing the position of equilibrium.",
+    type: "TRUE_FALSE",
+    topic: "Enzyme Catalysis",
+    explanation:
+      "True. Lowering the activation-energy barrier accelerates approach to equilibrium in both directions equally, so an enzyme changes reaction rate but never the equilibrium constant or the overall free-energy change of the reaction.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  {
+    stem: "True or False: Between two enzymes acting on the same substrate, the one with the higher Km has the higher affinity for that substrate.",
+    type: "TRUE_FALSE",
+    topic: "Enzyme Kinetics",
+    explanation:
+      "False. Km is inversely related to affinity: a higher Km means more substrate is needed to reach half-maximal velocity, indicating lower affinity. The enzyme with the lower Km binds substrate more tightly.",
+    choices: [{ text: "True" }, { text: "False", isCorrect: true }],
   },
 ];

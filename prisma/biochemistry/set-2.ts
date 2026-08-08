@@ -8,7 +8,7 @@
  * turns reducing equivalents into ATP — plus the poisons that famously block it.
  * Pairs with Set 1 (Proteins & Enzymes) to build Exam 1, the Foundations Block.
  *
- * 80 questions across 12 topics:
+ * 93 questions across 12 topics:
  *   Thermodynamics & ATP · Glycolysis · Pyruvate Dehydrogenase · Anaerobic &
  *   Lactate Metabolism · TCA Cycle · Electron Transport Chain · Oxidative
  *   Phosphorylation · ETC Inhibitors & Uncouplers · Mitochondrial Shuttles ·
@@ -949,5 +949,264 @@ export const BIOCHEMISTRY_SET_2: Q[] = [
     explanation:
       "True. Cardiac muscle has abundant mitochondria and relies heavily on oxidative phosphorylation for its steady, high energy demand, whereas the red blood cell has no mitochondria and depends entirely on glycolysis. This contrast illustrates tissue-specific energy strategies.",
     choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ EXPANSION — clinical, data & scenario items (harder) ══════════════ */
+  {
+    stem: "A patient in septic shock has these results:\n\n| Test | Result | Reference |\n|---|---|---|\n| Arterial pH | 7.21 | 7.35-7.45 |\n| HCO3- | 11 mEq/L | 22-28 |\n| Anion gap | 26 | 8-12 |\n| Lactate | 8.4 mmol/L | 0.5-2.2 |\n\nThe acid-base disturbance and its mechanism are best described as:",
+    topic: "Clinical Application",
+    explanation:
+      "Low pH with low bicarbonate, a high anion gap, and elevated lactate define a high-anion-gap metabolic acidosis from lactic acidosis. In shock, inadequate oxygen delivery forces anaerobic glycolysis, so pyruvate is reduced to lactate to regenerate NAD+.",
+    choices: [
+      { text: "High-anion-gap metabolic acidosis from anaerobic (type A) lactic acidosis", isCorrect: true },
+      { text: "Respiratory alkalosis from hyperventilation" },
+      { text: "Normal-anion-gap acidosis from bicarbonate loss" },
+      { text: "Metabolic alkalosis from vomiting" },
+      { text: "A purely respiratory acidosis" },
+    ],
+  },
+  {
+    stem: "A 70-year-old with chronic kidney disease on metformin presents obtunded with a lactate of 9 mmol/L and a high-anion-gap acidosis, without hypoxemia. The most likely contributor is:",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "Metformin can inhibit hepatic gluconeogenesis and mitochondrial respiration, promoting lactate accumulation; impaired renal clearance raises drug levels and precipitates lactic acidosis. This is a type B lactic acidosis, occurring without tissue hypoxia.",
+    choices: [
+      { text: "Metformin-associated lactic acidosis with reduced renal clearance", isCorrect: true },
+      { text: "Cyanide poisoning" },
+      { text: "Carbon monoxide poisoning" },
+      { text: "Simple dehydration" },
+      { text: "Thiamine excess" },
+    ],
+  },
+  {
+    stem: "Which statements about cyanide poisoning are correct? Select all that apply.",
+    type: "MULTI",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Cyanide blocks cytochrome c oxidase (Complex IV), halting electron transport so cells cannot use oxygen; venous oxygen content rises and anaerobic glycolysis drives a lactic acidosis. Hydroxocobalamin is an antidote. Oxygen consumption falls rather than rises.",
+    choices: [
+      { text: "It inhibits cytochrome c oxidase (Complex IV)", isCorrect: true },
+      { text: "Venous oxygen content is abnormally high", isCorrect: true },
+      { text: "A lactic acidosis develops", isCorrect: true },
+      { text: "Hydroxocobalamin can be used as an antidote", isCorrect: true },
+      { text: "Cellular oxygen consumption markedly increases" },
+    ],
+  },
+  {
+    stem: "Match each electron-transport inhibitor or agent to the complex it blocks. Select all pairs that are correct.",
+    type: "MULTI",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Rotenone blocks Complex I, antimycin A blocks Complex III, cyanide and carbon monoxide block Complex IV, and oligomycin blocks ATP synthase (Complex V). 2,4-Dinitrophenol is an uncoupler that carries protons across the membrane, not a Complex II inhibitor.",
+    choices: [
+      { text: "Rotenone — Complex I", isCorrect: true },
+      { text: "Antimycin A — Complex III", isCorrect: true },
+      { text: "Cyanide — Complex IV", isCorrect: true },
+      { text: "Oligomycin — ATP synthase (Complex V)", isCorrect: true },
+      { text: "2,4-Dinitrophenol — Complex II inhibitor" },
+    ],
+  },
+  {
+    stem: "Which processes of glucose oxidation are correctly matched to their subcellular location? Select all that apply.",
+    type: "MULTI",
+    topic: "TCA Cycle",
+    explanation:
+      "Glycolysis occurs in the cytosol; the pyruvate dehydrogenase reaction and the TCA cycle occur in the mitochondrial matrix; the electron transport chain and ATP synthase are embedded in the inner mitochondrial membrane. The TCA cycle is not a cytosolic pathway.",
+    choices: [
+      { text: "Glycolysis — cytosol", isCorrect: true },
+      { text: "TCA cycle — mitochondrial matrix", isCorrect: true },
+      { text: "Electron transport chain — inner mitochondrial membrane", isCorrect: true },
+      { text: "Pyruvate dehydrogenase — mitochondrial matrix", isCorrect: true },
+      { text: "TCA cycle — cytosol" },
+    ],
+  },
+  {
+    stem: "In a cell where glycolysis is blocked at pyruvate kinase, which intermediate pattern would you expect?",
+    topic: "Glycolysis",
+    explanation:
+      "Blocking the final step (pyruvate kinase) causes upstream intermediates such as phosphoenolpyruvate and fructose-1,6-bisphosphate to accumulate while the downstream product pyruvate falls. Tracking where intermediates pile up localizes a pathway block.",
+    choices: [
+      { text: "Upstream intermediates (e.g., PEP) rise; pyruvate falls", isCorrect: true },
+      { text: "Pyruvate rises while PEP falls" },
+      { text: "All intermediates fall equally" },
+      { text: "Only lactate rises, with no change upstream" },
+      { text: "Glucose-6-phosphate becomes undetectable" },
+    ],
+  },
+  {
+    stem: "Which vitamins supply the five coenzymes required by the pyruvate dehydrogenase complex? Select all that apply.",
+    type: "MULTI",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "PDH needs thiamine (B1, as TPP), riboflavin (B2, as FAD), niacin (B3, as NAD+), and pantothenate (B5, as coenzyme A), plus lipoic acid. Vitamin C is not a PDH cofactor. The mnemonic 'Tender Loving Care For Nancy' captures TPP, lipoate, CoA, FAD, NAD.",
+    choices: [
+      { text: "Thiamine (B1)", isCorrect: true },
+      { text: "Riboflavin (B2)", isCorrect: true },
+      { text: "Niacin (B3)", isCorrect: true },
+      { text: "Pantothenate (B5)", isCorrect: true },
+      { text: "Vitamin C (ascorbate)" },
+    ],
+  },
+  {
+    stem: "Which TCA-cycle steps generate NADH directly? Select all that apply.",
+    type: "MULTI",
+    topic: "TCA Cycle",
+    explanation:
+      "Isocitrate dehydrogenase, alpha-ketoglutarate dehydrogenase, and malate dehydrogenase each reduce NAD+ to NADH. Succinate dehydrogenase produces FADH2 instead, and succinyl-CoA synthetase produces GTP by substrate-level phosphorylation.",
+    choices: [
+      { text: "Isocitrate dehydrogenase", isCorrect: true },
+      { text: "Alpha-ketoglutarate dehydrogenase", isCorrect: true },
+      { text: "Malate dehydrogenase", isCorrect: true },
+      { text: "Succinate dehydrogenase" },
+      { text: "Succinyl-CoA synthetase" },
+    ],
+  },
+  {
+    stem: "Fluoroacetate, a rodenticide, is converted to fluorocitrate, which inhibits aconitase. Which intermediate accumulates just before the block?",
+    topic: "TCA Cycle",
+    explanation:
+      "Aconitase converts citrate to isocitrate, so inhibiting it causes citrate to accumulate upstream. Fluoroacetate is lethal precisely because it shuts down the TCA cycle at this early step, halting mitochondrial energy production.",
+    choices: [
+      { text: "Citrate", isCorrect: true },
+      { text: "Succinate" },
+      { text: "Malate" },
+      { text: "Oxaloacetate" },
+      { text: "Fumarate" },
+    ],
+  },
+  {
+    stem: "Arsenite poisons enzymes that use lipoic acid. Which two dehydrogenase reactions are therefore inhibited, causing both pyruvate and alpha-ketoglutarate to accumulate?",
+    topic: "TCA Cycle",
+    explanation:
+      "Both pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase require lipoic acid, so arsenite blocks both, backing up pyruvate and alpha-ketoglutarate. This shared cofactor explains why one toxin hits two key oxidative decarboxylations.",
+    choices: [
+      { text: "Pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase", isCorrect: true },
+      { text: "Succinate dehydrogenase and malate dehydrogenase" },
+      { text: "Citrate synthase and aconitase" },
+      { text: "Hexokinase and phosphofructokinase-1" },
+      { text: "ATP synthase and Complex I" },
+    ],
+  },
+  {
+    stem: "Glucose oxidized through the malate-aspartate shuttle yields about 2 more ATP than through the glycerol-3-phosphate shuttle because:",
+    topic: "Mitochondrial Shuttles",
+    explanation:
+      "The malate-aspartate shuttle delivers cytosolic reducing equivalents as mitochondrial NADH (about 2.5 ATP each), whereas the glycerol-3-phosphate shuttle feeds them in as FADH2 (about 1.5 ATP each). Across the two NADH from glycolysis, that difference totals roughly 2 ATP.",
+    choices: [
+      { text: "It regenerates mitochondrial NADH rather than FADH2", isCorrect: true },
+      { text: "It bypasses ATP synthase entirely" },
+      { text: "It transports intact NADH across the inner membrane" },
+      { text: "It produces GTP instead of ATP" },
+      { text: "It uncouples electron transport" },
+    ],
+  },
+  {
+    stem: "During fasting, glucagon raises hepatic cAMP and activates protein kinase A, which phosphorylates the bifunctional PFK-2/FBPase-2 enzyme. The effect on fructose-2,6-bisphosphate and glycolysis is:",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "Phosphorylation activates the phosphatase (FBPase-2) and inhibits the kinase (PFK-2), lowering fructose-2,6-bisphosphate. Because F2,6BP is the strongest activator of PFK-1, its fall slows hepatic glycolysis and favors gluconeogenesis during fasting.",
+    choices: [
+      { text: "Fructose-2,6-bisphosphate falls, so glycolysis slows", isCorrect: true },
+      { text: "Fructose-2,6-bisphosphate rises, so glycolysis accelerates" },
+      { text: "Fructose-2,6-bisphosphate is unchanged" },
+      { text: "PFK-1 is directly activated by glucagon" },
+      { text: "Gluconeogenesis is suppressed" },
+    ],
+  },
+  {
+    stem: "Which fuel adaptations are correct during prolonged (multi-week) starvation? Select all that apply.",
+    type: "MULTI",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "As starvation continues the brain shifts largely to ketone bodies, sparing glucose and muscle protein; red blood cells still rely on glucose because they lack mitochondria; and the liver produces ketones but cannot use them, lacking thiophorase. Muscle does not become the main glucose exporter — only the liver and kidney export glucose.",
+    choices: [
+      { text: "The brain derives much of its energy from ketone bodies", isCorrect: true },
+      { text: "Red blood cells continue to depend on glucose", isCorrect: true },
+      { text: "The liver makes ketone bodies but cannot oxidize them", isCorrect: true },
+      { text: "Skeletal muscle becomes the main exporter of free glucose" },
+      { text: "Ketone production is completely suppressed" },
+    ],
+  },
+  {
+    stem: "Which compounds have a higher phosphoryl-transfer potential than ATP (i.e., can phosphorylate ADP)? Select all that apply.",
+    type: "MULTI",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "Phosphoenolpyruvate, 1,3-bisphosphoglycerate, and creatine phosphate all have more negative phosphoryl-transfer free energies than ATP and can donate phosphate to ADP. Glucose-6-phosphate and AMP sit below ATP and cannot.",
+    choices: [
+      { text: "Phosphoenolpyruvate", isCorrect: true },
+      { text: "1,3-Bisphosphoglycerate", isCorrect: true },
+      { text: "Creatine phosphate", isCorrect: true },
+      { text: "Glucose-6-phosphate" },
+      { text: "AMP" },
+    ],
+  },
+  {
+    stem: "A young adult with short stature, hearing loss, and stroke-like episodes has a resting lactate of 5 mmol/L and an elevated lactate-to-pyruvate ratio; muscle biopsy shows ragged-red fibers and the disorder is maternally inherited. The best explanation is:",
+    topic: "Clinical Application",
+    explanation:
+      "Maternal inheritance, ragged-red fibers, lactic acidosis, and a high lactate-to-pyruvate ratio point to a mitochondrial DNA disorder impairing oxidative phosphorylation (for example MELAS). Because ATP cannot be made aerobically, cells fall back on glycolysis and generate lactate.",
+    choices: [
+      { text: "A mitochondrial DNA disorder impairing oxidative phosphorylation", isCorrect: true },
+      { text: "An autosomal-dominant glycogen storage disease" },
+      { text: "Simple iron-deficiency anemia" },
+      { text: "A urea-cycle enzyme deficiency" },
+      { text: "Vitamin D deficiency" },
+    ],
+  },
+  {
+    stem: "Which electron transport chain complexes pump protons from the matrix into the intermembrane space? Select all that apply.",
+    type: "MULTI",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Complexes I, III, and IV each translocate protons to build the electrochemical gradient. Complex II (succinate dehydrogenase) feeds electrons in but pumps no protons, which is one reason FADH2-derived electrons yield less ATP.",
+    choices: [
+      { text: "Complex I", isCorrect: true },
+      { text: "Complex III", isCorrect: true },
+      { text: "Complex IV", isCorrect: true },
+      { text: "Complex II" },
+      { text: "ATP synthase (Complex V)" },
+    ],
+  },
+  {
+    stem: "True or False: An uncoupler such as 2,4-dinitrophenol increases oxygen consumption while decreasing net ATP synthesis, releasing the energy as heat.",
+    type: "TRUE_FALSE",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "True. By carrying protons back across the inner membrane, an uncoupler dissipates the gradient, so electron transport (and oxygen use) speeds up to restore it while ATP synthase makes little ATP; the energy is lost as heat, causing hyperthermia.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  {
+    stem: "True or False: Under anaerobic conditions the net ATP yield of glycolysis is 2 per glucose, the same as its substrate-level total, because no ATP is produced by oxidative phosphorylation.",
+    type: "TRUE_FALSE",
+    topic: "Glycolysis",
+    explanation:
+      "True. Anaerobic glycolysis nets 2 ATP per glucose entirely from substrate-level phosphorylation; regenerating NAD+ by making lactate lets it continue but yields no additional ATP, unlike aerobic metabolism.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  {
+    stem: "A woman with hyperemesis gravidarum is admitted after weeks of vomiting and given intravenous dextrose. She develops confusion, ataxia, and eye-movement abnormalities. The biochemical basis is:",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "A carbohydrate load in a thiamine-depleted patient increases demand on thiamine-dependent enzymes (pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase, transketolase), precipitating Wernicke encephalopathy. Thiamine should be given before or with glucose.",
+    choices: [
+      { text: "Thiamine deficiency unmasked by a glucose load (Wernicke encephalopathy)", isCorrect: true },
+      { text: "Vitamin B12 deficiency" },
+      { text: "Acute cyanide exposure" },
+      { text: "Magnesium excess" },
+      { text: "Carbon monoxide poisoning" },
+    ],
+  },
+  {
+    stem: "A firefighter pulled from a smoke-filled building has headache and confusion. Co-oximetry shows a high carboxyhemoglobin level; arterial PaO2 is normal but measured oxygen saturation is low, with a metabolic acidosis. The mechanism is:",
+    topic: "Clinical Application",
+    explanation:
+      "Carbon monoxide binds hemoglobin with far greater affinity than oxygen, reducing oxygen-carrying capacity and shifting the dissociation curve left so less oxygen is unloaded; tissue hypoxia drives anaerobic metabolism and acidosis. PaO2 (dissolved oxygen) stays normal, so co-oximetry is needed to detect it.",
+    choices: [
+      { text: "Carbon monoxide reduces oxygen carrying and unloading despite a normal PaO2", isCorrect: true },
+      { text: "Methemoglobin formation from a topical anesthetic" },
+      { text: "Cyanide inhibition of Complex IV alone" },
+      { text: "Pure respiratory alkalosis" },
+      { text: "Iron-deficiency anemia" },
+    ],
   },
 ];
