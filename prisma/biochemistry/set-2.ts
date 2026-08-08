@@ -1,0 +1,953 @@
+/**
+ * BIOCHEMISTRY — PRACTICE SET 2
+ * Bioenergetics & Central Energy Metabolism
+ *
+ * Difficulty: Foundational. How the cell captures and spends energy: the
+ * thermodynamic rules, the glycolytic pathway and its control, the pyruvate
+ * dehydrogenase gateway, the TCA cycle, and the electron transport chain that
+ * turns reducing equivalents into ATP — plus the poisons that famously block it.
+ * Pairs with Set 1 (Proteins & Enzymes) to build Exam 1, the Foundations Block.
+ *
+ * 80 questions across 12 topics:
+ *   Thermodynamics & ATP · Glycolysis · Pyruvate Dehydrogenase · Anaerobic &
+ *   Lactate Metabolism · TCA Cycle · Electron Transport Chain · Oxidative
+ *   Phosphorylation · ETC Inhibitors & Uncouplers · Mitochondrial Shuttles ·
+ *   Regulation of Energy Metabolism · Tissue-Specific Fuel Use · Clinical
+ *   Application
+ *
+ * Item mix: 60 single-answer, 10 select-all-that-apply, 10 true/false.
+ * US conventional units and standard biochemical nomenclature throughout.
+ */
+
+import type { Q } from "../_lib/qbank";
+
+export const BIOCHEMISTRY_SET_2: Q[] = [
+  /* ══════════════ THERMODYNAMICS & ATP ══════════════ */
+  {
+    stem: "A reaction with a negative change in Gibbs free energy (ΔG < 0) is:",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "A negative ΔG marks an exergonic, spontaneous reaction that can proceed and release usable energy; a positive ΔG marks an endergonic reaction that requires an energy input. ΔG depends on actual concentrations, not only the standard-state value.",
+    choices: [
+      { text: "Exergonic and can proceed spontaneously", isCorrect: true },
+      { text: "Endergonic and requires energy input" },
+      { text: "At equilibrium with no net change" },
+      { text: "Impossible under any condition" },
+      { text: "Independent of temperature entirely" },
+    ],
+  },
+  {
+    stem: "ATP is called the cell's energy currency mainly because:",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "Hydrolysis of ATP's phosphoanhydride bonds releases a large amount of free energy that can be coupled to drive otherwise unfavorable reactions. ATP thus links exergonic catabolism to endergonic processes throughout the cell.",
+    choices: [
+      { text: "Its phosphoanhydride bonds release energy that drives unfavorable reactions", isCorrect: true },
+      { text: "It stores energy in a stable, long-term form like fat" },
+      { text: "It is a structural component of membranes" },
+      { text: "It carries genetic information" },
+      { text: "It cannot be hydrolyzed" },
+    ],
+  },
+  {
+    stem: "The energy released by an exergonic reaction can drive an endergonic one when the two are:",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "Energetic coupling links an exergonic reaction (often ATP hydrolysis) to an endergonic one so that the combined process has a net negative ΔG and proceeds. This coupling is the central strategy the cell uses to do work.",
+    choices: [
+      { text: "Coupled so the combined free-energy change is negative", isCorrect: true },
+      { text: "Run in completely separate compartments" },
+      { text: "Both endergonic" },
+      { text: "Catalyzed by denatured enzymes" },
+      { text: "Kept at chemical equilibrium" },
+    ],
+  },
+  {
+    stem: "True or False: A reaction's standard free-energy change (ΔG°′) predicts the direction it actually runs in the cell, regardless of substrate and product concentrations.",
+    type: "TRUE_FALSE",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "False. The actual ΔG depends on real concentrations of reactants and products, so a reaction with a positive ΔG°′ can still proceed forward in the cell if substrate is high and product is low. This is why some 'unfavorable' standard-state steps run readily in vivo.",
+    choices: [{ text: "True" }, { text: "False", isCorrect: true }],
+  },
+  /* ══════════════ GLYCOLYSIS ══════════════ */
+  {
+    stem: "Which enzyme catalyzes the rate-limiting and key regulatory step of glycolysis?",
+    topic: "Glycolysis",
+    explanation:
+      "Phosphofructokinase-1 (PFK-1), which converts fructose-6-phosphate to fructose-1,6-bisphosphate, is the committed, rate-limiting step of glycolysis and its principal control point. It is activated by AMP and fructose-2,6-bisphosphate and inhibited by ATP and citrate.",
+    choices: [
+      { text: "Phosphofructokinase-1", isCorrect: true },
+      { text: "Hexokinase" },
+      { text: "Pyruvate kinase" },
+      { text: "Aldolase" },
+      { text: "Enolase" },
+    ],
+  },
+  {
+    stem: "The net yield of ATP and NADH from the glycolysis of one glucose molecule to two pyruvate is:",
+    topic: "Glycolysis",
+    explanation:
+      "Glycolysis invests 2 ATP and produces 4 ATP (net 2 ATP) plus 2 NADH per glucose. Under aerobic conditions the NADH is reoxidized in the mitochondria; under anaerobic conditions it must be regenerated by lactate formation.",
+    choices: [
+      { text: "Net 2 ATP and 2 NADH", isCorrect: true },
+      { text: "Net 4 ATP and 4 NADH" },
+      { text: "Net 2 ATP and no NADH" },
+      { text: "Net 38 ATP directly" },
+      { text: "No ATP, only NADPH" },
+    ],
+  },
+  {
+    stem: "The most potent physiologic allosteric activator of phosphofructokinase-1 is:",
+    topic: "Glycolysis",
+    explanation:
+      "Fructose-2,6-bisphosphate, produced by PFK-2 in response to insulin, is the most potent activator of PFK-1 and simultaneously inhibits gluconeogenesis, coordinating the two opposing pathways. This makes it a master signal of the fed state in the liver.",
+    choices: [
+      { text: "Fructose-2,6-bisphosphate", isCorrect: true },
+      { text: "Citrate" },
+      { text: "ATP" },
+      { text: "Acetyl-CoA" },
+      { text: "NADH" },
+    ],
+  },
+  {
+    stem: "Which glycolytic steps are essentially irreversible and therefore serve as regulatory and gluconeogenic bypass points? Select all that apply.",
+    type: "MULTI",
+    topic: "Glycolysis",
+    explanation:
+      "The reactions catalyzed by hexokinase/glucokinase, phosphofructokinase-1 and pyruvate kinase are strongly exergonic and irreversible, so gluconeogenesis must bypass each with its own enzymes. Aldolase and phosphoglycerate kinase catalyze near-equilibrium, reversible steps.",
+    choices: [
+      { text: "Hexokinase (or glucokinase)", isCorrect: true },
+      { text: "Phosphofructokinase-1", isCorrect: true },
+      { text: "Pyruvate kinase", isCorrect: true },
+      { text: "Aldolase" },
+      { text: "Phosphoglycerate kinase" },
+    ],
+  },
+  {
+    stem: "Arsenate poisoning uncouples the payoff phase of glycolysis by substituting for inorganic phosphate at the glyceraldehyde-3-phosphate dehydrogenase step, with the result that:",
+    topic: "Glycolysis",
+    explanation:
+      "Arsenate forms an unstable acyl-arsenate that hydrolyzes spontaneously, bypassing the substrate-level phosphorylation normally catalyzed at the phosphoglycerate kinase step, so glycolysis proceeds but yields no net ATP. This illustrates how substrate-level phosphorylation can be short-circuited.",
+    choices: [
+      { text: "Glycolysis continues but net ATP production is lost", isCorrect: true },
+      { text: "Glycolysis stops completely at hexokinase" },
+      { text: "ATP yield doubles" },
+      { text: "NADPH is produced instead" },
+      { text: "The TCA cycle is directly blocked" },
+    ],
+  },
+  {
+    stem: "True or False: Because mature red blood cells lack mitochondria, they rely entirely on glycolysis for ATP.",
+    type: "TRUE_FALSE",
+    topic: "Glycolysis",
+    explanation:
+      "True. Without mitochondria, red blood cells cannot perform oxidative phosphorylation and depend solely on anaerobic glycolysis, regenerating NAD+ by converting pyruvate to lactate. This makes them uniquely vulnerable to defects in glycolytic enzymes.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ PYRUVATE DEHYDROGENASE ══════════════ */
+  {
+    stem: "The pyruvate dehydrogenase complex links glycolysis to the TCA cycle by catalyzing:",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "Pyruvate dehydrogenase irreversibly converts pyruvate to acetyl-CoA, releasing CO2 and producing NADH. Because the step is irreversible, acetyl-CoA cannot be turned back into pyruvate, which is why fatty acids cannot yield net glucose.",
+    choices: [
+      { text: "Oxidative decarboxylation of pyruvate to acetyl-CoA", isCorrect: true },
+      { text: "Reduction of pyruvate to lactate" },
+      { text: "Carboxylation of pyruvate to oxaloacetate" },
+      { text: "Conversion of acetyl-CoA to pyruvate" },
+      { text: "Transamination of pyruvate to alanine" },
+    ],
+  },
+  {
+    stem: "The pyruvate dehydrogenase complex requires five cofactors, most of them vitamin-derived. Which vitamin provides thiamine pyrophosphate for this complex?",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "Thiamine (vitamin B1) forms thiamine pyrophosphate, the cofactor for the decarboxylation step; the complex also uses lipoic acid, coenzyme A (pantothenate), FAD (riboflavin) and NAD+ (niacin). Thiamine deficiency thus impairs pyruvate entry into the TCA cycle.",
+    choices: [
+      { text: "Thiamine (B1)", isCorrect: true },
+      { text: "Vitamin C" },
+      { text: "Vitamin D" },
+      { text: "Biotin" },
+      { text: "Folate" },
+    ],
+  },
+  {
+    stem: "In thiamine (B1) deficiency, pyruvate accumulates and is diverted to lactate, contributing to the neurologic features of Wernicke encephalopathy. This is because thiamine deficiency impairs:",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "Without thiamine pyrophosphate, pyruvate dehydrogenase (and alpha-ketoglutarate dehydrogenase) cannot function, so pyruvate cannot enter the TCA cycle and builds up, shifting toward lactate. Brain tissue, highly dependent on glucose oxidation, is especially affected.",
+    choices: [
+      { text: "Entry of pyruvate into the TCA cycle", isCorrect: true },
+      { text: "Fatty acid synthesis only" },
+      { text: "DNA replication" },
+      { text: "Collagen cross-linking" },
+      { text: "Urea synthesis" },
+    ],
+  },
+  {
+    stem: "The pyruvate dehydrogenase complex is inhibited (turned off) by high levels of:",
+    topic: "Pyruvate Dehydrogenase",
+    explanation:
+      "High ATP, acetyl-CoA and NADH — signals of an energy-rich state and abundant product — inhibit pyruvate dehydrogenase, often via activation of its kinase. Conversely, ADP, pyruvate and calcium activate it when energy is needed.",
+    choices: [
+      { text: "ATP, acetyl-CoA, and NADH", isCorrect: true },
+      { text: "ADP and AMP" },
+      { text: "Pyruvate and calcium" },
+      { text: "NAD+ and coenzyme A" },
+      { text: "Fructose-2,6-bisphosphate" },
+    ],
+  },
+  /* ══════════════ ANAEROBIC & LACTATE METABOLISM ══════════════ */
+  {
+    stem: "During vigorous exercise or hypoxia, pyruvate is reduced to lactate mainly in order to:",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "Lactate dehydrogenase reduces pyruvate to lactate, oxidizing NADH back to NAD+, which glycolysis needs to continue its energy-yielding steps when oxygen is limited. Lactate is thus a way to sustain ATP production anaerobically, not a dead end.",
+    choices: [
+      { text: "Regenerate NAD+ so glycolysis can continue", isCorrect: true },
+      { text: "Produce additional ATP directly from lactate" },
+      { text: "Store energy long-term as fat" },
+      { text: "Make NADPH for biosynthesis" },
+      { text: "Enter the TCA cycle directly as lactate" },
+    ],
+  },
+  {
+    stem: "In the Cori cycle, lactate produced by exercising muscle is:",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "The Cori cycle carries muscle lactate to the liver, where gluconeogenesis converts it back to glucose that returns to muscle. This shifts the metabolic burden of gluconeogenesis to the liver and helps clear the lactate load.",
+    choices: [
+      { text: "Carried to the liver and converted back to glucose", isCorrect: true },
+      { text: "Excreted unchanged in the urine" },
+      { text: "Converted directly to fat in muscle" },
+      { text: "Used to make DNA" },
+      { text: "Stored as glycogen in the red blood cell" },
+    ],
+  },
+  {
+    stem: "A patient in shock develops a high anion-gap metabolic acidosis with elevated lactate. The lactate accumulates because:",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "Inadequate tissue oxygen delivery forces cells to rely on anaerobic glycolysis, producing lactate faster than it can be cleared, which lowers pH. Lactate is therefore a marker of tissue hypoperfusion and anaerobic metabolism in shock.",
+    choices: [
+      { text: "Tissue hypoxia forces reliance on anaerobic glycolysis", isCorrect: true },
+      { text: "Oxygen delivery is excessive" },
+      { text: "The TCA cycle is running too fast" },
+      { text: "Gluconeogenesis is maximally active" },
+      { text: "Fatty acid oxidation is increased" },
+    ],
+  },
+  {
+    stem: "True or False: Lactate can be reconverted to pyruvate and used as a fuel once oxygen becomes available again.",
+    type: "TRUE_FALSE",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "True. Lactate dehydrogenase catalyzes a reversible reaction, so when oxygen is restored, lactate can be oxidized back to pyruvate and enter the TCA cycle or gluconeogenesis. Lactate is thus a usable, transportable fuel, not merely a waste product.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ TCA CYCLE ══════════════ */
+  {
+    stem: "Per turn of the TCA cycle, one molecule of acetyl-CoA yields how many reduced electron carriers and GTP (or ATP)?",
+    topic: "TCA Cycle",
+    explanation:
+      "Each turn produces 3 NADH, 1 FADH2 and 1 GTP (or ATP) while releasing 2 CO2. The reduced carriers then feed the electron transport chain, where most of the ATP is actually generated.",
+    choices: [
+      { text: "3 NADH, 1 FADH2, and 1 GTP", isCorrect: true },
+      { text: "1 NADH, 1 FADH2, and 2 ATP" },
+      { text: "4 NADH and no GTP" },
+      { text: "2 NADPH and 1 ATP" },
+      { text: "No reduced carriers, only CO2" },
+    ],
+  },
+  {
+    stem: "The rate-limiting enzyme of the TCA cycle, inhibited by ATP and NADH, is:",
+    topic: "TCA Cycle",
+    explanation:
+      "Isocitrate dehydrogenase is generally considered the rate-limiting step and is inhibited by ATP and NADH while activated by ADP and calcium, matching cycle flux to energy demand. Citrate synthase and alpha-ketoglutarate dehydrogenase are also regulated points.",
+    choices: [
+      { text: "Isocitrate dehydrogenase", isCorrect: true },
+      { text: "Fumarase" },
+      { text: "Malate dehydrogenase" },
+      { text: "Succinyl-CoA synthetase" },
+      { text: "Aconitase" },
+    ],
+  },
+  {
+    stem: "Beyond producing energy, the TCA cycle also:",
+    topic: "TCA Cycle",
+    explanation:
+      "TCA intermediates are drawn off for biosynthesis — for example, citrate for fatty acid synthesis, alpha-ketoglutarate and oxaloacetate for amino acids, and succinyl-CoA for heme. Anaplerotic reactions refill these intermediates so the cycle can continue.",
+    choices: [
+      { text: "Provides intermediates for biosynthesis, replenished by anaplerotic reactions", isCorrect: true },
+      { text: "Synthesizes DNA directly" },
+      { text: "Occurs in the cytosol" },
+      { text: "Requires no enzymes" },
+      { text: "Produces oxygen as a product" },
+    ],
+  },
+  {
+    stem: "The anaplerotic reaction that replenishes oxaloacetate for the TCA cycle, catalyzed by pyruvate carboxylase, requires which cofactor?",
+    topic: "TCA Cycle",
+    explanation:
+      "Pyruvate carboxylase converts pyruvate to oxaloacetate using biotin as its carboxyl-carrying cofactor and is activated by acetyl-CoA. This anaplerotic step keeps the cycle supplied and also feeds gluconeogenesis.",
+    choices: [
+      { text: "Biotin", isCorrect: true },
+      { text: "Vitamin C" },
+      { text: "Tetrahydrofolate" },
+      { text: "Pyridoxal phosphate" },
+      { text: "Vitamin K" },
+    ],
+  },
+  {
+    stem: "Which TCA cycle step is also a member of the electron transport chain, passing electrons directly to FADH2/ubiquinone?",
+    topic: "TCA Cycle",
+    explanation:
+      "Succinate dehydrogenase (Complex II) oxidizes succinate to fumarate within the TCA cycle while feeding electrons into the respiratory chain via FADH2 and ubiquinone. It is the only membrane-bound TCA enzyme and the only one shared with the ETC.",
+    choices: [
+      { text: "Succinate dehydrogenase (Complex II)", isCorrect: true },
+      { text: "Citrate synthase" },
+      { text: "Aconitase" },
+      { text: "Fumarase" },
+      { text: "Isocitrate dehydrogenase" },
+    ],
+  },
+  /* ══════════════ ELECTRON TRANSPORT CHAIN ══════════════ */
+  {
+    stem: "In the electron transport chain, electrons ultimately flow to which final acceptor?",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Molecular oxygen is the terminal electron acceptor at Complex IV, where it is reduced to water. This is why oxidative phosphorylation is oxygen-dependent and why blocking oxygen use is rapidly lethal.",
+    choices: [
+      { text: "Molecular oxygen, reduced to water", isCorrect: true },
+      { text: "Carbon dioxide" },
+      { text: "NAD+" },
+      { text: "Pyruvate" },
+      { text: "Glucose" },
+    ],
+  },
+  {
+    stem: "The energy released as electrons pass down the respiratory chain is used to:",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Complexes I, III and IV pump protons from the matrix into the intermembrane space, building an electrochemical proton gradient. The potential energy of this gradient is then harnessed by ATP synthase to make ATP.",
+    choices: [
+      { text: "Pump protons across the inner mitochondrial membrane", isCorrect: true },
+      { text: "Synthesize NADH directly" },
+      { text: "Fix carbon dioxide" },
+      { text: "Break down ATP" },
+      { text: "Transport glucose into the cell" },
+    ],
+  },
+  {
+    stem: "NADH and FADH2 yield different amounts of ATP because:",
+    topic: "Electron Transport Chain",
+    explanation:
+      "NADH delivers its electrons to Complex I, contributing to three proton-pumping sites, whereas FADH2 enters at Complex II, bypassing Complex I, so fewer protons are pumped and less ATP is made per FADH2. This accounts for their different ATP yields.",
+    choices: [
+      { text: "FADH2 enters after Complex I, so fewer protons are pumped per molecule", isCorrect: true },
+      { text: "NADH cannot be oxidized by the chain" },
+      { text: "FADH2 carries more electrons than NADH" },
+      { text: "NADH bypasses all complexes" },
+      { text: "They are chemically identical" },
+    ],
+  },
+  {
+    stem: "Coenzyme Q (ubiquinone) and cytochrome c serve in the electron transport chain as:",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Ubiquinone is a lipid-soluble mobile carrier shuttling electrons within the inner membrane, and cytochrome c is a mobile carrier in the intermembrane space between Complexes III and IV. These mobile carriers connect the fixed complexes.",
+    choices: [
+      { text: "Mobile electron carriers linking the fixed complexes", isCorrect: true },
+      { text: "Proton pumps themselves" },
+      { text: "The final electron acceptors" },
+      { text: "Enzymes of the TCA cycle" },
+      { text: "Structural lipids only" },
+    ],
+  },
+  /* ══════════════ OXIDATIVE PHOSPHORYLATION ══════════════ */
+  {
+    stem: "The chemiosmotic theory proposes that ATP synthesis is driven by:",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "Peter Mitchell's chemiosmotic theory holds that the proton gradient across the inner mitochondrial membrane stores energy that drives ATP synthase as protons flow back into the matrix. This coupling of the gradient to ATP formation is the core of oxidative phosphorylation.",
+    choices: [
+      { text: "A proton gradient across the inner membrane powering ATP synthase", isCorrect: true },
+      { text: "Direct transfer of phosphate from NADH" },
+      { text: "Substrate-level phosphorylation in the cytosol" },
+      { text: "Heat released by the TCA cycle" },
+      { text: "Breakdown of glucose in the matrix" },
+    ],
+  },
+  {
+    stem: "ATP synthase (Complex V) produces ATP when:",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "Protons flow down their electrochemical gradient through ATP synthase back into the matrix, and this flux drives the rotary mechanism that phosphorylates ADP to ATP. The enzyme thus converts the gradient's energy into chemical bond energy.",
+    choices: [
+      { text: "Protons flow back into the matrix through it, driving phosphorylation of ADP", isCorrect: true },
+      { text: "It pumps protons out of the matrix" },
+      { text: "It hydrolyzes NADH" },
+      { text: "Oxygen is converted to carbon dioxide" },
+      { text: "Glucose is split into pyruvate" },
+    ],
+  },
+  {
+    stem: "The complete oxidation of one glucose molecule yields approximately how many ATP by current estimates?",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "Modern estimates place the yield near 30-32 ATP per glucose when glycolysis, the TCA cycle and oxidative phosphorylation are combined, lower than the older textbook figure of 36-38 because proton leak and transport costs are now accounted for. The exact number varies with the shuttle used.",
+    choices: [
+      { text: "About 30-32 ATP", isCorrect: true },
+      { text: "Exactly 2 ATP" },
+      { text: "About 100 ATP" },
+      { text: "About 4 ATP" },
+      { text: "Zero, since glucose yields only NADPH" },
+    ],
+  },
+  {
+    stem: "Under normal conditions, electron transport and ATP synthesis are 'coupled,' meaning that:",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "Coupling means electron flow (and oxygen consumption) proceeds only when protons can return through ATP synthase to make ATP, so respiration is normally paced by ADP availability (respiratory control). Uncoupling breaks this link, letting electrons flow without ATP synthesis.",
+    choices: [
+      { text: "Electron flow depends on ATP being synthesized as protons return", isCorrect: true },
+      { text: "They occur in completely separate cells" },
+      { text: "ATP is made without any electron transport" },
+      { text: "Oxygen is not required" },
+      { text: "Protons never cross the membrane" },
+    ],
+  },
+  {
+    stem: "True or False: Substrate-level phosphorylation, unlike oxidative phosphorylation, can generate ATP without oxygen or the electron transport chain.",
+    type: "TRUE_FALSE",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "True. Substrate-level phosphorylation transfers a phosphate directly from a high-energy substrate to ADP (as in glycolysis and the succinyl-CoA synthetase step), so it does not require oxygen. This is how cells make some ATP anaerobically.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ ETC INHIBITORS & UNCOUPLERS ══════════════ */
+  {
+    stem: "Cyanide and carbon monoxide are lethal because they inhibit the electron transport chain at:",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Both bind cytochrome c oxidase (Complex IV), halting electron transfer to oxygen, so the proton gradient collapses and ATP synthesis stops despite adequate oxygen. Cells are forced into anaerobic metabolism, producing lactic acidosis.",
+    choices: [
+      { text: "Complex IV (cytochrome c oxidase)", isCorrect: true },
+      { text: "Complex I only" },
+      { text: "ATP synthase" },
+      { text: "The glucose transporter" },
+      { text: "Pyruvate kinase" },
+    ],
+  },
+  {
+    stem: "An uncoupling agent such as 2,4-dinitrophenol affects mitochondria by:",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Uncouplers carry protons across the inner membrane, dissipating the gradient so its energy is released as heat rather than captured as ATP; electron transport and oxygen consumption actually speed up while ATP output falls. This causes hyperthermia, historically seen with DNP.",
+    choices: [
+      { text: "Dissipating the proton gradient, releasing energy as heat instead of ATP", isCorrect: true },
+      { text: "Blocking oxygen from reaching Complex IV" },
+      { text: "Inhibiting ATP synthase directly" },
+      { text: "Preventing NADH formation" },
+      { text: "Increasing ATP yield per glucose" },
+    ],
+  },
+  {
+    stem: "The physiologic uncoupling protein thermogenin (UCP1) in brown adipose tissue is important because it:",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Thermogenin allows protons to re-enter the matrix without making ATP, generating heat (non-shivering thermogenesis) — valuable in neonates and hibernating animals. It is a natural, regulated example of uncoupling.",
+    choices: [
+      { text: "Generates heat by uncoupling respiration from ATP synthesis", isCorrect: true },
+      { text: "Increases ATP production for muscle" },
+      { text: "Stores fat as glycogen" },
+      { text: "Blocks the electron transport chain" },
+      { text: "Synthesizes brown pigment" },
+    ],
+  },
+  {
+    stem: "Which agents are matched correctly to their site or mode of action on oxidative phosphorylation? Select all that apply.",
+    type: "MULTI",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Cyanide blocks Complex IV, rotenone blocks Complex I, oligomycin inhibits ATP synthase, and 2,4-dinitrophenol is an uncoupler. Malonate inhibits Complex II (succinate dehydrogenase), so labeling it an uncoupler would be incorrect.",
+    choices: [
+      { text: "Cyanide — Complex IV", isCorrect: true },
+      { text: "Rotenone — Complex I", isCorrect: true },
+      { text: "Oligomycin — ATP synthase", isCorrect: true },
+      { text: "2,4-Dinitrophenol — uncoupler", isCorrect: true },
+      { text: "Malonate — uncoupler" },
+    ],
+  },
+  {
+    stem: "When ATP synthase is blocked by oligomycin, electron transport soon slows as well because:",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "Because respiration is coupled, blocking proton return through ATP synthase causes the proton gradient to build up and oppose further pumping, so electron transport and oxygen consumption fall — unless an uncoupler is added to relieve the back-pressure. This is respiratory control in action.",
+    choices: [
+      { text: "The proton gradient builds up and opposes further pumping", isCorrect: true },
+      { text: "Oxygen is no longer present" },
+      { text: "NADH is destroyed" },
+      { text: "Glycolysis stops immediately" },
+      { text: "The TCA cycle speeds up without limit" },
+    ],
+  },
+  /* ══════════════ MITOCHONDRIAL SHUTTLES ══════════════ */
+  {
+    stem: "Cytosolic NADH from glycolysis cannot cross the inner mitochondrial membrane directly, so its reducing equivalents enter the chain via:",
+    topic: "Mitochondrial Shuttles",
+    explanation:
+      "The malate-aspartate shuttle (in heart and liver) and the glycerol-3-phosphate shuttle (in muscle and brain) transfer electrons from cytosolic NADH into the mitochondria. The shuttle used affects the ATP yield, since the glycerol-3-phosphate shuttle delivers electrons as FADH2.",
+    choices: [
+      { text: "The malate-aspartate or glycerol-3-phosphate shuttle", isCorrect: true },
+      { text: "Direct diffusion of NADH across the membrane" },
+      { text: "The urea cycle" },
+      { text: "The pentose phosphate pathway" },
+      { text: "Simple facilitated transport of NADH" },
+    ],
+  },
+  {
+    stem: "The malate-aspartate shuttle yields more ATP than the glycerol-3-phosphate shuttle because it:",
+    topic: "Mitochondrial Shuttles",
+    explanation:
+      "The malate-aspartate shuttle regenerates NADH inside the matrix, which enters at Complex I, whereas the glycerol-3-phosphate shuttle delivers electrons as FADH2 at Complex II, pumping fewer protons. Hence the malate-aspartate shuttle captures more energy per cytosolic NADH.",
+    choices: [
+      { text: "Delivers electrons as mitochondrial NADH at Complex I", isCorrect: true },
+      { text: "Bypasses the electron transport chain" },
+      { text: "Produces NADPH for biosynthesis" },
+      { text: "Generates ATP by substrate-level phosphorylation" },
+      { text: "Uses no membrane transport at all" },
+    ],
+  },
+  {
+    stem: "The carnitine shuttle serves a different transport role, moving which molecules into the mitochondrial matrix?",
+    topic: "Mitochondrial Shuttles",
+    explanation:
+      "The carnitine shuttle transports long-chain fatty acyl groups across the inner mitochondrial membrane for beta-oxidation; carnitine palmitoyltransferase I is its regulated, rate-limiting step. Deficiency causes fasting intolerance and muscle weakness.",
+    choices: [
+      { text: "Long-chain fatty acyl groups for beta-oxidation", isCorrect: true },
+      { text: "Glucose for glycolysis" },
+      { text: "Amino acids for protein synthesis" },
+      { text: "Protons for ATP synthase" },
+      { text: "Oxygen for Complex IV" },
+    ],
+  },
+  /* ══════════════ REGULATION OF ENERGY METABOLISM ══════════════ */
+  {
+    stem: "A high cellular ratio of ATP to ADP and AMP generally signals the cell to:",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "Abundant ATP indicates energy sufficiency, so ATP allosterically inhibits key catabolic enzymes such as PFK-1 and isocitrate dehydrogenase, slowing energy production, while AMP (signaling low energy) activates them. This keeps ATP supply matched to demand.",
+    choices: [
+      { text: "Slow catabolic, energy-producing pathways", isCorrect: true },
+      { text: "Accelerate glycolysis maximally" },
+      { text: "Speed up the TCA cycle without limit" },
+      { text: "Increase oxygen consumption sharply" },
+      { text: "Stop all biosynthesis" },
+    ],
+  },
+  {
+    stem: "AMP-activated protein kinase (AMPK) is often called the cell's fuel gauge because it is activated when:",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "A rising AMP:ATP ratio signals low energy and activates AMPK, which switches on ATP-generating catabolic pathways (glucose uptake, fatty acid oxidation) and switches off ATP-consuming anabolic ones. It thereby restores energy balance.",
+    choices: [
+      { text: "Energy is low (high AMP:ATP), switching on catabolism", isCorrect: true },
+      { text: "Energy is abundant, switching on anabolism" },
+      { text: "Oxygen is absent only" },
+      { text: "Glucose is being stored as glycogen" },
+      { text: "The cell is fully fed and resting" },
+    ],
+  },
+  {
+    stem: "Respiratory control refers to the observation that mitochondrial oxygen consumption is regulated primarily by the availability of:",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "In coupled mitochondria, the rate of electron transport (and oxygen use) is set largely by the supply of ADP: when ADP is plentiful (energy demand high), respiration speeds up; when ADP is scarce, it slows. This links ATP consumption to its production.",
+    choices: [
+      { text: "ADP", isCorrect: true },
+      { text: "Glucose" },
+      { text: "Carbon dioxide" },
+      { text: "Water" },
+      { text: "Nitrogen" },
+    ],
+  },
+  {
+    stem: "Which molecules act as allosteric inhibitors signaling an energy-rich state at key metabolic control points? Select all that apply.",
+    type: "MULTI",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "ATP, NADH, citrate and acetyl-CoA all rise when energy and building blocks are plentiful and act to slow catabolic flux (e.g., ATP and citrate inhibit PFK-1; NADH and acetyl-CoA inhibit pyruvate dehydrogenase). AMP is the opposite signal, activating catabolism when energy is low.",
+    choices: [
+      { text: "ATP", isCorrect: true },
+      { text: "NADH", isCorrect: true },
+      { text: "Citrate", isCorrect: true },
+      { text: "Acetyl-CoA", isCorrect: true },
+      { text: "AMP" },
+    ],
+  },
+  /* ══════════════ TISSUE-SPECIFIC FUEL USE ══════════════ */
+  {
+    stem: "In the well-fed state, the brain relies almost exclusively on which fuel?",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "Under normal fed conditions the brain depends on glucose, consuming a large share of the body's supply, because most fatty acids do not cross the blood-brain barrier. Only after prolonged starvation does it adapt to use ketone bodies.",
+    choices: [
+      { text: "Glucose", isCorrect: true },
+      { text: "Long-chain fatty acids" },
+      { text: "Lactate exclusively" },
+      { text: "Amino acids only" },
+      { text: "Triglycerides" },
+    ],
+  },
+  {
+    stem: "Mature red blood cells depend on glycolysis for ATP and on the pentose phosphate pathway for NADPH because they:",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "Lacking mitochondria, red cells cannot oxidize fuels aerobically, so glycolysis supplies ATP and the pentose phosphate pathway supplies NADPH to protect against oxidative damage. This dependence explains their vulnerability in G6PD deficiency and glycolytic enzyme defects.",
+    choices: [
+      { text: "Have no mitochondria", isCorrect: true },
+      { text: "Cannot take up glucose" },
+      { text: "Contain no enzymes" },
+      { text: "Rely solely on fatty acid oxidation" },
+      { text: "Use only ketone bodies" },
+    ],
+  },
+  {
+    stem: "Cardiac muscle preferentially oxidizes which fuel at rest, reflecting its rich mitochondrial content?",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "The heart favors fatty acid oxidation at rest because of its abundant mitochondria and high, steady energy demand, though it can also use lactate, ketones and glucose. This flexibility helps it maintain constant output.",
+    choices: [
+      { text: "Fatty acids", isCorrect: true },
+      { text: "Ribose" },
+      { text: "Only ketone bodies" },
+      { text: "Only glucose" },
+      { text: "Amino acids exclusively" },
+    ],
+  },
+  {
+    stem: "During prolonged starvation, a key adaptation that spares muscle protein is that the brain begins to use:",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "After days of fasting the brain adapts to use ketone bodies for much of its energy, reducing its glucose requirement and thereby lessening the need for gluconeogenesis from muscle amino acids. This protein-sparing shift is vital for surviving prolonged starvation.",
+    choices: [
+      { text: "Ketone bodies", isCorrect: true },
+      { text: "Free fatty acids directly" },
+      { text: "Lactate only" },
+      { text: "Dietary glucose" },
+      { text: "Stored glycogen from muscle" },
+    ],
+  },
+  {
+    stem: "True or False: Exercising skeletal muscle can retain glucose because, lacking glucose-6-phosphatase, it cannot release free glucose into the blood.",
+    type: "TRUE_FALSE",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "True. Muscle lacks glucose-6-phosphatase, so glucose-6-phosphate from its glycogen cannot be dephosphorylated and exported; the glucose is used locally. This is why the liver, not muscle, regulates blood glucose despite muscle holding more glycogen.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ CLINICAL APPLICATION ══════════════ */
+  {
+    stem: "A patient with cyanide poisoning develops severe lactic acidosis with a narrowed arteriovenous oxygen difference. The best explanation is that cyanide:",
+    topic: "Clinical Application",
+    explanation:
+      "By blocking Complex IV, cyanide prevents cells from using oxygen, so tissues cannot extract it (narrowed A-V oxygen difference) and shift to anaerobic glycolysis, generating lactate. Treatment aims to bind cyanide (e.g., hydroxocobalamin) and restore oxidative metabolism.",
+    choices: [
+      { text: "Blocks cellular oxygen use, forcing anaerobic metabolism", isCorrect: true },
+      { text: "Prevents oxygen from binding hemoglobin only" },
+      { text: "Increases ATP synthesis" },
+      { text: "Stimulates the TCA cycle" },
+      { text: "Uncouples the chain to make heat" },
+    ],
+  },
+  {
+    stem: "An infant with a defect in the pyruvate dehydrogenase complex characteristically develops lactic acidosis that worsens with a high-carbohydrate meal. A dietary strategy that may help is to:",
+    topic: "Clinical Application",
+    explanation:
+      "Because pyruvate cannot be converted to acetyl-CoA, a ketogenic (high-fat, low-carbohydrate) diet provides acetyl-CoA directly from fatty acids and ketones, bypassing the block and reducing pyruvate/lactate accumulation. This is a rational, mechanism-based intervention.",
+    choices: [
+      { text: "Provide a ketogenic (high-fat) diet to supply acetyl-CoA", isCorrect: true },
+      { text: "Increase dietary carbohydrate sharply" },
+      { text: "Restrict all fat intake" },
+      { text: "Give high-dose oxygen only" },
+      { text: "Add a mitochondrial uncoupler" },
+    ],
+  },
+  {
+    stem: "A patient who ingested a weight-loss product containing 2,4-dinitrophenol presents with dangerous hyperthermia and profuse sweating. The mechanism is that DNP:",
+    topic: "Clinical Application",
+    explanation:
+      "DNP uncouples oxidative phosphorylation, so the energy of the proton gradient is released as heat instead of captured in ATP; respiration accelerates but ATP falls, causing hyperthermia and metabolic stress. This explains its danger and historical toxicity.",
+    choices: [
+      { text: "Uncouples oxidative phosphorylation, releasing energy as heat", isCorrect: true },
+      { text: "Blocks glycolysis at PFK-1" },
+      { text: "Inhibits the TCA cycle" },
+      { text: "Prevents oxygen delivery by hemoglobin" },
+      { text: "Increases ATP synthesis dangerously" },
+    ],
+  },
+  {
+    stem: "A chronic alcoholic with poor nutrition develops confusion, ataxia and ophthalmoplegia. Administering which vitamin addresses the underlying enzymatic defect?",
+    topic: "Clinical Application",
+    explanation:
+      "Thiamine deficiency impairs pyruvate and alpha-ketoglutarate dehydrogenase (and transketolase), producing Wernicke encephalopathy; thiamine must be given, ideally before glucose, to prevent worsening. This links a cofactor deficiency to a classic clinical triad.",
+    choices: [
+      { text: "Thiamine (B1)", isCorrect: true },
+      { text: "Vitamin C" },
+      { text: "Vitamin K" },
+      { text: "Vitamin D" },
+      { text: "Biotin" },
+    ],
+  },
+  {
+    stem: "Which clinical clues correctly point to impaired mitochondrial energy metabolism? Select all that apply.",
+    type: "MULTI",
+    topic: "Clinical Application",
+    explanation:
+      "Lactic acidosis, tissues with high energy demand (brain, heart, muscle) being most affected, and maternal inheritance for primary mitochondrial DNA disorders all suggest impaired oxidative metabolism. A rise in a cardiac-specific marker like troponin points to myocardial injury, not generally to a mitochondrial energy defect, and normal lactate with high ATP argues against it.",
+    choices: [
+      { text: "Lactic acidosis", isCorrect: true },
+      { text: "Prominent involvement of brain, heart, and muscle", isCorrect: true },
+      { text: "Maternal inheritance in primary mitochondrial DNA disease", isCorrect: true },
+      { text: "Normal lactate with abundant ATP" },
+      { text: "An isolated rise in troponin as the defining feature" },
+    ],
+  },
+  {
+    stem: "True or False: Because oxidative phosphorylation depends on oxygen as the final electron acceptor, any condition that severely limits oxygen delivery will reduce ATP production and drive anaerobic metabolism.",
+    type: "TRUE_FALSE",
+    topic: "Clinical Application",
+    explanation:
+      "True. Without oxygen to accept electrons at Complex IV, the electron transport chain backs up and ATP synthesis falls, forcing cells to rely on anaerobic glycolysis and produce lactate. This underlies the metabolic consequences of ischemia and shock.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  /* ══════════════ ADDITIONAL ITEMS ══════════════ */
+  {
+    stem: "Coupling the hydrolysis of ATP to an energetically unfavorable reaction works because ATP hydrolysis:",
+    topic: "Thermodynamics & ATP",
+    explanation:
+      "ATP hydrolysis has a large negative free-energy change, and when this exergonic step is coupled to an endergonic reaction the sum can be negative, allowing the combined process to proceed. This is the fundamental way cells drive unfavorable reactions.",
+    choices: [
+      { text: "Contributes a large negative free-energy change to the combined reaction", isCorrect: true },
+      { text: "Absorbs energy from the surroundings" },
+      { text: "Raises the activation energy" },
+      { text: "Makes the overall free-energy change positive" },
+      { text: "Requires oxygen to occur" },
+    ],
+  },
+  {
+    stem: "Hexokinase, unlike hepatic glucokinase, is strongly inhibited by its product. This means hexokinase:",
+    topic: "Glycolysis",
+    explanation:
+      "Hexokinase is inhibited by glucose-6-phosphate, so when downstream glucose-6-phosphate accumulates the enzyme slows, preventing tissues from hoarding glucose. Glucokinase lacks this product inhibition, letting the liver keep taking up glucose after a meal.",
+    choices: [
+      { text: "Slows when glucose-6-phosphate accumulates", isCorrect: true },
+      { text: "Has a very high Km for glucose" },
+      { text: "Works only when glucose is abundant" },
+      { text: "Is found only in the liver" },
+      { text: "Cannot phosphorylate glucose" },
+    ],
+  },
+  {
+    stem: "Which glycolytic reactions generate ATP directly by substrate-level phosphorylation? Select all that apply.",
+    type: "MULTI",
+    topic: "Glycolysis",
+    explanation:
+      "The phosphoglycerate kinase step (1,3-bisphosphoglycerate to 3-phosphoglycerate) and the pyruvate kinase step (phosphoenolpyruvate to pyruvate) each transfer a phosphate directly to ADP, producing ATP without the electron transport chain. Hexokinase and phosphofructokinase-1 consume ATP rather than make it.",
+    choices: [
+      { text: "The phosphoglycerate kinase step", isCorrect: true },
+      { text: "The pyruvate kinase step", isCorrect: true },
+      { text: "The hexokinase step" },
+      { text: "The phosphofructokinase-1 step" },
+      { text: "The aldolase step" },
+    ],
+  },
+  {
+    stem: "The only NADH-producing step of glycolysis is catalyzed by glyceraldehyde-3-phosphate dehydrogenase, which is also the target of:",
+    topic: "Glycolysis",
+    explanation:
+      "Glyceraldehyde-3-phosphate dehydrogenase oxidizes its substrate while reducing NAD+ to NADH; arsenate can uncouple this step's ATP yield, and iodoacetate inhibits the enzyme's active-site cysteine. Its NADH must be reoxidized for glycolysis to continue.",
+    choices: [
+      { text: "Iodoacetate, which modifies its active-site cysteine", isCorrect: true },
+      { text: "Cyanide, which blocks its heme" },
+      { text: "Oligomycin, which blocks ATP synthase" },
+      { text: "Rotenone, which blocks Complex I" },
+      { text: "Allopurinol, which blocks xanthine oxidase" },
+    ],
+  },
+  {
+    stem: "Lactate dehydrogenase catalyzes a reaction that is important in the clinical lab because its isoenzyme pattern can indicate the tissue of origin. The reaction it catalyzes is:",
+    topic: "Anaerobic & Lactate Metabolism",
+    explanation:
+      "Lactate dehydrogenase interconverts pyruvate and lactate while oxidizing or reducing the NAD+/NADH couple. Its five isoenzymes distribute differently among tissues, so the pattern of elevation can help localize injury, for example to heart or liver.",
+    choices: [
+      { text: "Reversible interconversion of pyruvate and lactate", isCorrect: true },
+      { text: "Oxidation of pyruvate to acetyl-CoA" },
+      { text: "Carboxylation of pyruvate to oxaloacetate" },
+      { text: "Conversion of lactate to alanine" },
+      { text: "Decarboxylation of isocitrate" },
+    ],
+  },
+  {
+    stem: "How many molecules of carbon dioxide are released per single turn of the TCA cycle?",
+    topic: "TCA Cycle",
+    explanation:
+      "Two CO2 are released per turn, at the isocitrate dehydrogenase and alpha-ketoglutarate dehydrogenase steps. These carbons balance the two carbons that entered as the acetyl group of acetyl-CoA.",
+    choices: [
+      { text: "Two", isCorrect: true },
+      { text: "One" },
+      { text: "Three" },
+      { text: "Four" },
+      { text: "None" },
+    ],
+  },
+  {
+    stem: "The GTP (or ATP) formed directly within the TCA cycle is produced at the step catalyzed by:",
+    topic: "TCA Cycle",
+    explanation:
+      "Succinyl-CoA synthetase converts succinyl-CoA to succinate and captures the energy of the thioester bond as GTP (or ATP) by substrate-level phosphorylation. This is the cycle's only direct high-energy phosphate-generating step.",
+    choices: [
+      { text: "Succinyl-CoA synthetase", isCorrect: true },
+      { text: "Citrate synthase" },
+      { text: "Isocitrate dehydrogenase" },
+      { text: "Malate dehydrogenase" },
+      { text: "Fumarase" },
+    ],
+  },
+  {
+    stem: "The enzymes of the TCA cycle are located in the:",
+    topic: "TCA Cycle",
+    explanation:
+      "The TCA cycle operates in the mitochondrial matrix, with the single exception of succinate dehydrogenase, which is embedded in the inner membrane as Complex II. This location places the cycle next to the electron transport chain it feeds.",
+    choices: [
+      { text: "Mitochondrial matrix", isCorrect: true },
+      { text: "Cytosol" },
+      { text: "Nucleus" },
+      { text: "Endoplasmic reticulum" },
+      { text: "Lysosome" },
+    ],
+  },
+  {
+    stem: "Complex I of the electron transport chain is also known as:",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Complex I is NADH dehydrogenase (NADH:ubiquinone oxidoreductase), which accepts electrons from NADH and passes them to ubiquinone while pumping protons. Rotenone blocks this complex.",
+    choices: [
+      { text: "NADH dehydrogenase", isCorrect: true },
+      { text: "Cytochrome c oxidase" },
+      { text: "ATP synthase" },
+      { text: "Succinate dehydrogenase" },
+      { text: "Pyruvate dehydrogenase" },
+    ],
+  },
+  {
+    stem: "A small fraction of electrons leaking from the chain can reduce oxygen incompletely, producing reactive oxygen species. The cell defends against these using:",
+    topic: "Electron Transport Chain",
+    explanation:
+      "Superoxide dismutase, catalase and glutathione peroxidase detoxify reactive oxygen species such as superoxide and hydrogen peroxide; glutathione peroxidase depends on NADPH-regenerated reduced glutathione. These defenses limit oxidative damage from normal respiration.",
+    choices: [
+      { text: "Superoxide dismutase, catalase, and glutathione peroxidase", isCorrect: true },
+      { text: "ATP synthase and Complex I" },
+      { text: "Hexokinase and aldolase" },
+      { text: "Lactate dehydrogenase alone" },
+      { text: "The urea cycle enzymes" },
+    ],
+  },
+  {
+    stem: "True or False: Salicylate (aspirin) overdose can uncouple oxidative phosphorylation, contributing to hyperthermia.",
+    type: "TRUE_FALSE",
+    topic: "ETC Inhibitors & Uncouplers",
+    explanation:
+      "True. In toxic doses, salicylates uncouple oxidative phosphorylation, so energy is dissipated as heat and metabolism is disturbed, contributing to the hyperthermia and mixed acid-base picture of salicylate poisoning. This complements salicylate's direct effect on the respiratory center.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+  {
+    stem: "The glycerol-3-phosphate shuttle predominates in tissues such as skeletal muscle and brain and is notable because it:",
+    topic: "Mitochondrial Shuttles",
+    explanation:
+      "This shuttle transfers cytosolic reducing equivalents into the mitochondrion by generating FADH2, which enters the chain at Complex II, yielding slightly less ATP than the malate-aspartate shuttle. Its speed suits tissues with high energy turnover.",
+    choices: [
+      { text: "Delivers electrons as FADH2, giving a slightly lower ATP yield", isCorrect: true },
+      { text: "Delivers electrons as NADH at Complex I" },
+      { text: "Transports fatty acids into the mitochondrion" },
+      { text: "Produces NADPH for biosynthesis" },
+      { text: "Requires no membrane-bound enzymes" },
+    ],
+  },
+  {
+    stem: "In the fed state, insulin promotes energy storage by stimulating which set of processes?",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "Insulin promotes glucose uptake, glycolysis, glycogen synthesis and lipogenesis while suppressing gluconeogenesis and lipolysis, directing surplus fuel into storage. This anabolic pattern is the metabolic signature of the fed state.",
+    choices: [
+      { text: "Glycolysis, glycogen synthesis, and lipogenesis", isCorrect: true },
+      { text: "Gluconeogenesis and ketogenesis" },
+      { text: "Glycogenolysis and lipolysis" },
+      { text: "Proteolysis and fatty acid oxidation" },
+      { text: "Urea synthesis and gluconeogenesis" },
+    ],
+  },
+  {
+    stem: "Which conditions or signals activate glycolysis in the liver? Select all that apply.",
+    type: "MULTI",
+    topic: "Regulation of Energy Metabolism",
+    explanation:
+      "The fed state, insulin signaling, and a rise in fructose-2,6-bisphosphate all promote glycolysis, while a high AMP level (low energy) also activates PFK-1. High ATP and high citrate are signals of energy sufficiency that inhibit glycolysis rather than activate it.",
+    choices: [
+      { text: "Insulin signaling in the fed state", isCorrect: true },
+      { text: "Elevated fructose-2,6-bisphosphate", isCorrect: true },
+      { text: "A high AMP level", isCorrect: true },
+      { text: "A high ATP level" },
+      { text: "A high citrate level" },
+    ],
+  },
+  {
+    stem: "Blood collection tubes for glucose measurement often contain sodium fluoride, which preserves the sample by inhibiting the glycolytic enzyme:",
+    topic: "Clinical Application",
+    explanation:
+      "Fluoride inhibits enolase, halting glycolysis in the drawn blood so that red and white cells do not consume the glucose before it is measured. Without it, ongoing glycolysis would falsely lower the measured glucose.",
+    choices: [
+      { text: "Enolase", isCorrect: true },
+      { text: "Hexokinase" },
+      { text: "Pyruvate kinase" },
+      { text: "Aldolase" },
+      { text: "Lactate dehydrogenase" },
+    ],
+  },
+  {
+    stem: "The complete oxidation of one molecule of NADH in the mitochondrion yields approximately how many ATP under current estimates?",
+    topic: "Oxidative Phosphorylation",
+    explanation:
+      "Each NADH is now estimated to yield about 2.5 ATP and each FADH2 about 1.5 ATP, reflecting the number of protons pumped and the cost of ATP export. These revised figures replace the older whole-number estimates of 3 and 2.",
+    choices: [
+      { text: "About 2.5 ATP", isCorrect: true },
+      { text: "About 10 ATP" },
+      { text: "Exactly 1 ATP" },
+      { text: "About 0.5 ATP" },
+      { text: "Zero ATP" },
+    ],
+  },
+  {
+    stem: "A patient with a mitochondrial DNA disorder such as MELAS shows which characteristic inheritance pattern?",
+    topic: "Clinical Application",
+    explanation:
+      "Mitochondrial DNA is inherited from the oocyte, so primary mitochondrial disorders show maternal inheritance, affecting offspring of affected mothers regardless of sex. Heteroplasmy explains the variable severity among family members.",
+    choices: [
+      { text: "Maternal inheritance", isCorrect: true },
+      { text: "Y-linked inheritance" },
+      { text: "Autosomal dominant only" },
+      { text: "Paternal inheritance" },
+      { text: "No hereditary pattern at all" },
+    ],
+  },
+  {
+    stem: "True or False: A tissue rich in mitochondria, such as cardiac muscle, is generally more dependent on oxidative phosphorylation than a tissue like the mature red blood cell.",
+    type: "TRUE_FALSE",
+    topic: "Tissue-Specific Fuel Use",
+    explanation:
+      "True. Cardiac muscle has abundant mitochondria and relies heavily on oxidative phosphorylation for its steady, high energy demand, whereas the red blood cell has no mitochondria and depends entirely on glycolysis. This contrast illustrates tissue-specific energy strategies.",
+    choices: [{ text: "True", isCorrect: true }, { text: "False" }],
+  },
+];
