@@ -406,13 +406,25 @@ async function mapLimit<T>(
   fn: (item: T, index: number) => Promise<unknown>
 ): Promise<void> {
   let cursor = 0;
+  let firstError: unknown = null;
   const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
     while (cursor < items.length) {
+      // Once any worker has failed, stop pulling NEW work. Inserts already
+      // in flight are still awaited below, so the whole batch goes quiet
+      // before the error is propagated — nothing can commit after a retry's
+      // DELETE and duplicate rows (the 162-for-92 bug).
+      if (firstError) return;
       const idx = cursor++;
-      await fn(items[idx], idx);
+      try {
+        await fn(items[idx], idx);
+      } catch (e) {
+        if (firstError === null) firstError = e;
+        return;
+      }
     }
   });
-  await Promise.all(workers);
+  await Promise.all(workers); // every worker has fully settled by here
+  if (firstError) throw firstError; // safe to let withRetry replay from the DELETE
 }
 
 /**
