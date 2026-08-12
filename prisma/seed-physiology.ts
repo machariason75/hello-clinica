@@ -20,8 +20,8 @@ import { PHYSIOLOGY_SET_1 } from "./physiology/set-1";
 import { PHYSIOLOGY_SET_2 } from "./physiology/set-2";
 import { PHYSIOLOGY_SET_3 } from "./physiology/set-3";
 import { PHYSIOLOGY_SET_4 } from "./physiology/set-4";
-// import { PHYSIOLOGY_SET_5 } from "./physiology/set-5";
-// import { PHYSIOLOGY_SET_6 } from "./physiology/set-6";
+import { PHYSIOLOGY_SET_5 } from "./physiology/set-5";
+import { PHYSIOLOGY_SET_6 } from "./physiology/set-6";
 // import { PHYSIOLOGY_SET_7 } from "./physiology/set-7";
 
 const SETS = [
@@ -57,8 +57,22 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: PHYSIOLOGY_SET_4,
   },
-  // { n: 5, title: "Gastrointestinal Physiology", …, questions: PHYSIOLOGY_SET_5 },
-  // { n: 6, title: "Endocrine & Reproductive Physiology", …, questions: PHYSIOLOGY_SET_6 },
+  {
+    n: 5,
+    title: "Gastrointestinal Physiology",
+    description:
+      "The digestive tract as a coordinated system: gastrointestinal motility and smooth muscle, the enteric nervous system, swallowing and esophageal motility, gastric secretion and emptying, pancreatic and biliary secretion, the gut hormones, and the digestion and absorption of carbohydrate, protein, fat, and vitamins.",
+    difficulty: "Advanced" as const,
+    questions: PHYSIOLOGY_SET_5,
+  },
+  {
+    n: 6,
+    title: "Endocrine & Reproductive Physiology",
+    description:
+      "Chemical control of the body: hormone signaling mechanisms and feedback, the hypothalamic-pituitary axis, growth hormone and IGF-1, thyroid and adrenal cortical function, calcium and bone regulation, the endocrine pancreas, the male and female reproductive axes, and the physiology of pregnancy and lactation.",
+    difficulty: "Advanced" as const,
+    questions: PHYSIOLOGY_SET_6,
+  },
   // { n: 7, title: "Neurophysiology & Integrative Physiology", …, questions: PHYSIOLOGY_SET_7 },
 ];
 
