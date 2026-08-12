@@ -18,8 +18,8 @@ import { seedSubject, runWave, sample, merge, type Q } from "./_lib/qbank";
 
 import { PHYSIOLOGY_SET_1 } from "./physiology/set-1";
 import { PHYSIOLOGY_SET_2 } from "./physiology/set-2";
-// import { PHYSIOLOGY_SET_3 } from "./physiology/set-3";
-// import { PHYSIOLOGY_SET_4 } from "./physiology/set-4";
+import { PHYSIOLOGY_SET_3 } from "./physiology/set-3";
+import { PHYSIOLOGY_SET_4 } from "./physiology/set-4";
 // import { PHYSIOLOGY_SET_5 } from "./physiology/set-5";
 // import { PHYSIOLOGY_SET_6 } from "./physiology/set-6";
 // import { PHYSIOLOGY_SET_7 } from "./physiology/set-7";
@@ -41,8 +41,22 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: PHYSIOLOGY_SET_2,
   },
-  // { n: 3, title: "Respiratory Physiology", …, questions: PHYSIOLOGY_SET_3 },
-  // { n: 4, title: "Renal Physiology, Body Fluids & Acid-Base", …, questions: PHYSIOLOGY_SET_4 },
+  {
+    n: 3,
+    title: "Respiratory Physiology",
+    description:
+      "The lung as a gas exchanger: lung volumes and capacities, the mechanics of breathing and surfactant, airway resistance and flow, alveolar ventilation and dead space, diffusion and gas exchange, ventilation-perfusion matching, the transport of oxygen and carbon dioxide, the control of breathing, and the responses to exercise and altitude.",
+    difficulty: "Advanced" as const,
+    questions: PHYSIOLOGY_SET_3,
+  },
+  {
+    n: 4,
+    title: "Renal Physiology, Body Fluids & Acid-Base",
+    description:
+      "The kidney as the guardian of the internal environment: body-fluid compartments, renal clearance and the glomerular filtration rate, glomerular filtration and its autoregulation, tubular reabsorption and secretion, the loop of Henle and countercurrent multiplication, the regulation of water and sodium, potassium, calcium and phosphate handling, and acid-base physiology and its disorders.",
+    difficulty: "Advanced" as const,
+    questions: PHYSIOLOGY_SET_4,
+  },
   // { n: 5, title: "Gastrointestinal Physiology", …, questions: PHYSIOLOGY_SET_5 },
   // { n: 6, title: "Endocrine & Reproductive Physiology", …, questions: PHYSIOLOGY_SET_6 },
   // { n: 7, title: "Neurophysiology & Integrative Physiology", …, questions: PHYSIOLOGY_SET_7 },
