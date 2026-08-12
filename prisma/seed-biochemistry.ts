@@ -34,7 +34,7 @@ import { BIOCHEMISTRY_SET_3 } from "./biochemistry/set-3";
 import { BIOCHEMISTRY_SET_4 } from "./biochemistry/set-4";
 import { BIOCHEMISTRY_SET_5 } from "./biochemistry/set-5";
 import { BIOCHEMISTRY_SET_6 } from "./biochemistry/set-6";
-// import { BIOCHEMISTRY_SET_7 } from "./biochemistry/set-7";
+import { BIOCHEMISTRY_SET_7 } from "./biochemistry/set-7";
 
 /* ═══════════════════ PRACTICE SETS ═══════════════════ */
 
@@ -87,7 +87,14 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: BIOCHEMISTRY_SET_6,
   },
-  // { n: 7, title: "Vitamins, Nutrition & Integrated Metabolism", …, questions: BIOCHEMISTRY_SET_7 },
+  {
+    n: 7,
+    title: "Vitamins, Nutrition & Integrated Metabolism",
+    description:
+      "The capstone: the fat- and water-soluble vitamins and their deficiency syndromes, vitamin C and the trace minerals, energy balance and protein-energy malnutrition, and the integration of metabolism across the fed, fasting, and starvation states, hormonal control, ethanol, and diabetes.",
+    difficulty: "Advanced" as const,
+    questions: BIOCHEMISTRY_SET_7,
+  },
 ];
 
 /* ═══════════════════ EXAM LADDER ═══════════════════ */
@@ -188,7 +195,7 @@ runWave(() =>
     slugBase: "biochemistry",
     categorySlug: "fs-biochemistry",
     minPerSet: 90,  // firm floor — the seeder refuses to run if any set is under 90
-    partial: true, // ← switch to false once Set 7 has landed
+    partial: false, // all seven sets present — full strict mode (Exams 1-7 all build)
     sets: SETS,
     exams: EXAMS,
     footnote:

@@ -1,0 +1,4466 @@
+{
+  "exportedAt": "2026-08-07T11:42:00.270Z",
+  "allCategories": [
+    {
+      "slug": "nursing-exams",
+      "title": "Nursing Exams",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "teas",
+      "title": "TEAS",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-a2-certifications",
+      "title": "HESI A2 Certifications",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "nursing-certifications",
+      "title": "Nursing Certifications",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "colleges-universities",
+      "title": "Colleges & Universities",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ne-fundamentals-of-nursing",
+      "title": "Fundamentals of Nursing",
+      "parent": "Nursing Exams",
+      "quizCount": 1,
+      "questionCount": 5
+    },
+    {
+      "slug": "ne-medical-surgical",
+      "title": "Medical-Surgical Nursing",
+      "parent": "Nursing Exams",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ne-pharmacology",
+      "title": "Pharmacology",
+      "parent": "Nursing Exams",
+      "quizCount": 1,
+      "questionCount": 5
+    },
+    {
+      "slug": "ne-maternal-newborn",
+      "title": "Maternal & Newborn",
+      "parent": "Nursing Exams",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ne-pediatric-nursing",
+      "title": "Pediatric Nursing",
+      "parent": "Nursing Exams",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ne-mental-health",
+      "title": "Mental Health Nursing",
+      "parent": "Nursing Exams",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ne-community-health",
+      "title": "Community & Public Health",
+      "parent": "Nursing Exams",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "ati-teas-version-7",
+      "title": "ATI TEAS Version 7",
+      "parent": "TEAS",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "teas-reading",
+      "title": "Reading",
+      "parent": "ATI TEAS Version 7",
+      "quizCount": 1,
+      "questionCount": 6
+    },
+    {
+      "slug": "teas-mathematics",
+      "title": "Mathematics",
+      "parent": "ATI TEAS Version 7",
+      "quizCount": 1,
+      "questionCount": 5
+    },
+    {
+      "slug": "teas-science",
+      "title": "Science",
+      "parent": "ATI TEAS Version 7",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "teas-english",
+      "title": "English & Language Usage",
+      "parent": "ATI TEAS Version 7",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-reading-comprehension",
+      "title": "Reading Comprehension",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-vocabulary",
+      "title": "Vocabulary",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-mathematics",
+      "title": "Mathematics",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-biology",
+      "title": "Biology",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-chemistry",
+      "title": "Chemistry",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "hesi-anatomy-physiology",
+      "title": "Anatomy & Physiology",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 1,
+      "questionCount": 6
+    },
+    {
+      "slug": "hesi-grammar",
+      "title": "Grammar",
+      "parent": "HESI A2 Certifications",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "nclex-pn",
+      "title": "NCLEX-PN",
+      "parent": "Nursing Certifications",
+      "quizCount": 1,
+      "questionCount": 5
+    },
+    {
+      "slug": "nclex-rn",
+      "title": "NCLEX-RN",
+      "parent": "Nursing Certifications",
+      "quizCount": 1,
+      "questionCount": 10
+    },
+    {
+      "slug": "usmle-revision",
+      "title": "USMLE Revision",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "usmle-step-1",
+      "title": "Step 1",
+      "parent": "USMLE Revision",
+      "quizCount": 2,
+      "questionCount": 7
+    },
+    {
+      "slug": "fs-chemistry",
+      "title": "Chemistry",
+      "parent": "Foundational Sciences",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-organic-chemistry",
+      "title": "Organic Chemistry",
+      "parent": "Chemistry",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-inorganic-chemistry",
+      "title": "Inorganic Chemistry",
+      "parent": "Chemistry",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-physical-chemistry",
+      "title": "Physical Chemistry",
+      "parent": "Chemistry",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "usmle-study-strategy",
+      "title": "Study Strategy",
+      "parent": "USMLE Revision",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "mpje",
+      "title": "MPJE",
+      "parent": "Pharmacy Licensure (NAPLEX & MPJE)",
+      "quizCount": 1,
+      "questionCount": 3
+    },
+    {
+      "slug": "pharmacy-study-strategy",
+      "title": "Study Strategy",
+      "parent": "Pharmacy Licensure (NAPLEX & MPJE)",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-anatomy",
+      "title": "Anatomy",
+      "parent": "Foundational Sciences",
+      "quizCount": 1,
+      "questionCount": 75
+    },
+    {
+      "slug": "fs-gross-anatomy",
+      "title": "Gross Anatomy",
+      "parent": "Anatomy",
+      "quizCount": 3,
+      "questionCount": 60
+    },
+    {
+      "slug": "fs-neuroanatomy",
+      "title": "Neuroanatomy",
+      "parent": "Anatomy",
+      "quizCount": 3,
+      "questionCount": 60
+    },
+    {
+      "slug": "fs-embryology",
+      "title": "Embryology",
+      "parent": "Anatomy",
+      "quizCount": 1,
+      "questionCount": 15
+    },
+    {
+      "slug": "fs-histology",
+      "title": "Histology",
+      "parent": "Anatomy",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "fs-physiology",
+      "title": "Physiology",
+      "parent": "Foundational Sciences",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-respiratory-physiology",
+      "title": "Respiratory",
+      "parent": "Physiology",
+      "quizCount": 3,
+      "questionCount": 60
+    },
+    {
+      "slug": "fs-renal-physiology",
+      "title": "Renal & Fluid Balance",
+      "parent": "Physiology",
+      "quizCount": 3,
+      "questionCount": 60
+    },
+    {
+      "slug": "fs-endocrine-physiology",
+      "title": "Endocrine",
+      "parent": "Physiology",
+      "quizCount": 1,
+      "questionCount": 25
+    },
+    {
+      "slug": "fs-biochemistry",
+      "title": "Biochemistry",
+      "parent": "Foundational Sciences",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "fs-microbiology",
+      "title": "Microbiology",
+      "parent": "Foundational Sciences",
+      "quizCount": 1,
+      "questionCount": 44
+    },
+    {
+      "slug": "fs-bacteriology",
+      "title": "Bacteriology",
+      "parent": "Microbiology",
+      "quizCount": 1,
+      "questionCount": 14
+    },
+    {
+      "slug": "fs-virology",
+      "title": "Virology",
+      "parent": "Microbiology",
+      "quizCount": 1,
+      "questionCount": 12
+    },
+    {
+      "slug": "fs-parasitology",
+      "title": "Parasitology",
+      "parent": "Microbiology",
+      "quizCount": 1,
+      "questionCount": 10
+    },
+    {
+      "slug": "fs-mycology",
+      "title": "Mycology",
+      "parent": "Microbiology",
+      "quizCount": 1,
+      "questionCount": 8
+    },
+    {
+      "slug": "fs-pathology",
+      "title": "Pathology",
+      "parent": "Foundational Sciences",
+      "quizCount": 31,
+      "questionCount": 3261
+    },
+    {
+      "slug": "fs-pharmacology",
+      "title": "Pharmacology",
+      "parent": "Foundational Sciences",
+      "quizCount": 29,
+      "questionCount": 3198
+    },
+    {
+      "slug": "fs-antibiotics",
+      "title": "Antibiotics & Antimicrobials",
+      "parent": "Pharmacology",
+      "quizCount": 2,
+      "questionCount": 78
+    },
+    {
+      "slug": "fs-cardiovascular-drugs",
+      "title": "Cardiovascular Drugs",
+      "parent": "Pharmacology",
+      "quizCount": 1,
+      "questionCount": 15
+    },
+    {
+      "slug": "fs-drug-calculations",
+      "title": "Drug Calculations",
+      "parent": "Pharmacology",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "pharmacy-licensure",
+      "title": "Pharmacy Licensure (NAPLEX & MPJE)",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "naplex",
+      "title": "NAPLEX",
+      "parent": "Pharmacy Licensure (NAPLEX & MPJE)",
+      "quizCount": 2,
+      "questionCount": 6
+    },
+    {
+      "slug": "pharmacy-calculations",
+      "title": "Pharmacy Calculations",
+      "parent": "Pharmacy Licensure (NAPLEX & MPJE)",
+      "quizCount": 1,
+      "questionCount": 3
+    },
+    {
+      "slug": "foundational-sciences",
+      "title": "Foundational Sciences",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "fs-cardiovascular-physiology",
+      "title": "Cardiovascular",
+      "parent": "Physiology",
+      "quizCount": 1,
+      "questionCount": 15
+    },
+    {
+      "slug": "fs-cns-drugs",
+      "title": "CNS & Analgesia",
+      "parent": "Pharmacology",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "clinical-specialties",
+      "title": "Clinical Specialties",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-internal-medicine",
+      "title": "Internal Medicine",
+      "parent": "Clinical Specialties",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-respiratory-medicine",
+      "title": "Respiratory Medicine",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 135
+    },
+    {
+      "slug": "cs-gastroenterology",
+      "title": "Gastroenterology & Hepatology",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-nephrology",
+      "title": "Nephrology",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 135
+    },
+    {
+      "slug": "cs-neurology",
+      "title": "Neurology",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-endocrinology",
+      "title": "Endocrinology",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 175
+    },
+    {
+      "slug": "cs-surgery",
+      "title": "Surgery",
+      "parent": "Clinical Specialties",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-general-surgery",
+      "title": "General Surgery",
+      "parent": "Surgery",
+      "quizCount": 3,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-neurosurgery",
+      "title": "Neurosurgery",
+      "parent": "Surgery",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-psychiatry",
+      "title": "Psychiatry & Mental Health",
+      "parent": "Clinical Specialties",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-infectious-diseases",
+      "title": "Infectious Diseases",
+      "parent": "Clinical Specialties",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-critical-care",
+      "title": "Critical & Intensive Care",
+      "parent": "Clinical Specialties",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-outpatient-primary-care",
+      "title": "Outpatient & Primary Care",
+      "parent": "Clinical Specialties",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "emergency-life-support",
+      "title": "Emergency & Life Support",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "els-bls",
+      "title": "Basic Life Support (BLS/BCLS)",
+      "parent": "Emergency & Life Support",
+      "quizCount": 1,
+      "questionCount": 30
+    },
+    {
+      "slug": "els-acls",
+      "title": "Advanced Cardiac Life Support (ACLS)",
+      "parent": "Emergency & Life Support",
+      "quizCount": 2,
+      "questionCount": 60
+    },
+    {
+      "slug": "els-first-aid",
+      "title": "First Aid Essentials",
+      "parent": "Emergency & Life Support",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "els-trauma",
+      "title": "Trauma & Primary Survey",
+      "parent": "Emergency & Life Support",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "clinical-skills",
+      "title": "Clinical Skills & Procedures",
+      "parent": null,
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cks-physical-examination",
+      "title": "Physical Examination",
+      "parent": "Clinical Skills & Procedures",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cks-surgical-skills",
+      "title": "Surgical Skills",
+      "parent": "Clinical Skills & Procedures",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cks-infection-control",
+      "title": "Infection Prevention & Control",
+      "parent": "Clinical Skills & Procedures",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cks-documentation",
+      "title": "Documentation & Handover",
+      "parent": "Clinical Skills & Procedures",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-cardiology",
+      "title": "Cardiology",
+      "parent": "Internal Medicine",
+      "quizCount": 2,
+      "questionCount": 60
+    },
+    {
+      "slug": "cs-orthopedics",
+      "title": "Orthopedics & Trauma",
+      "parent": "Surgery",
+      "quizCount": 1,
+      "questionCount": 25
+    },
+    {
+      "slug": "cs-perioperative-care",
+      "title": "Peri-operative Care",
+      "parent": "Surgery",
+      "quizCount": 1,
+      "questionCount": 25
+    },
+    {
+      "slug": "els-pals",
+      "title": "Pediatric Advanced Life Support (PALS)",
+      "parent": "Emergency & Life Support",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cks-common-procedures",
+      "title": "Common Procedures",
+      "parent": "Clinical Skills & Procedures",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-obstetrics-gynecology",
+      "title": "Obstetrics & Gynecology",
+      "parent": "Clinical Specialties",
+      "quizCount": 8,
+      "questionCount": 210
+    },
+    {
+      "slug": "cs-dermatology",
+      "title": "Dermatology",
+      "parent": "Clinical Specialties",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "usmle-step-2-ck",
+      "title": "Step 2 CK",
+      "parent": "USMLE Revision",
+      "quizCount": 2,
+      "questionCount": 6
+    },
+    {
+      "slug": "usmle-step-3",
+      "title": "Step 3",
+      "parent": "USMLE Revision",
+      "quizCount": 0,
+      "questionCount": 0
+    },
+    {
+      "slug": "cs-fluids-electrolytes",
+      "title": "Fluids & Electrolytes",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 150
+    },
+    {
+      "slug": "cs-pediatrics",
+      "title": "Pediatrics",
+      "parent": "Clinical Specialties",
+      "quizCount": 8,
+      "questionCount": 210
+    },
+    {
+      "slug": "cs-hematology",
+      "title": "Hematology",
+      "parent": "Internal Medicine",
+      "quizCount": 4,
+      "questionCount": 150
+    }
+  ],
+  "biochemQuizzes": [
+    {
+      "slug": "biochemistry-practice-set-1",
+      "title": "Biochemistry — Practice Set 1",
+      "kind": "PRACTICE",
+      "category": "Biochemistry",
+      "questionCount": 30
+    },
+    {
+      "slug": "biochemistry-practice-set-2",
+      "title": "Biochemistry — Practice Set 2",
+      "kind": "PRACTICE",
+      "category": "Biochemistry",
+      "questionCount": 30
+    },
+    {
+      "slug": "biochemistry-exam-1",
+      "title": "Biochemistry — Timed Exam 1",
+      "kind": "EXAM",
+      "category": "Biochemistry",
+      "questionCount": 30
+    },
+    {
+      "slug": "biochemistry-exam-2",
+      "title": "Biochemistry — Timed Exam 2 (Comprehensive)",
+      "kind": "EXAM",
+      "category": "Biochemistry",
+      "questionCount": 60
+    }
+  ],
+  "biochemQuestions": [
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What does the Michaelis constant (Km) of an enzyme represent?",
+      "explanation": "The substrate concentration at which the reaction runs at half its maximum velocity. It is an inverse measure of affinity — a LOW Km means the enzyme is saturated at low substrate concentrations, so it binds tightly. Vmax, by contrast, reflects how much enzyme is present and how fast it can turn over once saturated.",
+      "choices": [
+        {
+          "text": "The total amount of enzyme present",
+          "isCorrect": false
+        },
+        {
+          "text": "The substrate concentration giving half-maximal velocity",
+          "isCorrect": true
+        },
+        {
+          "text": "The energy of activation of the reaction",
+          "isCorrect": false
+        },
+        {
+          "text": "The maximum reaction velocity achievable",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "How does a competitive inhibitor alter an enzyme's kinetics?",
+      "explanation": "It raises the apparent Km while leaving Vmax unchanged. Because it competes for the active site, adding enough substrate outcompetes it and full velocity is still reachable — which is exactly why it looks like reduced affinity rather than reduced capacity. A non-competitive inhibitor does the opposite: Vmax falls and Km is unaffected.",
+      "choices": [
+        {
+          "text": "Km rises, Vmax unchanged",
+          "isCorrect": true
+        },
+        {
+          "text": "Vmax falls, Km unchanged",
+          "isCorrect": false
+        },
+        {
+          "text": "Both Km and Vmax fall",
+          "isCorrect": false
+        },
+        {
+          "text": "Neither is affected",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why do enzymes speed up reactions?",
+      "explanation": "They lower the activation energy by stabilising the transition state. Note what they do NOT do: the equilibrium position and the overall free energy change are untouched, so an enzyme accelerates a reaction in both directions equally. A thermodynamically unfavourable reaction stays unfavourable no matter which enzyme is present.",
+      "choices": [
+        {
+          "text": "They make the overall free energy change more negative",
+          "isCorrect": false
+        },
+        {
+          "text": "They lower activation energy by stabilising the transition state",
+          "isCorrect": true
+        },
+        {
+          "text": "They supply energy directly to the reactants",
+          "isCorrect": false
+        },
+        {
+          "text": "They change the equilibrium position in favor of product",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What characterises an allosteric enzyme?",
+      "explanation": "Regulation through binding at a site distinct from the active site, producing a conformational change and a sigmoidal rather than hyperbolic velocity curve. This is what allows a pathway's output to feed back on its own first committed step — the basis of nearly all metabolic control, and the reason such enzymes sit at pathway branch points.",
+      "choices": [
+        {
+          "text": "Complete independence from any regulation",
+          "isCorrect": false
+        },
+        {
+          "text": "An inability to bind cofactors",
+          "isCorrect": false
+        },
+        {
+          "text": "Regulation via a site separate from the active site, giving sigmoidal kinetics",
+          "isCorrect": true
+        },
+        {
+          "text": "Absolute irreversibility of catalysis",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What is the difference between a cofactor and a coenzyme?",
+      "explanation": "Cofactor is the broader term for any non-protein helper an enzyme requires; coenzymes are the organic subset, most of them vitamin-derived. That derivation is why the clinical consequence of a vitamin deficiency is predictable: lose the vitamin and every enzyme depending on its coenzyme slows, which is why deficiency syndromes affect multiple systems at once.",
+      "choices": [
+        {
+          "text": "Coenzymes are the organic subset of cofactors, usually vitamin-derived",
+          "isCorrect": true
+        },
+        {
+          "text": "They are entirely unrelated concepts",
+          "isCorrect": false
+        },
+        {
+          "text": "Coenzymes are always metal ions",
+          "isCorrect": false
+        },
+        {
+          "text": "Cofactors are proteins and coenzymes are not",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why is the rate-limiting step of a pathway the usual point of regulation?",
+      "explanation": "Because it is the slowest step, so controlling it controls flux through the whole sequence — regulating a fast downstream step achieves little when the bottleneck is upstream. It is typically the first committed, irreversible step, which also means regulation happens before substrate has been spent on a pathway the cell no longer needs.",
+      "choices": [
+        {
+          "text": "It is always the final step of the pathway",
+          "isCorrect": false
+        },
+        {
+          "text": "It is the bottleneck, so controlling it controls flux through the whole pathway",
+          "isCorrect": true
+        },
+        {
+          "text": "It consumes no energy",
+          "isCorrect": false
+        },
+        {
+          "text": "It is the only reversible step",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme catalyses the rate-limiting step of glycolysis?",
+      "explanation": "Phosphofructokinase-1, converting fructose-6-phosphate to fructose-1,6-bisphosphate. It is inhibited by ATP and citrate — signals that energy is plentiful — and activated by AMP and fructose-2,6-bisphosphate. That makes it the point at which the cell decides whether to burn glucose at all.",
+      "choices": [
+        {
+          "text": "Aldolase",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate kinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Phosphofructokinase-1",
+          "isCorrect": true
+        },
+        {
+          "text": "Hexokinase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the net ATP yield of anaerobic glycolysis per molecule of glucose?",
+      "explanation": "Two. Four ATP are produced but two are invested in the early phosphorylation steps. It is a small yield compared with the roughly thirty from complete oxidation, but it needs no oxygen and no mitochondria — which is why the red cell and exercising muscle depend on it.",
+      "choices": [
+        {
+          "text": "38 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "2 ATP",
+          "isCorrect": true
+        },
+        {
+          "text": "12 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "0 ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why must pyruvate be converted to lactate when oxygen is scarce?",
+      "explanation": "To regenerate NAD+. Glycolysis consumes NAD+ at glyceraldehyde-3-phosphate dehydrogenase, and without oxidative phosphorylation to recycle it the pathway would halt within seconds. Lactate dehydrogenase is therefore not a waste step but the mechanism that keeps anaerobic glycolysis running.",
+      "choices": [
+        {
+          "text": "To regenerate NAD+ so glycolysis can continue",
+          "isCorrect": true
+        },
+        {
+          "text": "To synthesise glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "To consume excess oxygen",
+          "isCorrect": false
+        },
+        {
+          "text": "To generate additional ATP directly",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "How does hepatic glucokinase differ from hexokinase in other tissues?",
+      "explanation": "Glucokinase has a high Km and is not inhibited by its product, so it only becomes active when portal glucose is high — after a meal. That makes the liver a glucose buffer rather than a competitor: it takes up glucose when there is plenty and leaves it for the brain when there is not.",
+      "choices": [
+        {
+          "text": "It is found only in muscle",
+          "isCorrect": false
+        },
+        {
+          "text": "Low Km, so it works at all glucose concentrations",
+          "isCorrect": false
+        },
+        {
+          "text": "High Km and no product inhibition, so it acts only when glucose is abundant",
+          "isCorrect": true
+        },
+        {
+          "text": "It phosphorylates fructose rather than glucose",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why can fatty acids not be used for net glucose synthesis in humans?",
+      "explanation": "Because the pyruvate dehydrogenase reaction is irreversible, so acetyl-CoA cannot be converted back to pyruvate. Acetyl-CoA entering the TCA cycle loses two carbons as CO2, leaving no net carbon for gluconeogenesis. Glycerol from the triglyceride backbone and the odd-chain propionyl-CoA route are the exceptions, and neither is quantitatively significant.",
+      "choices": [
+        {
+          "text": "Fatty acids cannot enter mitochondria at all",
+          "isCorrect": false
+        },
+        {
+          "text": "Gluconeogenesis does not occur in humans",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate dehydrogenase is irreversible, so acetyl-CoA cannot return to pyruvate",
+          "isCorrect": true
+        },
+        {
+          "text": "Fatty acid oxidation produces no usable intermediates",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the main function of the BUN cycle?",
+      "explanation": "Converting ammonia — neurotoxic, especially to the central nervous system — into BUN for renal excretion. Defects at any step, or liver failure, cause hyperammonaemia with encephalopathy. This is why protein restriction and measures to reduce ammonia production are central to managing both inherited BUN cycle disorders and hepatic encephalopathy.",
+      "choices": [
+        {
+          "text": "Synthesising amino acids from glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Generating ATP for hepatocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Converting toxic ammonia into BUN for excretion",
+          "isCorrect": true
+        },
+        {
+          "text": "Producing ammonia from BUN",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Where and when are ketone bodies produced?",
+      "explanation": "In liver mitochondria, when acetyl-CoA from fatty acid oxidation exceeds the TCA cycle's capacity to process it — typically prolonged fasting, a very low carbohydrate intake, or insulin deficiency. The liver makes them but cannot use them, because it lacks the transferase needed; they are fuel exported for brain, heart and muscle.",
+      "choices": [
+        {
+          "text": "In muscle cytosol immediately after eating",
+          "isCorrect": false
+        },
+        {
+          "text": "In the brain, continuously",
+          "isCorrect": false
+        },
+        {
+          "text": "In adipose tissue during the fed state",
+          "isCorrect": false
+        },
+        {
+          "text": "In liver mitochondria, when acetyl-CoA exceeds TCA capacity",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What does lipoprotein lipase do, and where does it act?",
+      "explanation": "It sits on capillary endothelium and hydrolyses triglycerides in circulating chylomicrons and VLDL, releasing fatty acids for uptake by muscle and adipose tissue. Deficiency causes severe hypertriglyceridaemia with milky plasma and a risk of pancreatitis, because the triglyceride-rich particles are never unloaded.",
+      "choices": [
+        {
+          "text": "Transports cholesterol from tissues back to the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Converts cholesterol to bile acids in the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Hydrolyses triglycerides in chylomicrons and VLDL at the capillary endothelium",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthesises triglycerides inside adipocytes",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why is HDL described as performing reverse cholesterol transport?",
+      "explanation": "It collects cholesterol from peripheral tissues and returns it to the liver for excretion in bile — the opposite direction to LDL, which delivers cholesterol outward. This is the mechanistic basis for the epidemiological association between higher HDL and lower cardiovascular risk, though raising HDL pharmacologically has not reliably reproduced that benefit.",
+      "choices": [
+        {
+          "text": "It prevents all cholesterol absorption from the gut",
+          "isCorrect": false
+        },
+        {
+          "text": "It returns cholesterol from peripheral tissues to the liver",
+          "isCorrect": true
+        },
+        {
+          "text": "It delivers cholesterol from liver to tissues",
+          "isCorrect": false
+        },
+        {
+          "text": "It converts cholesterol into triglyceride",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why are linoleic and alpha-linolenic acid described as essential fatty acids?",
+      "explanation": "Humans lack the desaturases needed to introduce double bonds at those positions, so these fatty acids must come from the diet. They are precursors for longer-chain polyunsaturates and for eicosanoids, which is why prolonged fat-free feeding produces dermatitis and poor wound healing.",
+      "choices": [
+        {
+          "text": "They cannot be absorbed from the diet",
+          "isCorrect": false
+        },
+        {
+          "text": "Humans lack the desaturases to make them, so they must be eaten",
+          "isCorrect": true
+        },
+        {
+          "text": "They are the only fatty acids that yield ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "They are synthesised only in the brain",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the purpose of transamination in amino acid metabolism?",
+      "explanation": "Transferring an amino group to a keto acid, so the carbon skeleton can enter metabolism while nitrogen is funnelled towards disposal. The transaminases require pyridoxal phosphate from vitamin B6 — which is why B6 deficiency disturbs amino acid handling broadly, and why ALT and AST rise when hepatocytes are damaged.",
+      "choices": [
+        {
+          "text": "Converting glucose directly into protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Breaking peptide bonds in dietary protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Adding a carboxyl group to an amino acid",
+          "isCorrect": false
+        },
+        {
+          "text": "Transferring an amino group to a keto acid, separating nitrogen from carbon skeleton",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What distinguishes an essential from a non-essential amino acid?",
+      "explanation": "Essential amino acids cannot be synthesised by the body and must be supplied by the diet. Some become 'conditionally essential' when synthesis fails or demand rises — tyrosine in phenylketonuria, for instance. This is why protein quality, not just quantity, determines nutritional adequacy.",
+      "choices": [
+        {
+          "text": "Essential ones are needed in larger absolute amounts",
+          "isCorrect": false
+        },
+        {
+          "text": "Non-essential ones have no metabolic role",
+          "isCorrect": false
+        },
+        {
+          "text": "Only essential amino acids can form peptide bonds",
+          "isCorrect": false
+        },
+        {
+          "text": "Essential ones cannot be synthesised and must come from the diet",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Why does denaturation abolish enzyme activity without breaking peptide bonds?",
+      "explanation": "Because catalysis depends on the precise three-dimensional shape of the active site, and denaturation disrupts the non-covalent interactions holding that shape while leaving the amino acid sequence intact. Heat, extremes of pH and certain solutes all do this — the sequence survives, the function does not.",
+      "choices": [
+        {
+          "text": "Cofactors are chemically destroyed first",
+          "isCorrect": false
+        },
+        {
+          "text": "Peptide bonds are hydrolyzed by heat",
+          "isCorrect": false
+        },
+        {
+          "text": "The amino acid sequence is rearranged",
+          "isCorrect": false
+        },
+        {
+          "text": "The three-dimensional shape of the active site is lost while sequence remains",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Which enzyme is the rate-limiting step of cholesterol synthesis, and the target of statins?",
+      "explanation": "HMG-CoA reductase. Inhibiting it lowers intracellular cholesterol, which upregulates hepatic LDL receptors — and it is that receptor upregulation, more than reduced synthesis itself, that clears LDL from the plasma. It also explains why statins work poorly in homozygous familial hypercholesterolemia, where functional receptors are absent.",
+      "choices": [
+        {
+          "text": "HMG-CoA reductase",
+          "isCorrect": true
+        },
+        {
+          "text": "Acetyl-CoA carboxylase",
+          "isCorrect": false
+        },
+        {
+          "text": "Carnitine palmitoyltransferase I",
+          "isCorrect": false
+        },
+        {
+          "text": "Lipoprotein lipase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What is the role of carnitine in fatty acid oxidation?",
+      "explanation": "It shuttles long-chain fatty acyl groups across the inner mitochondrial membrane, which they cannot cross as CoA esters. Carnitine deficiency therefore causes accumulation of long-chain fats with hypoketotic hypoglycemia and muscle weakness — the fat is available but cannot reach the site of oxidation.",
+      "choices": [
+        {
+          "text": "Synthesising cholesterol from acetyl-CoA",
+          "isCorrect": false
+        },
+        {
+          "text": "Emulsifying dietary fat in the gut",
+          "isCorrect": false
+        },
+        {
+          "text": "Activating fatty acids in the cytosol",
+          "isCorrect": false
+        },
+        {
+          "text": "Transporting long-chain fatty acyl groups into mitochondria",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Which enzyme is deficient in classical phenylketonuria?",
+      "explanation": "Phenylalanine hydroxylase, so phenylalanine accumulates and tyrosine becomes conditionally essential. Untreated it causes severe intellectual disability, which is entirely preventable by dietary restriction from birth — the reason it is on newborn screening programs worldwide. A minority of cases instead reflect defective tetrahydrobiopterin, the cofactor.",
+      "choices": [
+        {
+          "text": "Branched-chain ketoacid dehydrogenase",
+          "isCorrect": false
+        },
+        {
+          "text": "Cystathionine beta-synthase",
+          "isCorrect": false
+        },
+        {
+          "text": "Homogentisate oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "Phenylalanine hydroxylase",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What level of protein structure is stabilized primarily by hydrogen bonding within the backbone?",
+      "explanation": "Secondary structure — the alpha helices and beta sheets, held by hydrogen bonds between backbone amide and carbonyl groups. Tertiary structure depends on side-chain interactions including hydrophobic packing and disulphide bridges, and quaternary on assembly of separate subunits.",
+      "choices": [
+        {
+          "text": "Tertiary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Quaternary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Primary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Secondary structure",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the cofactor for pyruvate dehydrogenase, and what happens when it is deficient?",
+      "explanation": "Thiamine (B1), as thiamine pyrophosphate. Deficiency blocks entry of pyruvate into the TCA cycle, so lactate accumulates and ATP production falls — most damagingly in the brain and heart, giving Wernicke encephalopathy and wet beriberi. Glucose given before thiamine can precipitate Wernicke's, which is why thiamine comes first in the at-risk patient.",
+      "choices": [
+        {
+          "text": "Thiamine — deficiency blocks pyruvate entry to the TCA cycle",
+          "isCorrect": true
+        },
+        {
+          "text": "Vitamin K — deficiency prolongs the prothrombin time",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamin C — deficiency causes bleeding gums only",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamin D — deficiency causes rickets",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "What role does vitamin K play in coagulation?",
+      "explanation": "It is the cofactor for gamma-carboxylation of glutamate residues on factors II, VII, IX and X, which is what lets those factors bind calcium and phospholipid surfaces. Warfarin blocks the recycling of vitamin K, which is why its effect takes days — existing carboxylated factors must first be cleared.",
+      "choices": [
+        {
+          "text": "Gamma-carboxylation of factors II, VII, IX and X",
+          "isCorrect": true
+        },
+        {
+          "text": "Breakdown of formed clots",
+          "isCorrect": false
+        },
+        {
+          "text": "Direct activation of platelets",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthesis of fibrinogen from amino acids",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Both vitamin B12 and folate deficiency cause megaloblastic anemia. What distinguishes them biochemically?",
+      "explanation": "Methylmalonic acid is raised in B12 deficiency but normal in folate deficiency, because B12 is additionally required by methylmalonyl-CoA mutase. Homocysteine rises in both. The distinction matters clinically: giving folate alone to someone B12-deficient corrects the anemia while the neurological damage continues.",
+      "choices": [
+        {
+          "text": "There is no biochemical difference",
+          "isCorrect": false
+        },
+        {
+          "text": "Methylmalonic acid is raised only in B12 deficiency",
+          "isCorrect": true
+        },
+        {
+          "text": "Only folate deficiency affects the blood film",
+          "isCorrect": false
+        },
+        {
+          "text": "Homocysteine rises only in folate deficiency",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the precursor of NAD+ and NADP+?",
+      "explanation": "Niacin (B3), which can also be made in limited amounts from tryptophan. Because NAD+ participates in a vast number of oxidation-reduction reactions, deficiency affects the tissues with the highest turnover — giving pellagra's dermatitis, diarrhea and dementia.",
+      "choices": [
+        {
+          "text": "Niacin",
+          "isCorrect": true
+        },
+        {
+          "text": "Biotin",
+          "isCorrect": false
+        },
+        {
+          "text": "Riboflavin",
+          "isCorrect": false
+        },
+        {
+          "text": "Pantothenic acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the principal function of the pentose phosphate pathway?",
+      "explanation": "Producing NADPH and ribose-5-phosphate — reducing power for biosynthesis and antioxidant defense, and the sugar backbone for nucleotides. It generates no ATP. Its importance is clearest in the red cell, where NADPH maintains reduced glutathione, and where losing it causes oxidative hemolysis.",
+      "choices": [
+        {
+          "text": "Generating NADPH and ribose-5-phosphate",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthesising fatty acids directly",
+          "isCorrect": false
+        },
+        {
+          "text": "Breaking down amino acids",
+          "isCorrect": false
+        },
+        {
+          "text": "Producing large amounts of ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme deficiency causes von Gierke disease, with severe fasting hypoglycemia and hepatomegaly?",
+      "explanation": "Glucose-6-phosphatase. Without it the liver can neither release glucose from glycogen nor from gluconeogenesis, so glucose-6-phosphate accumulates and no glucose reaches the circulation. That explains the combination of a large glycogen-loaded liver alongside profound hypoglycemia — the fuel is present but cannot leave the cell.",
+      "choices": [
+        {
+          "text": "Branching enzyme",
+          "isCorrect": false
+        },
+        {
+          "text": "Lysosomal acid maltase",
+          "isCorrect": false
+        },
+        {
+          "text": "Glucose-6-phosphatase",
+          "isCorrect": true
+        },
+        {
+          "text": "Muscle glycogen phosphorylase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Why does vitamin C deficiency weaken connective tissue?",
+      "explanation": "Ascorbate is required for the hydroxylation of proline and lysine residues in collagen, and without it the triple helix cannot cross-link properly. The resulting fragile collagen explains scurvy's picture: bleeding gums, poor wound healing, perifollicular hemorrhage and loose teeth.",
+      "choices": [
+        {
+          "text": "Elastin replaces collagen entirely",
+          "isCorrect": false
+        },
+        {
+          "text": "Calcium cannot be absorbed at all",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen genes are mutated by the deficiency",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen proline and lysine hydroxylation fails, so cross-linking is defective",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What does semiconservative DNA replication mean?",
+      "explanation": "Each daughter molecule retains one parental strand and one newly synthesised strand. The parental strand acts as the template, which is what makes replication accurate and allows mismatch repair to identify which strand is new — and therefore which base is the error.",
+      "choices": [
+        {
+          "text": "Each new molecule keeps one parental and one new strand",
+          "isCorrect": true
+        },
+        {
+          "text": "Both strands of each new molecule are newly made",
+          "isCorrect": false
+        },
+        {
+          "text": "The original molecule is destroyed and rebuilt",
+          "isCorrect": false
+        },
+        {
+          "text": "Only one strand is ever copied",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "In which direction does DNA polymerase synthesise a new strand?",
+      "explanation": "5′ to 3′ only, adding nucleotides to the free 3′ hydroxyl. This single constraint explains the whole architecture of the replication fork: one strand is copied continuously while the other must be made in short segments and joined, and it is why a primer is always required.",
+      "choices": [
+        {
+          "text": "Either direction, depending on the template",
+          "isCorrect": false
+        },
+        {
+          "text": "5′ to 3′",
+          "isCorrect": true
+        },
+        {
+          "text": "From the middle of the strand outwards",
+          "isCorrect": false
+        },
+        {
+          "text": "3′ to 5′",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What is meant by the degeneracy of the genetic code?",
+      "explanation": "Several codons can specify the same amino acid, most often differing at the third base. This is why many single-base substitutions are silent and have no effect on the protein, and it provides a genuine buffer against mutation rather than being a quirk of the code.",
+      "choices": [
+        {
+          "text": "The code differs between human tissues",
+          "isCorrect": false
+        },
+        {
+          "text": "One codon can code for several different amino acids",
+          "isCorrect": false
+        },
+        {
+          "text": "Several codons can code for the same amino acid",
+          "isCorrect": true
+        },
+        {
+          "text": "Some codons code for nothing at all",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "Why is a frameshift mutation usually more damaging than a missense mutation?",
+      "explanation": "Inserting or deleting a number of bases not divisible by three shifts the reading frame, so every downstream codon is misread and a premature stop is likely. A missense mutation changes one amino acid; a frameshift typically destroys the entire remainder of the protein.",
+      "choices": [
+        {
+          "text": "It only affects the first amino acid",
+          "isCorrect": false
+        },
+        {
+          "text": "The reading frame shifts, so all downstream codons are misread",
+          "isCorrect": true
+        },
+        {
+          "text": "It prevents transcription from starting",
+          "isCorrect": false
+        },
+        {
+          "text": "It always deletes the whole gene",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What is the purpose of splicing in eukaryotic gene expression?",
+      "explanation": "Removing introns and joining exons to produce mature mRNA. Alternative splicing lets one gene generate several proteins, which is part of why the human protein repertoire greatly exceeds the gene count. Mutations at splice sites can be as damaging as those in coding sequence.",
+      "choices": [
+        {
+          "text": "Translating mRNA into protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Adding introns to increase protein diversity",
+          "isCorrect": false
+        },
+        {
+          "text": "Copying DNA into a complementary strand",
+          "isCorrect": false
+        },
+        {
+          "text": "Removing introns and joining exons to form mature mRNA",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What does the polymerase chain reaction achieve?",
+      "explanation": "Exponential amplification of a specific DNA sequence defined by the primers, through repeated cycles of denaturation, annealing and extension. Because amplification is exponential, tiny starting amounts become detectable — which is the basis of molecular diagnostics and also why contamination causes false positives.",
+      "choices": [
+        {
+          "text": "Translation of RNA into protein in vitro",
+          "isCorrect": false
+        },
+        {
+          "text": "Separation of proteins by size",
+          "isCorrect": false
+        },
+        {
+          "text": "Direct sequencing of a whole genome in one step",
+          "isCorrect": false
+        },
+        {
+          "text": "Exponential amplification of a specific DNA sequence",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "A Western blot detects which type of molecule?",
+      "explanation": "Protein, using antibodies after electrophoretic separation. Southern blotting detects DNA and Northern detects RNA — a distinction worth fixing, because the choice of technique reveals what question is being asked of the sample.",
+      "choices": [
+        {
+          "text": "Carbohydrate",
+          "isCorrect": false
+        },
+        {
+          "text": "Protein",
+          "isCorrect": true
+        },
+        {
+          "text": "DNA",
+          "isCorrect": false
+        },
+        {
+          "text": "RNA",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Which enzyme is deficient in Lesch-Nyhan syndrome?",
+      "explanation": "Hypoxanthine-guanine phosphoribosyltransferase, the purine salvage enzyme. Losing salvage forces reliance on de novo synthesis and diverts purines to uric acid, giving hyperuricaemia with gout and renal stones alongside the neurological features. It is X-linked recessive.",
+      "choices": [
+        {
+          "text": "Adenosine deaminase",
+          "isCorrect": false
+        },
+        {
+          "text": "Xanthine oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "Dihydrofolate reductase",
+          "isCorrect": false
+        },
+        {
+          "text": "Hypoxanthine-guanine phosphoribosyltransferase (HGPRT)",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "How does allopurinol lower uric acid?",
+      "explanation": "By inhibiting xanthine oxidase, so hypoxanthine and xanthine are not converted to uric acid. Those precursors are more soluble and more readily excreted. It is prophylactic rather than a treatment for acute gout — starting it during an attack can prolong it.",
+      "choices": [
+        {
+          "text": "It increases renal uric acid reabsorption",
+          "isCorrect": false
+        },
+        {
+          "text": "It converts uric acid into purines",
+          "isCorrect": false
+        },
+        {
+          "text": "It inhibits xanthine oxidase",
+          "isCorrect": true
+        },
+        {
+          "text": "It blocks purine absorption from the diet",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "How does methotrexate interfere with nucleotide synthesis?",
+      "explanation": "It inhibits dihydrofolate reductase, depleting tetrahydrofolate and so blocking thymidine and purine synthesis. Rapidly dividing cells suffer first, which accounts for both the antineoplastic effect and the toxicity to marrow and gut mucosa. Folinic acid rescue bypasses the blocked step.",
+      "choices": [
+        {
+          "text": "It inhibits xanthine oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "It cross-links DNA strands directly",
+          "isCorrect": false
+        },
+        {
+          "text": "It blocks the ribosome",
+          "isCorrect": false
+        },
+        {
+          "text": "It inhibits dihydrofolate reductase, depleting tetrahydrofolate",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Why does adenosine deaminase deficiency cause severe combined immunodeficiency?",
+      "explanation": "Deoxyadenosine and its nucleotides accumulate and are particularly toxic to lymphocytes, which cannot tolerate the resulting imbalance in deoxynucleotide pools. Both T and B cell lineages fail, hence the combined defect — and it was the first condition treated by gene therapy.",
+      "choices": [
+        {
+          "text": "Antibodies are structurally abnormal",
+          "isCorrect": false
+        },
+        {
+          "text": "The thymus is absent from birth",
+          "isCorrect": false
+        },
+        {
+          "text": "Toxic deoxyadenosine metabolites accumulate and destroy lymphocytes",
+          "isCorrect": true
+        },
+        {
+          "text": "Complement proteins are not synthesised",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Which enzyme does 5-fluorouracil inhibit?",
+      "explanation": "Thymidylate synthase, so dTMP cannot be made and DNA synthesis stalls. As with methotrexate the effect falls hardest on rapidly dividing tissue, explaining the characteristic mucositis, diarrhea and myelosuppression.",
+      "choices": [
+        {
+          "text": "Ribonucleotide reductase",
+          "isCorrect": false
+        },
+        {
+          "text": "Thymidylate synthase",
+          "isCorrect": true
+        },
+        {
+          "text": "DNA ligase",
+          "isCorrect": false
+        },
+        {
+          "text": "Topoisomerase II",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What does the chemiosmotic theory propose about ATP synthesis?",
+      "explanation": "That electron transport pumps protons across the inner mitochondrial membrane, and the resulting electrochemical gradient drives ATP synthase as protons flow back. The gradient — not a chemical intermediate — is the stored energy, which is why anything that makes the membrane leaky abolishes ATP synthesis while electron transport continues.",
+      "choices": [
+        {
+          "text": "A proton gradient across the inner membrane drives ATP synthase",
+          "isCorrect": true
+        },
+        {
+          "text": "ATP is made directly by the electron transport complexes",
+          "isCorrect": false
+        },
+        {
+          "text": "Substrate-level phosphorylation supplies all mitochondrial ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "Oxygen is not required at any stage",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "How does an uncoupling agent such as 2,4-dinitrophenol affect mitochondria?",
+      "explanation": "It carries protons across the membrane, dissipating the gradient. Electron transport and oxygen consumption accelerate while ATP synthesis falls, and the energy appears as heat — which is why uncouplers cause dangerous hyperthermia. Brown adipose tissue uses the same principle physiologically via thermogenin.",
+      "choices": [
+        {
+          "text": "It prevents oxygen consumption entirely",
+          "isCorrect": false
+        },
+        {
+          "text": "It blocks electron transport completely",
+          "isCorrect": false
+        },
+        {
+          "text": "It dissipates the proton gradient, so energy is released as heat instead of ATP",
+          "isCorrect": true
+        },
+        {
+          "text": "It increases ATP yield per glucose molecule",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "Where does cyanide act in oxidative phosphorylation?",
+      "explanation": "At complex IV, cytochrome c oxidase, blocking the transfer of electrons to oxygen. Cells cannot use oxygen even though it is delivered normally, so venous oxygen content stays high and lactate rises steeply. That mismatch — adequate oxygenation with profound lactic acidosis — is the diagnostic clue.",
+      "choices": [
+        {
+          "text": "The carnitine shuttle",
+          "isCorrect": false
+        },
+        {
+          "text": "Complex IV, cytochrome c oxidase",
+          "isCorrect": true
+        },
+        {
+          "text": "ATP synthase",
+          "isCorrect": false
+        },
+        {
+          "text": "Complex I only",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What does a respiratory quotient of approximately 1.0 indicate about substrate use?",
+      "explanation": "Predominantly carbohydrate oxidation, because glucose oxidation produces roughly one molecule of CO2 per molecule of O2 consumed. Fat oxidation gives a lower value near 0.7, since fatty acids are more reduced and need proportionally more oxygen — so the ratio reports which fuel is being burnt.",
+      "choices": [
+        {
+          "text": "Mainly carbohydrate oxidation",
+          "isCorrect": true
+        },
+        {
+          "text": "No metabolism is occurring",
+          "isCorrect": false
+        },
+        {
+          "text": "Mainly fat oxidation",
+          "isCorrect": false
+        },
+        {
+          "text": "Mainly protein oxidation",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Which fuel does the brain use during prolonged starvation, and why does that matter?",
+      "explanation": "It shifts substantially to ketone bodies. This spares glucose and therefore spares muscle protein, since gluconeogenesis would otherwise consume amino acids. The adaptation is what allows survival for weeks rather than days — the brain cannot use fatty acids directly, so ketones are the only alternative.",
+      "choices": [
+        {
+          "text": "Only glucose, in all circumstances",
+          "isCorrect": false
+        },
+        {
+          "text": "Ketone bodies, which spare glucose and therefore muscle protein",
+          "isCorrect": true
+        },
+        {
+          "text": "Lactate exclusively",
+          "isCorrect": false
+        },
+        {
+          "text": "Fatty acids taken up directly across the blood-brain barrier",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Why does insulin deficiency cause ketoacidosis?",
+      "explanation": "Unopposed lipolysis floods the liver with fatty acids, and their oxidation generates acetyl-CoA far in excess of TCA capacity, so ketone bodies accumulate as acids. Glucose is abundant in the blood but cannot enter cells, so the body behaves as though starving — starvation in the midst of plenty.",
+      "choices": [
+        {
+          "text": "The kidneys stop excreting all acid",
+          "isCorrect": false
+        },
+        {
+          "text": "Unrestrained lipolysis floods the liver with fatty acids, overwhelming TCA capacity",
+          "isCorrect": true
+        },
+        {
+          "text": "Excess glucose is directly converted into acid",
+          "isCorrect": false
+        },
+        {
+          "text": "Protein synthesis produces acidic by-products",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What does glucagon do to hepatic metabolism during fasting?",
+      "explanation": "It stimulates glycogenolysis and gluconeogenesis and promotes ketogenesis, raising blood glucose. It acts principally on the liver, since muscle lacks glucagon receptors — which is why muscle glycogen cannot contribute directly to blood glucose and must go through the Cori cycle instead.",
+      "choices": [
+        {
+          "text": "Lowers blood glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulates glycogen synthesis in muscle",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulates glycogenolysis, gluconeogenesis and ketogenesis, mainly in liver",
+          "isCorrect": true
+        },
+        {
+          "text": "Promotes glucose uptake into adipose tissue",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Why does the liver, not muscle, regulate blood glucose despite muscle holding more glycogen?",
+      "explanation": "Muscle lacks glucose-6-phosphatase, so it cannot release free glucose into the circulation — its glycogen serves only the muscle itself. The liver has the enzyme, and so is the only tissue that can export stored glucose to the rest of the body.",
+      "choices": [
+        {
+          "text": "Muscle glycogen is inaccessible to any enzyme",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle has no glycogen phosphorylase",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle lacks glucose-6-phosphatase, so it cannot export free glucose",
+          "isCorrect": true
+        },
+        {
+          "text": "Muscle glycogen is chemically different",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why is newborn screening for metabolic disease worth doing?",
+      "explanation": "Because several of these conditions cause irreversible damage before symptoms appear, and dietary or pharmacological treatment started presymptomatically prevents it almost entirely. Phenylketonuria is the model case: detected at birth the outcome is normal, detected on symptoms the damage is permanent.",
+      "choices": [
+        {
+          "text": "Damage is irreversible but preventable if treatment starts before symptoms",
+          "isCorrect": true
+        },
+        {
+          "text": "It replaces the need for any family history",
+          "isCorrect": false
+        },
+        {
+          "text": "The conditions are untreatable but worth documenting",
+          "isCorrect": false
+        },
+        {
+          "text": "The conditions only appear in adulthood",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why is maple syrup urine disease a metabolic emergency in the newborn?",
+      "explanation": "Branched-chain ketoacid dehydrogenase deficiency lets leucine and its ketoacid accumulate to neurotoxic levels within days, causing encephalopathy and death if untreated. Management is urgent removal of the accumulated metabolites and restriction of branched-chain amino acid intake — a delay of hours matters.",
+      "choices": [
+        {
+          "text": "Branched-chain amino acids accumulate rapidly to neurotoxic levels",
+          "isCorrect": true
+        },
+        {
+          "text": "It causes gradual liver fibrosis over years",
+          "isCorrect": false
+        },
+        {
+          "text": "It affects skin pigmentation alone",
+          "isCorrect": false
+        },
+        {
+          "text": "It presents only in adolescence",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "Why does the red blood cell depend entirely on glycolysis for ATP?",
+      "explanation": "It has no mitochondria, so oxidative phosphorylation is unavailable despite the cell being full of oxygen. Its energy needs are met by anaerobic glycolysis alone, which is why glycolytic enzyme defects such as pyruvate kinase deficiency present as hemolytic anemia.",
+      "choices": [
+        {
+          "text": "It has no mitochondria",
+          "isCorrect": true
+        },
+        {
+          "text": "It cannot take up glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "It lacks all glycolytic enzymes",
+          "isCorrect": false
+        },
+        {
+          "text": "Oxygen is toxic to its enzymes",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What are insulin's principal metabolic effects after a meal?",
+      "explanation": "It promotes storage: glucose uptake into muscle and adipose tissue, glycogen and triglyceride synthesis, and protein synthesis, while suppressing gluconeogenesis, glycogenolysis and lipolysis. Every one of those actions is anabolic, which is why insulin deficiency produces simultaneous hyperglycemia, ketosis and wasting.",
+      "choices": [
+        {
+          "text": "It raises blood glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "It promotes storage and suppresses gluconeogenesis, glycogenolysis and lipolysis",
+          "isCorrect": true
+        },
+        {
+          "text": "It acts only on the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "It stimulates glycogen breakdown and lipolysis",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What is the Cori cycle?",
+      "explanation": "Lactate produced by anaerobic glycolysis in muscle travels to the liver, is converted back to glucose by gluconeogenesis, and returns to muscle. The liver bears the ATP cost so muscle can keep contracting — an inter-organ division of labor rather than a futile loop.",
+      "choices": [
+        {
+          "text": "Muscle lactate is converted to glucose in the liver and returned to muscle",
+          "isCorrect": true
+        },
+        {
+          "text": "Muscle glucose is converted to fat in adipose tissue",
+          "isCorrect": false
+        },
+        {
+          "text": "Liver ketones are converted to glucose in the brain",
+          "isCorrect": false
+        },
+        {
+          "text": "Amino acids are converted to BUN in muscle",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why does G6PD deficiency cause hemolysis on oxidative stress?",
+      "explanation": "The pentose phosphate pathway cannot generate enough NADPH to keep glutathione reduced, so hemoglobin oxidises and precipitates as Heinz bodies and the red cell membrane is damaged. Infections, fava beans and certain drugs precipitate it — and the red cell is uniquely vulnerable because it has no alternative NADPH source.",
+      "choices": [
+        {
+          "text": "Insufficient NADPH to maintain reduced glutathione",
+          "isCorrect": true
+        },
+        {
+          "text": "Failure of hemoglobin synthesis",
+          "isCorrect": false
+        },
+        {
+          "text": "Absent glycolytic enzymes",
+          "isCorrect": false
+        },
+        {
+          "text": "An abnormal beta-globin chain",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "What is the biochemical problem in classical galactosaemia?",
+      "explanation": "Deficiency of galactose-1-phosphate uridyltransferase, so galactose-1-phosphate accumulates and is toxic to liver, brain and lens. Removing lactose and galactose from the diet prevents the acute crisis, which is why it must be recognized in the first days of life.",
+      "choices": [
+        {
+          "text": "Inability to absorb any dietary sugar",
+          "isCorrect": false
+        },
+        {
+          "text": "Deficiency of lactase in the gut only",
+          "isCorrect": false
+        },
+        {
+          "text": "Galactose-1-phosphate uridyltransferase deficiency, with toxic accumulation",
+          "isCorrect": true
+        },
+        {
+          "text": "Excess galactose synthesis by the liver",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "What underlies the lysosomal storage disorders as a group?",
+      "explanation": "Deficiency of a lysosomal hydrolase, so its substrate accumulates progressively inside lysosomes and the cell enlarges and fails. Which substrate accumulates determines which organs suffer — hence the very different pictures of Gaucher, Tay-Sachs and Fabry disease despite a shared underlying mechanism.",
+      "choices": [
+        {
+          "text": "Overproduction of lysosomal enzymes",
+          "isCorrect": false
+        },
+        {
+          "text": "Failure of mitochondrial replication",
+          "isCorrect": false
+        },
+        {
+          "text": "Absence of lysosomes altogether",
+          "isCorrect": false
+        },
+        {
+          "text": "A deficient lysosomal enzyme, so its substrate accumulates progressively",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why does mitochondrial disease show maternal inheritance?",
+      "explanation": "Mitochondrial DNA is inherited almost entirely from the oocyte, so an affected mother can transmit to all her children while an affected father transmits to none. Variable heteroplasmy — the proportion of mutant mitochondria differing between tissues and between siblings — explains why severity varies so widely within one family.",
+      "choices": [
+        {
+          "text": "Paternal mitochondria replicate faster",
+          "isCorrect": false
+        },
+        {
+          "text": "Mitochondrial DNA is inherited from the oocyte",
+          "isCorrect": true
+        },
+        {
+          "text": "Mitochondria contain no DNA of their own",
+          "isCorrect": false
+        },
+        {
+          "text": "The genes involved are all X-linked",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-practice-set-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What is the metabolic role of the TCA cycle beyond energy production?",
+      "explanation": "It supplies intermediates for biosynthesis — oxaloacetate for gluconeogenesis and aspartate, alpha-ketoglutarate for glutamate, succinyl-CoA for heme. Because intermediates are withdrawn, they must be replenished by anaplerotic reactions such as pyruvate carboxylase, or the cycle grinds down.",
+      "choices": [
+        {
+          "text": "It provides biosynthetic intermediates, replenished by anaplerotic reactions",
+          "isCorrect": true
+        },
+        {
+          "text": "It synthesises fatty acids directly",
+          "isCorrect": false
+        },
+        {
+          "text": "It operates only under anaerobic conditions",
+          "isCorrect": false
+        },
+        {
+          "text": "It has no function other than making ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What does the Michaelis constant (Km) of an enzyme represent?",
+      "explanation": "The substrate concentration at which the reaction runs at half its maximum velocity. It is an inverse measure of affinity — a LOW Km means the enzyme is saturated at low substrate concentrations, so it binds tightly. Vmax, by contrast, reflects how much enzyme is present and how fast it can turn over once saturated.",
+      "choices": [
+        {
+          "text": "The energy of activation of the reaction",
+          "isCorrect": false
+        },
+        {
+          "text": "The maximum reaction velocity achievable",
+          "isCorrect": false
+        },
+        {
+          "text": "The substrate concentration giving half-maximal velocity",
+          "isCorrect": true
+        },
+        {
+          "text": "The total amount of enzyme present",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "How does a competitive inhibitor alter an enzyme's kinetics?",
+      "explanation": "It raises the apparent Km while leaving Vmax unchanged. Because it competes for the active site, adding enough substrate outcompetes it and full velocity is still reachable — which is exactly why it looks like reduced affinity rather than reduced capacity. A non-competitive inhibitor does the opposite: Vmax falls and Km is unaffected.",
+      "choices": [
+        {
+          "text": "Both Km and Vmax fall",
+          "isCorrect": false
+        },
+        {
+          "text": "Km rises, Vmax unchanged",
+          "isCorrect": true
+        },
+        {
+          "text": "Vmax falls, Km unchanged",
+          "isCorrect": false
+        },
+        {
+          "text": "Neither is affected",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why do enzymes speed up reactions?",
+      "explanation": "They lower the activation energy by stabilising the transition state. Note what they do NOT do: the equilibrium position and the overall free energy change are untouched, so an enzyme accelerates a reaction in both directions equally. A thermodynamically unfavourable reaction stays unfavourable no matter which enzyme is present.",
+      "choices": [
+        {
+          "text": "They lower activation energy by stabilising the transition state",
+          "isCorrect": true
+        },
+        {
+          "text": "They supply energy directly to the reactants",
+          "isCorrect": false
+        },
+        {
+          "text": "They change the equilibrium position in favor of product",
+          "isCorrect": false
+        },
+        {
+          "text": "They make the overall free energy change more negative",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What characterises an allosteric enzyme?",
+      "explanation": "Regulation through binding at a site distinct from the active site, producing a conformational change and a sigmoidal rather than hyperbolic velocity curve. This is what allows a pathway's output to feed back on its own first committed step — the basis of nearly all metabolic control, and the reason such enzymes sit at pathway branch points.",
+      "choices": [
+        {
+          "text": "Regulation via a site separate from the active site, giving sigmoidal kinetics",
+          "isCorrect": true
+        },
+        {
+          "text": "Absolute irreversibility of catalysis",
+          "isCorrect": false
+        },
+        {
+          "text": "Complete independence from any regulation",
+          "isCorrect": false
+        },
+        {
+          "text": "An inability to bind cofactors",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What is the difference between a cofactor and a coenzyme?",
+      "explanation": "Cofactor is the broader term for any non-protein helper an enzyme requires; coenzymes are the organic subset, most of them vitamin-derived. That derivation is why the clinical consequence of a vitamin deficiency is predictable: lose the vitamin and every enzyme depending on its coenzyme slows, which is why deficiency syndromes affect multiple systems at once.",
+      "choices": [
+        {
+          "text": "They are entirely unrelated concepts",
+          "isCorrect": false
+        },
+        {
+          "text": "Coenzymes are always metal ions",
+          "isCorrect": false
+        },
+        {
+          "text": "Cofactors are proteins and coenzymes are not",
+          "isCorrect": false
+        },
+        {
+          "text": "Coenzymes are the organic subset of cofactors, usually vitamin-derived",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why is the rate-limiting step of a pathway the usual point of regulation?",
+      "explanation": "Because it is the slowest step, so controlling it controls flux through the whole sequence — regulating a fast downstream step achieves little when the bottleneck is upstream. It is typically the first committed, irreversible step, which also means regulation happens before substrate has been spent on a pathway the cell no longer needs.",
+      "choices": [
+        {
+          "text": "It is always the final step of the pathway",
+          "isCorrect": false
+        },
+        {
+          "text": "It consumes no energy",
+          "isCorrect": false
+        },
+        {
+          "text": "It is the only reversible step",
+          "isCorrect": false
+        },
+        {
+          "text": "It is the bottleneck, so controlling it controls flux through the whole pathway",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme catalyses the rate-limiting step of glycolysis?",
+      "explanation": "Phosphofructokinase-1, converting fructose-6-phosphate to fructose-1,6-bisphosphate. It is inhibited by ATP and citrate — signals that energy is plentiful — and activated by AMP and fructose-2,6-bisphosphate. That makes it the point at which the cell decides whether to burn glucose at all.",
+      "choices": [
+        {
+          "text": "Phosphofructokinase-1",
+          "isCorrect": true
+        },
+        {
+          "text": "Hexokinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Aldolase",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate kinase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the net ATP yield of anaerobic glycolysis per molecule of glucose?",
+      "explanation": "Two. Four ATP are produced but two are invested in the early phosphorylation steps. It is a small yield compared with the roughly thirty from complete oxidation, but it needs no oxygen and no mitochondria — which is why the red cell and exercising muscle depend on it.",
+      "choices": [
+        {
+          "text": "2 ATP",
+          "isCorrect": true
+        },
+        {
+          "text": "38 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "12 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "0 ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why must pyruvate be converted to lactate when oxygen is scarce?",
+      "explanation": "To regenerate NAD+. Glycolysis consumes NAD+ at glyceraldehyde-3-phosphate dehydrogenase, and without oxidative phosphorylation to recycle it the pathway would halt within seconds. Lactate dehydrogenase is therefore not a waste step but the mechanism that keeps anaerobic glycolysis running.",
+      "choices": [
+        {
+          "text": "To generate additional ATP directly",
+          "isCorrect": false
+        },
+        {
+          "text": "To synthesise glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "To regenerate NAD+ so glycolysis can continue",
+          "isCorrect": true
+        },
+        {
+          "text": "To consume excess oxygen",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "How does hepatic glucokinase differ from hexokinase in other tissues?",
+      "explanation": "Glucokinase has a high Km and is not inhibited by its product, so it only becomes active when portal glucose is high — after a meal. That makes the liver a glucose buffer rather than a competitor: it takes up glucose when there is plenty and leaves it for the brain when there is not.",
+      "choices": [
+        {
+          "text": "It phosphorylates fructose rather than glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "It is found only in muscle",
+          "isCorrect": false
+        },
+        {
+          "text": "High Km and no product inhibition, so it acts only when glucose is abundant",
+          "isCorrect": true
+        },
+        {
+          "text": "Low Km, so it works at all glucose concentrations",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why can fatty acids not be used for net glucose synthesis in humans?",
+      "explanation": "Because the pyruvate dehydrogenase reaction is irreversible, so acetyl-CoA cannot be converted back to pyruvate. Acetyl-CoA entering the TCA cycle loses two carbons as CO2, leaving no net carbon for gluconeogenesis. Glycerol from the triglyceride backbone and the odd-chain propionyl-CoA route are the exceptions, and neither is quantitatively significant.",
+      "choices": [
+        {
+          "text": "Fatty acids cannot enter mitochondria at all",
+          "isCorrect": false
+        },
+        {
+          "text": "Gluconeogenesis does not occur in humans",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate dehydrogenase is irreversible, so acetyl-CoA cannot return to pyruvate",
+          "isCorrect": true
+        },
+        {
+          "text": "Fatty acid oxidation produces no usable intermediates",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Which enzyme is the rate-limiting step of cholesterol synthesis, and the target of statins?",
+      "explanation": "HMG-CoA reductase. Inhibiting it lowers intracellular cholesterol, which upregulates hepatic LDL receptors — and it is that receptor upregulation, more than reduced synthesis itself, that clears LDL from the plasma. It also explains why statins work poorly in homozygous familial hypercholesterolemia, where functional receptors are absent.",
+      "choices": [
+        {
+          "text": "Acetyl-CoA carboxylase",
+          "isCorrect": false
+        },
+        {
+          "text": "HMG-CoA reductase",
+          "isCorrect": true
+        },
+        {
+          "text": "Lipoprotein lipase",
+          "isCorrect": false
+        },
+        {
+          "text": "Carnitine palmitoyltransferase I",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the main function of the BUN cycle?",
+      "explanation": "Converting ammonia — neurotoxic, especially to the central nervous system — into BUN for renal excretion. Defects at any step, or liver failure, cause hyperammonaemia with encephalopathy. This is why protein restriction and measures to reduce ammonia production are central to managing both inherited BUN cycle disorders and hepatic encephalopathy.",
+      "choices": [
+        {
+          "text": "Synthesising amino acids from glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Generating ATP for hepatocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Converting toxic ammonia into BUN for excretion",
+          "isCorrect": true
+        },
+        {
+          "text": "Producing ammonia from BUN",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Where and when are ketone bodies produced?",
+      "explanation": "In liver mitochondria, when acetyl-CoA from fatty acid oxidation exceeds the TCA cycle's capacity to process it — typically prolonged fasting, a very low carbohydrate intake, or insulin deficiency. The liver makes them but cannot use them, because it lacks the transferase needed; they are fuel exported for brain, heart and muscle.",
+      "choices": [
+        {
+          "text": "In adipose tissue during the fed state",
+          "isCorrect": false
+        },
+        {
+          "text": "In liver mitochondria, when acetyl-CoA exceeds TCA capacity",
+          "isCorrect": true
+        },
+        {
+          "text": "In the brain, continuously",
+          "isCorrect": false
+        },
+        {
+          "text": "In muscle cytosol immediately after eating",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What does lipoprotein lipase do, and where does it act?",
+      "explanation": "It sits on capillary endothelium and hydrolyses triglycerides in circulating chylomicrons and VLDL, releasing fatty acids for uptake by muscle and adipose tissue. Deficiency causes severe hypertriglyceridaemia with milky plasma and a risk of pancreatitis, because the triglyceride-rich particles are never unloaded.",
+      "choices": [
+        {
+          "text": "Hydrolyses triglycerides in chylomicrons and VLDL at the capillary endothelium",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthesises triglycerides inside adipocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Transports cholesterol from tissues back to the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Converts cholesterol to bile acids in the liver",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why is HDL described as performing reverse cholesterol transport?",
+      "explanation": "It collects cholesterol from peripheral tissues and returns it to the liver for excretion in bile — the opposite direction to LDL, which delivers cholesterol outward. This is the mechanistic basis for the epidemiological association between higher HDL and lower cardiovascular risk, though raising HDL pharmacologically has not reliably reproduced that benefit.",
+      "choices": [
+        {
+          "text": "It converts cholesterol into triglyceride",
+          "isCorrect": false
+        },
+        {
+          "text": "It delivers cholesterol from liver to tissues",
+          "isCorrect": false
+        },
+        {
+          "text": "It returns cholesterol from peripheral tissues to the liver",
+          "isCorrect": true
+        },
+        {
+          "text": "It prevents all cholesterol absorption from the gut",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why are linoleic and alpha-linolenic acid described as essential fatty acids?",
+      "explanation": "Humans lack the desaturases needed to introduce double bonds at those positions, so these fatty acids must come from the diet. They are precursors for longer-chain polyunsaturates and for eicosanoids, which is why prolonged fat-free feeding produces dermatitis and poor wound healing.",
+      "choices": [
+        {
+          "text": "They are the only fatty acids that yield ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "They cannot be absorbed from the diet",
+          "isCorrect": false
+        },
+        {
+          "text": "Humans lack the desaturases to make them, so they must be eaten",
+          "isCorrect": true
+        },
+        {
+          "text": "They are synthesised only in the brain",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the purpose of transamination in amino acid metabolism?",
+      "explanation": "Transferring an amino group to a keto acid, so the carbon skeleton can enter metabolism while nitrogen is funnelled towards disposal. The transaminases require pyridoxal phosphate from vitamin B6 — which is why B6 deficiency disturbs amino acid handling broadly, and why ALT and AST rise when hepatocytes are damaged.",
+      "choices": [
+        {
+          "text": "Converting glucose directly into protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Breaking peptide bonds in dietary protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Transferring an amino group to a keto acid, separating nitrogen from carbon skeleton",
+          "isCorrect": true
+        },
+        {
+          "text": "Adding a carboxyl group to an amino acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What distinguishes an essential from a non-essential amino acid?",
+      "explanation": "Essential amino acids cannot be synthesised by the body and must be supplied by the diet. Some become 'conditionally essential' when synthesis fails or demand rises — tyrosine in phenylketonuria, for instance. This is why protein quality, not just quantity, determines nutritional adequacy.",
+      "choices": [
+        {
+          "text": "Essential ones are needed in larger absolute amounts",
+          "isCorrect": false
+        },
+        {
+          "text": "Non-essential ones have no metabolic role",
+          "isCorrect": false
+        },
+        {
+          "text": "Only essential amino acids can form peptide bonds",
+          "isCorrect": false
+        },
+        {
+          "text": "Essential ones cannot be synthesised and must come from the diet",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Why does denaturation abolish enzyme activity without breaking peptide bonds?",
+      "explanation": "Because catalysis depends on the precise three-dimensional shape of the active site, and denaturation disrupts the non-covalent interactions holding that shape while leaving the amino acid sequence intact. Heat, extremes of pH and certain solutes all do this — the sequence survives, the function does not.",
+      "choices": [
+        {
+          "text": "The three-dimensional shape of the active site is lost while sequence remains",
+          "isCorrect": true
+        },
+        {
+          "text": "The amino acid sequence is rearranged",
+          "isCorrect": false
+        },
+        {
+          "text": "Peptide bonds are hydrolyzed by heat",
+          "isCorrect": false
+        },
+        {
+          "text": "Cofactors are chemically destroyed first",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the cofactor for pyruvate dehydrogenase, and what happens when it is deficient?",
+      "explanation": "Thiamine (B1), as thiamine pyrophosphate. Deficiency blocks entry of pyruvate into the TCA cycle, so lactate accumulates and ATP production falls — most damagingly in the brain and heart, giving Wernicke encephalopathy and wet beriberi. Glucose given before thiamine can precipitate Wernicke's, which is why thiamine comes first in the at-risk patient.",
+      "choices": [
+        {
+          "text": "Vitamin C — deficiency causes bleeding gums only",
+          "isCorrect": false
+        },
+        {
+          "text": "Thiamine — deficiency blocks pyruvate entry to the TCA cycle",
+          "isCorrect": true
+        },
+        {
+          "text": "Vitamin D — deficiency causes rickets",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamin K — deficiency prolongs the prothrombin time",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "What role does vitamin K play in coagulation?",
+      "explanation": "It is the cofactor for gamma-carboxylation of glutamate residues on factors II, VII, IX and X, which is what lets those factors bind calcium and phospholipid surfaces. Warfarin blocks the recycling of vitamin K, which is why its effect takes days — existing carboxylated factors must first be cleared.",
+      "choices": [
+        {
+          "text": "Gamma-carboxylation of factors II, VII, IX and X",
+          "isCorrect": true
+        },
+        {
+          "text": "Breakdown of formed clots",
+          "isCorrect": false
+        },
+        {
+          "text": "Direct activation of platelets",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthesis of fibrinogen from amino acids",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Which enzyme is deficient in classical phenylketonuria?",
+      "explanation": "Phenylalanine hydroxylase, so phenylalanine accumulates and tyrosine becomes conditionally essential. Untreated it causes severe intellectual disability, which is entirely preventable by dietary restriction from birth — the reason it is on newborn screening programs worldwide. A minority of cases instead reflect defective tetrahydrobiopterin, the cofactor.",
+      "choices": [
+        {
+          "text": "Homogentisate oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "Branched-chain ketoacid dehydrogenase",
+          "isCorrect": false
+        },
+        {
+          "text": "Cystathionine beta-synthase",
+          "isCorrect": false
+        },
+        {
+          "text": "Phenylalanine hydroxylase",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What level of protein structure is stabilized primarily by hydrogen bonding within the backbone?",
+      "explanation": "Secondary structure — the alpha helices and beta sheets, held by hydrogen bonds between backbone amide and carbonyl groups. Tertiary structure depends on side-chain interactions including hydrophobic packing and disulphide bridges, and quaternary on assembly of separate subunits.",
+      "choices": [
+        {
+          "text": "Tertiary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Secondary structure",
+          "isCorrect": true
+        },
+        {
+          "text": "Quaternary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Primary structure",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Why does vitamin C deficiency weaken connective tissue?",
+      "explanation": "Ascorbate is required for the hydroxylation of proline and lysine residues in collagen, and without it the triple helix cannot cross-link properly. The resulting fragile collagen explains scurvy's picture: bleeding gums, poor wound healing, perifollicular hemorrhage and loose teeth.",
+      "choices": [
+        {
+          "text": "Elastin replaces collagen entirely",
+          "isCorrect": false
+        },
+        {
+          "text": "Calcium cannot be absorbed at all",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen genes are mutated by the deficiency",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen proline and lysine hydroxylation fails, so cross-linking is defective",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Both vitamin B12 and folate deficiency cause megaloblastic anemia. What distinguishes them biochemically?",
+      "explanation": "Methylmalonic acid is raised in B12 deficiency but normal in folate deficiency, because B12 is additionally required by methylmalonyl-CoA mutase. Homocysteine rises in both. The distinction matters clinically: giving folate alone to someone B12-deficient corrects the anemia while the neurological damage continues.",
+      "choices": [
+        {
+          "text": "Methylmalonic acid is raised only in B12 deficiency",
+          "isCorrect": true
+        },
+        {
+          "text": "There is no biochemical difference",
+          "isCorrect": false
+        },
+        {
+          "text": "Homocysteine rises only in folate deficiency",
+          "isCorrect": false
+        },
+        {
+          "text": "Only folate deficiency affects the blood film",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the precursor of NAD+ and NADP+?",
+      "explanation": "Niacin (B3), which can also be made in limited amounts from tryptophan. Because NAD+ participates in a vast number of oxidation-reduction reactions, deficiency affects the tissues with the highest turnover — giving pellagra's dermatitis, diarrhea and dementia.",
+      "choices": [
+        {
+          "text": "Niacin",
+          "isCorrect": true
+        },
+        {
+          "text": "Biotin",
+          "isCorrect": false
+        },
+        {
+          "text": "Riboflavin",
+          "isCorrect": false
+        },
+        {
+          "text": "Pantothenic acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the principal function of the pentose phosphate pathway?",
+      "explanation": "Producing NADPH and ribose-5-phosphate — reducing power for biosynthesis and antioxidant defense, and the sugar backbone for nucleotides. It generates no ATP. Its importance is clearest in the red cell, where NADPH maintains reduced glutathione, and where losing it causes oxidative hemolysis.",
+      "choices": [
+        {
+          "text": "Generating NADPH and ribose-5-phosphate",
+          "isCorrect": true
+        },
+        {
+          "text": "Producing large amounts of ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthesising fatty acids directly",
+          "isCorrect": false
+        },
+        {
+          "text": "Breaking down amino acids",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme deficiency causes von Gierke disease, with severe fasting hypoglycemia and hepatomegaly?",
+      "explanation": "Glucose-6-phosphatase. Without it the liver can neither release glucose from glycogen nor from gluconeogenesis, so glucose-6-phosphate accumulates and no glucose reaches the circulation. That explains the combination of a large glycogen-loaded liver alongside profound hypoglycemia — the fuel is present but cannot leave the cell.",
+      "choices": [
+        {
+          "text": "Glucose-6-phosphatase",
+          "isCorrect": true
+        },
+        {
+          "text": "Lysosomal acid maltase",
+          "isCorrect": false
+        },
+        {
+          "text": "Branching enzyme",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle glycogen phosphorylase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-1",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What is the role of carnitine in fatty acid oxidation?",
+      "explanation": "It shuttles long-chain fatty acyl groups across the inner mitochondrial membrane, which they cannot cross as CoA esters. Carnitine deficiency therefore causes accumulation of long-chain fats with hypoketotic hypoglycemia and muscle weakness — the fat is available but cannot reach the site of oxidation.",
+      "choices": [
+        {
+          "text": "Synthesising cholesterol from acetyl-CoA",
+          "isCorrect": false
+        },
+        {
+          "text": "Transporting long-chain fatty acyl groups into mitochondria",
+          "isCorrect": true
+        },
+        {
+          "text": "Activating fatty acids in the cytosol",
+          "isCorrect": false
+        },
+        {
+          "text": "Emulsifying dietary fat in the gut",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What is meant by the degeneracy of the genetic code?",
+      "explanation": "Several codons can specify the same amino acid, most often differing at the third base. This is why many single-base substitutions are silent and have no effect on the protein, and it provides a genuine buffer against mutation rather than being a quirk of the code.",
+      "choices": [
+        {
+          "text": "The code differs between human tissues",
+          "isCorrect": false
+        },
+        {
+          "text": "Some codons code for nothing at all",
+          "isCorrect": false
+        },
+        {
+          "text": "One codon can code for several different amino acids",
+          "isCorrect": false
+        },
+        {
+          "text": "Several codons can code for the same amino acid",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What is the Cori cycle?",
+      "explanation": "Lactate produced by anaerobic glycolysis in muscle travels to the liver, is converted back to glucose by gluconeogenesis, and returns to muscle. The liver bears the ATP cost so muscle can keep contracting — an inter-organ division of labor rather than a futile loop.",
+      "choices": [
+        {
+          "text": "Amino acids are converted to BUN in muscle",
+          "isCorrect": false
+        },
+        {
+          "text": "Liver ketones are converted to glucose in the brain",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle lactate is converted to glucose in the liver and returned to muscle",
+          "isCorrect": true
+        },
+        {
+          "text": "Muscle glucose is converted to fat in adipose tissue",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What does the Michaelis constant (Km) of an enzyme represent?",
+      "explanation": "The substrate concentration at which the reaction runs at half its maximum velocity. It is an inverse measure of affinity — a LOW Km means the enzyme is saturated at low substrate concentrations, so it binds tightly. Vmax, by contrast, reflects how much enzyme is present and how fast it can turn over once saturated.",
+      "choices": [
+        {
+          "text": "The total amount of enzyme present",
+          "isCorrect": false
+        },
+        {
+          "text": "The substrate concentration giving half-maximal velocity",
+          "isCorrect": true
+        },
+        {
+          "text": "The maximum reaction velocity achievable",
+          "isCorrect": false
+        },
+        {
+          "text": "The energy of activation of the reaction",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "How does a competitive inhibitor alter an enzyme's kinetics?",
+      "explanation": "It raises the apparent Km while leaving Vmax unchanged. Because it competes for the active site, adding enough substrate outcompetes it and full velocity is still reachable — which is exactly why it looks like reduced affinity rather than reduced capacity. A non-competitive inhibitor does the opposite: Vmax falls and Km is unaffected.",
+      "choices": [
+        {
+          "text": "Neither is affected",
+          "isCorrect": false
+        },
+        {
+          "text": "Km rises, Vmax unchanged",
+          "isCorrect": true
+        },
+        {
+          "text": "Both Km and Vmax fall",
+          "isCorrect": false
+        },
+        {
+          "text": "Vmax falls, Km unchanged",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why do enzymes speed up reactions?",
+      "explanation": "They lower the activation energy by stabilising the transition state. Note what they do NOT do: the equilibrium position and the overall free energy change are untouched, so an enzyme accelerates a reaction in both directions equally. A thermodynamically unfavourable reaction stays unfavourable no matter which enzyme is present.",
+      "choices": [
+        {
+          "text": "They change the equilibrium position in favor of product",
+          "isCorrect": false
+        },
+        {
+          "text": "They supply energy directly to the reactants",
+          "isCorrect": false
+        },
+        {
+          "text": "They make the overall free energy change more negative",
+          "isCorrect": false
+        },
+        {
+          "text": "They lower activation energy by stabilising the transition state",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What characterises an allosteric enzyme?",
+      "explanation": "Regulation through binding at a site distinct from the active site, producing a conformational change and a sigmoidal rather than hyperbolic velocity curve. This is what allows a pathway's output to feed back on its own first committed step — the basis of nearly all metabolic control, and the reason such enzymes sit at pathway branch points.",
+      "choices": [
+        {
+          "text": "An inability to bind cofactors",
+          "isCorrect": false
+        },
+        {
+          "text": "Absolute irreversibility of catalysis",
+          "isCorrect": false
+        },
+        {
+          "text": "Complete independence from any regulation",
+          "isCorrect": false
+        },
+        {
+          "text": "Regulation via a site separate from the active site, giving sigmoidal kinetics",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "What is the difference between a cofactor and a coenzyme?",
+      "explanation": "Cofactor is the broader term for any non-protein helper an enzyme requires; coenzymes are the organic subset, most of them vitamin-derived. That derivation is why the clinical consequence of a vitamin deficiency is predictable: lose the vitamin and every enzyme depending on its coenzyme slows, which is why deficiency syndromes affect multiple systems at once.",
+      "choices": [
+        {
+          "text": "Cofactors are proteins and coenzymes are not",
+          "isCorrect": false
+        },
+        {
+          "text": "Coenzymes are always metal ions",
+          "isCorrect": false
+        },
+        {
+          "text": "They are entirely unrelated concepts",
+          "isCorrect": false
+        },
+        {
+          "text": "Coenzymes are the organic subset of cofactors, usually vitamin-derived",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Enzymes & Kinetics",
+      "stem": "Why is the rate-limiting step of a pathway the usual point of regulation?",
+      "explanation": "Because it is the slowest step, so controlling it controls flux through the whole sequence — regulating a fast downstream step achieves little when the bottleneck is upstream. It is typically the first committed, irreversible step, which also means regulation happens before substrate has been spent on a pathway the cell no longer needs.",
+      "choices": [
+        {
+          "text": "It is the only reversible step",
+          "isCorrect": false
+        },
+        {
+          "text": "It consumes no energy",
+          "isCorrect": false
+        },
+        {
+          "text": "It is the bottleneck, so controlling it controls flux through the whole pathway",
+          "isCorrect": true
+        },
+        {
+          "text": "It is always the final step of the pathway",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme catalyses the rate-limiting step of glycolysis?",
+      "explanation": "Phosphofructokinase-1, converting fructose-6-phosphate to fructose-1,6-bisphosphate. It is inhibited by ATP and citrate — signals that energy is plentiful — and activated by AMP and fructose-2,6-bisphosphate. That makes it the point at which the cell decides whether to burn glucose at all.",
+      "choices": [
+        {
+          "text": "Pyruvate kinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Aldolase",
+          "isCorrect": false
+        },
+        {
+          "text": "Hexokinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Phosphofructokinase-1",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the net ATP yield of anaerobic glycolysis per molecule of glucose?",
+      "explanation": "Two. Four ATP are produced but two are invested in the early phosphorylation steps. It is a small yield compared with the roughly thirty from complete oxidation, but it needs no oxygen and no mitochondria — which is why the red cell and exercising muscle depend on it.",
+      "choices": [
+        {
+          "text": "38 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "0 ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "2 ATP",
+          "isCorrect": true
+        },
+        {
+          "text": "12 ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why must pyruvate be converted to lactate when oxygen is scarce?",
+      "explanation": "To regenerate NAD+. Glycolysis consumes NAD+ at glyceraldehyde-3-phosphate dehydrogenase, and without oxidative phosphorylation to recycle it the pathway would halt within seconds. Lactate dehydrogenase is therefore not a waste step but the mechanism that keeps anaerobic glycolysis running.",
+      "choices": [
+        {
+          "text": "To consume excess oxygen",
+          "isCorrect": false
+        },
+        {
+          "text": "To regenerate NAD+ so glycolysis can continue",
+          "isCorrect": true
+        },
+        {
+          "text": "To generate additional ATP directly",
+          "isCorrect": false
+        },
+        {
+          "text": "To synthesise glucose",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "How does hepatic glucokinase differ from hexokinase in other tissues?",
+      "explanation": "Glucokinase has a high Km and is not inhibited by its product, so it only becomes active when portal glucose is high — after a meal. That makes the liver a glucose buffer rather than a competitor: it takes up glucose when there is plenty and leaves it for the brain when there is not.",
+      "choices": [
+        {
+          "text": "It phosphorylates fructose rather than glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Low Km, so it works at all glucose concentrations",
+          "isCorrect": false
+        },
+        {
+          "text": "High Km and no product inhibition, so it acts only when glucose is abundant",
+          "isCorrect": true
+        },
+        {
+          "text": "It is found only in muscle",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Why can fatty acids not be used for net glucose synthesis in humans?",
+      "explanation": "Because the pyruvate dehydrogenase reaction is irreversible, so acetyl-CoA cannot be converted back to pyruvate. Acetyl-CoA entering the TCA cycle loses two carbons as CO2, leaving no net carbon for gluconeogenesis. Glycerol from the triglyceride backbone and the odd-chain propionyl-CoA route are the exceptions, and neither is quantitatively significant.",
+      "choices": [
+        {
+          "text": "Gluconeogenesis does not occur in humans",
+          "isCorrect": false
+        },
+        {
+          "text": "Fatty acid oxidation produces no usable intermediates",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate dehydrogenase is irreversible, so acetyl-CoA cannot return to pyruvate",
+          "isCorrect": true
+        },
+        {
+          "text": "Fatty acids cannot enter mitochondria at all",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Where and when are ketone bodies produced?",
+      "explanation": "In liver mitochondria, when acetyl-CoA from fatty acid oxidation exceeds the TCA cycle's capacity to process it — typically prolonged fasting, a very low carbohydrate intake, or insulin deficiency. The liver makes them but cannot use them, because it lacks the transferase needed; they are fuel exported for brain, heart and muscle.",
+      "choices": [
+        {
+          "text": "In muscle cytosol immediately after eating",
+          "isCorrect": false
+        },
+        {
+          "text": "In the brain, continuously",
+          "isCorrect": false
+        },
+        {
+          "text": "In liver mitochondria, when acetyl-CoA exceeds TCA capacity",
+          "isCorrect": true
+        },
+        {
+          "text": "In adipose tissue during the fed state",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Which enzyme is the rate-limiting step of cholesterol synthesis, and the target of statins?",
+      "explanation": "HMG-CoA reductase. Inhibiting it lowers intracellular cholesterol, which upregulates hepatic LDL receptors — and it is that receptor upregulation, more than reduced synthesis itself, that clears LDL from the plasma. It also explains why statins work poorly in homozygous familial hypercholesterolemia, where functional receptors are absent.",
+      "choices": [
+        {
+          "text": "HMG-CoA reductase",
+          "isCorrect": true
+        },
+        {
+          "text": "Lipoprotein lipase",
+          "isCorrect": false
+        },
+        {
+          "text": "Carnitine palmitoyltransferase I",
+          "isCorrect": false
+        },
+        {
+          "text": "Acetyl-CoA carboxylase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What is the role of carnitine in fatty acid oxidation?",
+      "explanation": "It shuttles long-chain fatty acyl groups across the inner mitochondrial membrane, which they cannot cross as CoA esters. Carnitine deficiency therefore causes accumulation of long-chain fats with hypoketotic hypoglycemia and muscle weakness — the fat is available but cannot reach the site of oxidation.",
+      "choices": [
+        {
+          "text": "Synthesising cholesterol from acetyl-CoA",
+          "isCorrect": false
+        },
+        {
+          "text": "Activating fatty acids in the cytosol",
+          "isCorrect": false
+        },
+        {
+          "text": "Emulsifying dietary fat in the gut",
+          "isCorrect": false
+        },
+        {
+          "text": "Transporting long-chain fatty acyl groups into mitochondria",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "What does lipoprotein lipase do, and where does it act?",
+      "explanation": "It sits on capillary endothelium and hydrolyses triglycerides in circulating chylomicrons and VLDL, releasing fatty acids for uptake by muscle and adipose tissue. Deficiency causes severe hypertriglyceridaemia with milky plasma and a risk of pancreatitis, because the triglyceride-rich particles are never unloaded.",
+      "choices": [
+        {
+          "text": "Hydrolyses triglycerides in chylomicrons and VLDL at the capillary endothelium",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthesises triglycerides inside adipocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Converts cholesterol to bile acids in the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Transports cholesterol from tissues back to the liver",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why is HDL described as performing reverse cholesterol transport?",
+      "explanation": "It collects cholesterol from peripheral tissues and returns it to the liver for excretion in bile — the opposite direction to LDL, which delivers cholesterol outward. This is the mechanistic basis for the epidemiological association between higher HDL and lower cardiovascular risk, though raising HDL pharmacologically has not reliably reproduced that benefit.",
+      "choices": [
+        {
+          "text": "It delivers cholesterol from liver to tissues",
+          "isCorrect": false
+        },
+        {
+          "text": "It converts cholesterol into triglyceride",
+          "isCorrect": false
+        },
+        {
+          "text": "It returns cholesterol from peripheral tissues to the liver",
+          "isCorrect": true
+        },
+        {
+          "text": "It prevents all cholesterol absorption from the gut",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Lipid Metabolism",
+      "stem": "Why are linoleic and alpha-linolenic acid described as essential fatty acids?",
+      "explanation": "Humans lack the desaturases needed to introduce double bonds at those positions, so these fatty acids must come from the diet. They are precursors for longer-chain polyunsaturates and for eicosanoids, which is why prolonged fat-free feeding produces dermatitis and poor wound healing.",
+      "choices": [
+        {
+          "text": "They cannot be absorbed from the diet",
+          "isCorrect": false
+        },
+        {
+          "text": "They are synthesised only in the brain",
+          "isCorrect": false
+        },
+        {
+          "text": "They are the only fatty acids that yield ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "Humans lack the desaturases to make them, so they must be eaten",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the purpose of transamination in amino acid metabolism?",
+      "explanation": "Transferring an amino group to a keto acid, so the carbon skeleton can enter metabolism while nitrogen is funnelled towards disposal. The transaminases require pyridoxal phosphate from vitamin B6 — which is why B6 deficiency disturbs amino acid handling broadly, and why ALT and AST rise when hepatocytes are damaged.",
+      "choices": [
+        {
+          "text": "Transferring an amino group to a keto acid, separating nitrogen from carbon skeleton",
+          "isCorrect": true
+        },
+        {
+          "text": "Breaking peptide bonds in dietary protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Converting glucose directly into protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Adding a carboxyl group to an amino acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What is the main function of the BUN cycle?",
+      "explanation": "Converting ammonia — neurotoxic, especially to the central nervous system — into BUN for renal excretion. Defects at any step, or liver failure, cause hyperammonaemia with encephalopathy. This is why protein restriction and measures to reduce ammonia production are central to managing both inherited BUN cycle disorders and hepatic encephalopathy.",
+      "choices": [
+        {
+          "text": "Synthesising amino acids from glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Producing ammonia from BUN",
+          "isCorrect": false
+        },
+        {
+          "text": "Generating ATP for hepatocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Converting toxic ammonia into BUN for excretion",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What distinguishes an essential from a non-essential amino acid?",
+      "explanation": "Essential amino acids cannot be synthesised by the body and must be supplied by the diet. Some become 'conditionally essential' when synthesis fails or demand rises — tyrosine in phenylketonuria, for instance. This is why protein quality, not just quantity, determines nutritional adequacy.",
+      "choices": [
+        {
+          "text": "Only essential amino acids can form peptide bonds",
+          "isCorrect": false
+        },
+        {
+          "text": "Essential ones are needed in larger absolute amounts",
+          "isCorrect": false
+        },
+        {
+          "text": "Essential ones cannot be synthesised and must come from the diet",
+          "isCorrect": true
+        },
+        {
+          "text": "Non-essential ones have no metabolic role",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Why does denaturation abolish enzyme activity without breaking peptide bonds?",
+      "explanation": "Because catalysis depends on the precise three-dimensional shape of the active site, and denaturation disrupts the non-covalent interactions holding that shape while leaving the amino acid sequence intact. Heat, extremes of pH and certain solutes all do this — the sequence survives, the function does not.",
+      "choices": [
+        {
+          "text": "Cofactors are chemically destroyed first",
+          "isCorrect": false
+        },
+        {
+          "text": "Peptide bonds are hydrolyzed by heat",
+          "isCorrect": false
+        },
+        {
+          "text": "The amino acid sequence is rearranged",
+          "isCorrect": false
+        },
+        {
+          "text": "The three-dimensional shape of the active site is lost while sequence remains",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the cofactor for pyruvate dehydrogenase, and what happens when it is deficient?",
+      "explanation": "Thiamine (B1), as thiamine pyrophosphate. Deficiency blocks entry of pyruvate into the TCA cycle, so lactate accumulates and ATP production falls — most damagingly in the brain and heart, giving Wernicke encephalopathy and wet beriberi. Glucose given before thiamine can precipitate Wernicke's, which is why thiamine comes first in the at-risk patient.",
+      "choices": [
+        {
+          "text": "Vitamin C — deficiency causes bleeding gums only",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamin D — deficiency causes rickets",
+          "isCorrect": false
+        },
+        {
+          "text": "Thiamine — deficiency blocks pyruvate entry to the TCA cycle",
+          "isCorrect": true
+        },
+        {
+          "text": "Vitamin K — deficiency prolongs the prothrombin time",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "What role does vitamin K play in coagulation?",
+      "explanation": "It is the cofactor for gamma-carboxylation of glutamate residues on factors II, VII, IX and X, which is what lets those factors bind calcium and phospholipid surfaces. Warfarin blocks the recycling of vitamin K, which is why its effect takes days — existing carboxylated factors must first be cleared.",
+      "choices": [
+        {
+          "text": "Gamma-carboxylation of factors II, VII, IX and X",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthesis of fibrinogen from amino acids",
+          "isCorrect": false
+        },
+        {
+          "text": "Direct activation of platelets",
+          "isCorrect": false
+        },
+        {
+          "text": "Breakdown of formed clots",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What does semiconservative DNA replication mean?",
+      "explanation": "Each daughter molecule retains one parental strand and one newly synthesised strand. The parental strand acts as the template, which is what makes replication accurate and allows mismatch repair to identify which strand is new — and therefore which base is the error.",
+      "choices": [
+        {
+          "text": "Both strands of each new molecule are newly made",
+          "isCorrect": false
+        },
+        {
+          "text": "Each new molecule keeps one parental and one new strand",
+          "isCorrect": true
+        },
+        {
+          "text": "The original molecule is destroyed and rebuilt",
+          "isCorrect": false
+        },
+        {
+          "text": "Only one strand is ever copied",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "In which direction does DNA polymerase synthesise a new strand?",
+      "explanation": "5′ to 3′ only, adding nucleotides to the free 3′ hydroxyl. This single constraint explains the whole architecture of the replication fork: one strand is copied continuously while the other must be made in short segments and joined, and it is why a primer is always required.",
+      "choices": [
+        {
+          "text": "3′ to 5′",
+          "isCorrect": false
+        },
+        {
+          "text": "From the middle of the strand outwards",
+          "isCorrect": false
+        },
+        {
+          "text": "Either direction, depending on the template",
+          "isCorrect": false
+        },
+        {
+          "text": "5′ to 3′",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "What level of protein structure is stabilized primarily by hydrogen bonding within the backbone?",
+      "explanation": "Secondary structure — the alpha helices and beta sheets, held by hydrogen bonds between backbone amide and carbonyl groups. Tertiary structure depends on side-chain interactions including hydrophobic packing and disulphide bridges, and quaternary on assembly of separate subunits.",
+      "choices": [
+        {
+          "text": "Quaternary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Tertiary structure",
+          "isCorrect": false
+        },
+        {
+          "text": "Secondary structure",
+          "isCorrect": true
+        },
+        {
+          "text": "Primary structure",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Why does vitamin C deficiency weaken connective tissue?",
+      "explanation": "Ascorbate is required for the hydroxylation of proline and lysine residues in collagen, and without it the triple helix cannot cross-link properly. The resulting fragile collagen explains scurvy's picture: bleeding gums, poor wound healing, perifollicular hemorrhage and loose teeth.",
+      "choices": [
+        {
+          "text": "Elastin replaces collagen entirely",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen genes are mutated by the deficiency",
+          "isCorrect": false
+        },
+        {
+          "text": "Collagen proline and lysine hydroxylation fails, so cross-linking is defective",
+          "isCorrect": true
+        },
+        {
+          "text": "Calcium cannot be absorbed at all",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Both vitamin B12 and folate deficiency cause megaloblastic anemia. What distinguishes them biochemically?",
+      "explanation": "Methylmalonic acid is raised in B12 deficiency but normal in folate deficiency, because B12 is additionally required by methylmalonyl-CoA mutase. Homocysteine rises in both. The distinction matters clinically: giving folate alone to someone B12-deficient corrects the anemia while the neurological damage continues.",
+      "choices": [
+        {
+          "text": "Methylmalonic acid is raised only in B12 deficiency",
+          "isCorrect": true
+        },
+        {
+          "text": "Only folate deficiency affects the blood film",
+          "isCorrect": false
+        },
+        {
+          "text": "There is no biochemical difference",
+          "isCorrect": false
+        },
+        {
+          "text": "Homocysteine rises only in folate deficiency",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Vitamins & Cofactors",
+      "stem": "Which vitamin is the precursor of NAD+ and NADP+?",
+      "explanation": "Niacin (B3), which can also be made in limited amounts from tryptophan. Because NAD+ participates in a vast number of oxidation-reduction reactions, deficiency affects the tissues with the highest turnover — giving pellagra's dermatitis, diarrhea and dementia.",
+      "choices": [
+        {
+          "text": "Niacin",
+          "isCorrect": true
+        },
+        {
+          "text": "Pantothenic acid",
+          "isCorrect": false
+        },
+        {
+          "text": "Biotin",
+          "isCorrect": false
+        },
+        {
+          "text": "Riboflavin",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "Why is a frameshift mutation usually more damaging than a missense mutation?",
+      "explanation": "Inserting or deleting a number of bases not divisible by three shifts the reading frame, so every downstream codon is misread and a premature stop is likely. A missense mutation changes one amino acid; a frameshift typically destroys the entire remainder of the protein.",
+      "choices": [
+        {
+          "text": "The reading frame shifts, so all downstream codons are misread",
+          "isCorrect": true
+        },
+        {
+          "text": "It always deletes the whole gene",
+          "isCorrect": false
+        },
+        {
+          "text": "It prevents transcription from starting",
+          "isCorrect": false
+        },
+        {
+          "text": "It only affects the first amino acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What is the purpose of splicing in eukaryotic gene expression?",
+      "explanation": "Removing introns and joining exons to produce mature mRNA. Alternative splicing lets one gene generate several proteins, which is part of why the human protein repertoire greatly exceeds the gene count. Mutations at splice sites can be as damaging as those in coding sequence.",
+      "choices": [
+        {
+          "text": "Copying DNA into a complementary strand",
+          "isCorrect": false
+        },
+        {
+          "text": "Translating mRNA into protein",
+          "isCorrect": false
+        },
+        {
+          "text": "Removing introns and joining exons to form mature mRNA",
+          "isCorrect": true
+        },
+        {
+          "text": "Adding introns to increase protein diversity",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "What does the polymerase chain reaction achieve?",
+      "explanation": "Exponential amplification of a specific DNA sequence defined by the primers, through repeated cycles of denaturation, annealing and extension. Because amplification is exponential, tiny starting amounts become detectable — which is the basis of molecular diagnostics and also why contamination causes false positives.",
+      "choices": [
+        {
+          "text": "Translation of RNA into protein in vitro",
+          "isCorrect": false
+        },
+        {
+          "text": "Direct sequencing of a whole genome in one step",
+          "isCorrect": false
+        },
+        {
+          "text": "Exponential amplification of a specific DNA sequence",
+          "isCorrect": true
+        },
+        {
+          "text": "Separation of proteins by size",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Molecular Biology",
+      "stem": "A Western blot detects which type of molecule?",
+      "explanation": "Protein, using antibodies after electrophoretic separation. Southern blotting detects DNA and Northern detects RNA — a distinction worth fixing, because the choice of technique reveals what question is being asked of the sample.",
+      "choices": [
+        {
+          "text": "Carbohydrate",
+          "isCorrect": false
+        },
+        {
+          "text": "RNA",
+          "isCorrect": false
+        },
+        {
+          "text": "Protein",
+          "isCorrect": true
+        },
+        {
+          "text": "DNA",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Which enzyme is deficient in Lesch-Nyhan syndrome?",
+      "explanation": "Hypoxanthine-guanine phosphoribosyltransferase, the purine salvage enzyme. Losing salvage forces reliance on de novo synthesis and diverts purines to uric acid, giving hyperuricaemia with gout and renal stones alongside the neurological features. It is X-linked recessive.",
+      "choices": [
+        {
+          "text": "Dihydrofolate reductase",
+          "isCorrect": false
+        },
+        {
+          "text": "Adenosine deaminase",
+          "isCorrect": false
+        },
+        {
+          "text": "Xanthine oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "Hypoxanthine-guanine phosphoribosyltransferase (HGPRT)",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "How does allopurinol lower uric acid?",
+      "explanation": "By inhibiting xanthine oxidase, so hypoxanthine and xanthine are not converted to uric acid. Those precursors are more soluble and more readily excreted. It is prophylactic rather than a treatment for acute gout — starting it during an attack can prolong it.",
+      "choices": [
+        {
+          "text": "It inhibits xanthine oxidase",
+          "isCorrect": true
+        },
+        {
+          "text": "It blocks purine absorption from the diet",
+          "isCorrect": false
+        },
+        {
+          "text": "It converts uric acid into purines",
+          "isCorrect": false
+        },
+        {
+          "text": "It increases renal uric acid reabsorption",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "How does methotrexate interfere with nucleotide synthesis?",
+      "explanation": "It inhibits dihydrofolate reductase, depleting tetrahydrofolate and so blocking thymidine and purine synthesis. Rapidly dividing cells suffer first, which accounts for both the antineoplastic effect and the toxicity to marrow and gut mucosa. Folinic acid rescue bypasses the blocked step.",
+      "choices": [
+        {
+          "text": "It inhibits dihydrofolate reductase, depleting tetrahydrofolate",
+          "isCorrect": true
+        },
+        {
+          "text": "It cross-links DNA strands directly",
+          "isCorrect": false
+        },
+        {
+          "text": "It inhibits xanthine oxidase",
+          "isCorrect": false
+        },
+        {
+          "text": "It blocks the ribosome",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Why does adenosine deaminase deficiency cause severe combined immunodeficiency?",
+      "explanation": "Deoxyadenosine and its nucleotides accumulate and are particularly toxic to lymphocytes, which cannot tolerate the resulting imbalance in deoxynucleotide pools. Both T and B cell lineages fail, hence the combined defect — and it was the first condition treated by gene therapy.",
+      "choices": [
+        {
+          "text": "Toxic deoxyadenosine metabolites accumulate and destroy lymphocytes",
+          "isCorrect": true
+        },
+        {
+          "text": "Complement proteins are not synthesised",
+          "isCorrect": false
+        },
+        {
+          "text": "Antibodies are structurally abnormal",
+          "isCorrect": false
+        },
+        {
+          "text": "The thymus is absent from birth",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What does the chemiosmotic theory propose about ATP synthesis?",
+      "explanation": "That electron transport pumps protons across the inner mitochondrial membrane, and the resulting electrochemical gradient drives ATP synthase as protons flow back. The gradient — not a chemical intermediate — is the stored energy, which is why anything that makes the membrane leaky abolishes ATP synthesis while electron transport continues.",
+      "choices": [
+        {
+          "text": "A proton gradient across the inner membrane drives ATP synthase",
+          "isCorrect": true
+        },
+        {
+          "text": "ATP is made directly by the electron transport complexes",
+          "isCorrect": false
+        },
+        {
+          "text": "Oxygen is not required at any stage",
+          "isCorrect": false
+        },
+        {
+          "text": "Substrate-level phosphorylation supplies all mitochondrial ATP",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "How does an uncoupling agent such as 2,4-dinitrophenol affect mitochondria?",
+      "explanation": "It carries protons across the membrane, dissipating the gradient. Electron transport and oxygen consumption accelerate while ATP synthesis falls, and the energy appears as heat — which is why uncouplers cause dangerous hyperthermia. Brown adipose tissue uses the same principle physiologically via thermogenin.",
+      "choices": [
+        {
+          "text": "It increases ATP yield per glucose molecule",
+          "isCorrect": false
+        },
+        {
+          "text": "It dissipates the proton gradient, so energy is released as heat instead of ATP",
+          "isCorrect": true
+        },
+        {
+          "text": "It blocks electron transport completely",
+          "isCorrect": false
+        },
+        {
+          "text": "It prevents oxygen consumption entirely",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "Where does cyanide act in oxidative phosphorylation?",
+      "explanation": "At complex IV, cytochrome c oxidase, blocking the transfer of electrons to oxygen. Cells cannot use oxygen even though it is delivered normally, so venous oxygen content stays high and lactate rises steeply. That mismatch — adequate oxygenation with profound lactic acidosis — is the diagnostic clue.",
+      "choices": [
+        {
+          "text": "The carnitine shuttle",
+          "isCorrect": false
+        },
+        {
+          "text": "ATP synthase",
+          "isCorrect": false
+        },
+        {
+          "text": "Complex IV, cytochrome c oxidase",
+          "isCorrect": true
+        },
+        {
+          "text": "Complex I only",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What does a respiratory quotient of approximately 1.0 indicate about substrate use?",
+      "explanation": "Predominantly carbohydrate oxidation, because glucose oxidation produces roughly one molecule of CO2 per molecule of O2 consumed. Fat oxidation gives a lower value near 0.7, since fatty acids are more reduced and need proportionally more oxygen — so the ratio reports which fuel is being burnt.",
+      "choices": [
+        {
+          "text": "Mainly carbohydrate oxidation",
+          "isCorrect": true
+        },
+        {
+          "text": "Mainly fat oxidation",
+          "isCorrect": false
+        },
+        {
+          "text": "Mainly protein oxidation",
+          "isCorrect": false
+        },
+        {
+          "text": "No metabolism is occurring",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Which fuel does the brain use during prolonged starvation, and why does that matter?",
+      "explanation": "It shifts substantially to ketone bodies. This spares glucose and therefore spares muscle protein, since gluconeogenesis would otherwise consume amino acids. The adaptation is what allows survival for weeks rather than days — the brain cannot use fatty acids directly, so ketones are the only alternative.",
+      "choices": [
+        {
+          "text": "Lactate exclusively",
+          "isCorrect": false
+        },
+        {
+          "text": "Ketone bodies, which spare glucose and therefore muscle protein",
+          "isCorrect": true
+        },
+        {
+          "text": "Fatty acids taken up directly across the blood-brain barrier",
+          "isCorrect": false
+        },
+        {
+          "text": "Only glucose, in all circumstances",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "What is the metabolic role of the TCA cycle beyond energy production?",
+      "explanation": "It supplies intermediates for biosynthesis — oxaloacetate for gluconeogenesis and aspartate, alpha-ketoglutarate for glutamate, succinyl-CoA for heme. Because intermediates are withdrawn, they must be replenished by anaplerotic reactions such as pyruvate carboxylase, or the cycle grinds down.",
+      "choices": [
+        {
+          "text": "It operates only under anaerobic conditions",
+          "isCorrect": false
+        },
+        {
+          "text": "It has no function other than making ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "It provides biosynthetic intermediates, replenished by anaplerotic reactions",
+          "isCorrect": true
+        },
+        {
+          "text": "It synthesises fatty acids directly",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Bioenergetics",
+      "stem": "Why does the red blood cell depend entirely on glycolysis for ATP?",
+      "explanation": "It has no mitochondria, so oxidative phosphorylation is unavailable despite the cell being full of oxygen. Its energy needs are met by anaerobic glycolysis alone, which is why glycolytic enzyme defects such as pyruvate kinase deficiency present as hemolytic anemia.",
+      "choices": [
+        {
+          "text": "It lacks all glycolytic enzymes",
+          "isCorrect": false
+        },
+        {
+          "text": "It has no mitochondria",
+          "isCorrect": true
+        },
+        {
+          "text": "It cannot take up glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Oxygen is toxic to its enzymes",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What are insulin's principal metabolic effects after a meal?",
+      "explanation": "It promotes storage: glucose uptake into muscle and adipose tissue, glycogen and triglyceride synthesis, and protein synthesis, while suppressing gluconeogenesis, glycogenolysis and lipolysis. Every one of those actions is anabolic, which is why insulin deficiency produces simultaneous hyperglycemia, ketosis and wasting.",
+      "choices": [
+        {
+          "text": "It acts only on the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "It raises blood glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "It stimulates glycogen breakdown and lipolysis",
+          "isCorrect": false
+        },
+        {
+          "text": "It promotes storage and suppresses gluconeogenesis, glycogenolysis and lipolysis",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Why does insulin deficiency cause ketoacidosis?",
+      "explanation": "Unopposed lipolysis floods the liver with fatty acids, and their oxidation generates acetyl-CoA far in excess of TCA capacity, so ketone bodies accumulate as acids. Glucose is abundant in the blood but cannot enter cells, so the body behaves as though starving — starvation in the midst of plenty.",
+      "choices": [
+        {
+          "text": "The kidneys stop excreting all acid",
+          "isCorrect": false
+        },
+        {
+          "text": "Unrestrained lipolysis floods the liver with fatty acids, overwhelming TCA capacity",
+          "isCorrect": true
+        },
+        {
+          "text": "Protein synthesis produces acidic by-products",
+          "isCorrect": false
+        },
+        {
+          "text": "Excess glucose is directly converted into acid",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "What does glucagon do to hepatic metabolism during fasting?",
+      "explanation": "It stimulates glycogenolysis and gluconeogenesis and promotes ketogenesis, raising blood glucose. It acts principally on the liver, since muscle lacks glucagon receptors — which is why muscle glycogen cannot contribute directly to blood glucose and must go through the Cori cycle instead.",
+      "choices": [
+        {
+          "text": "Stimulates glycogen synthesis in muscle",
+          "isCorrect": false
+        },
+        {
+          "text": "Lowers blood glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Promotes glucose uptake into adipose tissue",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulates glycogenolysis, gluconeogenesis and ketogenesis, mainly in liver",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Metabolic Integration",
+      "stem": "Why does the liver, not muscle, regulate blood glucose despite muscle holding more glycogen?",
+      "explanation": "Muscle lacks glucose-6-phosphatase, so it cannot release free glucose into the circulation — its glycogen serves only the muscle itself. The liver has the enzyme, and so is the only tissue that can export stored glucose to the rest of the body.",
+      "choices": [
+        {
+          "text": "Muscle lacks glucose-6-phosphatase, so it cannot export free glucose",
+          "isCorrect": true
+        },
+        {
+          "text": "Muscle has no glycogen phosphorylase",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle glycogen is chemically different",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle glycogen is inaccessible to any enzyme",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why is newborn screening for metabolic disease worth doing?",
+      "explanation": "Because several of these conditions cause irreversible damage before symptoms appear, and dietary or pharmacological treatment started presymptomatically prevents it almost entirely. Phenylketonuria is the model case: detected at birth the outcome is normal, detected on symptoms the damage is permanent.",
+      "choices": [
+        {
+          "text": "Damage is irreversible but preventable if treatment starts before symptoms",
+          "isCorrect": true
+        },
+        {
+          "text": "The conditions are untreatable but worth documenting",
+          "isCorrect": false
+        },
+        {
+          "text": "The conditions only appear in adulthood",
+          "isCorrect": false
+        },
+        {
+          "text": "It replaces the need for any family history",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why is maple syrup urine disease a metabolic emergency in the newborn?",
+      "explanation": "Branched-chain ketoacid dehydrogenase deficiency lets leucine and its ketoacid accumulate to neurotoxic levels within days, causing encephalopathy and death if untreated. Management is urgent removal of the accumulated metabolites and restriction of branched-chain amino acid intake — a delay of hours matters.",
+      "choices": [
+        {
+          "text": "It affects skin pigmentation alone",
+          "isCorrect": false
+        },
+        {
+          "text": "It presents only in adolescence",
+          "isCorrect": false
+        },
+        {
+          "text": "Branched-chain amino acids accumulate rapidly to neurotoxic levels",
+          "isCorrect": true
+        },
+        {
+          "text": "It causes gradual liver fibrosis over years",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "What underlies the lysosomal storage disorders as a group?",
+      "explanation": "Deficiency of a lysosomal hydrolase, so its substrate accumulates progressively inside lysosomes and the cell enlarges and fails. Which substrate accumulates determines which organs suffer — hence the very different pictures of Gaucher, Tay-Sachs and Fabry disease despite a shared underlying mechanism.",
+      "choices": [
+        {
+          "text": "A deficient lysosomal enzyme, so its substrate accumulates progressively",
+          "isCorrect": true
+        },
+        {
+          "text": "Failure of mitochondrial replication",
+          "isCorrect": false
+        },
+        {
+          "text": "Absence of lysosomes altogether",
+          "isCorrect": false
+        },
+        {
+          "text": "Overproduction of lysosomal enzymes",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why does mitochondrial disease show maternal inheritance?",
+      "explanation": "Mitochondrial DNA is inherited almost entirely from the oocyte, so an affected mother can transmit to all her children while an affected father transmits to none. Variable heteroplasmy — the proportion of mutant mitochondria differing between tissues and between siblings — explains why severity varies so widely within one family.",
+      "choices": [
+        {
+          "text": "Paternal mitochondria replicate faster",
+          "isCorrect": false
+        },
+        {
+          "text": "Mitochondria contain no DNA of their own",
+          "isCorrect": false
+        },
+        {
+          "text": "Mitochondrial DNA is inherited from the oocyte",
+          "isCorrect": true
+        },
+        {
+          "text": "The genes involved are all X-linked",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "What is the biochemical problem in classical galactosaemia?",
+      "explanation": "Deficiency of galactose-1-phosphate uridyltransferase, so galactose-1-phosphate accumulates and is toxic to liver, brain and lens. Removing lactose and galactose from the diet prevents the acute crisis, which is why it must be recognized in the first days of life.",
+      "choices": [
+        {
+          "text": "Excess galactose synthesis by the liver",
+          "isCorrect": false
+        },
+        {
+          "text": "Galactose-1-phosphate uridyltransferase deficiency, with toxic accumulation",
+          "isCorrect": true
+        },
+        {
+          "text": "Inability to absorb any dietary sugar",
+          "isCorrect": false
+        },
+        {
+          "text": "Deficiency of lactase in the gut only",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "What is the principal function of the pentose phosphate pathway?",
+      "explanation": "Producing NADPH and ribose-5-phosphate — reducing power for biosynthesis and antioxidant defense, and the sugar backbone for nucleotides. It generates no ATP. Its importance is clearest in the red cell, where NADPH maintains reduced glutathione, and where losing it causes oxidative hemolysis.",
+      "choices": [
+        {
+          "text": "Breaking down amino acids",
+          "isCorrect": false
+        },
+        {
+          "text": "Producing large amounts of ATP",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthesising fatty acids directly",
+          "isCorrect": false
+        },
+        {
+          "text": "Generating NADPH and ribose-5-phosphate",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Carbohydrate Metabolism",
+      "stem": "Which enzyme deficiency causes von Gierke disease, with severe fasting hypoglycemia and hepatomegaly?",
+      "explanation": "Glucose-6-phosphatase. Without it the liver can neither release glucose from glycogen nor from gluconeogenesis, so glucose-6-phosphate accumulates and no glucose reaches the circulation. That explains the combination of a large glycogen-loaded liver alongside profound hypoglycemia — the fuel is present but cannot leave the cell.",
+      "choices": [
+        {
+          "text": "Branching enzyme",
+          "isCorrect": false
+        },
+        {
+          "text": "Muscle glycogen phosphorylase",
+          "isCorrect": false
+        },
+        {
+          "text": "Glucose-6-phosphatase",
+          "isCorrect": true
+        },
+        {
+          "text": "Lysosomal acid maltase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Amino Acids & Protein",
+      "stem": "Which enzyme is deficient in classical phenylketonuria?",
+      "explanation": "Phenylalanine hydroxylase, so phenylalanine accumulates and tyrosine becomes conditionally essential. Untreated it causes severe intellectual disability, which is entirely preventable by dietary restriction from birth — the reason it is on newborn screening programs worldwide. A minority of cases instead reflect defective tetrahydrobiopterin, the cofactor.",
+      "choices": [
+        {
+          "text": "Phenylalanine hydroxylase",
+          "isCorrect": true
+        },
+        {
+          "text": "Cystathionine beta-synthase",
+          "isCorrect": false
+        },
+        {
+          "text": "Branched-chain ketoacid dehydrogenase",
+          "isCorrect": false
+        },
+        {
+          "text": "Homogentisate oxidase",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Nucleotide Metabolism",
+      "stem": "Which enzyme does 5-fluorouracil inhibit?",
+      "explanation": "Thymidylate synthase, so dTMP cannot be made and DNA synthesis stalls. As with methotrexate the effect falls hardest on rapidly dividing tissue, explaining the characteristic mucositis, diarrhea and myelosuppression.",
+      "choices": [
+        {
+          "text": "Ribonucleotide reductase",
+          "isCorrect": false
+        },
+        {
+          "text": "Topoisomerase II",
+          "isCorrect": false
+        },
+        {
+          "text": "DNA ligase",
+          "isCorrect": false
+        },
+        {
+          "text": "Thymidylate synthase",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "quiz": "biochemistry-exam-2",
+      "type": "SINGLE",
+      "topic": "Inherited Metabolic Disease",
+      "stem": "Why does G6PD deficiency cause hemolysis on oxidative stress?",
+      "explanation": "The pentose phosphate pathway cannot generate enough NADPH to keep glutathione reduced, so hemoglobin oxidises and precipitates as Heinz bodies and the red cell membrane is damaged. Infections, fava beans and certain drugs precipitate it — and the red cell is uniquely vulnerable because it has no alternative NADPH source.",
+      "choices": [
+        {
+          "text": "Insufficient NADPH to maintain reduced glutathione",
+          "isCorrect": true
+        },
+        {
+          "text": "An abnormal beta-globin chain",
+          "isCorrect": false
+        },
+        {
+          "text": "Failure of hemoglobin synthesis",
+          "isCorrect": false
+        },
+        {
+          "text": "Absent glycolytic enzymes",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}

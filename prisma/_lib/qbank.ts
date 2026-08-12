@@ -315,6 +315,57 @@ function validate(cfg: SubjectConfig, pool: Pool, papers: Map<number, Q[]>): Pro
       if (seen) err(`${where} Q${i + 1}: stem duplicates ${seen}.`);
       else allStems.set(key, `${where} Q${i + 1}`);
     });
+
+    /*
+     * ANSWER-LENGTH PARITY AUDIT
+     * ---------------------------
+     * If the correct answer is reliably the longest option, students can game
+     * the set by picking the longest choice without reading. A well-built set
+     * has the correct answer as the longest option only about as often as
+     * chance (1 / number-of-options), and the average correct-answer length
+     * within a whisker of the average distractor length. We fail the set when
+     * either signal is exploitable.
+     */
+    const graded = set.questions.filter(
+      (q) => (q.type ?? "SINGLE") !== "TRUE_FALSE"
+    );
+    let perceptibleTell = 0; // correct answer noticeably longer than the rest
+    let sumCorrect = 0;
+    let sumDistractor = 0;
+    let counted = 0;
+    for (const q of graded) {
+      const correctLens = q.choices.filter((c) => c.isCorrect).map((c) => (c.text ?? "").trim().length);
+      const distractorLens = q.choices.filter((c) => !c.isCorrect).map((c) => (c.text ?? "").trim().length);
+      if (!correctLens.length || !distractorLens.length) continue;
+      counted++;
+      const maxCorrect = Math.max(...correctLens);
+      const maxDistractor = Math.max(...distractorLens);
+      const meanDistractor = distractorLens.reduce((a, b) => a + b, 0) / distractorLens.length;
+      // A "tell" is a gap a student could actually SEE: the correct answer is the
+      // longest AND either ≥8 characters longer than the next option or >1.25× the
+      // mean distractor. Tiny 1–2 char differences are not perceptible and don't count.
+      if (maxCorrect > maxDistractor && (maxCorrect - maxDistractor >= 8 || maxCorrect > meanDistractor * 1.25))
+        perceptibleTell++;
+      sumCorrect += maxCorrect;
+      sumDistractor += meanDistractor;
+    }
+    if (counted >= 20) {
+      const tellRate = perceptibleTell / counted;
+      const lenRatio = sumCorrect / sumDistractor;
+      if (tellRate > 0.3)
+        err(
+          `${where}: the correct answer is perceptibly the longest in ${(tellRate * 100).toFixed(0)}% of items. ` +
+            `Lengthen distractors or trim the key — length must not reveal the answer.`
+        );
+      else if (tellRate > 0.22)
+        warn(`${where}: correct answer is perceptibly longest in ${(tellRate * 100).toFixed(0)}% of items. Tighten length parity toward chance.`);
+      if (lenRatio > 1.2)
+        err(
+          `${where}: correct answers average ${lenRatio.toFixed(2)}× the distractor length. Match option lengths so the key is not detectable.`
+        );
+      else if (lenRatio > 1.13)
+        warn(`${where}: correct answers average ${lenRatio.toFixed(2)}× distractor length. Aim for ≈1.0.`);
+    }
   }
 
   /* ---- exams ---- */
