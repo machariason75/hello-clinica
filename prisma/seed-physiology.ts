@@ -22,7 +22,7 @@ import { PHYSIOLOGY_SET_3 } from "./physiology/set-3";
 import { PHYSIOLOGY_SET_4 } from "./physiology/set-4";
 import { PHYSIOLOGY_SET_5 } from "./physiology/set-5";
 import { PHYSIOLOGY_SET_6 } from "./physiology/set-6";
-// import { PHYSIOLOGY_SET_7 } from "./physiology/set-7";
+import { PHYSIOLOGY_SET_7 } from "./physiology/set-7";
 
 const SETS = [
   {
@@ -73,7 +73,14 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: PHYSIOLOGY_SET_6,
   },
-  // { n: 7, title: "Neurophysiology & Integrative Physiology", …, questions: PHYSIOLOGY_SET_7 },
+  {
+    n: 7,
+    title: "Neurophysiology & Integrative Physiology",
+    description:
+      "The nervous system and whole-body integration: synaptic transmission and neurotransmitters, sensory receptors and the special senses, motor systems and spinal reflexes, the cerebellum and basal ganglia, the autonomic nervous system, the spinal cord tracts, higher cortical function, sleep and memory, the cerebrospinal fluid and cerebral circulation, hypothalamic homeostasis, and integrative responses to exercise and hemorrhage.",
+    difficulty: "Advanced" as const,
+    questions: PHYSIOLOGY_SET_7,
+  },
 ];
 
 const EXAMS = [
@@ -161,7 +168,7 @@ const config = {
   categorySlug: "fs-physiology",
   minPerSet: 100, // NEW gold standard — the seeder refuses to run if any set is under 100
   minPerExam: 90,
-  partial: true, // ← switch to false once all seven sets have landed
+  partial: false, // ← all seven sets have landed; every exam now builds
   sets: SETS,
   exams: EXAMS,
   footnote:
