@@ -9,6 +9,7 @@ import { Toaster } from "@/components/common/Toaster";
 import { JsonLd } from "@/components/common/JsonLd";
 import { AmbientBackground } from "@/components/common/AmbientBackground";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { buildMetadata, organizationJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PremiumBanner />
         <Toaster />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
