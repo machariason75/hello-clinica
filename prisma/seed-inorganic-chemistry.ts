@@ -22,8 +22,8 @@ import { seedSubject, runWave, merge, sample } from "./_lib/qbank";
 
 import { INORGANIC_SET_1 } from "./inorganic-chemistry/set-1";
 import { INORGANIC_SET_2 } from "./inorganic-chemistry/set-2";
-// import { INORGANIC_SET_3 } from "./inorganic-chemistry/set-3";
-// import { INORGANIC_SET_4 } from "./inorganic-chemistry/set-4";
+import { INORGANIC_SET_3 } from "./inorganic-chemistry/set-3";
+import { INORGANIC_SET_4 } from "./inorganic-chemistry/set-4";
 // import { INORGANIC_SET_5 } from "./inorganic-chemistry/set-5";
 // import { INORGANIC_SET_6 } from "./inorganic-chemistry/set-6";
 // import { INORGANIC_SET_7 } from "./inorganic-chemistry/set-7";
@@ -45,8 +45,22 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: INORGANIC_SET_2,
   },
-  // { n: 3, title: "Chemical Bonding I — Ionic & Covalent", …, questions: INORGANIC_SET_3 },
-  // { n: 4, title: "Chemical Bonding II — MO Theory & Metals", …, questions: INORGANIC_SET_4 },
+  {
+    n: 3,
+    title: "Chemical Bonding I — Ionic & Covalent",
+    description:
+      "How atoms combine: ionic bonding and lattice formation, lattice energy and the Born–Landé equation, the Born–Haber cycle, Fajans' rules and covalent character, Lewis structures, resonance and formal charge, exceptions to the octet, VSEPR geometry and bond angles, hybridization, bond polarity and dipole moments, and the bond-order / bond-length / bond-energy relationships. Chemical formulae and equations are shown in full notation.",
+    difficulty: "Advanced" as const,
+    questions: INORGANIC_SET_3,
+  },
+  {
+    n: 4,
+    title: "Chemical Bonding II — MO Theory & Metallic Bonding",
+    description:
+      "The molecular-orbital picture of bonding: LCAO and bonding/antibonding orbitals, bond order from molecular orbitals, the period-2 homonuclear diatomics and s–p mixing, the paramagnetism of O₂, MO electron configurations, heteronuclear diatomics (CO, NO, HF), valence-bond versus MO theory, metallic bonding and band theory, conductors, semiconductors, insulators and doping, delocalized π systems, and magnetic properties.",
+    difficulty: "Advanced" as const,
+    questions: INORGANIC_SET_4,
+  },
   // { n: 5, title: "Coordination Chemistry & Crystal Field Theory", …, questions: INORGANIC_SET_5 },
   // { n: 6, title: "Descriptive Main-Group Chemistry", …, questions: INORGANIC_SET_6 },
   // { n: 7, title: "Transition Metals, Redox & Acid–Base", …, questions: INORGANIC_SET_7 },
