@@ -66,7 +66,7 @@ const SETS = [
     title: "Coordination Chemistry & Crystal Field Theory",
     description:
       "The chemistry of coordination compounds: Werner's theory and the coordination sphere, ligands, denticity and the chelate effect, nomenclature, coordination numbers and geometries, structural and stereoisomerism including optical isomers, crystal field theory in octahedral, tetrahedral and square-planar fields, Δ and CFSE, high- versus low-spin complexes and the spectrochemical series, colour and d–d transitions, the Jahn–Teller effect, magnetic moments, stability constants, bio-coordination chemistry and organometallics. Formulae of complex ions are shown in full notation.",
-    difficulty: "Expert" as const,
+    difficulty: "Advanced" as const,
     questions: INORGANIC_SET_5,
   },
   {
