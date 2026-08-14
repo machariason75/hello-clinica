@@ -24,8 +24,8 @@ import { INORGANIC_SET_1 } from "./inorganic-chemistry/set-1";
 import { INORGANIC_SET_2 } from "./inorganic-chemistry/set-2";
 import { INORGANIC_SET_3 } from "./inorganic-chemistry/set-3";
 import { INORGANIC_SET_4 } from "./inorganic-chemistry/set-4";
-// import { INORGANIC_SET_5 } from "./inorganic-chemistry/set-5";
-// import { INORGANIC_SET_6 } from "./inorganic-chemistry/set-6";
+import { INORGANIC_SET_5 } from "./inorganic-chemistry/set-5";
+import { INORGANIC_SET_6 } from "./inorganic-chemistry/set-6";
 // import { INORGANIC_SET_7 } from "./inorganic-chemistry/set-7";
 
 const SETS = [
@@ -61,8 +61,22 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: INORGANIC_SET_4,
   },
-  // { n: 5, title: "Coordination Chemistry & Crystal Field Theory", …, questions: INORGANIC_SET_5 },
-  // { n: 6, title: "Descriptive Main-Group Chemistry", …, questions: INORGANIC_SET_6 },
+  {
+    n: 5,
+    title: "Coordination Chemistry & Crystal Field Theory",
+    description:
+      "The chemistry of coordination compounds: Werner's theory and the coordination sphere, ligands, denticity and the chelate effect, nomenclature, coordination numbers and geometries, structural and stereoisomerism including optical isomers, crystal field theory in octahedral, tetrahedral and square-planar fields, Δ and CFSE, high- versus low-spin complexes and the spectrochemical series, colour and d–d transitions, the Jahn–Teller effect, magnetic moments, stability constants, bio-coordination chemistry and organometallics. Formulae of complex ions are shown in full notation.",
+    difficulty: "Expert" as const,
+    questions: INORGANIC_SET_5,
+  },
+  {
+    n: 6,
+    title: "Descriptive Main-Group Chemistry",
+    description:
+      "The systematic descriptive chemistry of the s- and p-block: the anomalous position of hydrogen and the hydrides, the alkali and alkaline-earth metals and their trends, the beryllium anomaly and diagonal relationships, the boron group and electron-deficient bonding, the carbon and nitrogen groups, catenation, allotropy and the inert pair effect, the oxygen and halogen groups with their oxoacids, the noble gases and their compounds, and the periodic trends in oxide acid–base character. Formulae and equations are shown in full notation.",
+    difficulty: "Advanced" as const,
+    questions: INORGANIC_SET_6,
+  },
   // { n: 7, title: "Transition Metals, Redox & Acid–Base", …, questions: INORGANIC_SET_7 },
 ];
 
