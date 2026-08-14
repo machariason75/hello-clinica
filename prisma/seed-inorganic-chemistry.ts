@@ -26,7 +26,7 @@ import { INORGANIC_SET_3 } from "./inorganic-chemistry/set-3";
 import { INORGANIC_SET_4 } from "./inorganic-chemistry/set-4";
 import { INORGANIC_SET_5 } from "./inorganic-chemistry/set-5";
 import { INORGANIC_SET_6 } from "./inorganic-chemistry/set-6";
-// import { INORGANIC_SET_7 } from "./inorganic-chemistry/set-7";
+import { INORGANIC_SET_7 } from "./inorganic-chemistry/set-7";
 
 const SETS = [
   {
@@ -77,7 +77,14 @@ const SETS = [
     difficulty: "Advanced" as const,
     questions: INORGANIC_SET_6,
   },
-  // { n: 7, title: "Transition Metals, Redox & Acid–Base", …, questions: INORGANIC_SET_7 },
+  {
+    n: 7,
+    title: "Transition Metals, Redox & Acid–Base",
+    description:
+      "The capstone of inorganic chemistry: the d-block transition metals — their electron configurations, variable oxidation states, colour, magnetism, catalytic activity and complex formation; redox chemistry and electrochemistry including oxidation numbers, balancing, disproportionation, standard electrode potentials, galvanic cells, the Nernst equation, the ΔG°–E° relationship, electrolysis and Faraday's laws; the acid–base theories of Brønsted–Lowry and Lewis, amphoterism, oxoacid strength and hard–soft acid–base (HSAB) theory; descriptive chemistry of the first transition series and the f-block. Formulae, ions and equations are shown in full notation.",
+    difficulty: "Advanced" as const,
+    questions: INORGANIC_SET_7,
+  },
 ];
 
 const EXAMS = [
@@ -167,7 +174,7 @@ const config = {
   categorySlug: "fs-inorganic-chemistry",
   minPerSet: 100,
   minPerExam: 90,
-  partial: true, // ← switch to false once all seven sets have landed
+  partial: false, // all seven sets present — full subject live
   sets: SETS,
   exams: EXAMS,
   footnote:
