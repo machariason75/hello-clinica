@@ -27,8 +27,8 @@ import { ORGANIC_SET_1 } from "./organic-chemistry/set-1";
 import { ORGANIC_SET_2 } from "./organic-chemistry/set-2";
 import { ORGANIC_SET_3 } from "./organic-chemistry/set-3";
 import { ORGANIC_SET_4 } from "./organic-chemistry/set-4";
-// import { ORGANIC_SET_5 } from "./organic-chemistry/set-5";
-// import { ORGANIC_SET_6 } from "./organic-chemistry/set-6";
+import { ORGANIC_SET_5 } from "./organic-chemistry/set-5";
+import { ORGANIC_SET_6 } from "./organic-chemistry/set-6";
 // import { ORGANIC_SET_7 } from "./organic-chemistry/set-7";
 
 const config: SubjectConfig = {
@@ -72,8 +72,22 @@ const config: SubjectConfig = {
       difficulty: "Advanced" as const,
       questions: ORGANIC_SET_4,
     },
-    // { n: 5, title: "Addition & Aromatic Chemistry", …, questions: ORGANIC_SET_5 },
-    // { n: 6, title: "Carbonyl Chemistry", …, questions: ORGANIC_SET_6 },
+    {
+      n: 5,
+      title: "Addition & Aromatic Chemistry",
+      description:
+        "The reactions of π systems: electrophilic addition to alkenes (Markovnikov and anti-Markovnikov, HX, hydration, halogenation via the bromonium ion, halohydrins, rearrangements), the regio- and stereochemistry of hydroboration, oxymercuration, hydrogenation, ozonolysis, epoxidation and dihydroxylation, the chemistry of alkynes (acidity, addition, Lindlar and dissolving-metal reductions), aromaticity and Hückel's rule, and both electrophilic and nucleophilic aromatic substitution with directing and activating effects. Structures and mechanisms are shown in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: ORGANIC_SET_5,
+    },
+    {
+      n: 6,
+      title: "Carbonyl Chemistry",
+      description:
+        "The chemistry of the carbonyl group: nucleophilic addition to aldehydes and ketones (Grignard and hydride additions, cyanohydrins, hydrates), acetals and their use as protecting groups, imines and enamines, reductive amination, the Wittig reaction, oxidation and reduction of carbonyls, enols and enolates, keto–enol tautomerism, α-halogenation and the haloform reaction, the aldol and Claisen condensations, conjugate (Michael, 1,4-) addition, and the carboxylic acids and their derivatives with the addition–elimination (nucleophilic acyl substitution) mechanism and reactivity order. Structures and mechanisms are shown in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: ORGANIC_SET_6,
+    },
     // { n: 7, title: "Spectroscopy, Synthesis & Biomolecules", …, questions: ORGANIC_SET_7 },
   ],
 
