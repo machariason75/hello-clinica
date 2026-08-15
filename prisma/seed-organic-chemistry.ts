@@ -25,8 +25,8 @@ import {
 
 import { ORGANIC_SET_1 } from "./organic-chemistry/set-1";
 import { ORGANIC_SET_2 } from "./organic-chemistry/set-2";
-// import { ORGANIC_SET_3 } from "./organic-chemistry/set-3";
-// import { ORGANIC_SET_4 } from "./organic-chemistry/set-4";
+import { ORGANIC_SET_3 } from "./organic-chemistry/set-3";
+import { ORGANIC_SET_4 } from "./organic-chemistry/set-4";
 // import { ORGANIC_SET_5 } from "./organic-chemistry/set-5";
 // import { ORGANIC_SET_6 } from "./organic-chemistry/set-6";
 // import { ORGANIC_SET_7 } from "./organic-chemistry/set-7";
@@ -56,8 +56,22 @@ const config: SubjectConfig = {
       difficulty: "Advanced" as const,
       questions: ORGANIC_SET_2,
     },
-    // { n: 3, title: "Reaction Mechanisms & Reactive Intermediates", …, questions: ORGANIC_SET_3 },
-    // { n: 4, title: "Substitution & Elimination", …, questions: ORGANIC_SET_4 },
+    {
+      n: 3,
+      title: "Reaction Mechanisms & Reactive Intermediates",
+      description:
+        "How organic reactions happen: curly-arrow notation and bond cleavage (homolysis vs heterolysis), nucleophiles and electrophiles, the reactive intermediates (carbocations, carbanions, radicals and carbenes) and their relative stabilities, 1,2-hydride and alkyl shifts, reaction types and energy profiles, transition states, the Hammond postulate, kinetic versus thermodynamic control, and organic acidity and basicity (pKa and the resonance, inductive, electronegativity and hybridisation factors behind them). Mechanisms and structures are shown in inline notation.",
+      difficulty: "Intermediate" as const,
+      questions: ORGANIC_SET_3,
+    },
+    {
+      n: 4,
+      title: "Substitution & Elimination",
+      description:
+        "The substitution and elimination chemistry of alkyl halides: SN2 (concerted, backside attack with inversion) and SN1 (stepwise, carbocation, racemisation), E2 (anti-periplanar, Zaitsev) and E1, Hofmann versus Zaitsev orientation, the substrate, nucleophile/base, leaving-group, solvent and temperature factors that decide the pathway, and the key transformations of alkyl halides (Williamson ethers, nitriles, amines, Grignard reagents, Finkelstein and radical halogenation). Mechanisms and structures are shown in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: ORGANIC_SET_4,
+    },
     // { n: 5, title: "Addition & Aromatic Chemistry", …, questions: ORGANIC_SET_5 },
     // { n: 6, title: "Carbonyl Chemistry", …, questions: ORGANIC_SET_6 },
     // { n: 7, title: "Spectroscopy, Synthesis & Biomolecules", …, questions: ORGANIC_SET_7 },
