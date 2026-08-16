@@ -29,7 +29,7 @@ import { ORGANIC_SET_3 } from "./organic-chemistry/set-3";
 import { ORGANIC_SET_4 } from "./organic-chemistry/set-4";
 import { ORGANIC_SET_5 } from "./organic-chemistry/set-5";
 import { ORGANIC_SET_6 } from "./organic-chemistry/set-6";
-// import { ORGANIC_SET_7 } from "./organic-chemistry/set-7";
+import { ORGANIC_SET_7 } from "./organic-chemistry/set-7";
 
 const config: SubjectConfig = {
   subject: "Organic Chemistry",
@@ -37,7 +37,7 @@ const config: SubjectConfig = {
   categorySlug: "fs-organic-chemistry",
   minPerSet: 100,
   minPerExam: 90,
-  partial: true, // ← switch to false once all seven sets have landed
+  partial: false, // all seven sets present — subject fully published
 
   sets: [
     {
@@ -88,7 +88,14 @@ const config: SubjectConfig = {
       difficulty: "Advanced" as const,
       questions: ORGANIC_SET_6,
     },
-    // { n: 7, title: "Spectroscopy, Synthesis & Biomolecules", …, questions: ORGANIC_SET_7 },
+    {
+      n: 7,
+      title: "Spectroscopy, Synthesis & Biomolecules",
+      description:
+        "The capstone set: structure determination and the organic chemistry of life. Infrared spectroscopy (diagnostic stretches and the fingerprint region), ¹H and ¹³C NMR (chemical shift, integration, spin–spin splitting and the n+1 rule, carbon environments), mass spectrometry (the molecular ion, base peak, isotope patterns and fragmentation) and UV–Vis (conjugation and chromophores); degree-of-unsaturation analysis and combined-spectra structure elucidation; multistep synthesis, retrosynthetic analysis, functional-group interconversions and protecting groups; and the four classes of biomolecule — carbohydrates, amino acids and proteins, lipids, and nucleic acids — with their characteristic linkages. Structures and spectra are described in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: ORGANIC_SET_7,
+    },
   ],
 
   exams: [
@@ -155,10 +162,14 @@ const config: SubjectConfig = {
           p.byTopic(
             "Reaction Mechanisms",
             "Reactive Intermediates",
-            "Acids & Bases in Organic Chemistry",
-            "SN1 vs SN2",
-            "E1 vs E2",
+            "Nucleophiles & Electrophiles",
+            "Substitution: SN1 & SN2",
+            "Elimination: E1 & E2",
             "Substitution vs Elimination",
+            "Electrophilic Addition",
+            "Electrophilic Aromatic Substitution",
+            "Nucleophilic Addition",
+            "Nucleophilic Acyl Substitution",
           ),
           sample(p.all(), 90, 6),
         ),
