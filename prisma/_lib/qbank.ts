@@ -513,6 +513,63 @@ async function categoryIdFor(slug: string, cache: Map<string, string>): Promise<
   return row.id;
 }
 
+/**
+ * Extract a quiz's set/exam NUMBER from its slug (preferred), else its title,
+ * else its order. Used by the duplicate gate below. Mirrors the cleanup tool.
+ */
+function quizNumberOf(slug: string, title: string, order: number | null): string | null {
+  let m = /(?:practice-set|exam|set|paper|test)-(\d+)/i.exec(slug || "");
+  if (m) return m[1];
+  m = /(?:set|exam|paper|test)\s*#?\s*(\d+)/i.exec(title || "");
+  if (m) return m[1];
+  return order != null ? `order:${order}` : null;
+}
+
+/**
+ * GATE — one number per kind per category.
+ *
+ * After the canonical quiz (`<base>-practice-set-N` / `<base>-exam-N`) is
+ * written, remove any OTHER quiz in the same category and of the same kind that
+ * resolves to the same number N — i.e. an old under-built or previous-generation
+ * set left over from before. This makes every seed self-healing: a section can
+ * never again show two "Practice Set 1" or two "Exam 1".
+ *
+ * Tightly scoped on purpose: it only ever removes same-category, same-kind,
+ * same-number siblings of the quiz we just wrote, and only when our own slug is
+ * the standard canonical form. Deleting a quiz cascades to its questions,
+ * choices, and any attempts on that old quiz (the point of the cleanup).
+ */
+async function reconcileDuplicateNumber(o: {
+  slug: string;
+  categoryId: string;
+  kind: "PRACTICE" | "EXAM";
+}): Promise<void> {
+  const mine = /-(?:practice-set|exam)-(\d+)$/i.exec(o.slug);
+  if (!mine) return; // non-standard slug — never let the gate touch anything
+  const num = mine[1];
+
+  const siblings: { id: string; slug: string; title: string; order: number | null }[] =
+    await withRetry(
+      () =>
+        prisma.quiz.findMany({
+          where: { categoryId: o.categoryId, kind: o.kind, slug: { not: o.slug } },
+          select: { id: true, slug: true, title: true, order: true },
+        }),
+      `scan duplicates of ${o.slug}`
+    );
+
+  const dupes = siblings.filter((s) => quizNumberOf(s.slug, s.title, s.order) === num);
+  if (!dupes.length) return;
+
+  await withRetry(
+    () => prisma.quiz.deleteMany({ where: { id: { in: dupes.map((d) => d.id) } } }),
+    `remove ${dupes.length} duplicate(s) of ${o.slug}`
+  );
+  for (const d of dupes) {
+    console.log(`    ↳ removed duplicate ${o.kind === "EXAM" ? "exam" : "practice set"} #${num}: ${d.slug}`);
+  }
+}
+
 /** Writes one quiz and its questions. Re-running rebuilds the questions cleanly. */
 async function writeQuiz(o: {
   slug: string;
@@ -605,6 +662,9 @@ async function writeQuiz(o: {
         `Re-run the seed — the quiz is in an inconsistent state.`
     );
   }
+
+  // Gate: ensure no older duplicate of this same kind+number lingers alongside it.
+  await reconcileDuplicateNumber({ slug: o.slug, categoryId: o.categoryId, kind: o.kind });
 
   return quiz;
 }
