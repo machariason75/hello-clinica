@@ -19,12 +19,20 @@ export async function GET(req: Request) {
   const trackId = url.searchParams.get("trackId");
   if (!trackId) return new NextResponse("Not found", { status: 404 });
 
-  // Only serve to our own pages — a pasted URL or hotlink has no matching
-  // referer and is refused, so this can't become a backdoor download link.
+  // Hotlink guard. Block only a *cross-origin* referer (another site embedding
+  // this endpoint). A missing referer is normal — a new-tab open or a referrer
+  // policy that strips the header — and must be allowed, or the player breaks.
   const referer = req.headers.get("referer");
-  const sameOrigin = !!referer && new URL(referer).origin === url.origin;
-  if (!sameOrigin) {
-    return NextResponse.json({ error: "Not available" }, { status: 403 });
+  if (referer) {
+    let refOrigin = "";
+    try {
+      refOrigin = new URL(referer).origin;
+    } catch {
+      refOrigin = "";
+    }
+    if (refOrigin && refOrigin !== url.origin) {
+      return NextResponse.json({ error: "Not available" }, { status: 403 });
+    }
   }
 
   const track = await prisma.audioTrack.findUnique({

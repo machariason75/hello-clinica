@@ -14,13 +14,22 @@ export const dynamic = "force-dynamic";
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
-  // Only serve this to our own reader page. A pasted URL, a hotlink, or a direct
-  // fetch from another site has no matching referer and is refused — so this
-  // endpoint can't be used as a backdoor download link.
+  // Hotlink guard. We block only a *cross-origin* referer — i.e. another site
+  // embedding or linking straight to this endpoint. A MISSING referer is normal
+  // and must be allowed: opening the reader in a new tab, or a browser/referrer
+  // policy that strips the header, sends no referer, and those are legitimate
+  // reads. (Reading is free; the separate /api/download path stays gated.)
   const referer = req.headers.get("referer");
-  const sameOrigin = !!referer && new URL(referer).origin === url.origin;
-  if (!sameOrigin) {
-    return NextResponse.json({ error: "Not available" }, { status: 403 });
+  if (referer) {
+    let refOrigin = "";
+    try {
+      refOrigin = new URL(referer).origin;
+    } catch {
+      refOrigin = "";
+    }
+    if (refOrigin && refOrigin !== url.origin) {
+      return NextResponse.json({ error: "Not available" }, { status: 403 });
+    }
   }
 
   const type = url.searchParams.get("type");
