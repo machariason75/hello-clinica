@@ -36,3 +36,10 @@ next-env.d.ts
 # prisma
 /prisma/*.db
 .env*
+
+# Generated reports, plans, and backups (not source)
+books-report*.txt
+files-dump*.txt
+cleanup-plan.txt
+discipline-plan.txt
+deleted-quizzes-backup.json
