@@ -43,3 +43,11 @@ files-dump*.txt
 cleanup-plan.txt
 discipline-plan.txt
 deleted-quizzes-backup.json
+
+# Local maintenance scripts (run via tsx; kept out of the production build)
+prisma/cleanup-duplicates.ts
+prisma/refile-disciplines.ts
+prisma/patch-schema-discipline.ts
+prisma/inspect-books*.ts
+prisma/dump-files.ts
+prisma/diagnose-state.ts
