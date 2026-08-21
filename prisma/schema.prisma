@@ -190,6 +190,7 @@ model NewsletterSubscriber {
 // ----------------------------------------------------------------------------
 
 model Book {
+  discipline   String?   // Medical-school discipline slug (see lib/data/book-disciplines.ts)
   id            String        @id @default(cuid())
   title         String
   author        String

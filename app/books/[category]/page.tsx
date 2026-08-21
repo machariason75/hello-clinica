@@ -6,6 +6,7 @@ import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
 import { BookCard } from "@/components/cards/BookCard";
+import { MedicalSchoolShelf, type ShelfBook } from "@/components/books/MedicalSchoolShelf";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
@@ -30,6 +31,10 @@ export default async function BookCategoryPage({ params }: Params) {
 
   const books = await getBooksByCategory(def.enum);
 
+  // "Medical School Books" is browsed by discipline folders; the other
+  // categories keep the simple flat grid.
+  const isMedicalSchool = def.slug === "medical-school-books";
+
   return (
     <PageTransition>
       <PageHero eyebrow="Books" title={def.title} description={def.description} />
@@ -48,6 +53,17 @@ export default async function BookCategoryPage({ params }: Params) {
             icon={<BookOpen className="h-7 w-7" />}
             title="No books here yet"
             description="Titles for this category are being added. Check back soon or subscribe below."
+          />
+        ) : isMedicalSchool ? (
+          <MedicalSchoolShelf
+            books={books.map(
+              (b): ShelfBook => ({
+                id: b.id,
+                title: b.title,
+                author: b.author,
+                discipline: (b as { discipline: string | null }).discipline ?? null,
+              })
+            )}
           />
         ) : (
           <StaggerGroup className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
