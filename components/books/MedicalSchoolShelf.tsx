@@ -36,11 +36,9 @@ export function MedicalSchoolShelf({ books }: { books: ShelfBook[] }) {
     return m;
   }, [books]);
 
-  // Only show folders that actually contain something.
-  const folders = useMemo(
-    () => bookDisciplines.filter((d) => (counts[d.slug] ?? 0) > 0),
-    [counts]
-  );
+  // Show the full set of disciplines as folders so the structure is always
+  // visible; a folder can read "0 books" until titles are filed into it.
+  const folders = bookDisciplines;
 
   const q = query.trim().toLowerCase();
   const searching = q.length > 0;
@@ -114,7 +112,7 @@ export function MedicalSchoolShelf({ books }: { books: ShelfBook[] }) {
               <div className="flex flex-1 flex-col p-5">
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-medical-blue">
                   <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
-                  {counts[d.slug]} {counts[d.slug] === 1 ? "book" : "books"}
+                  {(counts[d.slug] ?? 0)} {(counts[d.slug] ?? 0) === 1 ? "book" : "books"}
                 </span>
                 <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{d.description}</p>
               </div>

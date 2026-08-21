@@ -517,12 +517,12 @@ export const PHYSICAL_SET_3: Q[] = [
   },
   {
     type: "MULTI",
-    stem: "Which combinations of ΔH and ΔS give a reaction that is spontaneous only at high temperature? Select all that apply.",
+    stem: "Which combinations of ΔH and ΔS make a reaction more spontaneous (ΔG more negative) as the temperature rises? Select all that apply.",
     topic: "Free Energy & Spontaneity",
-    explanation: "Only ΔH > 0 with ΔS > 0 is spontaneous just at high T (the −TΔS term must overcome a positive ΔH). ΔH<0,ΔS>0 is always spontaneous; ΔH<0,ΔS<0 only at low T; ΔH>0,ΔS<0 never.",
+    explanation: "Because ΔG = ΔH − TΔS, the slope d(ΔG)/dT = −ΔS. A reaction's ΔG falls (becomes more negative) as T increases exactly when ΔS > 0, whatever the sign of ΔH. The two cases with ΔS < 0 instead become less spontaneous on heating.",
     choices: [
       { text: "ΔH > 0 and ΔS > 0", isCorrect: true },
-      { text: "ΔH < 0 and ΔS > 0" },
+      { text: "ΔH < 0 and ΔS > 0", isCorrect: true },
       { text: "ΔH < 0 and ΔS < 0" },
       { text: "ΔH > 0 and ΔS < 0" },
     ],
