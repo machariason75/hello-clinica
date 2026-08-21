@@ -18,8 +18,8 @@ import {
 
 import { PHYSICAL_SET_1 } from "./physical-chemistry/set-1";
 import { PHYSICAL_SET_2 } from "./physical-chemistry/set-2";
-// import { PHYSICAL_SET_3 } from "./physical-chemistry/set-3";
-// import { PHYSICAL_SET_4 } from "./physical-chemistry/set-4";
+import { PHYSICAL_SET_3 } from "./physical-chemistry/set-3";
+import { PHYSICAL_SET_4 } from "./physical-chemistry/set-4";
 // import { PHYSICAL_SET_5 } from "./physical-chemistry/set-5";
 // import { PHYSICAL_SET_6 } from "./physical-chemistry/set-6";
 // import { PHYSICAL_SET_7 } from "./physical-chemistry/set-7";
@@ -49,8 +49,22 @@ const config: SubjectConfig = {
       difficulty: "Intermediate" as const,
       questions: PHYSICAL_SET_2,
     },
-    // { n: 3, title: "Second & Third Laws", …, questions: PHYSICAL_SET_3 },
-    // { n: 4, title: "Phase Equilibria & Solutions", …, questions: PHYSICAL_SET_4 },
+    {
+      n: 3,
+      title: "Second & Third Laws",
+      description:
+        "The second and third laws of thermodynamics: entropy and the Clausius definition dS = dq_rev/T, the Clausius inequality and the direction of spontaneous change (ΔS_total ≥ 0), the Carnot cycle and its efficiency η = 1 − T_c/T_h, Carnot's theorem and the Kelvin–Planck and Clausius statements, refrigerators and heat pumps, the Gibbs (G = H − TS) and Helmholtz (A = U − TS) energies and the sign of ΔG as the criterion of spontaneity, the relation ΔG° = −RT ln K, the third law and absolute (Third-Law) entropies, the fundamental thermodynamic relations and the Maxwell relations, the Gibbs–Helmholtz equation, and the statistical (Boltzmann) view of entropy S = k ln W including the entropy of mixing. Equations are shown in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: PHYSICAL_SET_3,
+    },
+    {
+      n: 4,
+      title: "Phase Equilibria & Solutions",
+      description:
+        "Phase equilibria and the physical chemistry of solutions: one-component phase diagrams (the p–T plane, the triple and critical points, and the negative solid–liquid slope of water), the phase rule F = C − P + 2, the Clapeyron and Clausius–Clapeyron equations for coexistence lines, Raoult's and Henry's laws and ideal versus real solutions (positive and negative deviations, azeotropes and distillation), the colligative properties (boiling-point elevation, freezing-point depression, osmotic pressure Π = cRT, and the van 't Hoff factor i), partial molar quantities and the chemical potential, and activities and activity coefficients in real solutions. Equations are shown in inline notation.",
+      difficulty: "Intermediate" as const,
+      questions: PHYSICAL_SET_4,
+    },
     // { n: 5, title: "Chemical Equilibrium & Electrochemistry", …, questions: PHYSICAL_SET_5 },
     // { n: 6, title: "Chemical Kinetics", …, questions: PHYSICAL_SET_6 },
     // { n: 7, title: "Quantum Chemistry & Spectroscopy", …, questions: PHYSICAL_SET_7 },
