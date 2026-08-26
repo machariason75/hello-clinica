@@ -20,8 +20,8 @@ import { PHYSICAL_SET_1 } from "./physical-chemistry/set-1";
 import { PHYSICAL_SET_2 } from "./physical-chemistry/set-2";
 import { PHYSICAL_SET_3 } from "./physical-chemistry/set-3";
 import { PHYSICAL_SET_4 } from "./physical-chemistry/set-4";
-// import { PHYSICAL_SET_5 } from "./physical-chemistry/set-5";
-// import { PHYSICAL_SET_6 } from "./physical-chemistry/set-6";
+import { PHYSICAL_SET_5 } from "./physical-chemistry/set-5";
+import { PHYSICAL_SET_6 } from "./physical-chemistry/set-6";
 // import { PHYSICAL_SET_7 } from "./physical-chemistry/set-7";
 
 const config: SubjectConfig = {
@@ -65,8 +65,22 @@ const config: SubjectConfig = {
       difficulty: "Intermediate" as const,
       questions: PHYSICAL_SET_4,
     },
-    // { n: 5, title: "Chemical Equilibrium & Electrochemistry", …, questions: PHYSICAL_SET_5 },
-    // { n: 6, title: "Chemical Kinetics", …, questions: PHYSICAL_SET_6 },
+    {
+      n: 5,
+      title: "Chemical Equilibrium & Electrochemistry",
+      description:
+        "Chemical equilibrium and electrochemistry: the equilibrium constant in its Kc, Kp, and Kx forms and their relation Kp = Kc(RT)^\u0394n, the reaction quotient Q and the direction of net change, heterogeneous equilibria and the exclusion of pure condensed phases, Le Chatelier's principle for changes of concentration, pressure, and temperature, the thermodynamic link \u0394G\u00b0 = \u2212RT ln K and the van 't Hoff temperature dependence of K, acid\u2013base equilibria (Ka, Kb, Kw, buffers and the Henderson\u2013Hasselbalch equation) and solubility equilibria (Ksp and the common-ion effect), and electrochemistry from galvanic and electrolytic cells, standard electrode potentials and the SHE, cell notation and the salt bridge, the Nernst equation, \u0394G\u00b0 = \u2212nFE\u00b0 and ln K = nFE\u00b0/RT, Faraday's laws of electrolysis, and molar conductivity with Kohlrausch's law. Equations are shown in inline notation.",
+      difficulty: "Intermediate" as const,
+      questions: PHYSICAL_SET_5,
+    },
+    {
+      n: 6,
+      title: "Chemical Kinetics",
+      description:
+        "Chemical kinetics: reaction rate and its relation to stoichiometry, rate laws and reaction order determined by experiment (initial-rates and pseudo-order methods), the units of the rate constant, and the integrated rate laws for zero-, first-, and second-order reactions with their characteristic linear plots and half-lives (including the concentration-independent first-order half-life), the temperature dependence of the rate constant through the Arrhenius equation k = Ae^(\u2212Ea/RT), Arrhenius plots and the two-point form, activation energy and the reaction energy profile, reaction mechanisms (molecularity versus order, the rate-determining step, intermediates, the steady-state and pre-equilibrium approximations, and the transition state), theories of reaction rates (collision theory with the energy and steric requirements, transition-state theory, and diffusion control), and catalysis including homogeneous and heterogeneous catalysts, catalyst poisoning, and Michaelis\u2013Menten enzyme kinetics with Vmax and KM. Equations are shown in inline notation.",
+      difficulty: "Advanced" as const,
+      questions: PHYSICAL_SET_6,
+    },
     // { n: 7, title: "Quantum Chemistry & Spectroscopy", …, questions: PHYSICAL_SET_7 },
   ],
 
