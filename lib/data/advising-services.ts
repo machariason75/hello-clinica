@@ -83,15 +83,17 @@ export const advisingServiceDefs: AdvisingServiceDef[] = [
   },
   {
     slug: "consultation-packages",
-    title: "Consultation Packages",
-    description: "Flexible packages that bundle advising hours for key milestones.",
+    title: "Academic Support",
+    description: "Specialist support for advanced-degree research, writing, and analysis.",
     overview:
-      "Choose a package that bundles advising hours to support you through the milestones that matter most. Compare options below and submit an inquiry — our team will follow up to help you get started.",
+      "Dedicated support for Master's, PhD, and postdoctoral researchers — thesis and dissertation work, journal articles and research papers, literature reviews, statistical and data analysis, and academic editing. Choose the area you need help with; every engagement is handled by subject-matter experts and kept strictly confidential.",
     icon: HeartHandshake,
     includes: [],
     faqs: [
-      { question: "How do packages work?", answer: "Each package bundles a set number of advising hours and features. Submit an inquiry for the one that fits, and we'll follow up to arrange the details." },
-      { question: "Can pricing or hours change?", answer: "Packages are kept up to date by our team. The options shown here reflect current offerings." },
+      { question: "Who is this for?", answer: "Postgraduate and advanced-degree students and researchers — Master's, PhD, and postdoctoral — who need expert help with complex academic work." },
+      { question: "What kinds of work can you help with?", answer: "Thesis and dissertation chapters, journal articles and research papers, literature reviews and proposals, statistical and data analysis, and editing, proofreading, and formatting." },
+      { question: "Is the work original and confidential?", answer: "Yes. Every engagement is confidential, and our role is expert guidance and assistance toward your own original work." },
+      { question: "How is pricing set?", answer: "Each service shows a starting price. Final scope and cost are confirmed after we discuss your specific requirements and deadline." },
     ],
     isPackages: true,
   },
@@ -100,3 +102,5 @@ export const advisingServiceDefs: AdvisingServiceDef[] = [
 export function getAdvisingServiceBySlug(slug: string): AdvisingServiceDef | undefined {
   return advisingServiceDefs.find((s) => s.slug === slug);
 }
+
+

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Check, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, BookOpen, ShieldCheck, GraduationCap, CalendarClock } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
-import { PackagesBreakdown } from "@/components/packages/PackagesBreakdown";
+import { AcademicSupport } from "@/components/packages/AcademicSupport";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/common/JsonLd";
@@ -84,28 +84,57 @@ export default async function AdvisingServicePage({ params }: Params) {
               }
             />
           ) : (
-            <PackagesBreakdown packages={packages} />
+            <>
+              <AcademicSupport packages={packages} />
+              <p className="mt-8 text-center text-sm text-muted-foreground">
+                Prices shown in USD. Final scope and cost are confirmed after we discuss your
+                requirements and deadline.
+              </p>
+            </>
           )
         ) : (
-          <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
-            <Reveal>
+          <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+            <Reveal className="surface-card p-7 sm:p-8">
               <h2 className="text-h3 text-deep-blue">What's included</h2>
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {def.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-deep-blue">
-                    <Check className="mt-1 h-5 w-5 shrink-0 text-medical-blue" aria-hidden="true" />
-                    <span className="text-body">{item}</span>
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-deep-blue/85">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden="true" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-border/60 pt-6">
+                {[
+                  { icon: ShieldCheck, label: "Confidential" },
+                  { icon: GraduationCap, label: "Experienced advisors" },
+                  { icon: CalendarClock, label: "Flexible scheduling" },
+                ].map(({ icon: Icon, label }) => (
+                  <span key={label} className="inline-flex items-center gap-1.5 text-sm text-deep-blue/75">
+                    <Icon className="h-4 w-4 text-emerald-500" aria-hidden="true" />
+                    {label}
+                  </span>
+                ))}
+              </div>
             </Reveal>
+
             <Reveal variant="fadeLeft" className="surface-card h-fit p-7">
-              <h3 className="text-h3 text-deep-blue">Ready to begin?</h3>
-              <p className="text-body mt-3 text-muted-foreground">
-                Reach out and we'll match this service to your goals and stage.
+              <div className="rounded-2xl bg-brand-bg/60 p-5 text-center ring-1 ring-border/60">
+                <p className="text-sm font-semibold text-deep-blue">Personalized quote</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Scope and pricing are confirmed after a quick chat about your goals.
+                </p>
+              </div>
+              <h3 className="text-h3 mt-6 text-deep-blue">Ready to begin?</h3>
+              <p className="text-body mt-2 text-muted-foreground">
+                Reach out and we'll match {def.title} to your goals, stage, and timeline.
               </p>
               <Button asChild size="lg" className="mt-6 w-full">
-                <Link href="/contact">Get started</Link>
+                <Link href="/request-consultation">
+                  Request this service
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               </Button>
             </Reveal>
           </div>

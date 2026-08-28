@@ -4,7 +4,6 @@ import {
   MessagesSquare,
   GraduationCap,
   Target,
-  HeartHandshake,
   Compass,
   type LucideIcon,
 } from "lucide-react";
@@ -64,26 +63,26 @@ export const advisingServices: ServiceCardData[] = [
   {
     title: "Admissions Advising",
     description: "One-on-one guidance across your whole application — school list, strategy, and positioning.",
-    href: "/advising",
+    href: "/advising/admissions-advising",
     icon: Compass,
   },
   {
     title: "Application Review",
     description: "Detailed feedback on your personal statement, activities, and secondaries before you submit.",
-    href: "/advising",
+    href: "/advising/application-review",
     icon: FileText,
   },
   {
     title: "Exam Coaching",
     description: "Targeted coaching for the NCLEX, USMLE, TEAS, HESI, and pharmacy boards — built around your exam date.",
-    href: "/advising",
+    href: "/advising/exam-coaching",
     icon: Target,
   },
   {
-    title: "Consultation Packages",
-    description: "Flexible packages that bundle advising hours to support you through key milestones.",
-    href: "/advising",
-    icon: HeartHandshake,
+    title: "Academic Support",
+    description: "Expert help with thesis, dissertation, research papers, data analysis, and editing for advanced-degree study.",
+    href: "/advising/consultation-packages",
+    icon: GraduationCap,
   },
 ];
 

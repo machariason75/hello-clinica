@@ -100,10 +100,10 @@ export const primaryNav: NavItem[] = [
     label: "Advising Services",
     href: "/advising",
     children: [
-      { label: "Admissions Advising", href: "/advising#admissions-advising" },
-      { label: "Application Review", href: "/advising#application-review" },
-      { label: "Exam Coaching", href: "/advising#exam-coaching" },
-      { label: "Consultation Packages", href: "/advising#consultation-packages" },
+      { label: "Admissions Advising", href: "/advising/admissions-advising" },
+      { label: "Application Review", href: "/advising/application-review" },
+      { label: "Exam Coaching", href: "/advising/exam-coaching" },
+      { label: "Academic Support", href: "/advising/consultation-packages" },
     ],
   },
   {
@@ -128,3 +128,5 @@ export const primaryNav: NavItem[] = [
  * repoint to /request-consultation once the consultation page ships.
  */
 export const primaryCta = { label: "Request a Consultation", href: "/request-consultation" };
+
+
