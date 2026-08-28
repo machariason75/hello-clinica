@@ -1,0 +1,209 @@
+TOTAL resources in database: 135
+
+FIELDS PRESENT ON A RESOURCE ROW:
+  id, title, description, body, category, thumbnail, resourceFile, featured, published, archived, createdAt, updatedAt
+
+=== COUNT BY CATEGORY  (published / unpublished / archived) ===
+APPLICATION_TIMELINE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+CAREER_EXPLORATION:  total 2  |  published 2  |  unpublished 0  |  archived 0
+CLINICAL_EXPERIENCE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+INTERVIEW_GUIDE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+MEDICAL_SCHOOL_ADMISSIONS:  total 10  |  published 8  |  unpublished 2  |  archived 0
+NURSING_ABBREVIATIONS:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_ANATOMY:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_ASSESSMENT:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_DOSAGE:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_ECG:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_LAB_VALUES:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_MED_ADMIN:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_MED_TERMINOLOGY:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_NCLEX_SHEETS:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_PHARMACOLOGY:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_PHYSIOLOGY:  total 3  |  published 3  |  unpublished 0  |  archived 0
+NURSING_RESOURCES:  total 63  |  published 63  |  unpublished 0  |  archived 0
+NURSING_VITAL_SIGNS:  total 3  |  published 3  |  unpublished 0  |  archived 0
+PERSONAL_STATEMENT_GUIDE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+SHADOWING_GUIDE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+STUDY_RESOURCES:  total 12  |  published 12  |  unpublished 0  |  archived 0
+VOLUNTEER_GUIDE:  total 2  |  published 2  |  unpublished 0  |  archived 0
+
+=== EVERY RESOURCE  (id | category | published | archived | title) ===
+
+-- APPLICATION_TIMELINE --
+cmqssatnd000414hnbelxpuim | APPLICATION_TIMELINE | pub=true | arch=false | Application Timeline: Checklist & Templates
+cmqssatnd000314hn7fsheehh | APPLICATION_TIMELINE | pub=true | arch=false | Application Timeline: Getting Started Guide
+
+-- CAREER_EXPLORATION --
+cmqssatnd000i14hnnvq64or9 | CAREER_EXPLORATION | pub=true | arch=false | Career Exploration: Checklist & Templates
+cmqssatnd000h14hnj32z1psu | CAREER_EXPLORATION | pub=true | arch=false | Career Exploration: Getting Started Guide
+
+-- CLINICAL_EXPERIENCE --
+cmqssatnd000a14hnls33fbz3 | CLINICAL_EXPERIENCE | pub=true | arch=false | Clinical Experience: Checklist & Templates
+cmqssatnd000914hnp4g2mub9 | CLINICAL_EXPERIENCE | pub=true | arch=false | Clinical Experience: Getting Started Guide
+
+-- INTERVIEW_GUIDE --
+cmqssatnd000814hncv7naf51 | INTERVIEW_GUIDE | pub=true | arch=false | Interview Guide: Checklist & Templates
+cmqssatnd000714hn0kch37q4 | INTERVIEW_GUIDE | pub=true | arch=false | Interview Guide: Getting Started Guide
+
+-- MEDICAL_SCHOOL_ADMISSIONS --
+cmta1z5lt00a3qv8u7ldjjdw3 | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Choosing your path in medicine
+cmta1zu0300f6qv8unoh2jjgs | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Dosage calculations dymestified
+cmta1y9wd0051qv8u403filre | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Interview day dymestified
+cmqssatnd000214hnjmjzf402 | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Medical School Admissions: Checklist & Templates
+cmqssatnd000114hn1uthx6af | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Medical School Admissions: Getting Started Guide
+cmta1c3bi009zudwx0rb5jt4g | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Orthopaedic Physical Examination Tests
+cmta1xcyb0000qv8u93iamnyi | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | Personal statements that connect
+cmta1vdkr0000entbna7b0zfy | MEDICAL_SCHOOL_ADMISSIONS | pub=true | arch=false | The pre-med roadmap
+cmrrvmgza0000y65t9ubdx8p5 | MEDICAL_SCHOOL_ADMISSIONS | pub=false | arch=false | Title
+cmrrvco4u0030ffsxsrtf9rxq | MEDICAL_SCHOOL_ADMISSIONS | pub=false | arch=false | WERE
+
+-- NURSING_ABBREVIATIONS --
+seed-nrs-nursing_abbreviations-1 | NURSING_ABBREVIATIONS | pub=true | arch=false | Approved Abbreviations List
+seed-nrs-nursing_abbreviations-3 | NURSING_ABBREVIATIONS | pub=true | arch=false | Charting Shorthand Guide
+seed-nrs-nursing_abbreviations-2 | NURSING_ABBREVIATIONS | pub=true | arch=false | Do-Not-Use Abbreviations
+
+-- NURSING_ANATOMY --
+seed-nrs-nursing_anatomy-3 | NURSING_ANATOMY | pub=true | arch=false | Major Organ Systems Map
+seed-nrs-nursing_anatomy-2 | NURSING_ANATOMY | pub=true | arch=false | Muscular System Quick Review
+seed-nrs-nursing_anatomy-1 | NURSING_ANATOMY | pub=true | arch=false | Skeletal System Overview
+
+-- NURSING_ASSESSMENT --
+seed-nrs-nursing_assessment-3 | NURSING_ASSESSMENT | pub=true | arch=false | Assessment Documentation Template
+seed-nrs-nursing_assessment-1 | NURSING_ASSESSMENT | pub=true | arch=false | Head-to-Toe Assessment Checklist
+seed-nrs-nursing_assessment-2 | NURSING_ASSESSMENT | pub=true | arch=false | Normal vs Abnormal Findings
+
+-- NURSING_DOSAGE --
+seed-nrs-nursing_dosage-1 | NURSING_DOSAGE | pub=true | arch=false | Dimensional Analysis Practice
+seed-nrs-nursing_dosage-2 | NURSING_DOSAGE | pub=true | arch=false | IV Drip Rate Formulas
+seed-nrs-nursing_dosage-3 | NURSING_DOSAGE | pub=true | arch=false | Pediatric Dosage Worksheet
+
+-- NURSING_ECG --
+seed-nrs-nursing_ecg-2 | NURSING_ECG | pub=true | arch=false | Common Rhythms Guide
+seed-nrs-nursing_ecg-3 | NURSING_ECG | pub=true | arch=false | ECG Interpretation Practice
+seed-nrs-nursing_ecg-1 | NURSING_ECG | pub=true | arch=false | Reading an ECG Strip
+
+-- NURSING_LAB_VALUES --
+seed-nrs-nursing_lab_values-2 | NURSING_LAB_VALUES | pub=true | arch=false | ABG Interpretation Guide
+seed-nrs-nursing_lab_values-1 | NURSING_LAB_VALUES | pub=true | arch=false | Common Lab Values Reference
+seed-nrs-nursing_lab_values-3 | NURSING_LAB_VALUES | pub=true | arch=false | Electrolyte Ranges Chart
+
+-- NURSING_MED_ADMIN --
+seed-nrs-nursing_med_admin-2 | NURSING_MED_ADMIN | pub=true | arch=false | Injection Sites Guide
+seed-nrs-nursing_med_admin-1 | NURSING_MED_ADMIN | pub=true | arch=false | Rights of Medication Administration
+seed-nrs-nursing_med_admin-3 | NURSING_MED_ADMIN | pub=true | arch=false | Safe Med Administration Checklist
+
+-- NURSING_MED_TERMINOLOGY --
+seed-nrs-nursing_med_terminology-2 | NURSING_MED_TERMINOLOGY | pub=true | arch=false | Body System Terminology
+seed-nrs-nursing_med_terminology-1 | NURSING_MED_TERMINOLOGY | pub=true | arch=false | Common Prefixes & Suffixes
+seed-nrs-nursing_med_terminology-3 | NURSING_MED_TERMINOLOGY | pub=true | arch=false | Root Words Reference
+
+-- NURSING_NCLEX_SHEETS --
+seed-nrs-nursing_nclex_sheets-1 | NURSING_NCLEX_SHEETS | pub=true | arch=false | Lab Values Quick Sheet
+seed-nrs-nursing_nclex_sheets-3 | NURSING_NCLEX_SHEETS | pub=true | arch=false | Pharmacology Hot Spots
+seed-nrs-nursing_nclex_sheets-2 | NURSING_NCLEX_SHEETS | pub=true | arch=false | Priority & Delegation Tips
+
+-- NURSING_PHARMACOLOGY --
+seed-nrs-nursing_pharmacology-2 | NURSING_PHARMACOLOGY | pub=true | arch=false | Common Medication Suffixes
+seed-nrs-nursing_pharmacology-1 | NURSING_PHARMACOLOGY | pub=true | arch=false | Drug Classifications Cheat Sheet
+seed-nrs-nursing_pharmacology-3 | NURSING_PHARMACOLOGY | pub=true | arch=false | Pharmacokinetics Basics
+
+-- NURSING_PHYSIOLOGY --
+seed-nrs-nursing_physiology-1 | NURSING_PHYSIOLOGY | pub=true | arch=false | Cardiac Cycle Basics
+seed-nrs-nursing_physiology-3 | NURSING_PHYSIOLOGY | pub=true | arch=false | Renal Function Essentials
+seed-nrs-nursing_physiology-2 | NURSING_PHYSIOLOGY | pub=true | arch=false | Respiratory Physiology Overview
+
+-- NURSING_RESOURCES --
+cmt9ttf5s00cyom8fbk9ca2tm | NURSING_RESOURCES | pub=true | arch=false | 26 Nurse in the making
+cmt9tnddr0037om8f9jandfry | NURSING_RESOURCES | pub=true | arch=false | A & P I Flashcards
+cmt9xast101nsjqd9qw5kivm0 | NURSING_RESOURCES | pub=true | arch=false | All-in-One Nursing School Bundle
+cmt9x7bst0166jqd9jl4m8srt | NURSING_RESOURCES | pub=true | arch=false | Anatomy
+cmt9s2o2u0000l2ull1ek3gxb | NURSING_RESOURCES | pub=true | arch=false | Anatomy Demystefied
+cmt9xpnqq02t1jqd9gs91nrj7 | NURSING_RESOURCES | pub=true | arch=false | Anatomy Flashcards
+cmt9x1b170089jqd9ufpccndi | NURSING_RESOURCES | pub=true | arch=false | Anatomy-demystefied
+cmt9wypzt01e7a0ge95qwbda0 | NURSING_RESOURCES | pub=true | arch=false | ATI gas exchange
+cmt9vu5ux00eawscc9zb6qv0l | NURSING_RESOURCES | pub=true | arch=false | ATI Nursing Fundamental
+cmt9uw3p600003qekzd2loi20 | NURSING_RESOURCES | pub=true | arch=false | ATI_TEAS_Prep_Plus_Kaplan_Nursing
+cmt9xa3yd01jcjqd9rlpzs5jw | NURSING_RESOURCES | pub=true | arch=false | ATI-TEASV7-NurseCheung-Science-Practice-Questions
+cmt9x9byq01exjqd95k2cp4gd | NURSING_RESOURCES | pub=true | arch=false | Basic Dosage Calculations Made Easy
+cmt9vnhz00000lj5wquh318tw | NURSING_RESOURCES | pub=true | arch=false | BIO 12 FINAL
+cmt9tox0r006fom8ffcbzlym5 | NURSING_RESOURCES | pub=true | arch=false | Calculations Bible
+cmt9xovui02ocjqd9blkmlk8i | NURSING_RESOURCES | pub=true | arch=false | ChemStudy
+cmt9x62qk00xjjqd9j3zn1pr9 | NURSING_RESOURCES | pub=true | arch=false | Clinical judgement
+cmt9wwdg500y9a0geib79p4ni | NURSING_RESOURCES | pub=true | arch=false | Colostomy Question
+cmt9tqpyl009oom8fhj7iaon1 | NURSING_RESOURCES | pub=true | arch=false | Concept Map Template
+cmt9vtl7800aowsccjtb1mlkf | NURSING_RESOURCES | pub=true | arch=false | Critical endocrine-NUR213
+cmt9vutbx00hxwscc9s722mm6 | NURSING_RESOURCES | pub=true | arch=false | Critical neuro NUR-213
+cmt9uczfz00004wpc0h8bhslo | NURSING_RESOURCES | pub=true | arch=false | David's Drug Guide 18th edition
+cmt9s5qbi0033l2ulqwa1wggk | NURSING_RESOURCES | pub=true | arch=false | Developing Clinical Judgment
+cmt9ws8g200b6a0gey2ja7r4e | NURSING_RESOURCES | pub=true | arch=false | Dimensional_Analysis_50_Answer_Key_Full_Work
+cmt9wu63d00mla0ged59ul9sg | NURSING_RESOURCES | pub=true | arch=false | Dosage Calculations
+cmt9ru8e10000g9qfdeg5d837 | NURSING_RESOURCES | pub=true | arch=false | Dosage Calculations and Basic Math for Nurses
+cmt9x5cjo00t9jqd9kj59yx0v | NURSING_RESOURCES | pub=true | arch=false | Dosage_Pharm Basics
+cmt9wvier00uca0geysw9d7ln | NURSING_RESOURCES | pub=true | arch=false | Free Pharmacology Worksheet
+cmt9wsxly00eya0gep546mnl2 | NURSING_RESOURCES | pub=true | arch=false | Herbal meds review
+cmt9wrkji007fa0ge939021nw | NURSING_RESOURCES | pub=true | arch=false | LVN Dosage Cal with answers
+cmt9xdj9r01s9jqd9wo972yd4 | NURSING_RESOURCES | pub=true | arch=false | Mark Klemik (Blue Book)
+cmt9wy0u301a6a0gekbuhl7pj | NURSING_RESOURCES | pub=true | arch=false | Mark Klimek Review
+cmt9x4sid00p0jqd9a0l1f7ii | NURSING_RESOURCES | pub=true | arch=false | Mark_Klimek_notes
+cmt9wpvrz0000a0gecaegm08r | NURSING_RESOURCES | pub=true | arch=false | Mark-Klimek-Lectures-1-To-13-Nursing-Notes
+cmt9tl9e30000om8fg9emyysp | NURSING_RESOURCES | pub=true | arch=false | MarkKlimekyyellow book
+cmt9u9w8d01d3om8ffi15uyk0 | NURSING_RESOURCES | pub=true | arch=false | Mental Health Book
+cmt9sixqk00fgl2ulsz03wo8h | NURSING_RESOURCES | pub=true | arch=false | Microbiology Demystefied
+cmt9xevk0021ajqd9r27mvjt1 | NURSING_RESOURCES | pub=true | arch=false | NCLEX Cram Flashcards
+cmt9x48vs00ksjqd9lvfxvbr4 | NURSING_RESOURCES | pub=true | arch=false | NCLEX FILES
+cmt9vswkb0073wscc32ekgt2j | NURSING_RESOURCES | pub=true | arch=false | NCLEX Herbal Supplements
+cmt9wwxxl0127a0geme3x5nfz | NURSING_RESOURCES | pub=true | arch=false | NCLEX_U-World Notes
+cmt9tife20000awv05lme4qhr | NURSING_RESOURCES | pub=true | arch=false | NCLEX-FILES
+cmt9uf7sf003e4wpc81hj4ys6 | NURSING_RESOURCES | pub=true | arch=false | NUR17_Dosage_Calculations_Q1-10
+cmt9xe7wn01wrjqd9s3qyugfv | NURSING_RESOURCES | pub=true | arch=false | Nurse bundles
+cmt9xracm032ijqd91yjmxczj | NURSING_RESOURCES | pub=true | arch=false | Nursing (2)
+cmt9voiso003hlj5wollnva3f | NURSING_RESOURCES | pub=true | arch=false | Nursing Mmemonics
+cmt9u7znl019rom8fd8iobilh | NURSING_RESOURCES | pub=true | arch=false | Nursing School Comprehensive Bundle 2025
+cmt9xqh3j02xrjqd9vrelx57a | NURSING_RESOURCES | pub=true | arch=false | Nursing School Notes
+cmt9xmg0p02f1jqd96nzz90c7 | NURSING_RESOURCES | pub=true | arch=false | OB Maternity Flashcards
+cmt9wxg8b0166a0get2d4itpw | NURSING_RESOURCES | pub=true | arch=false | Patho_Bible
+cmt9wzyv80000jqd98mbgq3jd | NURSING_RESOURCES | pub=true | arch=false | Pediatrics Bundle 2024
+cmt9x6qnw011ujqd914hyu4zw | NURSING_RESOURCES | pub=true | arch=false | Pharm Mastery Notes
+cmt9x2tep00cfjqd9ionewao5 | NURSING_RESOURCES | pub=true | arch=false | Pharm-demystefied
+cmt9wqg0e003pa0gedch79xii | NURSING_RESOURCES | pub=true | arch=false | Pharmacology_Basics_101_NCLEX_Q8
+cmt9x0kaz0044jqd9vneuleph | NURSING_RESOURCES | pub=true | arch=false | Physiology-demystified
+cmt9x82j501ajjqd9b2e27uci | NURSING_RESOURCES | pub=true | arch=false | Psychiatric Mental Health Study Guide
+cmt9wzgfm01i9a0geokcxyv3h | NURSING_RESOURCES | pub=true | arch=false | Renal System Flashcards
+cmt9vs13y003jwscc2i4k0h2b | NURSING_RESOURCES | pub=true | arch=false | Review Pharm copy
+cmt9xjsuy025ujqd9wzypg3i0 | NURSING_RESOURCES | pub=true | arch=false | Strategies for student success
+cmt9xo8lx02jojqd9l7psps4u | NURSING_RESOURCES | pub=true | arch=false | The Complete Chemistry Guide to Matter Atomic Structure Empiric
+cmt9xkm2h02afjqd99vmkzpan | NURSING_RESOURCES | pub=true | arch=false | U world NCLEX 2021
+cmt9wth0z00ira0gexvd21jw0 | NURSING_RESOURCES | pub=true | arch=false | UWORLD_REVIEW
+cmt9vrbba0000wscca484duw0 | NURSING_RESOURCES | pub=true | arch=false | VEALCHOP
+cmt9wuqb600qga0ge7xhl0cy7 | NURSING_RESOURCES | pub=true | arch=false | Yellow Book
+
+-- NURSING_VITAL_SIGNS --
+seed-nrs-nursing_vital_signs-1 | NURSING_VITAL_SIGNS | pub=true | arch=false | Normal Vital Sign Ranges
+seed-nrs-nursing_vital_signs-2 | NURSING_VITAL_SIGNS | pub=true | arch=false | Pediatric Vital Signs
+seed-nrs-nursing_vital_signs-3 | NURSING_VITAL_SIGNS | pub=true | arch=false | Vital Signs Documentation Guide
+
+-- PERSONAL_STATEMENT_GUIDE --
+cmqssatnd000614hnuvtkazou | PERSONAL_STATEMENT_GUIDE | pub=true | arch=false | Personal Statement Guide: Checklist & Templates
+cmqssatnd000514hnf7cxf4u0 | PERSONAL_STATEMENT_GUIDE | pub=true | arch=false | Personal Statement Guide: Getting Started Guide
+
+-- SHADOWING_GUIDE --
+cmqssatnd000e14hnj6wcgg4p | SHADOWING_GUIDE | pub=true | arch=false | Shadowing Guide: Checklist & Templates
+cmqssatnd000d14hnrq91yg2t | SHADOWING_GUIDE | pub=true | arch=false | Shadowing Guide: Getting Started Guide
+
+-- STUDY_RESOURCES --
+cmrj9g5ox002x125gqtkoew56 | STUDY_RESOURCES | pub=true | arch=false | ACLS (Advanced Cardiac Life Support)
+cmta0najo009i9q0gb9zi153a | STUDY_RESOURCES | pub=true | arch=false | Apley's System of Orthopaedics and Fractures
+cmta0o5z500eb9q0ggg3xirkb | STUDY_RESOURCES | pub=true | arch=false | ATLS-2018
+cmta143r60000udwx7ixoci31 | STUDY_RESOURCES | pub=true | arch=false | McRae's Orthopaedic Trauma and Emergency Fracture Management
+cmta19lzm0053udwxdu2sfwvu | STUDY_RESOURCES | pub=true | arch=false | Netter's Concise Orthopaedic Anatomy
+cmrtac2g6000010a57hcvnwzq | STUDY_RESOURCES | pub=true | arch=false | Okell Notes Surgery
+cmrj8wk4f000031kl89xxnbsj | STUDY_RESOURCES | pub=true | arch=false | Orthopaedics
+cmrj8na760000iabnp231142t | STUDY_RESOURCES | pub=true | arch=false | Orthopedics
+cmta1ct6300ewudwxaxznql6r | STUDY_RESOURCES | pub=true | arch=false | Principles of Traction
+cmta1dr3j00juudwx27as55ct | STUDY_RESOURCES | pub=true | arch=false | Special Tests for all Joints
+cmqssatnd000g14hnjwyofeux | STUDY_RESOURCES | pub=true | arch=false | Study Resources: Checklist & Templates
+cmqssatnd000f14hn49n39j8l | STUDY_RESOURCES | pub=true | arch=false | Study Resources: Getting Started Guide
+
+-- VOLUNTEER_GUIDE --
+cmqssatnd000c14hnfh8zmdj1 | VOLUNTEER_GUIDE | pub=true | arch=false | Volunteer Guide: Checklist & Templates
+cmqssatnd000b14hnkxc0efrh | VOLUNTEER_GUIDE | pub=true | arch=false | Volunteer Guide: Getting Started Guide

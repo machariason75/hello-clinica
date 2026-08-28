@@ -2,8 +2,6 @@ import {
   ClipboardList,
   FileText,
   MessagesSquare,
-  CalendarClock,
-  Microscope,
   GraduationCap,
   Target,
   HeartHandshake,
@@ -38,41 +36,26 @@ export const trustStats: TrustStat[] = [
   { value: "9", label: "Stages supported, pre-med to residency", icon: Compass },
 ];
 
+// A trimmed teaser for the homepage — three representative categories, each
+// linking straight to its own resource page. The "View all resources" button
+// beneath them opens the full category list at /resources.
 export const featuredResources: ResourceCardData[] = [
   {
     title: "Medical School Admissions",
     description: "A clear walkthrough of what selective programs look for and how to position your application.",
-    href: "/resources",
+    href: "/resources/admissions",
     icon: ClipboardList,
-  },
-  {
-    title: "Application Timeline",
-    description: "Month-by-month planning so nothing important slips through the cracks during your cycle.",
-    href: "/resources",
-    icon: CalendarClock,
   },
   {
     title: "Personal Statement Guide",
     description: "Frameworks and prompts to help you write an essay that sounds like you — and lands.",
-    href: "/resources",
+    href: "/resources/personal-statement-guide",
     icon: FileText,
-  },
-  {
-    title: "Interview Preparation",
-    description: "Practice structures, common formats, and ways to tell your story with confidence.",
-    href: "/resources",
-    icon: MessagesSquare,
-  },
-  {
-    title: "Clinical & Shadowing Experience",
-    description: "How to find meaningful exposure and reflect on it in a way admissions committees value.",
-    href: "/resources",
-    icon: Microscope,
   },
   {
     title: "Study & Career Resources",
     description: "Curated tools for coursework, standardized exams, and exploring paths within medicine.",
-    href: "/resources",
+    href: "/resources/study-resources",
     icon: Compass,
   },
 ];
@@ -230,3 +213,5 @@ export const homepageFaqs: FaqItem[] = [
       "We bring together curated study guides, recommended books, and personalized advising for nursing students — from pre-nursing through BSN, RN, and advanced practice — so you have clear guidance and trusted resources at every step.",
   },
 ];
+
+

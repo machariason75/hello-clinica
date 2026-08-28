@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
-
 /** Reusable closing CTA band (Contact CTA on the homepage). */
 export function CtaSection({
   title = "Ready to take the next step?",
@@ -12,6 +11,7 @@ export function CtaSection({
   primaryLabel = "Get in touch",
   secondaryHref = "/advising",
   secondaryLabel = "View advising services",
+  showSecondary = true,
 }: {
   title?: string;
   description?: string;
@@ -19,6 +19,8 @@ export function CtaSection({
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  /** Set false to show only the primary button (e.g. the homepage). */
+  showSecondary?: boolean;
 }) {
   return (
     <section className="section">
@@ -36,9 +38,11 @@ export function CtaSection({
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="border-2 border-medical-blue/30 bg-transparent text-medical-blue hover:bg-medical-blue/5">
-                <Link href={secondaryHref}>{secondaryLabel}</Link>
-              </Button>
+              {showSecondary && (
+                <Button asChild variant="secondary" size="lg" className="border-2 border-medical-blue/30 bg-transparent text-medical-blue hover:bg-medical-blue/5">
+                  <Link href={secondaryHref}>{secondaryLabel}</Link>
+                </Button>
+              )}
             </div>
           </div>
         </Reveal>

@@ -1,0 +1,20 @@
+===== PHYSICAL CHEMISTRY QUIZZES =====
+  published  EXAM     order 2   physical-chemistry-exam-1  — 200 questions
+  published  PRACTICE order 0   physical-chemistry-practice-set-1  — 100 questions
+  published  PRACTICE order 1   physical-chemistry-practice-set-2  — 100 questions
+  total: 3 Physical Chemistry quizzes
+  Set 3 present: false   Set 4 present: false   Exam 2 present: false
+
+===== BOOKS BY CATEGORY =====
+  MEDICAL_SCHOOL_BOOKS     2
+  NCLEX_BOOKS              3
+  RECOMMENDED_BOOKS        4
+  DIGITAL_DOWNLOADS        2
+  STUDY_GUIDES             2
+  NURSING_BOOKS            3
+
+===== MEDICAL SCHOOL BOOKS — DISCIPLINES =====
+  MEDICAL_SCHOOL_BOOKS: 2 total (2 published)
+     pathology                  1
+     physiology                 1
+  books with a discipline set: 2 of 2

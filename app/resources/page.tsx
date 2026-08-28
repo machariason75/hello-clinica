@@ -30,21 +30,16 @@ export default async function ResourcesPage() {
 
       <Section ariaLabel="Resource categories">
         {/*
-          Only surface categories that actually hold guides, plus the gateway
-          categories (Nursing Resources) that lead somewhere substantial. This
-          keeps the page honest about what the site contains rather than showing
-          a long wall of empty folders. Add a guide in the admin and its category
-          appears here automatically.
+          Show the full set of top-level categories so visitors can see the
+          whole library at a glance and navigate to any topic. Categories that
+          don't hold published guides yet still have a page with an outline of
+          what's coming, so none of these lead to a dead end. (The nursing
+          sub-folders — group "nursing" — live inside the Nursing Resources
+          page, so they're excluded here.)
         */}
         <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {resourceCategories
             .filter((category) => category.group !== "nursing")
-            .filter((category) => {
-              const count = counts.get(category.enum) ?? 0;
-              // Nursing Resources is a gateway to its own 12-topic library.
-              const isGateway = category.slug === "nursing-resources";
-              return count > 0 || isGateway;
-            })
             .map((category) => {
               const count = counts.get(category.enum) ?? 0;
               return (

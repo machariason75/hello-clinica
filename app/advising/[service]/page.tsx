@@ -7,7 +7,7 @@ import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
-import { PackagesWithInquiry } from "@/components/packages/PackagesWithInquiry";
+import { PackagesBreakdown } from "@/components/packages/PackagesBreakdown";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/common/JsonLd";
@@ -84,7 +84,7 @@ export default async function AdvisingServicePage({ params }: Params) {
               }
             />
           ) : (
-            <PackagesWithInquiry packages={packages} />
+            <PackagesBreakdown packages={packages} />
           )
         ) : (
           <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
@@ -119,3 +119,5 @@ export default async function AdvisingServicePage({ params }: Params) {
     </PageTransition>
   );
 }
+
+

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, FileText } from "lucide-react";
+import { ArrowLeft, FileText, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
@@ -13,6 +12,7 @@ import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { getResourceCategoryBySlug } from "@/lib/data/resource-categories";
 import { getResourcesByCategory } from "@/lib/queries/resources";
+import { getPlaceholderTopics } from "@/lib/data/resource-placeholders";
 
 export const revalidate = 300; // cached, refreshed every 5 min
 
@@ -35,6 +35,9 @@ export default async function ResourceCategoryPage({ params }: Params) {
   if (!def) notFound();
 
   const resources = await getResourcesByCategory(def.enum);
+  // Shown only while a category has no published guides yet. As soon as the
+  // admin publishes a real resource here, the real guides render instead.
+  const placeholderTopics = resources.length === 0 ? getPlaceholderTopics(def.slug) : [];
 
   return (
     <PageTransition>
@@ -49,13 +52,7 @@ export default async function ResourceCategoryPage({ params }: Params) {
           All resources
         </Link>
 
-        {resources.length === 0 ? (
-          <EmptyState
-            icon={<FileText className="h-7 w-7" />}
-            title="New guides are on the way"
-            description="We're preparing in-depth resources for this topic. Subscribe below to be notified when they're published."
-          />
-        ) : (
+        {resources.length > 0 ? (
           <StaggerGroup className="grid gap-6 md:grid-cols-2">
             {resources.map((resource) => (
               <StaggerItem key={resource.id} className="h-full">
@@ -79,6 +76,35 @@ export default async function ResourceCategoryPage({ params }: Params) {
               </StaggerItem>
             ))}
           </StaggerGroup>
+        ) : (
+          <div>
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-medical-blue/10 px-4 py-1.5 text-sm font-medium text-medical-blue ring-1 ring-medical-blue/15">
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Guides coming soon
+            </div>
+            <p className="text-body mb-8 max-w-2xl text-muted-foreground">
+              We&apos;re preparing in-depth guides for this topic. Here&apos;s what to expect —
+              published resources will appear here as soon as they&apos;re ready.
+            </p>
+            <StaggerGroup className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {placeholderTopics.map((topic) => (
+                <StaggerItem key={topic.title} className="h-full">
+                  <article className="surface-card flex h-full flex-col p-6 opacity-90">
+                    <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-muted text-muted-foreground ring-1 ring-border">
+                      <FileText className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="text-lg font-semibold text-deep-blue">{topic.title}</h3>
+                    <p className="text-body mt-2 flex-1 text-muted-foreground">
+                      {topic.description}
+                    </p>
+                    <span className="mt-5 inline-flex w-fit items-center rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+                      Coming soon
+                    </span>
+                  </article>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          </div>
         )}
       </Section>
 

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getStudent } from "@/lib/student/auth";
 import { getReaderNotes } from "@/lib/reader/notes";
 import { ReaderView, type ReaderNoteItem } from "@/components/reader/ReaderView";
+import { PremiumLock } from "@/components/quiz/PremiumLock";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -41,6 +42,18 @@ export default async function ReaderPage({ params }: Params) {
   }
 
   const student = await getStudent();
+
+  // Reading a resource's content online is premium (matching downloads). The
+  // listing pages stay free — only opening the file requires access. Non-premium
+  // visitors get the upgrade prompt instead of the reader.
+  if (type === "resource" && !student?.hasAccess) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16">
+        <PremiumLock signedIn={!!student} title="Reading this guide is a premium feature" />
+      </div>
+    );
+  }
+
   const notesRaw = await getReaderNotes(type, id);
   const initialNotes: ReaderNoteItem[] = notesRaw.map((n) => ({
     id: n.id, content: n.content, page: n.page, createdAt: n.createdAt.toISOString(),

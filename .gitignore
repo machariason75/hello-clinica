@@ -51,3 +51,17 @@ prisma/patch-schema-discipline.ts
 prisma/inspect-books*.ts
 prisma/dump-files.ts
 prisma/diagnose-state.ts
+
+prisma/inspect-resources.ts
+
+prisma/cleanup-resource-seeds.ts
+
+# local one-off maintenance scripts (run with tsx, never built)
+prisma/cleanup-duplicates.ts
+prisma/refile-disciplines.ts
+prisma/patch-schema-discipline.ts
+prisma/inspect-books*.ts
+prisma/dump-files.ts
+prisma/diagnose-state.ts
+prisma/inspect-resources.ts
+prisma/cleanup-resource-seeds.ts

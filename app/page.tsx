@@ -43,7 +43,9 @@ export default async function HomePage() {
       <BooksSection />
       <Testimonials />
       <NewsletterSection />
-      <CtaSection />
+      <CtaSection showSecondary={false} />
     </>
   );
 }
+
+

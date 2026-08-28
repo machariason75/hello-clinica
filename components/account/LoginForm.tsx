@@ -33,16 +33,39 @@ export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) 
     });
   }
 
+  // A real <form> with name + autocomplete attributes is what lets Chrome,
+  // Safari, and password managers recognise this as a sign-in, offer to save the
+  // password, and autofill it on return visits.
   return (
-    <div className="space-y-4">
+    <form
+      className="space-y-4"
+      onSubmit={(e) => { e.preventDefault(); submit(); }}
+    >
       <div>
-        <Label>Email</Label>
-        <Input type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+        <Label htmlFor="login-email">Email</Label>
+        <Input
+          id="login-email"
+          name="email"
+          type="email"
+          autoComplete="username"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          value={form.email}
+          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+        />
         {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
       </div>
       <div>
-        <Label>Password</Label>
-        <Input type="password" value={form.password} onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} />
+        <Label htmlFor="login-password">Password</Label>
+        <Input
+          id="login-password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          value={form.password}
+          onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+        />
         {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
       </div>
       <div className="text-right">
@@ -50,11 +73,11 @@ export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) 
           Forgot your password?
         </Link>
       </div>
-      <Button className="w-full" onClick={submit} disabled={isPending}>{isPending ? "Signing in…" : "Sign in"}</Button>
+      <Button type="submit" className="w-full" disabled={isPending}>{isPending ? "Signing in…" : "Sign in"}</Button>
       <p className="text-center text-sm text-muted-foreground">
         New here?{" "}
         <Link href="/account/register" className="font-medium text-medical-blue hover:underline">Create an account</Link>
       </p>
-    </div>
+    </form>
   );
 }
