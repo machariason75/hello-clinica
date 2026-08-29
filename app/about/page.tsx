@@ -87,7 +87,7 @@ export default function AboutPage() {
             return (
               <StaggerItem key={value.title} className="h-full">
                 <div className="surface-card flex h-full flex-col p-6">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-gradient text-white">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F1E8DC] text-medical-blue">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </span>
                   <h3 className="mt-5 text-lg font-semibold text-deep-blue">{value.title}</h3>

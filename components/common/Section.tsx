@@ -24,7 +24,7 @@ export function Section({
     <Tag
       id={id}
       aria-label={ariaLabel}
-      className={cn("section", gradient && "bg-brand-gradient text-white", className)}
+      className={cn("section", gradient && "bg-[#F1E8DC] text-medical-blue", className)}
     >
       <Container className={containerClassName}>{children}</Container>
     </Tag>
