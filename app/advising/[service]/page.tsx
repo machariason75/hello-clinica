@@ -16,6 +16,7 @@ import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { getAdvisingServiceBySlug } from "@/lib/data/advising-services";
 import { getPublishedPackages } from "@/lib/queries/packages";
+import { getFaqs } from "@/lib/queries/faqs";
 import type { PackageView } from "@/components/packages/PackageCard";
 
 export const revalidate = 300; // cached, refreshed every 5 min
@@ -33,6 +34,17 @@ export default async function AdvisingServicePage({ params }: Params) {
   const { service } = await params;
   const def = getAdvisingServiceBySlug(service);
   if (!def) notFound();
+
+  const FAQ_CATEGORY: Record<string, string> = {
+    "admissions-advising": "ADMISSIONS_ADVISING",
+    "application-review": "APPLICATION_REVIEW",
+    "exam-coaching": "INTERVIEW_COACHING",
+    "consultation-packages": "CONSULTATION_PACKAGES",
+  };
+  // FAQs come from the database (admin-editable). If none are published yet for
+  // this service, fall back to the built-in defaults so the page is never empty.
+  const dbFaqs = await getFaqs(FAQ_CATEGORY[def.slug] ?? "GENERAL");
+  const faqs = dbFaqs.length > 0 ? dbFaqs : def.faqs;
 
   let packages: PackageView[] = [];
   if (def.isPackages) {
@@ -53,7 +65,7 @@ export default async function AdvisingServicePage({ params }: Params) {
       {/* FAQ markup is the highest-value schema on the site: Google renders
           these as expandable questions in the results, which takes up far more
           of the page than a plain link. */}
-      {def.faqs.length > 0 && <JsonLd data={faqJsonLd(def.faqs)} />}
+      {faqs.length > 0 && <JsonLd data={faqJsonLd(faqs)} />}
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Advising", path: "/advising" },
@@ -143,10 +155,12 @@ export default async function AdvisingServicePage({ params }: Params) {
 
       <Section ariaLabel="Frequently asked questions" className="bg-white">
         <SectionHeading eyebrow="FAQ" title="Common questions" align="center" className="mb-10" />
-        <FaqAccordion items={def.faqs} />
+        <FaqAccordion items={faqs} />
       </Section>
     </PageTransition>
   );
 }
+
+
 
 

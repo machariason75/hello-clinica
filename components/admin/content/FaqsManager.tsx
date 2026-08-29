@@ -34,7 +34,7 @@ const categoryLabels: Record<string, string> = {
   ADMISSIONS_ADVISING: "Admissions Advising",
   APPLICATION_REVIEW: "Application Review",
   INTERVIEW_COACHING: "Exam Coaching",
-  CONSULTATION_PACKAGES: "Consultation Packages",
+  CONSULTATION_PACKAGES: "Academic Support",
   BOOKS: "Books",
   RESOURCES: "Resources",
   CONTACT: "Contact",
@@ -241,3 +241,5 @@ function Field({ label, error, children }: { label: string; error?: string; chil
     </div>
   );
 }
+
+
