@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, User, Headphones } from "lucide-react";
+import { bookCoverGradient } from "@/lib/book-cover";
 import { Container } from "@/components/common/Container";
 import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -74,7 +75,7 @@ export default async function BookDetailPage({ params }: Params) {
         <div className="grid gap-10 lg:grid-cols-[320px_1fr] lg:gap-14">
           {/* Cover */}
           <Reveal className="mx-auto w-full max-w-[320px]">
-            <div className="surface-card flex aspect-[3/4] items-center justify-center overflow-hidden bg-brand-gradient p-8 text-center">
+            <div className="surface-card flex aspect-[3/4] items-center justify-center overflow-hidden p-8 text-center" style={{ backgroundImage: bookCoverGradient(book.title) }}>
               <div className="flex flex-col items-center gap-4 text-white">
                 <BookOpen className="h-12 w-12 opacity-90" aria-hidden="true" />
                 <span className="text-lg font-semibold leading-snug">{book.title}</span>
@@ -144,3 +145,4 @@ export default async function BookDetailPage({ params }: Params) {
     </PageTransition>
   );
 }
+
