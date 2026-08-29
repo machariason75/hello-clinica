@@ -217,7 +217,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
         </Link>
 
         <div className="surface-card p-8 sm:p-10">
-          <span className="inline-flex items-center gap-2 rounded-full bg-medical-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-medical-blue">
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#F1E8DC] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-medical-blue">
             <ListChecks className="h-3.5 w-3.5" /> Practice quiz
           </span>
           <h1 className="mt-4 text-3xl font-bold text-deep-blue sm:text-4xl">{quiz.title}</h1>
@@ -289,7 +289,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
             <div
               className={cn(
                 "flex h-28 w-28 flex-col items-center justify-center rounded-full text-white shadow-md",
-                results.passed ? "bg-brand-gradient" : "bg-coral"
+                results.passed ? "bg-success" : "bg-coral"
               )}
             >
               <span className="text-3xl font-extrabold leading-none">{results.score}%</span>
@@ -337,11 +337,11 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
                         {t.correct}/{t.total} · {pct}%
                       </span>
                     </div>
-                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-medical-blue/10">
+                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-[#F1E8DC]">
                       <div
                         className={cn(
                           "h-full rounded-full transition-all",
-                          pct >= quiz.passThreshold ? "bg-brand-gradient" : "bg-coral"
+                          pct >= quiz.passThreshold ? "bg-success" : "bg-coral"
                         )}
                         style={{ width: `${pct}%` }}
                       />
@@ -466,8 +466,8 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
             mode === "timed"
               ? timeLeft <= 30
                 ? "bg-rose-100 text-rose-700"
-                : "bg-medical-blue/10 text-medical-blue"
-              : "bg-medical-blue/10 text-medical-blue"
+                : "bg-[#F1E8DC] text-medical-blue"
+              : "bg-[#F1E8DC] text-medical-blue"
           )}
         >
           <Clock className="h-4 w-4" />
@@ -476,7 +476,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
       </div>
 
       {/* progress bar */}
-      <div className="mb-6 h-1.5 w-full overflow-hidden rounded-full bg-medical-blue/10">
+      <div className="mb-6 h-1.5 w-full overflow-hidden rounded-full bg-[#F1E8DC]">
         <div
           className="h-full rounded-full bg-brand-gradient transition-all"
           style={{ width: `${((current + 1) / total) * 100}%` }}
@@ -487,7 +487,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
         {/* question card */}
         <div className="surface-card p-6 sm:p-8">
           <div className="flex items-center justify-between gap-3">
-            <span className="inline-flex items-center rounded-full bg-medical-blue/10 px-2.5 py-1 text-xs font-semibold text-medical-blue">
+            <span className="inline-flex items-center rounded-full bg-[#F1E8DC] px-2.5 py-1 text-xs font-semibold text-medical-blue">
               {q.topic}
             </span>
             <button
@@ -625,7 +625,7 @@ export function QuizPlayer({ quiz }: { quiz: QuizPlayerData }) {
                         ? "bg-medical-blue text-white ring-2 ring-medical-blue ring-offset-2"
                         : isAnswered
                           ? "bg-medical-blue/15 text-medical-blue"
-                          : "bg-brand-bg text-muted-foreground hover:bg-medical-blue/10"
+                          : "bg-brand-bg text-muted-foreground hover:bg-[#F1E8DC]"
                     )}
                   >
                     {i + 1}

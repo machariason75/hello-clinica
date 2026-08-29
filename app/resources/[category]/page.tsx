@@ -57,7 +57,7 @@ export default async function ResourceCategoryPage({ params }: Params) {
             {resources.map((resource) => (
               <StaggerItem key={resource.id} className="h-full">
                 <article className="surface-card flex h-full flex-col p-6">
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-medical-blue/10 text-medical-blue ring-1 ring-medical-blue/15">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F1E8DC] text-medical-blue ring-1 ring-black/5">
                     <FileText className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="text-xl font-semibold text-deep-blue">{resource.title}</h3>
@@ -78,7 +78,7 @@ export default async function ResourceCategoryPage({ params }: Params) {
           </StaggerGroup>
         ) : (
           <div>
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-medical-blue/10 px-4 py-1.5 text-sm font-medium text-medical-blue ring-1 ring-medical-blue/15">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-[#F1E8DC] px-4 py-1.5 text-sm font-medium text-medical-blue ring-1 ring-black/5">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               Guides coming soon
             </div>

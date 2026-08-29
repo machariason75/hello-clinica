@@ -225,7 +225,7 @@ export function ReadinessAssessment({ questions }: { questions: AssessmentQuesti
             <span className="font-medium text-deep-blue/60">
               Question {index + 1} of {total}
             </span>
-            <span className="rounded-full bg-medical-blue/10 px-2 py-0.5 font-medium text-medical-blue">
+            <span className="rounded-full bg-[#F1E8DC] px-2 py-0.5 font-medium text-medical-blue">
               {current.topic}
             </span>
           </div>

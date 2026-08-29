@@ -104,7 +104,7 @@ const config: Config = {
       backgroundImage: {
         // Overridden gradient: teal -> petrol -> cyan
         "brand-gradient":
-          "linear-gradient(135deg, #0C3C4C 0%, #082C38 55%, #17A2B8 100%)",
+          "linear-gradient(135deg, #C2461A 0%, #A93C15 55%, #E8613F 100%)",
       },
       spacing: {
         "section-mobile": "48px",

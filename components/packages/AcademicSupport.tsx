@@ -56,7 +56,7 @@ export function AcademicSupport({ packages }: { packages: PackageView[] }) {
           {DEGREE_LEVELS.map((level) => (
             <span
               key={level}
-              className="rounded-full bg-medical-blue/10 px-3 py-1 text-sm font-semibold text-medical-blue ring-1 ring-medical-blue/15"
+              className="rounded-full bg-[#F1E8DC] px-3 py-1 text-sm font-semibold text-medical-blue ring-1 ring-black/5"
             >
               {level}
             </span>
@@ -91,7 +91,7 @@ export function AcademicSupport({ packages }: { packages: PackageView[] }) {
                   </span>
                 )}
 
-                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-medical-blue/10 text-medical-blue ring-1 ring-medical-blue/15">
+                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F1E8DC] text-medical-blue ring-1 ring-black/5">
                   <Icon className="h-6 w-6" aria-hidden="true" />
                 </span>
 

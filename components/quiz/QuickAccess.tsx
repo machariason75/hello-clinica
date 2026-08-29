@@ -50,7 +50,7 @@ const kindIcon = {
 };
 
 const kindStyle = {
-  section: "bg-medical-blue/10 text-medical-blue",
+  section: "bg-[#F1E8DC] text-medical-blue",
   practice: "bg-emerald-500/10 text-emerald-600",
   exam: "bg-coral/10 text-coral",
   link: "bg-amber-500/10 text-amber-600",

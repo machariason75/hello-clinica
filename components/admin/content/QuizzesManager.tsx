@@ -96,7 +96,7 @@ export function QuizzesManager({ quizzes, categoryOptions }: { quizzes: QuizList
                 <td className="px-4 py-3"><div className="font-medium text-deep-blue">{q.title}</div><div className="text-xs text-deep-blue/50">/{q.slug}</div></td>
                 <td className="px-4 py-3 text-deep-blue/70">{q.categoryTitle}</td>
                 <td className="px-4 py-3">
-                  <span className={"rounded-full px-2 py-0.5 text-xs font-medium " + (q.kind === "EXAM" ? "bg-coral/10 text-coral" : "bg-medical-blue/10 text-medical-blue")}>
+                  <span className={"rounded-full px-2 py-0.5 text-xs font-medium " + (q.kind === "EXAM" ? "bg-coral/10 text-coral" : "bg-[#F1E8DC] text-medical-blue")}>
                     {q.kind === "EXAM" ? "Exam" : "Practice"}
                   </span>
                 </td>

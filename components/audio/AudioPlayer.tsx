@@ -171,7 +171,7 @@ export function AudioPlayer({
       <div className="surface-card overflow-hidden">
         {/* Now playing */}
         <div className="flex items-center gap-4 border-b border-deep-blue/10 bg-gradient-to-r from-[#F3E9DD]/70 to-white p-5 sm:p-6">
-          <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-lg bg-medical-blue/10 shadow-card sm:h-24 sm:w-20">
+          <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-lg bg-[#F1E8DC] shadow-card sm:h-24 sm:w-20">
             {coverImage ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={coverImage} alt="" className="h-full w-full object-cover" />

@@ -26,7 +26,7 @@ import type { DepartmentAnalytics, Trend, NamedCount } from "@/lib/admin/analyti
 function TrendPill({ t }: { t: Trend }) {
   if (t.changePct === null) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-medical-blue/10 px-2 py-0.5 text-[11px] font-semibold text-medical-blue">
+      <span className="inline-flex items-center gap-1 rounded-full bg-[#F1E8DC] px-2 py-0.5 text-[11px] font-semibold text-medical-blue">
         new
       </span>
     );

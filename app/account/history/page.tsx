@@ -67,7 +67,7 @@ export default async function HistoryPage() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <p className="truncate font-semibold text-deep-blue">{a.quiz.title}</p>
-                      <span className={"rounded-full px-2 py-0.5 text-[10px] font-medium " + (a.quiz.kind === "EXAM" ? "bg-coral/10 text-coral" : "bg-medical-blue/10 text-medical-blue")}>
+                      <span className={"rounded-full px-2 py-0.5 text-[10px] font-medium " + (a.quiz.kind === "EXAM" ? "bg-coral/10 text-coral" : "bg-[#F1E8DC] text-medical-blue")}>
                         {a.quiz.kind === "EXAM" ? "Exam" : "Practice"}
                       </span>
                     </div>

@@ -14,7 +14,7 @@ export function TestimonialsCarousel({ data }: { data: TestimonialData[] }) {
         <div
           className={cn(
             "surface-card flex h-full flex-col justify-center p-7 shadow-card sm:p-9",
-            active && "ring-1 ring-medical-blue/15"
+            active && "ring-1 ring-black/5"
           )}
         >
           <Quote className="h-8 w-8 text-coral/70" aria-hidden="true" />

@@ -65,3 +65,5 @@ prisma/dump-files.ts
 prisma/diagnose-state.ts
 prisma/inspect-resources.ts
 prisma/cleanup-resource-seeds.ts
+
+prisma/seed-academic-services.ts

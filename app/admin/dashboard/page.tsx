@@ -23,7 +23,7 @@ function timeAgo(date: Date): string {
 }
 
 const activityTone: Record<string, string> = {
-  Consultation: "bg-medical-blue/10 text-medical-blue",
+  Consultation: "bg-[#F1E8DC] text-medical-blue",
   Contact: "bg-accent-blue/10 text-accent-blue",
   Inquiry: "bg-coral/10 text-coral",
   Subscriber: "bg-success/10 text-success",

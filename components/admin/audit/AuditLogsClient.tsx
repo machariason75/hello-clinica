@@ -26,14 +26,14 @@ function fmt(iso: string) {
 const actionTone: Record<string, string> = {
   LOGIN: "bg-success/10 text-success",
   CREATE: "bg-accent-blue/10 text-accent-blue",
-  UPDATE: "bg-medical-blue/10 text-medical-blue",
+  UPDATE: "bg-[#F1E8DC] text-medical-blue",
   DELETE: "bg-destructive/10 text-destructive",
   ARCHIVE: "bg-amber-100 text-amber-700",
   UNARCHIVE: "bg-brand-bg text-muted-foreground",
 };
 
 function toneFor(action: string) {
-  if (action.startsWith("STATUS_")) return "bg-medical-blue/10 text-medical-blue";
+  if (action.startsWith("STATUS_")) return "bg-[#F1E8DC] text-medical-blue";
   if (action === "FEATURE" || action === "UNFEATURE") return "bg-coral/10 text-coral";
   return actionTone[action] ?? "bg-brand-bg text-muted-foreground";
 }
