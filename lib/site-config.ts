@@ -26,7 +26,6 @@ export const sidebarNav: { label: string; href: string; isSearch?: boolean }[] =
   { label: "Advising Services", href: "/advising" },
   { label: "Books", href: "/books" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 /** Footer navigation columns. */
@@ -120,7 +119,6 @@ export const primaryNav: NavItem[] = [
   },
   { label: "Question Bank", href: "/question-bank" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 /**

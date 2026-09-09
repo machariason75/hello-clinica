@@ -75,11 +75,11 @@ export default async function BookDetailPage({ params }: Params) {
         <div className="grid gap-10 lg:grid-cols-[320px_1fr] lg:gap-14">
           {/* Cover */}
           <Reveal className="mx-auto w-full max-w-[320px]">
-            <div className="surface-card flex aspect-[3/4] items-center justify-center overflow-hidden p-8 text-center" style={{ backgroundImage: bookCoverGradient(book.title) }}>
-              <div className="flex flex-col items-center gap-4 text-white">
-                <BookOpen className="h-12 w-12 opacity-90" aria-hidden="true" />
-                <span className="text-lg font-semibold leading-snug">{book.title}</span>
-              </div>
+            <div
+              className="surface-card flex aspect-[3/4] items-center justify-center overflow-hidden p-8"
+              style={{ backgroundImage: bookCoverGradient(book.title) }}
+            >
+              <BookOpen className="h-14 w-14 text-white opacity-90" aria-hidden="true" />
             </div>
           </Reveal>
 

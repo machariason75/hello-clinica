@@ -1,8 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -40,14 +37,6 @@ export function BooksFeatureBanner() {
                 Curated exam prep, core texts, and digital downloads — chosen to help you focus on what matters and
                 study with confidence. Read any title online, right here on the site.
               </p>
-              <div className="mt-7">
-                <Button asChild>
-                  <Link href="#book-catalog">
-                    Browse the library
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </Button>
-              </div>
             </div>
           </div>
         </div>
@@ -55,3 +44,4 @@ export function BooksFeatureBanner() {
     </Container>
   );
 }
+

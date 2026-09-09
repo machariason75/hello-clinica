@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Container } from "@/components/common/Container";
-import { Button } from "@/components/ui/button";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { siteConfig } from "@/lib/site-config";
 
@@ -62,17 +60,6 @@ export function Hero({ slotIndex = 0 }: { slotIndex?: number }) {
             pre-med to practice with clarity and confidence.
           </motion.p>
 
-          <motion.div variants={item} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="primary" size="lg">
-              <Link href="/advising">
-                Explore advising
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </Button>
-            <Button asChild variant="secondary" size="lg">
-              <Link href="/resources">Browse free resources</Link>
-            </Button>
-          </motion.div>
         </motion.div>
 
         {/* Medic photo — settled, not mid-transition. */}
@@ -88,3 +75,5 @@ export function Hero({ slotIndex = 0 }: { slotIndex?: number }) {
     </section>
   );
 }
+
+

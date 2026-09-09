@@ -67,3 +67,5 @@ prisma/inspect-resources.ts
 prisma/cleanup-resource-seeds.ts
 
 prisma/seed-academic-services.ts
+
+prisma/seed-faqs.ts

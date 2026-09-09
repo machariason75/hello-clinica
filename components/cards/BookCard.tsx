@@ -10,7 +10,11 @@ export type BookCardData = {
   href: string;
 };
 
-/** Book card — each cover gets its own muted jewel tone (see lib/book-cover). */
+/**
+ * Book card. The cover shows only the book icon on the book's own muted jewel
+ * tone (see lib/book-cover) — the title/category/author live in the panel below,
+ * so the cover stays clean and the title isn't duplicated on top of it.
+ */
 export function BookCard({ data, className }: { data: BookCardData; className?: string }) {
   return (
     <Link
@@ -18,13 +22,10 @@ export function BookCard({ data, className }: { data: BookCardData; className?: 
       className={cn("surface-card-interactive focus-ring group flex h-full flex-col overflow-hidden", className)}
     >
       <div
-        className="flex aspect-[3/4] items-center justify-center p-6 text-center"
+        className="flex aspect-[3/4] items-center justify-center p-6"
         style={{ backgroundImage: bookCoverGradient(data.title) }}
       >
-        <div className="flex flex-col items-center gap-3 text-white">
-          <BookOpen className="h-9 w-9 opacity-90" aria-hidden="true" />
-          <span className="line-clamp-3 text-base font-semibold leading-snug">{data.title}</span>
-        </div>
+        <BookOpen className="h-10 w-10 text-white opacity-90" aria-hidden="true" />
       </div>
       <div className="flex flex-1 flex-col p-5">
         <span className="text-xs font-medium uppercase tracking-wide text-medical-blue">
