@@ -1,29 +1,29 @@
 import Link from "next/link";
-import { BookOpen, Download } from "lucide-react";
+import { BookOpen } from "lucide-react";
+import { ShareButton } from "@/components/common/ShareButton";
 
 /**
- * Primary "Read online" action opens the in-browser reader; the secondary
- * "Download" action goes through /api/download, which is premium-gated
- * (non-premium users are redirected to the account page with an upgrade note).
- *
- * Drop-in replacement for the previous download-only button — same props.
+ * Actions for a book/resource: "Read online" (opens the in-browser reader) and
+ * "Share". Download has been replaced by sharing — a shared link points at the
+ * reader, so it stays gated exactly like reading. Kept the name/props so it's a
+ * drop-in replacement for existing call sites.
  */
 export function DownloadButton({
   type,
   id,
   fileUrl,
-  label = "Download",
+  title,
 }: {
   type: "resource" | "book";
   id: string;
   fileUrl?: string | null;
+  title?: string;
+  /** Accepted for call-site compatibility; no longer used. */
   label?: string;
 }) {
   if (!fileUrl) {
     return (
-      <p className="text-sm text-muted-foreground">
-        This item will be available to read shortly.
-      </p>
+      <p className="text-sm text-muted-foreground">This item will be available to read shortly.</p>
     );
   }
 
@@ -33,15 +33,9 @@ export function DownloadButton({
         href={`/read/${type}/${id}`}
         className="focus-ring inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
       >
-        <BookOpen className="h-4 w-4" /> Read online
+        <BookOpen className="h-4 w-4" aria-hidden="true" /> Read online
       </Link>
-      <a
-        href={`/api/download?type=${type}&id=${id}`}
-        className="focus-ring inline-flex items-center gap-2 rounded-xl border-2 border-medical-blue/30 px-5 py-2.5 font-semibold text-medical-blue transition hover:bg-medical-blue/5"
-        title="Downloading is a premium feature"
-      >
-        <Download className="h-4 w-4" /> {label}
-      </a>
+      <ShareButton type={type} id={id} title={title} />
     </div>
   );
 }

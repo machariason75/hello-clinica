@@ -9,6 +9,7 @@ import {
   ZoomIn, ZoomOut, Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ShareButton } from "@/components/common/ShareButton";
 import { Textarea } from "@/components/ui/textarea";
 import { addReaderNote, deleteReaderNote } from "@/lib/reader/notes";
 
@@ -277,15 +278,12 @@ export function ReaderView({
         <Button variant="secondary" size="sm" onClick={() => setNotesOpen((o) => !o)}>
           <StickyNote className="mr-1.5 h-4 w-4" /> Notes{notes.length > 0 ? ` (${notes.length})` : ""}
         </Button>
-        {isPremium ? (
-          <a href={`/api/download?type=${itemType}&id=${itemId}`} className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">
-            <Download className="h-4 w-4" /> Download
-          </a>
-        ) : (
-          <Link href="/account?need=download" className="focus-ring inline-flex items-center gap-1.5 rounded-xl border-2 border-coral/40 px-4 py-2 text-sm font-semibold text-coral transition hover:bg-coral/5" title="Downloading is a premium feature">
-            <Download className="h-4 w-4" /> Download
-          </Link>
-        )}
+        <ShareButton
+          type={itemType}
+          id={itemId}
+          title={title}
+          className="focus-ring inline-flex items-center gap-1.5 rounded-xl border-2 border-medical-blue/30 px-4 py-2 text-sm font-semibold text-medical-blue transition hover:bg-medical-blue/5"
+        />
       </header>
 
       <div className="flex min-h-0 flex-1">
@@ -361,3 +359,4 @@ export function ReaderView({
     </div>
   );
 }
+
