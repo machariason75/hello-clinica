@@ -6,6 +6,7 @@ import { getReaderNotes } from "@/lib/reader/notes";
 import { ReaderView, type ReaderNoteItem } from "@/components/reader/ReaderView";
 import { PremiumLock } from "@/components/quiz/PremiumLock";
 import { buildMetadata } from "@/lib/seo";
+import { headers } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,18 @@ type Params = { params: Promise<{ type: string; id: string }> };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { type, id } = await params;
   const title = await titleFor(type, id);
-  return buildMetadata({ title: title ? `Reading: ${title}` : "Reader", path: `/read/${type}/${id}` });
+  const base = buildMetadata({ title: title ? `Reading: ${title}` : "Reader", path: `/read/${type}/${id}` });
+  const h = await headers();
+  const host = h.get("host") ?? "";
+  const proto = host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https";
+  const origin = host ? `${proto}://${host}` : "";
+  const ogUrl = `${origin}/api/og/read?type=${type}&id=${encodeURIComponent(id)}`;
+  const ogTitle = title ?? "Hello Clinica";
+  return {
+    ...base,
+    openGraph: { ...(base.openGraph ?? {}), title: ogTitle, images: [{ url: ogUrl, width: 1200, height: 630 }] },
+    twitter: { card: "summary_large_image", title: ogTitle, images: [ogUrl] },
+  };
 }
 
 async function titleFor(type: string, id: string): Promise<string | null> {
@@ -73,3 +85,4 @@ export default async function ReaderPage({ params }: Params) {
     />
   );
 }
+
