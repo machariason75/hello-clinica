@@ -9,10 +9,14 @@ import { Lock, ArrowRight, CheckCircle2 } from "lucide-react";
 export function PremiumLock({
   signedIn,
   title = "This is a premium section",
+  next,
 }: {
   signedIn: boolean;
   title?: string;
+  /** Where to send the user after they sign in / create an account. */
+  next?: string;
 }) {
+  const q = next ? `?next=${encodeURIComponent(next)}` : "";
   return (
     <div className="surface-card mx-auto max-w-2xl overflow-hidden">
       <div className="bg-[#F3E9DD]/70 px-6 py-8 text-center sm:px-10">
@@ -46,13 +50,13 @@ export function PremiumLock({
           ) : (
             <>
               <Link
-                href="/account/register"
+                href={`/account/register${q}`}
                 className="focus-ring inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-coral to-[#E8613F] px-5 py-2.5 font-semibold text-white transition hover:opacity-90"
               >
                 Create free account <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/account/login"
+                href={`/account/login${q}`}
                 className="focus-ring inline-flex items-center justify-center rounded-xl border-2 border-medical-blue/30 px-5 py-2.5 font-semibold text-medical-blue transition hover:bg-medical-blue/5"
               >
                 Sign in
@@ -64,3 +68,4 @@ export function PremiumLock({
     </div>
   );
 }
+

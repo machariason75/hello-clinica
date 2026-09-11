@@ -13,6 +13,7 @@ import { studentRegisterSchema, type StudentRegisterInput } from "@/lib/admin/co
 const empty: StudentRegisterInput = { name: "", email: "", password: "", university: "" };
 
 export function RegisterForm({ redirectTo = "/account" }: { redirectTo?: string }) {
+  const nextQ = redirectTo && redirectTo !== "/account" ? `?next=${encodeURIComponent(redirectTo)}` : "";
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState<StudentRegisterInput>(empty);
@@ -57,8 +58,9 @@ export function RegisterForm({ redirectTo = "/account" }: { redirectTo?: string 
       <Button className="w-full" onClick={submit} disabled={isPending}>{isPending ? "Creating…" : "Create account"}</Button>
       <p className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}
-        <Link href="/account/login" className="font-medium text-medical-blue hover:underline">Sign in</Link>
+        <Link href={`/account/login${nextQ}`} className="font-medium text-medical-blue hover:underline">Sign in</Link>
       </p>
     </div>
   );
 }
+

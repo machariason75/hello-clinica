@@ -82,7 +82,7 @@ export default async function ReaderPage({ params }: Params) {
   if (type === "resource" && !student?.hasAccess) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16">
-        <PremiumLock signedIn={!!student} title="Reading this guide is a premium feature" />
+        <PremiumLock signedIn={!!student} title="Reading this guide is a premium feature" next={`/read/${type}/${id}`} />
       </div>
     );
   }

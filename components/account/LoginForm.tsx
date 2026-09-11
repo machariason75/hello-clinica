@@ -13,6 +13,7 @@ import { studentLoginSchema, type StudentLoginInput } from "@/lib/admin/content-
 const empty: StudentLoginInput = { email: "", password: "" };
 
 export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) {
+  const nextQ = redirectTo && redirectTo !== "/account" ? `?next=${encodeURIComponent(redirectTo)}` : "";
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState<StudentLoginInput>(empty);
@@ -76,8 +77,9 @@ export function LoginForm({ redirectTo = "/account" }: { redirectTo?: string }) 
       <Button type="submit" className="w-full" disabled={isPending}>{isPending ? "Signing in…" : "Sign in"}</Button>
       <p className="text-center text-sm text-muted-foreground">
         New here?{" "}
-        <Link href="/account/register" className="font-medium text-medical-blue hover:underline">Create an account</Link>
+        <Link href={`/account/register${nextQ}`} className="font-medium text-medical-blue hover:underline">Create an account</Link>
       </p>
     </form>
   );
 }
+
