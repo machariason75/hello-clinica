@@ -10,7 +10,6 @@ export function AdvisingServices() {
       <Container>
         <SectionHeading
           eyebrow="Advising Services"
-          title="Personalized support when it matters most"
           intro="Work one-on-one with advisors who tailor their guidance to your goals, your stage, and your story."
         />
         <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -24,3 +23,5 @@ export function AdvisingServices() {
     </section>
   );
 }
+
+

@@ -11,7 +11,7 @@ export function SectionHeading({
   className,
 }: {
   eyebrow?: string;
-  title: string;
+  title?: string;
   intro?: string;
   align?: "center" | "left";
   inverted?: boolean;
@@ -28,7 +28,7 @@ export function SectionHeading({
       {eyebrow && (
         <p className={cn("eyebrow", inverted && "text-accent-blue")}>{eyebrow}</p>
       )}
-      <h2 className={cn("text-h2 mt-3", inverted ? "text-white" : "text-deep-blue")}>{title}</h2>
+      {title && <h2 className={cn("text-h2 mt-3", inverted ? "text-white" : "text-deep-blue")}>{title}</h2>}
       {intro && (
         <p className={cn("text-lead mt-4", inverted && "text-white/85")}>{intro}</p>
       )}

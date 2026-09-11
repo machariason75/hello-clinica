@@ -13,7 +13,6 @@ export function FeaturedResources() {
       <Container>
         <SectionHeading
           eyebrow="Free Resources"
-          title="Guides for every step of the journey"
           intro="Practical, no-cost resources covering admissions, essays, interviews, and the experiences that shape a strong application."
         />
         <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,3 +34,5 @@ export function FeaturedResources() {
     </section>
   );
 }
+
+
