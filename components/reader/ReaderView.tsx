@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useCallback, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import {
-  ArrowLeft, Download, StickyNote, X, Trash2, ExternalLink, FileText,
+  ArrowLeft, StickyNote, X, Trash2, ExternalLink, FileText,
   ZoomIn, ZoomOut, Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ function loadPdfJs(): Promise<any> {
  * developer tools can still capture what their browser renders. Downloading a
  * clean copy stays premium-gated via /api/download.
  */
-function PdfDocument({ src }: { src: string }) {
+function PdfDocument({ src, onUnsupported }: { src: string; onUnsupported?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pdfRef = useRef<any>(null);
   const renderedRef = useRef<Set<number>>(new Set());
@@ -83,7 +83,10 @@ function PdfDocument({ src }: { src: string }) {
         setBase({ w: vp.width, h: vp.height });
         setStatus("ready");
       } catch {
-        if (!cancelled) setStatus("error");
+        if (!cancelled) {
+          setStatus("error");
+          onUnsupported?.();
+        }
       }
     })();
     return () => { cancelled = true; };
@@ -201,7 +204,7 @@ function PdfDocument({ src }: { src: string }) {
 }
 
 export function ReaderView({
-  itemType, itemId, title, hasFile, isPdf, backHref, signedIn, isPremium, initialNotes,
+  itemType, itemId, title, hasFile, backHref, signedIn, isPremium, initialNotes,
 }: {
   itemType: "book" | "resource";
   itemId: string;
@@ -214,6 +217,7 @@ export function ReaderView({
   initialNotes: ReaderNoteItem[];
 }) {
   const [notesOpen, setNotesOpen] = useState(false);
+  const [unsupported, setUnsupported] = useState(false);
   const [notes, setNotes] = useState<ReaderNoteItem[]>(initialNotes);
   const [draft, setDraft] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -294,9 +298,7 @@ export function ReaderView({
               <FileText className="h-10 w-10 text-medical-blue/40" />
               <p className="text-muted-foreground">This item doesn't have a file yet. Please check back soon.</p>
             </div>
-          ) : isPdf ? (
-            <PdfDocument src={`/api/read-file?type=${itemType}&id=${itemId}`} />
-          ) : isPremium ? (
+          ) : unsupported ? (
             <div className="flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
               <FileText className="h-10 w-10 text-medical-blue/50" />
               <p className="text-muted-foreground">This file format opens in a new tab.</p>
@@ -305,15 +307,10 @@ export function ReaderView({
               </a>
             </div>
           ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
-              <FileText className="h-10 w-10 text-medical-blue/50" />
-              <p className="max-w-sm text-muted-foreground">
-                This title is best viewed as a PDF in the reader. If you'd like to open it in another format, downloading is a premium feature.
-              </p>
-              <Link href="/account?need=download" className="inline-flex items-center gap-1.5 rounded-xl border-2 border-coral/40 px-4 py-2 text-sm font-semibold text-coral hover:bg-coral/5">
-                <Download className="h-4 w-4" /> See premium
-              </Link>
-            </div>
+            <PdfDocument
+              src={`/api/read-file?type=${itemType}&id=${itemId}`}
+              onUnsupported={() => setUnsupported(true)}
+            />
           )}
         </main>
 
