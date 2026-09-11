@@ -45,7 +45,6 @@ export async function BooksSection() {
         <SectionHeading
           eyebrow="Books"
           title="Curated reading to go deeper"
-          intro="A fresh selection each day, drawn from across the library."
         />
         <StaggerGroup className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {books.map((book) => (

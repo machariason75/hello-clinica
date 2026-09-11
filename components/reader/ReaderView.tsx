@@ -66,6 +66,16 @@ function PdfDocument({ src, onUnsupported }: { src: string; onUnsupported?: () =
   const [base, setBase] = useState<{ w: number; h: number } | null>(null);
   const [scale, setScale] = useState(1.15);
   const [page, setPage] = useState(1);
+  const [zoomText, setZoomText] = useState("");
+
+  const applyZoom = () => {
+    const v = parseInt(zoomText, 10);
+    if (!Number.isNaN(v)) {
+      const clamped = Math.min(250, Math.max(60, v));
+      setScale(+(clamped / 100).toFixed(2));
+    }
+    setZoomText("");
+  };
 
   // Load the document once.
   useEffect(() => {
@@ -195,7 +205,25 @@ function PdfDocument({ src, onUnsupported }: { src: string; onUnsupported?: () =
           <button onClick={() => goto(page + 1)} className="focus-ring rounded-lg px-2 py-1 text-medical-blue hover:bg-medical-blue/5" aria-label="Next page">›</button>
           <span className="mx-2 h-4 w-px bg-deep-blue/15" />
           <button onClick={() => setScale((s) => Math.max(0.6, +(s - 0.15).toFixed(2)))} className="focus-ring rounded-lg p-1.5 text-medical-blue hover:bg-medical-blue/5" aria-label="Zoom out"><ZoomOut className="h-4 w-4" /></button>
-          <span className="tabular-nums text-deep-blue">{Math.round(scale * 100)}%</span>
+          <span className="inline-flex items-center gap-0.5 text-deep-blue">
+            <input
+              type="text"
+              inputMode="numeric"
+              value={zoomText !== "" ? zoomText : String(Math.round(scale * 100))}
+              onChange={(e) => setZoomText(e.target.value.replace(/[^0-9]/g, "").slice(0, 3))}
+              onFocus={(e) => e.currentTarget.select()}
+              onBlur={applyZoom}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  applyZoom();
+                  e.currentTarget.blur();
+                }
+              }}
+              aria-label="Zoom percent"
+              className="focus-ring w-10 rounded-md border border-deep-blue/15 bg-white px-1 py-0.5 text-center tabular-nums outline-none"
+            />
+            <span className="tabular-nums">%</span>
+          </span>
           <button onClick={() => setScale((s) => Math.min(2.5, +(s + 0.15).toFixed(2)))} className="focus-ring rounded-lg p-1.5 text-medical-blue hover:bg-medical-blue/5" aria-label="Zoom in"><ZoomIn className="h-4 w-4" /></button>
         </div>
       )}
