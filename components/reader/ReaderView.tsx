@@ -203,14 +203,128 @@ function PdfDocument({ src, onUnsupported }: { src: string; onUnsupported?: () =
   );
 }
 
+type DocKind = "pdf" | "image" | "audio" | "video" | "excel" | "word" | "other";
+
+function loadScriptOnce(id: string, src: string, globalKey: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const w = window as any;
+    if (w[globalKey]) return resolve(w[globalKey]);
+    const finish = () => {
+      const g = (window as any)[globalKey];
+      g ? resolve(g) : reject(new Error(globalKey + " missing"));
+    };
+    let el = document.getElementById(id) as HTMLScriptElement | null;
+    if (el) {
+      el.addEventListener("load", finish);
+      el.addEventListener("error", () => reject(new Error("load error")));
+      return;
+    }
+    el = document.createElement("script");
+    el.id = id;
+    el.src = src;
+    el.async = true;
+    el.onload = finish;
+    el.onerror = () => reject(new Error("load error"));
+    document.head.appendChild(el);
+  });
+}
+
+function ViewerLoading({ label }: { label: string }) {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
+      <Loader2 className="h-6 w-6 animate-spin text-medical-blue" />
+      <p className="text-sm text-muted-foreground">{label}</p>
+    </div>
+  );
+}
+
+/** Excel/CSV rendered as HTML tables in-app (SheetJS via CDN). File URL never exposed. */
+function SheetViewer({ src, onUnsupported }: { src: string; onUnsupported?: () => void }) {
+  const [html, setHtml] = useState("");
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const XLSX = await loadScriptOnce(
+          "xlsx-cdn",
+          "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+          "XLSX"
+        );
+        const res = await fetch(src, { credentials: "include" });
+        if (!res.ok) throw new Error("fetch failed");
+        const buf = await res.arrayBuffer();
+        const wb = XLSX.read(buf, { type: "array" });
+        const parts: string[] = [];
+        for (const name of wb.SheetNames as string[]) {
+          const table = XLSX.utils.sheet_to_html(wb.Sheets[name]);
+          parts.push('<h3 class="sheet-name">' + name + "</h3>" + table);
+        }
+        if (!cancelled) {
+          setHtml(parts.join(""));
+          setStatus("ready");
+        }
+      } catch {
+        if (!cancelled) {
+          setStatus("error");
+          onUnsupported?.();
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [src, onUnsupported]);
+  if (status === "loading") return <ViewerLoading label="Opening spreadsheet…" />;
+  if (status === "error") return null;
+  return <div className="sheet-viewer h-full overflow-auto p-6 text-sm" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+/** Word (.docx) rendered as HTML in-app (mammoth via CDN). */
+function DocxViewer({ src, onUnsupported }: { src: string; onUnsupported?: () => void }) {
+  const [html, setHtml] = useState("");
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const mammoth = await loadScriptOnce(
+          "mammoth-cdn",
+          "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js",
+          "mammoth"
+        );
+        const res = await fetch(src, { credentials: "include" });
+        if (!res.ok) throw new Error("fetch failed");
+        const buf = await res.arrayBuffer();
+        const out = await mammoth.convertToHtml({ arrayBuffer: buf });
+        if (!cancelled) {
+          setHtml((out && out.value) || "");
+          setStatus("ready");
+        }
+      } catch {
+        if (!cancelled) {
+          setStatus("error");
+          onUnsupported?.();
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [src, onUnsupported]);
+  if (status === "loading") return <ViewerLoading label="Opening document…" />;
+  if (status === "error") return null;
+  return <div className="docx-viewer prose mx-auto max-w-3xl p-8" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
 export function ReaderView({
-  itemType, itemId, title, hasFile, backHref, signedIn, isPremium, initialNotes,
+  itemType, itemId, title, hasFile, kind, backHref, signedIn, isPremium, initialNotes,
 }: {
   itemType: "book" | "resource";
   itemId: string;
   title: string;
   hasFile: boolean;
-  isPdf: boolean;
+  kind: DocKind;
   backHref: string;
   signedIn: boolean;
   isPremium: boolean;
@@ -306,6 +420,38 @@ export function ReaderView({
                 <ExternalLink className="h-4 w-4" /> Open document
               </a>
             </div>
+          ) : kind === "image" ? (
+            <div className="flex min-h-full items-start justify-center p-4">
+              <img
+                src={`/api/read-file?type=${itemType}&id=${itemId}`}
+                alt={title}
+                className="mx-auto max-h-[calc(100dvh-140px)] max-w-full rounded-lg shadow"
+              />
+            </div>
+          ) : kind === "audio" ? (
+            <div className="flex h-full flex-col items-center justify-center gap-6 p-8 text-center">
+              <FileText className="h-10 w-10 text-medical-blue/50" />
+              <p className="font-semibold text-deep-blue">{title}</p>
+              <audio controls className="w-full max-w-xl" src={`/api/read-file?type=${itemType}&id=${itemId}`} />
+            </div>
+          ) : kind === "video" ? (
+            <div className="flex h-full items-center justify-center p-4">
+              <video
+                controls
+                className="max-h-[calc(100dvh-140px)] w-full max-w-4xl rounded-lg shadow"
+                src={`/api/read-file?type=${itemType}&id=${itemId}`}
+              />
+            </div>
+          ) : kind === "excel" ? (
+            <SheetViewer
+              src={`/api/read-file?type=${itemType}&id=${itemId}`}
+              onUnsupported={() => setUnsupported(true)}
+            />
+          ) : kind === "word" ? (
+            <DocxViewer
+              src={`/api/read-file?type=${itemType}&id=${itemId}`}
+              onUnsupported={() => setUnsupported(true)}
+            />
           ) : (
             <PdfDocument
               src={`/api/read-file?type=${itemType}&id=${itemId}`}

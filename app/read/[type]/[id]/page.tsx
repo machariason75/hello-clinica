@@ -35,6 +35,27 @@ async function titleFor(type: string, id: string): Promise<string | null> {
   return null;
 }
 
+type DocKind = "pdf" | "image" | "audio" | "video" | "excel" | "word" | "other";
+
+async function classifyKind(fileUrl: string | null): Promise<DocKind> {
+  if (!fileUrl) return "other";
+  let ct = "";
+  try {
+    const res = await fetch(fileUrl, { method: "GET", headers: { Range: "bytes=0-0" }, cache: "no-store" });
+    ct = (res.headers.get("content-type") || "").toLowerCase();
+  } catch {
+    ct = "";
+  }
+  const u = fileUrl.toLowerCase();
+  if (ct.includes("pdf") || /\.pdf($|\?)/.test(u)) return "pdf";
+  if (ct.startsWith("image/") || /\.(png|jpe?g|gif|webp|svg|avif)($|\?)/.test(u)) return "image";
+  if (ct.startsWith("audio/") || /\.(mp3|wav|m4a|aac|ogg|oga)($|\?)/.test(u)) return "audio";
+  if (ct.startsWith("video/") || /\.(mp4|webm|ogv|mov|m4v)($|\?)/.test(u)) return "video";
+  if (ct.includes("sheet") || ct.includes("excel") || ct.includes("csv") || /\.(xlsx|xls|csv)($|\?)/.test(u)) return "excel";
+  if (ct.includes("word") || ct.includes("wordprocessing") || /\.docx($|\?)/.test(u)) return "word";
+  return "other";
+}
+
 export default async function ReaderPage({ params }: Params) {
   const { type, id } = await params;
   if (type !== "book" && type !== "resource") notFound();
@@ -71,13 +92,15 @@ export default async function ReaderPage({ params }: Params) {
     id: n.id, content: n.content, page: n.page, createdAt: n.createdAt.toISOString(),
   }));
 
+  const kind = await classifyKind(fileUrl);
+
   return (
     <ReaderView
       itemType={type}
       itemId={id}
       title={title}
       hasFile={!!fileUrl}
-      isPdf={!!fileUrl && /\.pdf($|\?)/i.test(fileUrl)}
+      kind={kind}
       backHref={backHref}
       signedIn={!!student}
       isPremium={!!student?.hasAccess}
