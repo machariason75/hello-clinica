@@ -56,9 +56,6 @@ export function QuestionOfTheDay({
                   <CalendarDays className="h-4 w-4" aria-hidden="true" />
                   Question of the Day
                 </span>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  A new one every day, drawn from across the Question Bank. Free — no account needed.
-                </p>
               </div>
 
               <div className="p-5 sm:p-6">
@@ -137,3 +134,5 @@ export function QuestionOfTheDay({
     </section>
   );
 }
+
+
