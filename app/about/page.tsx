@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Target, Eye, HeartHandshake, ShieldCheck, Sparkles, Users } from "lucide-react";
+import Link from "next/link";
+import { Target, Eye, HeartHandshake, ShieldCheck, Sparkles, Users, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
-import { CtaSection } from "@/components/sections/CtaSection";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { Button } from "@/components/ui/button";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -99,10 +100,16 @@ export default function AboutPage() {
         </StaggerGroup>
       </Section>
 
-      <CtaSection
-        title="Let's find your next step"
-        description="Whether you're just starting out or deep into your application, we're here to help you move forward."
-      />
+      <Section>
+        <div className="flex justify-center">
+          <Button asChild size="lg">
+            <Link href="/contact">
+              Get in touch
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
+      </Section>
     </PageTransition>
   );
 }
