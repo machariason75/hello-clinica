@@ -29,7 +29,7 @@ export function AdvisingServices() {
         <div className="mt-10 text-center">
           <Button asChild variant="secondary">
             <Link href="/advising">
-              View all advising services
+              View advising services
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>
