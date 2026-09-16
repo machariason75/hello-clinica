@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, Lock, ArrowRight, GraduationCap, History } from "lucide-react";
+import { CheckCircle2, Lock, ArrowRight, GraduationCap, History, StickyNote } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { PageTransition } from "@/components/motion/PageTransition";
@@ -50,6 +50,15 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             <ArrowRight className="h-5 w-5 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
           </Link>
 
+          <Link href="/account/notes" className="surface-card group flex items-center gap-3 p-6 transition hover:shadow-md">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-bg text-medical-blue"><StickyNote className="h-5 w-5" /></span>
+            <div className="flex-1">
+              <h2 className="font-semibold text-deep-blue">My notes</h2>
+              <p className="text-body text-muted-foreground">All the notes you've taken while reading, grouped by book or resource.</p>
+            </div>
+            <ArrowRight className="h-5 w-5 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
+          </Link>
+
           <div className="surface-card p-6">
             <div className="flex items-start gap-3">
               {student.hasAccess ? (
@@ -94,3 +103,4 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
     </PageTransition>
   );
 }
+
