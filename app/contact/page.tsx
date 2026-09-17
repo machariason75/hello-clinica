@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Mail, Clock, MessageSquare } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
@@ -9,6 +9,7 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
+import { WhatsAppIcon } from "@/components/common/SocialIcons";
 import { homepageFaqs } from "@/lib/data/homepage-content";
 
 export const metadata: Metadata = buildMetadata({
@@ -32,8 +33,8 @@ export default function ContactPage() {
             <div>
               <h2 className="text-h3 text-deep-blue">Reach us directly</h2>
               <p className="text-body mt-3 text-muted-foreground">
-                Prefer email? Send us a note and we'll get back to you. For detailed support, the form
-                helps us route your message to the right place.
+                Prefer email or WhatsApp? Reach us directly and we'll get back to you. For detailed
+                support, the form helps us route your message to the right place.
               </p>
             </div>
             <ul className="space-y-4">
@@ -48,6 +49,17 @@ export default function ContactPage() {
                   </a>
                   <a href={`mailto:${siteConfig.email.secondary}`} className="block text-medical-blue hover:underline">
                     {siteConfig.email.secondary}
+                  </a>
+                </div>
+              </li>
+              <li className="surface-card flex items-start gap-4 p-5">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                  <WhatsAppIcon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="font-semibold text-deep-blue">WhatsApp</p>
+                  <a href="https://wa.me/17178137793" target="_blank" rel="noopener noreferrer" className="block text-medical-blue hover:underline">
+                    Chat with us on WhatsApp
                   </a>
                 </div>
               </li>
