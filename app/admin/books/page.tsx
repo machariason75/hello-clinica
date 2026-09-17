@@ -18,6 +18,7 @@ export default async function AdminBooksPage() {
     category: r.category,
     coverImage: r.coverImage,
     fileUrl: r.fileUrl,
+    discipline: r.discipline,
     featured: r.featured,
     published: r.published,
     archived: r.archived,

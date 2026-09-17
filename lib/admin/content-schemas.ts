@@ -50,6 +50,7 @@ export const bookSchema = z.object({
   }),
   coverImage: optionalUrl,
   fileUrl: optionalUrl,
+  discipline: z.string().trim().optional().default(""),
   featured: z.boolean(),
   published: z.boolean(),
 });

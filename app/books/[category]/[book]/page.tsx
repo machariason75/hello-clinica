@@ -115,7 +115,7 @@ export default async function BookDetailPage({ params }: Params) {
               )}
               {!book.fileUrl && (
                 <p className="mt-3 text-sm text-muted-foreground">
-                  This title is part of our recommended reading. A download will appear here when available.
+                  This title is part of our recommended reading. It will be available to read here soon.
                 </p>
               )}
             </div>

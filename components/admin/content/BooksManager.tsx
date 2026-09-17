@@ -21,6 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { YesNoPill } from "@/components/admin/ui/StatusPill";
 import { UploadField } from "@/components/admin/ui/UploadField";
+import { bookDisciplines } from "@/lib/data/book-disciplines";
 import { bookSchema, bookCategoryValues, type BookFormInput } from "@/lib/admin/content-schemas";
 import {
   createBook, updateBook, setBookFeatured, setBookArchived, deleteBook,
@@ -34,6 +35,7 @@ export type BookRow = {
   category: string;
   coverImage: string | null;
   fileUrl: string | null;
+  discipline: string | null;
   featured: boolean;
   published: boolean;
   archived: boolean;
@@ -50,7 +52,7 @@ const categoryLabels: Record<string, string> = {
 
 const emptyForm: BookFormInput = {
   title: "", author: "", description: "", category: "RECOMMENDED_BOOKS",
-  coverImage: "", fileUrl: "", featured: false, published: true,
+  coverImage: "", fileUrl: "", discipline: "", featured: false, published: true,
 };
 
 type Errors = Partial<Record<keyof BookFormInput, string>>;
@@ -90,7 +92,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
     setForm({
       title: r.title, author: r.author, description: r.description,
       category: r.category as BookFormInput["category"],
-      coverImage: r.coverImage ?? "", fileUrl: r.fileUrl ?? "",
+      coverImage: r.coverImage ?? "", fileUrl: r.fileUrl ?? "", discipline: r.discipline ?? "",
       featured: r.featured, published: r.published,
     });
     setErrors({});
@@ -255,6 +257,18 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
                 </SelectContent>
               </Select>
             </Field>
+            {form.category === "MEDICAL_SCHOOL_BOOKS" && (
+              <Field label="Discipline (folder)" error={errors.discipline}>
+                <Select value={form.discipline || ""} onValueChange={(v) => setForm({ ...form, discipline: v })}>
+                  <SelectTrigger><SelectValue placeholder="Choose a discipline" /></SelectTrigger>
+                  <SelectContent>
+                    {bookDisciplines.map((d) => (
+                      <SelectItem key={d.slug} value={d.slug}>{d.title}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+            )}
             <UploadField
               label="Cover image (optional)"
               endpoint="bookCover"

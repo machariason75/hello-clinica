@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { BookCard } from "@/components/cards/BookCard";
 import { bookDisciplines } from "@/lib/data/book-disciplines";
 import { cn } from "@/lib/utils";
+import { bookCoverGradient } from "@/lib/book-cover";
 
 export type ShelfBook = {
   id: string;
@@ -103,7 +104,7 @@ export function MedicalSchoolShelf({ books }: { books: ShelfBook[] }) {
               onClick={() => setOpen(d.slug)}
               className="surface-card-interactive focus-ring group flex h-full flex-col overflow-hidden text-left"
             >
-              <div className="flex aspect-[4/3] items-center justify-center bg-brand-gradient p-6 text-center">
+              <div className="flex aspect-[4/3] items-center justify-center p-6 text-center" style={{ backgroundImage: bookCoverGradient(d.title) }}>
                 <div className="flex flex-col items-center gap-3 text-white">
                   <FolderOpen className="h-9 w-9 opacity-90" aria-hidden="true" />
                   <span className="text-base font-semibold leading-snug">{d.title}</span>
