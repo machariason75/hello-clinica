@@ -138,7 +138,7 @@ export function NewsletterForm({ variant = "standalone" }: { variant?: "standalo
 
       <Button
         type="submit"
-        variant={inverted ? "secondary" : "primary"}
+        variant="secondary"
         disabled={isPending}
         className="w-full sm:w-auto"
       >

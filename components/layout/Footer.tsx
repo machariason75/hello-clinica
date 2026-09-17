@@ -2,15 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { footerNav, siteConfig } from "@/lib/site-config";
+import {
+  InstagramIcon, TiktokIcon, TelegramIcon, FacebookIcon, XIcon,
+} from "@/components/common/SocialIcons";
+
+const socials = [
+  { name: "Instagram", href: "https://www.instagram.com/helloclinica?utm_source=qr&stkn=bGxsZmZidHJpZHpi", Icon: InstagramIcon },
+  { name: "TikTok", href: "https://www.tiktok.com/@helloclinica?_r=1&_t=ZS-99nxuFFFowR", Icon: TiktokIcon },
+  { name: "Telegram", href: "https://t.me/helloclinica", Icon: TelegramIcon },
+  { name: "Facebook", href: "https://www.facebook.com/share/1HT5J6R3yP/", Icon: FacebookIcon },
+  { name: "X (Twitter)", href: "https://x.com/Helloclinica", Icon: XIcon },
+];
 
 /**
- * Footer — warm surface (matches the site background), brand logo, and the
- * Explore / Legal / Contact columns. The newsletter sign-up lives in its own
- * section above the footer, so it is intentionally not repeated here.
+ * Footer — Legal and Contact only. The brand logo and the Explore column were
+ * removed as duplicates of the top navigation; the newsletter sign-up lives in
+ * its own section above. Contact now carries the email plus social links.
  */
 export function Footer() {
   const pathname = usePathname();
@@ -23,44 +33,17 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      className="border-t border-deep-blue/10 bg-[#F3E9DD]/70"
-      aria-labelledby="footer-heading"
-    >
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
+    <footer className="border-t border-deep-blue/10 bg-[#F3E9DD]/70" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" className="sr-only">Footer</h2>
       <Container className="py-14 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-8">
-          {/* Brand */}
-          <div className="max-w-md">
-            <Link href="/" className="flex items-center gap-2" aria-label={`${siteConfig.name} home`}>
-              <Image
-                src="/images/logo.png"
-                alt={siteConfig.name}
-                width={290}
-                height={134}
-                className="h-10 w-auto"
-              />
-            </Link>
-            <p className="mt-4 text-deep-blue/70">
-              Expert guidance and study tools for future healthcare professionals — advising,
-              resources, and practice questions in one place.
-            </p>
-          </div>
-
-          {/* Explore */}
-          <nav aria-label="Footer navigation">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">
-              Explore
-            </h3>
+        <div className="grid gap-12 sm:grid-cols-2 lg:gap-16">
+          {/* Legal */}
+          <nav aria-label="Legal">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Legal</h3>
             <ul className="mt-5 space-y-3">
-              {footerNav.explore.map((item) => (
+              {footerNav.legal.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="focus-ring rounded text-deep-blue/75 transition-colors hover:text-coral"
-                  >
+                  <Link href={item.href} className="focus-ring rounded text-deep-blue/75 transition-colors hover:text-coral">
                     {item.label}
                   </Link>
                 </li>
@@ -68,37 +51,34 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Legal + contact */}
+          {/* Contact + socials */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">
-              Legal
-            </h3>
-            <ul className="mt-5 space-y-3">
-              {footerNav.legal.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="focus-ring rounded text-deep-blue/75 transition-colors hover:text-coral"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <h3 className="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-coral">
-              Contact
-            </h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Contact</h3>
             <ul className="mt-5 space-y-3">
               <li>
-                <a
-                  href={`mailto:${siteConfig.email.primary}`}
-                  className="focus-ring inline-flex items-center gap-2 rounded text-deep-blue/75 transition-colors hover:text-coral"
-                >
+                <a href={`mailto:${siteConfig.email.primary}`} className="focus-ring inline-flex items-center gap-2 rounded text-deep-blue/75 transition-colors hover:text-coral">
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   {siteConfig.email.primary}
                 </a>
               </li>
             </ul>
+
+            <p className="mt-6 text-sm font-medium text-deep-blue/70">Follow us</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {socials.map(({ name, href, Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  title={name}
+                  className="focus-ring flex h-10 w-10 items-center justify-center rounded-full bg-white text-medical-blue shadow-sm transition hover:bg-medical-blue hover:text-white"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

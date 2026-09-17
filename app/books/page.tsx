@@ -30,6 +30,7 @@ export default async function BooksPage() {
       author: b.author,
       categorySlug: cat?.slug ?? "recommended-books",
       categoryLabel: cat?.title ?? "Books",
+      discipline: (b as { discipline: string | null }).discipline ?? null,
     };
   });
 
