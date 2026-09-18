@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  CalendarClock, Mail, Package, Users, FileText, BookOpen, Download,
-  ArrowRight, ListChecks, GraduationCap, KeyRound, Link2, FolderTree, Sparkles, ShieldCheck,
-, Bell } from "lucide-react";
+import { CalendarClock, Mail, Package, Users, FileText, BookOpen, Download, ArrowRight, ListChecks, GraduationCap, KeyRound, Link2, FolderTree, Sparkles, ShieldCheck, Bell } from "lucide-react";
 import { requireAdmin } from "@/lib/admin/auth-helpers";
 import { getDashboardStats, getRecentActivity } from "@/lib/admin/dashboard-data";
 import { AdminShell } from "@/components/admin/AdminShell";
