@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { footerNav, siteConfig } from "@/lib/site-config";
 import {
-  InstagramIcon, TiktokIcon, TelegramIcon, FacebookIcon, XIcon, WhatsAppIcon,
+  InstagramIcon, TiktokIcon, TelegramIcon, FacebookIcon, XIcon,
 } from "@/components/common/SocialIcons";
 
 const socials = [
@@ -59,12 +59,6 @@ export function Footer() {
                 <a href={`mailto:${siteConfig.email.primary}`} className="focus-ring inline-flex items-center gap-2 rounded text-deep-blue/75 transition-colors hover:text-coral">
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   {siteConfig.email.primary}
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/17178137793" target="_blank" rel="noopener noreferrer" className="focus-ring inline-flex items-center gap-2 rounded text-deep-blue/75 transition-colors hover:text-coral">
-                  <WhatsAppIcon className="h-4 w-4" aria-hidden="true" />
-                  WhatsApp
                 </a>
               </li>
             </ul>

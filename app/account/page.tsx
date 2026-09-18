@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, Lock, ArrowRight, GraduationCap, History, StickyNote } from "lucide-react";
+import { CheckCircle2, Lock, ArrowRight, GraduationCap, History, StickyNote , Bell, StickyNote } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { LogoutButton } from "@/components/account/LogoutButton";
 import { getStudent } from "@/lib/student/auth";
+import { getUnreadNotificationCount } from "@/lib/queries/notifications";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   const student = await getStudent();
   if (!student) redirect("/account/login");
   const { need } = await searchParams;
+  const unread = await getUnreadNotificationCount(student.id);
 
   return (
     <PageTransition>
@@ -46,6 +48,29 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             <div className="flex-1">
               <h2 className="font-semibold text-deep-blue">My results & review</h2>
               <p className="text-body text-muted-foreground">See every test you've taken, your scores and grades, and review the answers.</p>
+            </div>
+            <ArrowRight className="h-5 w-5 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
+          </Link>
+
+          <Link href="/account/notifications" className="surface-card group flex items-center gap-3 p-6 transition hover:shadow-md">
+            <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-brand-bg text-medical-blue">
+              <Bell className="h-5 w-5" />
+              {unread > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-coral px-1 text-xs font-semibold text-white">{unread}</span>
+              )}
+            </span>
+            <div className="flex-1">
+              <h2 className="font-semibold text-deep-blue">Notifications</h2>
+              <p className="text-body text-muted-foreground">{unread > 0 ? `${unread} new update${unread === 1 ? "" : "s"}` : "Updates about your access and activity."}</p>
+            </div>
+            <ArrowRight className="h-5 w-5 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
+          </Link>
+
+          <Link href="/account/notes" className="surface-card group flex items-center gap-3 p-6 transition hover:shadow-md">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-bg text-medical-blue"><StickyNote className="h-5 w-5" /></span>
+            <div className="flex-1">
+              <h2 className="font-semibold text-deep-blue">My notes</h2>
+              <p className="text-body text-muted-foreground">All the notes you've taken while reading, grouped by book or resource.</p>
             </div>
             <ArrowRight className="h-5 w-5 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
           </Link>

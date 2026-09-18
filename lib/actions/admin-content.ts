@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { createNotification } from "@/lib/actions/notifications";
 import { getAdminUser } from "@/lib/admin/auth-helpers";
 import { recordAudit } from "@/lib/admin/audit";
 import { buildSearchIndex } from "@/lib/search-index";
@@ -432,6 +433,12 @@ export async function setRequestStatus(requestId: string, status: string): Promi
     // Granting a request grants the linked student access, if any.
     if (status === "granted" && req.studentId) {
       await prisma.student.update({ where: { id: req.studentId }, data: { hasAccess: true } });
+      await createNotification(req.studentId, {
+        kind: "access",
+        title: "Course access granted",
+        body: "Your premium access is now active - the full Question Bank and books are unlocked. Happy studying!",
+        actionUrl: "/question-bank",
+      });
     }
     await recordAudit({ adminId: id, action: "UPDATE", entity: "CourseAccessRequest", entityId: requestId });
     refreshStudents();

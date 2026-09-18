@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { getStudent } from "@/lib/student/auth";
+import { createNotification } from "@/lib/actions/notifications";
 import { courseRequestSchema, type CourseRequestInput } from "@/lib/admin/content-schemas";
 
 export type RequestResult = { success: boolean; message?: string; fieldErrors?: Record<string, string> };
@@ -39,6 +40,11 @@ export async function submitCourseRequest(input: CourseRequestInput): Promise<Re
     if (!student.university) {
       await prisma.student.update({ where: { id: student.id }, data: { university: parsed.data.university } });
     }
+    await createNotification(student.id, {
+      kind: "system",
+      title: "Request received",
+      body: "Thanks! We received your course access request and will review it shortly. You will be notified here when it is approved.",
+    });
     return { success: true };
   } catch {
     return { success: false, message: "Something went wrong. Please try again." };

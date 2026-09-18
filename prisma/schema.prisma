@@ -582,6 +582,7 @@ model Student {
   audioProgress AudioProgress[]
   dailyAttempts DailyQuestionAttempt[]
   subscriptions Subscription[]
+  notifications Notification[]
 
   @@map("students")
 }
@@ -830,4 +831,23 @@ model DailyQuestionPick {
   createdAt  DateTime @default(now())
 
   @@map("daily_question_picks")
+}
+
+
+model Notification {
+  id            String    @id @default(cuid())
+  studentId     String
+  student       Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  kind          String    @default("system") // system | access | admin
+  title         String
+  body          String
+  actionUrl     String?
+  requiresReply Boolean   @default(false)
+  reply         String?
+  repliedAt     DateTime?
+  readAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@index([studentId, createdAt])
+  @@map("notifications")
 }

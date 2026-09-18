@@ -79,10 +79,10 @@ export default async function ReaderPage({ params }: Params) {
   // Reading a resource's content online is premium (matching downloads). The
   // listing pages stay free — only opening the file requires access. Non-premium
   // visitors get the upgrade prompt instead of the reader.
-  if (type === "resource" && !student?.hasAccess) {
+  if (type === "book" && !student?.hasAccess) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16">
-        <PremiumLock signedIn={!!student} title="Reading this guide is a premium feature" next={`/read/${type}/${id}`} />
+        <PremiumLock signedIn={!!student} title="Reading this book is a premium feature" next={`/read/${type}/${id}`} />
       </div>
     );
   }
