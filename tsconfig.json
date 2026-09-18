@@ -36,6 +36,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules", "prisma/diagnose-*.ts", "prisma/refile-*.ts", "prisma/inspect-*.ts", "prisma/*-state.ts", "prisma/cleanup-*.ts", "prisma/check-*.ts", "prisma/backfill-*.ts", "prisma/fix-*.ts"
   ]
 }
