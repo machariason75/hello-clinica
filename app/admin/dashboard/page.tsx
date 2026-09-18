@@ -3,7 +3,7 @@ import Image from "next/image";
 import {
   CalendarClock, Mail, Package, Users, FileText, BookOpen, Download,
   ArrowRight, ListChecks, GraduationCap, KeyRound, Link2, FolderTree, Sparkles, ShieldCheck,
-} from "lucide-react";
+, Bell } from "lucide-react";
 import { requireAdmin } from "@/lib/admin/auth-helpers";
 import { getDashboardStats, getRecentActivity } from "@/lib/admin/dashboard-data";
 import { AdminShell } from "@/components/admin/AdminShell";
@@ -183,6 +183,7 @@ export default async function AdminDashboardPage() {
                 { label: "Question Bank", sub: `${stats.quizCategories} sections · ${stats.quizzes} quizzes`, href: "/admin/question-bank", icon: FolderTree },
                 { label: "Students", sub: `${stats.studentsWithAccess} with premium access`, href: "/admin/students", icon: GraduationCap },
                 { label: "Access Requests", sub: `${stats.pendingRequests} pending`, href: "/admin/access-requests", icon: KeyRound },
+                { label: "Notifications", sub: "Send notices, read replies", href: "/admin/notifications", icon: Bell },
                 { label: "Packages", sub: "Prices & premium benefits", href: "/admin/packages", icon: FolderTree },
                 { label: "Password Resets", sub: `${stats.pendingResets} in progress`, href: "/admin/password-resets", icon: ShieldCheck },
                 { label: "Resources & Books", sub: `${stats.resources} resources · ${stats.books} books`, href: "/admin/resources", icon: FileText },

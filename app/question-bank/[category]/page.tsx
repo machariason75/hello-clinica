@@ -47,7 +47,7 @@ export default async function QuizCategoryPage({ params }: Params) {
   const links = node.externalLinks ?? [];
 
   const isColleges = node.slug === "colleges-universities";
-  const premiumBranch = node.premium || ancestors.some((a) => a.premium);
+  const premiumBranch = true; // the whole Question Bank is premium
   const gated = premiumBranch && !student?.hasAccess && !isColleges;
 
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildMetadata, quizJsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import { getQuizBySlug, getCategoryAncestors } from "@/lib/queries/quizzes";
+import { getQuizBySlug } from "@/lib/queries/quizzes";
 import { getStudent } from "@/lib/student/auth";
 import { claimFreeSet, hasFreeSetFor } from "@/lib/student/daily-question";
 import { QuizPlayer, type QuizPlayerData } from "@/components/quiz/QuizPlayer";
@@ -34,8 +34,8 @@ export default async function QuizPage({ params }: Params) {
 
   // Premium gate: if this quiz's category (or any ancestor) is premium and the
   // student lacks access, show the lock instead of the player.
-  const [ancestors, student] = await Promise.all([getCategoryAncestors(q.categoryId), getStudent()]);
-  const premiumBranch = ancestors.some((a) => a.premium);
+  const student = await getStudent();
+  const premiumBranch = true; // the whole Question Bank is premium
 
   // The Question of the Day earns a signed-in student ONE complete set per day,
   // any section. Claiming happens here, on opening the quiz — so the entitlement
