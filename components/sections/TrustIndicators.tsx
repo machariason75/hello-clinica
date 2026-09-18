@@ -12,7 +12,7 @@ export function TrustIndicators() {
             const Icon = stat.icon;
             return (
               <StaggerItem key={stat.label} className="text-center">
-                <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl text-medical-blue">
                   <Icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <p className="text-3xl font-bold text-deep-blue lg:text-4xl">{stat.value}</p>

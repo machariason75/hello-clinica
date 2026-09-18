@@ -17,7 +17,7 @@ export function ServiceCard({ data, className }: { data: ServiceCardData; classN
       href={data.href}
       className={cn("surface-card-interactive focus-ring group flex h-full flex-col p-7", className)}
     >
-      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl text-medical-blue">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h3 className="text-h3 text-deep-blue">{data.title}</h3>

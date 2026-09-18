@@ -39,7 +39,7 @@ export default function ContactPage() {
             </div>
             <ul className="space-y-4">
               <li className="surface-card flex items-start gap-4 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-medical-blue">
                   <Mail className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -53,7 +53,7 @@ export default function ContactPage() {
                 </div>
               </li>
               <li className="surface-card flex items-start gap-4 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-medical-blue">
                   <WhatsAppIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -64,7 +64,7 @@ export default function ContactPage() {
                 </div>
               </li>
               <li className="surface-card flex items-start gap-4 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-medical-blue">
                   <Clock className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -73,7 +73,7 @@ export default function ContactPage() {
                 </div>
               </li>
               <li className="surface-card flex items-start gap-4 p-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-bg text-medical-blue">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-medical-blue">
                   <MessageSquare className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>

@@ -57,7 +57,6 @@ export const searchablePages: { title: string; href: string; type: string; keywo
   { title: "Books", href: "/books", type: "Section", keywords: "recommended medical school study guides digital downloads" },
   { title: "Contact", href: "/contact", type: "Page", keywords: "email phone message support questions" },
   { title: "Question Bank", href: "/question-bank", type: "Section", keywords: "practice questions quiz nclex hesi teas nursing exam test prep" },
-  { title: "Request a Consultation", href: "/request-consultation", type: "Page", keywords: "consultation request advising one-on-one booking appointment talk call" },
   { title: "Privacy Policy", href: "/privacy-policy", type: "Legal", keywords: "privacy data" },
   { title: "Terms of Service", href: "/terms-of-service", type: "Legal", keywords: "terms conditions" },
   { title: "Cookie Policy", href: "/cookie-policy", type: "Legal", keywords: "cookies tracking" },
@@ -124,6 +123,6 @@ export const primaryNav: NavItem[] = [
  * Persistent header CTA. Points to /contact in Phase 1 (the live intake form);
  * repoint to /request-consultation once the consultation page ships.
  */
-export const primaryCta = { label: "Request a Consultation", href: "/request-consultation" };
+export const primaryCta = { label: "Get in touch", href: "/contact" };
 
 

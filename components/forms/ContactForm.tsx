@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectTrigger,
@@ -16,6 +15,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { NeonButton } from "@/components/common/NeonButton";
 import {
   contactSchema,
   cadreOptions,
@@ -179,7 +179,7 @@ export function ContactForm() {
       </div>
       {errText("acceptedTerms")}
 
-      <Button type="submit" disabled={isPending} size="lg" className="w-full sm:w-auto">
+      <NeonButton type="submit" disabled={isPending}>
         {isPending ? (
           <LoadingSpinner label="Submitting…" />
         ) : (
@@ -188,7 +188,8 @@ export function ContactForm() {
             Send message
           </>
         )}
-      </Button>
+      </NeonButton>
     </form>
   );
 }
+

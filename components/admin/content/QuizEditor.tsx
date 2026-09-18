@@ -234,7 +234,7 @@ export function QuizEditor({
           <ol className="space-y-2">
             {questions.map((q, idx) => (
               <li key={q.id} className="flex items-start gap-3 rounded-xl border border-deep-blue/5 bg-white/60 p-3">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-bg text-xs font-semibold text-medical-blue">{idx + 1}</span>
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-medical-blue">{idx + 1}</span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-deep-blue">{q.stem}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">

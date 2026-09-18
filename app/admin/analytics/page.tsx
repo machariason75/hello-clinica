@@ -40,7 +40,7 @@ export default async function AdminAnalyticsPage() {
             const Icon = t.icon;
             return (
               <div key={t.label} className="surface-card p-5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-bg text-medical-blue">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl text-medical-blue">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <p className="mt-3 text-2xl font-bold text-deep-blue">{t.value}</p>

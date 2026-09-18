@@ -40,7 +40,7 @@ export default async function MyNotesPage() {
                 <article key={`${g.itemType}:${g.itemId}`} className="surface-card p-6">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F1E8DC] text-medical-blue">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl text-medical-blue">
                         {g.itemType === "book" ? <BookOpen className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
                       </span>
                       <div>

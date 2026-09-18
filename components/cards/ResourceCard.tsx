@@ -21,7 +21,7 @@ export function ResourceCard({ data, className }: { data: ResourceCardData; clas
         className
       )}
     >
-      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F1E8DC] text-medical-blue shadow-sm">
+      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl text-medical-blue shadow-sm">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h3 className="text-xl font-semibold text-deep-blue">{data.title}</h3>

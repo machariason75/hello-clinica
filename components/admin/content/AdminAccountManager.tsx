@@ -140,7 +140,7 @@ export function AdminAccountManager({
         <ul className="space-y-2">
           {admins.map((a) => (
             <li key={a.id} className="flex items-center gap-3 rounded-xl border border-deep-blue/5 bg-white/60 p-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-bg text-medical-blue">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg text-medical-blue">
                 <ShieldCheck className="h-4 w-4" />
               </span>
               <div className="min-w-0 flex-1">

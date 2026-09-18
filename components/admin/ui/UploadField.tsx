@@ -50,7 +50,7 @@ export function UploadField({
               className="h-16 w-16 shrink-0 rounded-lg object-cover"
             />
           ) : (
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-brand-bg text-medical-blue">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg text-medical-blue">
               <FileText className="h-7 w-7" />
             </span>
           )}

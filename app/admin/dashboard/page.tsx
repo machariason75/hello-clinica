@@ -188,7 +188,7 @@ export default async function AdminDashboardPage() {
                 const Icon = q.icon;
                 return (
                   <Link key={q.label} href={q.href} className="group flex items-center gap-3 rounded-xl border border-deep-blue/5 bg-white/60 p-3 transition hover:border-coral/30 hover:bg-white">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-bg text-medical-blue"><Icon className="h-4 w-4" /></span>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg text-medical-blue"><Icon className="h-4 w-4" /></span>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium text-deep-blue">{q.label}</p>
                       <p className="truncate text-xs text-muted-foreground">{q.sub}</p>

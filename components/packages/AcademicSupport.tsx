@@ -91,7 +91,7 @@ export function AcademicSupport({ packages }: { packages: PackageView[] }) {
                   </span>
                 )}
 
-                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F1E8DC] text-medical-blue ring-1 ring-black/5">
+                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl text-medical-blue ring-1 ring-black/5">
                   <Icon className="h-6 w-6" aria-hidden="true" />
                 </span>
 
