@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { footerNav, siteConfig } from "@/lib/site-config";
 import {
@@ -53,18 +52,8 @@ export function Footer() {
 
           {/* Contact + socials */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Contact</h3>
-            <ul className="mt-5 space-y-3">
-              <li>
-                <a href={`mailto:${siteConfig.email.primary}`} className="focus-ring inline-flex items-center gap-2 rounded text-deep-blue/75 transition-colors hover:text-coral">
-                  <Mail className="h-4 w-4" aria-hidden="true" />
-                  {siteConfig.email.primary}
-                </a>
-              </li>
-            </ul>
-
-            <p className="mt-6 text-sm font-medium text-deep-blue/70">Follow us</p>
-            <div className="mt-3 flex flex-wrap gap-3">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Follow us</h3>
+            <div className="mt-5 flex flex-wrap gap-4">
               {socials.map(({ name, href, Icon }) => (
                 <a
                   key={name}
@@ -73,9 +62,9 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={name}
                   title={name}
-                  className="focus-ring flex h-10 w-10 items-center justify-center rounded-full bg-white text-medical-blue shadow-sm transition hover:bg-medical-blue hover:text-white"
+                  className="focus-ring text-deep-blue/70 transition hover:text-coral"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-6 w-6" />
                 </a>
               ))}
             </div>

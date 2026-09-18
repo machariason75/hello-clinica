@@ -6,8 +6,8 @@ import { Send, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { NeonButton } from "@/components/common/NeonButton";
 import { newsletterSchema } from "@/lib/validations";
 import { subscribeToNewsletter } from "@/lib/actions/newsletter";
 import { cn } from "@/lib/utils";
@@ -136,12 +136,7 @@ export function NewsletterForm({ variant = "standalone" }: { variant?: "standalo
         <p className={cn("text-sm", inverted ? "text-white" : "text-destructive")}>{errors.consent}</p>
       )}
 
-      <Button
-        type="submit"
-        variant="secondary"
-        disabled={isPending}
-        className="w-full sm:w-auto"
-      >
+      <NeonButton type="submit" disabled={isPending}>
         {isPending ? (
           <LoadingSpinner label="Submitting…" />
         ) : (
@@ -150,7 +145,8 @@ export function NewsletterForm({ variant = "standalone" }: { variant?: "standalo
             Subscribe
           </>
         )}
-      </Button>
+      </NeonButton>
     </form>
   );
 }
+
