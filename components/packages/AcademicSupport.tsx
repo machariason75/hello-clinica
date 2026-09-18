@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NeonButton } from "@/components/common/NeonButton";
 import {
   ArrowRight,
   Check,
@@ -131,18 +132,20 @@ export function AcademicSupport({ packages }: { packages: PackageView[] }) {
                         </div>
                       )}
                     </div>
-                    <Link
-                      href={`/request-consultation?package=${encodeURIComponent(pkg.packageName)}`}
-                      className={
-                        "focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition " +
-                        (featured
-                          ? "bg-gradient-to-r from-coral to-[#E8613F] text-white hover:opacity-90"
-                          : "border-2 border-medical-blue/30 text-medical-blue hover:bg-medical-blue/5")
-                      }
-                    >
-                      {pkg.buttonText || "Request support"}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
+                    {featured ? (
+                      <NeonButton href="/contact" className="shrink-0">
+                        {pkg.buttonText || "Request support"}
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </NeonButton>
+                    ) : (
+                      <Link
+                        href="/contact"
+                        className="focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border-2 border-medical-blue/30 px-4 py-2.5 text-sm font-semibold text-medical-blue transition hover:bg-medical-blue/5"
+                      >
+                        {pkg.buttonText || "Request support"}
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </article>

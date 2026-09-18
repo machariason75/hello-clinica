@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, User } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { BackButton } from "@/components/common/BackButton";
 import { Sidebar } from "@/components/navigation/Sidebar";
@@ -58,6 +58,14 @@ export function Navbar() {
 
           {/* Right cluster */}
           <div className="flex items-center gap-1 sm:gap-2">
+            <Link
+              href="/account"
+              className="focus-ring hidden items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-deep-blue transition-colors hover:bg-brand-bg lg:inline-flex"
+              aria-label="My account"
+            >
+              <User className="h-4 w-4" aria-hidden="true" /> My Account
+            </Link>
+
             {/* Hamburger — mobile/tablet only */}
             <button
               type="button"

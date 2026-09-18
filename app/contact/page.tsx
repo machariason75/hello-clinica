@@ -31,7 +31,6 @@ export default function ContactPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
           <Reveal variant="fadeLeft" className="space-y-6">
             <div>
-              <h2 className="text-h3 text-deep-blue">Reach us directly</h2>
               <p className="text-body mt-3 text-muted-foreground">
                 Prefer email or WhatsApp? Reach us directly and we'll get back to you. For detailed
                 support, the form helps us route your message to the right place.

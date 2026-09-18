@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X, Search as SearchIcon, ChevronDown } from "lucide-react";
+import { X, Search as SearchIcon, ChevronDown, User } from "lucide-react";
 import { primaryNav, primaryCta } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -68,6 +68,18 @@ export function Sidebar({
                 <SearchIcon className="h-5 w-5 text-medical-blue" aria-hidden="true" />
                 Search
               </button>
+
+              <Link
+                href="/account"
+                onClick={close}
+                className="group focus-ring mb-3 block rounded-2xl p-[2px]"
+                style={{ backgroundImage: "linear-gradient(135deg, #C2461A, #17a2b8, #C2461A)" }}
+                aria-label="My account"
+              >
+                <span className="flex items-center gap-3 rounded-[14px] bg-[#FBF7F2] px-4 py-3.5 text-lg font-semibold text-deep-blue transition-colors group-hover:bg-white">
+                  <User className="h-5 w-5 text-medical-blue" aria-hidden="true" /> My Account
+                </span>
+              </Link>
 
               <ul className="space-y-1">
                 {primaryNav.map((item) => {
@@ -155,3 +167,4 @@ export function Sidebar({
     </>
   );
 }
+

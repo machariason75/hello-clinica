@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { AcademicSupport } from "@/components/packages/AcademicSupport";
-import { Button } from "@/components/ui/button";
+import { NeonButton } from "@/components/common/NeonButton";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/common/JsonLd";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -90,9 +90,7 @@ export default async function AdvisingServicePage({ params }: Params) {
               title="Packages are being finalized"
               description="We're finalizing consultation packages with clear hours and pricing. Reach out and we'll help you find the right fit."
               action={
-                <Button asChild>
-                  <Link href="/contact">Start a conversation</Link>
-                </Button>
+                <NeonButton href="/contact">Start a conversation</NeonButton>
               }
             />
           ) : (
@@ -142,12 +140,10 @@ export default async function AdvisingServicePage({ params }: Params) {
               <p className="text-body mt-2 text-muted-foreground">
                 Reach out and we'll match {def.title} to your goals, stage, and timeline.
               </p>
-              <Button asChild size="lg" className="mt-6 w-full">
-                <Link href="/request-consultation">
-                  Request this service
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </Button>
+              <NeonButton href="/contact" className="mt-6">
+                Request this service
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </NeonButton>
             </Reveal>
           </div>
         )}
