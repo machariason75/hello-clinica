@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, Lock, ArrowRight, GraduationCap, History, StickyNote , Bell, StickyNote } from "lucide-react";
+import { CheckCircle2, Lock, ArrowRight, GraduationCap, History, StickyNote, Bell } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { PageTransition } from "@/components/motion/PageTransition";
