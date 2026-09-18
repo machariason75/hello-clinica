@@ -4,11 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, Search as SearchIcon, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { BackButton } from "@/components/common/BackButton";
 import { Sidebar } from "@/components/navigation/Sidebar";
-import { SearchModal } from "@/components/navigation/SearchModal";
 import { siteConfig, primaryNav, type NavItem } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +19,6 @@ import { cn } from "@/lib/utils";
  */
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
   const onAdmin =
     (pathname?.startsWith("/admin") ||
@@ -60,16 +58,6 @@ export function Navbar() {
 
           {/* Right cluster */}
           <div className="flex items-center gap-1 sm:gap-2">
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className="focus-ring hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-deep-blue transition-colors hover:bg-brand-bg sm:inline-flex"
-              aria-label="Open search"
-            >
-              <SearchIcon className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden md:inline">Search</span>
-            </button>
-
             {/* Hamburger — mobile/tablet only */}
             <button
               type="button"
@@ -95,7 +83,6 @@ export function Navbar() {
       </header>
 
       <Sidebar open={menuOpen} onOpenChange={setMenuOpen} />
-      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 }
@@ -197,3 +184,4 @@ function NavEntry({ item, pathname }: { item: NavItem; pathname: string }) {
     </div>
   );
 }
+
