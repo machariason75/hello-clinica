@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShareButton } from "@/components/common/ShareButton";
+import { BookmarkButton } from "@/components/common/BookmarkButton";
 import { Textarea } from "@/components/ui/textarea";
 import { addReaderNote, deleteReaderNote } from "@/lib/reader/notes";
 
@@ -424,6 +425,7 @@ export function ReaderView({
         <Button variant="secondary" size="sm" onClick={() => setNotesOpen((o) => !o)}>
           <StickyNote className="mr-1.5 h-4 w-4" /> Notes{notes.length > 0 ? ` (${notes.length})` : ""}
         </Button>
+        <BookmarkButton itemType={itemType} itemId={itemId} signedIn={signedIn} />
         <ShareButton
           type={itemType}
           id={itemId}
