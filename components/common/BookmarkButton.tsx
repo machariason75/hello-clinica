@@ -6,23 +6,25 @@ import { Bookmark, BookmarkCheck } from "lucide-react";
 import { toast } from "sonner";
 import { isBookmarked, toggleBookmark } from "@/lib/actions/bookmarks";
 
-/** Bookmark toggle for the reader. Saving requires an account — a signed-out
- *  user is prompted to sign in (mirrors how Notes work). */
+/** Bookmark toggle. Saving is a PREMIUM feature: a signed-out user is sent to
+ *  sign in; a signed-in user without granted access is sent to request access. */
 export function BookmarkButton({
   itemType,
   itemId,
   signedIn,
+  canSave,
 }: {
   itemType: "book" | "resource";
   itemId: string;
   signedIn: boolean;
+  canSave: boolean; // = granted premium (hasAccess)
 }) {
   const [saved, setSaved] = useState(false);
   const [, start] = useTransition();
   const router = useRouter();
 
   useEffect(() => {
-    if (!signedIn) return;
+    if (!canSave) return;
     let cancelled = false;
     isBookmarked(itemType, itemId).then((v) => {
       if (!cancelled) setSaved(v);
@@ -30,7 +32,7 @@ export function BookmarkButton({
     return () => {
       cancelled = true;
     };
-  }, [itemType, itemId, signedIn]);
+  }, [itemType, itemId, canSave]);
 
   function onClick() {
     if (!signedIn) {
@@ -38,17 +40,19 @@ export function BookmarkButton({
       router.push(`/account/login?next=/read/${itemType}/${itemId}`);
       return;
     }
+    if (!canSave) {
+      toast.info("Bookmarks unlock with premium access.");
+      router.push("/account");
+      return;
+    }
     const next = !saved;
-    setSaved(next); // optimistic
+    setSaved(next);
     start(async () => {
       const res = await toggleBookmark(itemType, itemId);
       if (!res.success) {
         setSaved(!next);
-        if ("needsAccount" in res && res.needsAccount) {
-          router.push(`/account/login?next=/read/${itemType}/${itemId}`);
-        } else {
-          toast.error("Couldn't update bookmark.");
-        }
+        if ("needsPremium" in res && res.needsPremium) router.push("/account");
+        else toast.error("Couldn't update bookmark.");
       } else {
         toast.success(res.bookmarked ? "Bookmarked." : "Bookmark removed.");
       }

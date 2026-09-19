@@ -7,17 +7,18 @@ type Kind = "book" | "resource";
 
 export async function isBookmarked(itemType: Kind, itemId: string): Promise<boolean> {
   const s = await getStudent();
-  if (!s) return false;
+  if (!s || !s.hasAccess) return false;
   const row = await (prisma as any).bookmark.findUnique({
     where: { studentId_itemType_itemId: { studentId: s.id, itemType, itemId } },
   });
   return !!row;
 }
 
-/** Toggle a bookmark. Requires an account (saving is a premium/account feature). */
+/** Saving requires GRANTED premium (hasAccess), consistent with books & QB. */
 export async function toggleBookmark(itemType: Kind, itemId: string) {
   const s = await getStudent();
   if (!s) return { success: false, needsAccount: true as const };
+  if (!s.hasAccess) return { success: false, needsPremium: true as const };
   const key = { studentId_itemType_itemId: { studentId: s.id, itemType, itemId } };
   const existing = await (prisma as any).bookmark.findUnique({ where: key });
   if (existing) {

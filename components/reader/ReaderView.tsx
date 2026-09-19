@@ -425,7 +425,7 @@ export function ReaderView({
         <Button variant="secondary" size="sm" onClick={() => setNotesOpen((o) => !o)}>
           <StickyNote className="mr-1.5 h-4 w-4" /> Notes{notes.length > 0 ? ` (${notes.length})` : ""}
         </Button>
-        <BookmarkButton itemType={itemType} itemId={itemId} signedIn={signedIn} />
+        <BookmarkButton itemType={itemType} itemId={itemId} signedIn={signedIn} canSave={isPremium} />
         <ShareButton
           type={itemType}
           id={itemId}
@@ -498,14 +498,14 @@ export function ReaderView({
               <button onClick={() => setNotesOpen(false)} className="text-deep-blue/40 hover:text-deep-blue"><X className="h-4 w-4" /></button>
             </div>
 
-            {signedIn ? (
+            {isPremium ? (
               <div className="border-b border-deep-blue/10 p-4">
                 <Textarea rows={3} placeholder="Jot a note as you read…" value={draft} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDraft(e.target.value)} />
                 <Button className="mt-2 w-full" size="sm" onClick={save} disabled={isPending || !draft.trim()}>Save note</Button>
               </div>
             ) : (
               <div className="border-b border-deep-blue/10 p-4 text-sm text-muted-foreground">
-                <Link href="/account/login" className="font-medium text-medical-blue hover:underline">Sign in</Link> to save notes as you read.
+                Notes unlock with premium access — <Link href="/account" className="font-medium text-medical-blue hover:underline">get access</Link>.
               </div>
             )}
 
