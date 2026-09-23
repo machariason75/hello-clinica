@@ -256,3 +256,34 @@ html.dark,
 .dark [class*="from-[#fff"],
 .dark [class*="via-[#fde"],
 .dark [class*="to-[#eaf"] { background-image: linear-gradient(135deg,#0e1b22 0%,#10222b 55%,#0c1a22 100%) !important; }
+
+
+/* DARK MODE PHASE 2c — nav, footer, bright buttons ========================= */
+
+/* Top nav: dark translucent glass instead of the light bar */
+.dark header {
+  background-color: rgba(10, 20, 29, 0.82) !important;
+  border-color: hsl(var(--border)) !important;
+  backdrop-filter: saturate(140%) blur(10px);
+}
+/* the sticky "Back" sub-bar that sits under the nav */
+.dark header + div,
+.dark .sticky.top-0 { background-color: rgba(10, 20, 29, 0.7) !important; }
+
+/* Footer: solid dark, hairline divider on the border token */
+.dark footer { background-color: #0a141d !important; background-image: none !important; }
+.dark footer hr,
+.dark footer .border-t { border-color: hsl(var(--border)) !important; }
+
+/* Bright cream/white PILL buttons -> dark surface, teal-accented (aurora-like) */
+.dark a[class*="bg-brand-bg"],
+.dark button[class*="bg-brand-bg"],
+.dark a[class*="bg-white"]:not([class*="/"]),
+.dark button[class*="bg-white"]:not([class*="/"]) {
+  background-color: hsl(200 24% 16%) !important;
+  color: hsl(var(--foreground)) !important;
+  border: 1px solid hsl(188 60% 40% / 0.5) !important;
+  box-shadow: 0 0 0 1px hsl(16 76% 52% / 0.18) inset !important;
+}
+.dark a[class*="bg-brand-bg"] *,
+.dark button[class*="bg-brand-bg"] * { color: hsl(var(--foreground)) !important; }
