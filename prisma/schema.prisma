@@ -582,6 +582,7 @@ model Student {
   audioProgress AudioProgress[]
   dailyAttempts DailyQuestionAttempt[]
   subscriptions Subscription[]
+  engagements   Engagement[]
   bookmarks     Bookmark[]
   notifications Notification[]
 
@@ -865,4 +866,48 @@ model Bookmark {
   @@unique([studentId, itemType, itemId])
   @@index([studentId, createdAt])
   @@map("bookmarks")
+}
+
+
+model Engagement {
+  id        String   @id @default(cuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  service   String
+  title     String
+  status    String   @default("active") // active | completed | paused
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  steps    EngagementStep[]
+  messages EngagementMessage[]
+
+  @@index([studentId, createdAt])
+  @@map("engagements")
+}
+
+model EngagementStep {
+  id           String    @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  label        String
+  status       String     @default("pending") // pending | in_progress | done
+  order        Int        @default(0)
+  dueAt        DateTime?
+  createdAt    DateTime   @default(now())
+
+  @@index([engagementId, order])
+  @@map("engagement_steps")
+}
+
+model EngagementMessage {
+  id           String     @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)
+  sender       String     // student | admin
+  body         String
+  createdAt    DateTime   @default(now())
+
+  @@index([engagementId, createdAt])
+  @@map("engagement_messages")
 }
