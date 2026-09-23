@@ -57,20 +57,6 @@ export const resourceCategories: ResourceCategoryDef[] = [
     ],
   },
   {
-    slug: "application-timeline",
-    enum: "APPLICATION_TIMELINE",
-    title: "Application Timeline",
-    description: "Show the application planning process month by month.",
-    overview:
-      "A clear, milestone-based view of the application cycle so you always know what to work on next — from primary applications to secondaries, interviews, and decisions.",
-    icon: CalendarClock,
-    faqs: [
-      { question: "How long does the application cycle take?", answer: "Most cycles run roughly a year from primary submission to final decisions. Submitting early in the cycle is one of the most reliable ways to strengthen your position." },
-      { question: "What is a rolling admissions cycle?", answer: "Many schools review and offer interviews as applications arrive, rather than all at once. Earlier complete applications are generally reviewed sooner." },
-      { question: "When are secondaries due?", answer: "Secondaries arrive shortly after your primary is verified. Aim to return each within one to two weeks to stay competitive." },
-    ],
-  },
-  {
     slug: "personal-statement-guide",
     enum: "PERSONAL_STATEMENT_GUIDE",
     title: "Personal Statement Guide",
@@ -96,48 +82,6 @@ export const resourceCategories: ResourceCategoryDef[] = [
       { question: "What interview formats should I prepare for?", answer: "Traditional one-on-one, panel, and MMI are the most common. Each rewards a slightly different style of preparation, but all reward clear, reflective communication." },
       { question: "How do I prepare for an MMI?", answer: "Practice thinking out loud through short ethical and situational prompts. Structure your reasoning and acknowledge multiple perspectives." },
       { question: "What should I ask my interviewers?", answer: "Thoughtful questions about the school's mission, support systems, and community show genuine interest and help you evaluate fit." },
-    ],
-  },
-  {
-    slug: "clinical-experience",
-    enum: "CLINICAL_EXPERIENCE",
-    title: "Clinical Experience",
-    description: "Guide experience acquisition across clinical settings.",
-    overview:
-      "How to find, secure, and reflect on clinical experiences — from shadowing and scribing to volunteering — so they strengthen both your application and your understanding of medicine.",
-    icon: Stethoscope,
-    faqs: [
-      { question: "How much clinical experience do I need?", answer: "There's no fixed number. Aim for consistent, meaningful exposure over time rather than a last-minute burst of hours." },
-      { question: "What counts as clinical experience?", answer: "Activities with direct or close patient contact — scribing, medical assisting, volunteering in care settings, and similar roles." },
-      { question: "Is shadowing enough on its own?", answer: "Shadowing shows exposure but is best paired with hands-on experiences that demonstrate sustained commitment." },
-    ],
-  },
-  {
-    slug: "volunteer-guide",
-    enum: "VOLUNTEER_GUIDE",
-    title: "Volunteer Guide",
-    description: "Plan community service that is meaningful and sustained.",
-    overview:
-      "Find volunteer opportunities that align with your values, follow best practices for commitment, and track your impact in a way that supports your application narrative.",
-    icon: HeartHandshake,
-    faqs: [
-      { question: "Does volunteering have to be medical?", answer: "No. Non-clinical service that shows sustained commitment to others is valued, especially alongside clinical exposure." },
-      { question: "How do I choose where to volunteer?", answer: "Choose causes you genuinely care about. Sustained involvement in a few places is stronger than scattered short stints." },
-      { question: "How do I track my hours?", answer: "Keep a simple, dated log of roles and responsibilities. It makes application entries and reflections far easier later." },
-    ],
-  },
-  {
-    slug: "shadowing-guide",
-    enum: "SHADOWING_GUIDE",
-    title: "Shadowing Guide",
-    description: "Support physician shadowing from outreach to follow-up.",
-    overview:
-      "Outreach templates, preparation guides, and etiquette to help you arrange and make the most of physician shadowing across specialties.",
-    icon: Eye,
-    faqs: [
-      { question: "How do I find physicians to shadow?", answer: "Start with your network, university advising, and local clinics. A concise, polite outreach message goes a long way." },
-      { question: "What should I do while shadowing?", answer: "Observe attentively, respect patient privacy, ask thoughtful questions at appropriate times, and reflect afterward on what you learned." },
-      { question: "Should I shadow multiple specialties?", answer: "Exposure to a range of specialties helps you understand the breadth of medicine and speak credibly about your interests." },
     ],
   },
   {
