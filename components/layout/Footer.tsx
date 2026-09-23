@@ -47,6 +47,11 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/newsletter" className="focus-ring rounded text-deep-blue/75 transition-colors hover:text-coral">
+                  Newsletter
+                </Link>
+              </li>
             </ul>
           </nav>
 

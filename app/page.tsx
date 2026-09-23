@@ -4,7 +4,6 @@ import { FeaturedResources } from "@/components/sections/FeaturedResources";
 import { AdvisingServices } from "@/components/sections/AdvisingServices";
 import { BooksSection } from "@/components/sections/BooksSection";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { QuestionOfTheDay } from "@/components/sections/QuestionOfTheDay";
 import { getQuestionOfTheDay } from "@/lib/queries/question-of-day";
@@ -42,7 +41,6 @@ export default async function HomePage() {
       <AdvisingServices />
       <BooksSection />
       <Testimonials />
-      <NewsletterSection />
       <CtaSection showSecondary={false} />
     </>
   );
