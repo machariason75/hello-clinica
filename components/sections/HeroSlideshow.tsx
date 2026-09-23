@@ -41,7 +41,7 @@ export function HeroSlideshow({ slotIndex: _slotIndex = 0 }: { slotIndex?: numbe
         {/* Dark mode: eclipse (plain img so it always renders) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/hero-eclipse.jpg"
+          src="/images/hero-eclipse.png"
           alt=""
           className="absolute inset-0 hidden h-full w-full object-cover dark:block"
         />
