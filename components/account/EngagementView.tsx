@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Send, Clock, CircleDot, CheckCircle2, Circle } from "lucide-react";
+import { Send, Clock, CircleDot, CheckCircle2, Circle, Plus, X } from "lucide-react";
 import { toast } from "sonner";
-import { studentPostMessage } from "@/lib/actions/engagements";
+import { studentPostMessage, studentStartConversation } from "@/lib/actions/engagements";
 import type { EngagementFull, EngMessage } from "@/lib/queries/engagements";
 
 const STATUS = {
@@ -13,17 +13,82 @@ const STATUS = {
 } as const;
 
 export function EngagementView({ items }: { items: EngagementFull[] }) {
-  if (items.length === 0) {
-    return (
-      <div className="surface-card flex flex-col items-center gap-3 p-10 text-center">
-        <p className="font-semibold text-deep-blue">No active engagements yet</p>
-        <p className="text-body max-w-md text-muted-foreground">
-          When you start an advising service with our team, your plan and messages appear here.
-        </p>
-      </div>
-    );
+  const [starting, setStarting] = useState(false);
+
+  return (
+    <div className="space-y-6">
+      {items.length > 0 && !starting && (
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={() => setStarting(true)}
+            className="focus-ring inline-flex items-center gap-1.5 rounded-xl border border-border px-4 py-2 text-sm font-semibold text-medical-blue hover:bg-brand-bg"
+          >
+            <Plus className="h-4 w-4" /> New message
+          </button>
+        </div>
+      )}
+
+      {(starting || items.length === 0) && (
+        <StartConversation onDone={() => setStarting(false)} showCancel={items.length > 0} />
+      )}
+
+      {items.length > 0 && <div className="space-y-8">{items.map((e) => <Card key={e.id} eng={e} />)}</div>}
+    </div>
+  );
+}
+
+function StartConversation({ onDone, showCancel }: { onDone: () => void; showCancel: boolean }) {
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [pending, start] = useTransition();
+
+  function send() {
+    const t = body.trim();
+    if (!t) { toast.error("Write a message first."); return; }
+    start(async () => {
+      const r = await studentStartConversation(subject, t);
+      if (r.success) { toast.success("Message sent — the team will reply here."); setSubject(""); setBody(""); onDone(); }
+      else toast.error(r.message ?? "Couldn't send.");
+    });
   }
-  return <div className="space-y-8">{items.map((e) => <Card key={e.id} eng={e} />)}</div>;
+
+  return (
+    <div className="surface-card p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-coral">Message the team</p>
+          <h2 className="text-h3 mt-1 text-deep-blue">Start a conversation</h2>
+        </div>
+        {showCancel && (
+          <button type="button" onClick={onDone} aria-label="Cancel" className="focus-ring rounded-lg p-1.5 text-muted-foreground hover:bg-brand-bg">
+            <X className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+      <p className="text-body mt-2 text-muted-foreground">
+        Ask a question or request support. Your tutor replies right here, and you'll get a notification.
+      </p>
+      <input
+        value={subject}
+        onChange={(e) => setSubject(e.target.value)}
+        placeholder="Subject (optional)"
+        className="focus-ring mt-4 w-full rounded-xl border border-border bg-white p-3 text-sm outline-none dark:bg-transparent"
+      />
+      <div className="mt-3 flex items-end gap-2">
+        <textarea
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          rows={3}
+          placeholder="Write your message…"
+          className="focus-ring flex-1 rounded-xl border border-border bg-white p-3 text-sm outline-none dark:bg-transparent"
+        />
+        <button type="button" onClick={send} disabled={pending} className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60">
+          <Send className="h-4 w-4" /> {pending ? "Sending…" : "Send"}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function Card({ eng }: { eng: EngagementFull }) {
@@ -86,7 +151,7 @@ function Card({ eng }: { eng: EngagementFull }) {
           onChange={(e) => setDraft(e.target.value)}
           rows={2}
           placeholder="Message your tutor…"
-          className="focus-ring flex-1 rounded-xl border border-border bg-white p-3 text-sm outline-none"
+          className="focus-ring flex-1 rounded-xl border border-border bg-white p-3 text-sm outline-none dark:bg-transparent"
         />
         <button type="button" onClick={send} className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90">
           <Send className="h-4 w-4" /> Send

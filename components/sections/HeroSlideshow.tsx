@@ -4,9 +4,10 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { HeartPulse, Plus, GraduationCap } from "lucide-react";
 
-/** The hero photo is constant — the same blue-scrubs clinician on every visit,
- *  so it paints instantly with no slideshow or swap. */
-const HERO_PHOTO = { src: "/images/medics/medic-1.jpg", alt: "Smiling nurse in blue scrubs" };
+/** Light mode shows the clinician; dark mode shows the eclipse, faded into the
+ *  page so it blends rather than sitting in a bright card. */
+const LIGHT_PHOTO = { src: "/images/medics/medic-1.jpg", alt: "Smiling nurse in blue scrubs" };
+const DARK_PHOTO = { src: "/images/hero-eclipse.jpg", alt: "Eclipse over a starfield" };
 
 export function HeroSlideshow({ slotIndex: _slotIndex = 0 }: { slotIndex?: number }) {
   const reduce = useReducedMotion();
@@ -29,15 +30,30 @@ export function HeroSlideshow({ slotIndex: _slotIndex = 0 }: { slotIndex?: numbe
         initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut" }}
-        className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5"
+        className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5 dark:bg-transparent dark:ring-white/10"
       >
+        {/* Light: clinician */}
         <Image
-          src={HERO_PHOTO.src}
-          alt={HERO_PHOTO.alt}
+          src={LIGHT_PHOTO.src}
+          alt={LIGHT_PHOTO.alt}
           fill
           priority
           sizes="(max-width: 1024px) 90vw, 600px"
-          className="object-cover"
+          className="object-cover dark:hidden"
+        />
+        {/* Dark: eclipse */}
+        <Image
+          src={DARK_PHOTO.src}
+          alt={DARK_PHOTO.alt}
+          fill
+          sizes="(max-width: 1024px) 90vw, 600px"
+          className="hidden object-cover dark:block"
+        />
+        {/* Dark blend: fade the eclipse edges into the page background */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden dark:block"
+          style={{ background: "radial-gradient(125% 100% at 50% 42%, transparent 52%, #0b1620 100%)" }}
         />
       </motion.div>
     </div>

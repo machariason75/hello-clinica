@@ -287,3 +287,25 @@ html.dark,
 }
 .dark a[class*="bg-brand-bg"] *,
 .dark button[class*="bg-brand-bg"] * { color: hsl(var(--foreground)) !important; }
+
+
+/* DARK MODE QUESTION BANK — soft patch visibility ========================== */
+.dark .bg-black\/5,
+.dark .bg-black\/10 { background-color: hsl(200 22% 15%) !important; }
+.dark .bg-muted { background-color: hsl(200 20% 15%) !important; }
+.dark .bg-muted\/50,
+.dark .bg-muted\/40,
+.dark .bg-muted\/30 { background-color: hsl(200 20% 15% / 0.65) !important; }
+.dark .bg-slate-50, .dark .bg-slate-100,
+.dark .bg-gray-50,  .dark .bg-gray-100 { background-color: hsl(200 20% 15%) !important; }
+.dark .bg-white\/80, .dark .bg-white\/90, .dark .bg-white\/95 { background-color: hsl(var(--card)) !important; }
+
+/* correct-answer highlight → readable dark green */
+.dark .bg-emerald-50, .dark .bg-green-50, .dark .bg-emerald-100 {
+  background-color: hsl(152 42% 15%) !important;
+  border-color: hsl(152 40% 32%) !important;
+}
+.dark .bg-emerald-50 *, .dark .bg-green-50 * { color: hsl(152 55% 80%) !important; }
+
+/* hairline rings that used black */
+.dark .ring-black\/5, .dark .ring-black\/10 { --tw-ring-color: hsl(var(--border)) !important; }
