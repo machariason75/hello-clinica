@@ -333,6 +333,7 @@ model SiteSettings {
   logo          String?
   favicon       String?
   socialLinks   Json     @default("{}")
+  whatsappNumber String? @default("17178137793")
   footerText    String?  @default("Expert guidance for future healthcare professionals.") // [additive]
   copyrightText String?  @default("© Hello Clinica. All rights reserved.") // [additive]
   createdAt     DateTime @default(now())
@@ -911,3 +912,5 @@ model EngagementMessage {
   @@index([engagementId, createdAt])
   @@map("engagement_messages")
 }
+
+

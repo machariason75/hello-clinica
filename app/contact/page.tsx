@@ -9,6 +9,7 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppNumber } from "@/lib/settings";
 import { WhatsAppIcon } from "@/components/common/SocialIcons";
 import { homepageFaqs } from "@/lib/data/homepage-content";
 
@@ -18,7 +19,8 @@ export const metadata: Metadata = buildMetadata({
   path: "/contact",
 });
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const whatsapp = await getWhatsAppNumber();
   return (
     <PageTransition>
       <PageHero
@@ -57,7 +59,7 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <p className="font-semibold text-deep-blue">WhatsApp</p>
-                  <a href="https://wa.me/17178137793" target="_blank" rel="noopener noreferrer" className="block text-medical-blue hover:underline">
+                  <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="block text-medical-blue hover:underline">
                     Chat with us on WhatsApp
                   </a>
                 </div>
