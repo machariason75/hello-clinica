@@ -13,13 +13,7 @@ import { updateSettings } from "@/lib/actions/admin-settings";
 
 type Errors = Partial<Record<keyof SettingsFormInput, string>>;
 
-export function SettingsForm({
-  settingsId,
-  initial,
-}: {
-  settingsId: string;
-  initial: SettingsFormInput;
-}) {
+export function SettingsForm({ settingsId, initial }: { settingsId: string; initial: SettingsFormInput }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState<SettingsFormInput>(initial);
@@ -68,6 +62,10 @@ export function SettingsForm({
             <Input value={form.siteEmail2} onChange={(e) => set("siteEmail2", e.target.value)} />
           </Field>
         </div>
+        <Field label="WhatsApp number" error={errors.whatsappNumber}>
+          <Input value={form.whatsappNumber} onChange={(e) => set("whatsappNumber", e.target.value)} placeholder="e.g. +1 (717) 813-7793" />
+          <p className="mt-1 text-xs text-muted-foreground">Shown on the contact page's "Chat on WhatsApp" link. Country code included; symbols are ignored.</p>
+        </Field>
       </section>
 
       <section className="surface-card space-y-4 p-6">
