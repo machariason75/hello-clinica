@@ -82,12 +82,8 @@ export const primaryNav: NavItem[] = [
     href: "/resources",
     children: [
       { label: "Medical School Admissions", href: "/resources/admissions" },
-      { label: "Application Timeline", href: "/resources/application-timeline" },
       { label: "Personal Statement Guide", href: "/resources/personal-statement-guide" },
       { label: "Interview Guide", href: "/resources/interview-guide" },
-      { label: "Clinical Experience", href: "/resources/clinical-experience" },
-      { label: "Volunteer Guide", href: "/resources/volunteer-guide" },
-      { label: "Shadowing Guide", href: "/resources/shadowing-guide" },
       { label: "Study Resources", href: "/resources/study-resources" },
       { label: "Career Exploration", href: "/resources/career-exploration" },
       { label: "Nursing Resources", href: "/resources/nursing-resources" },

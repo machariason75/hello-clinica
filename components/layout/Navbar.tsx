@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, ChevronDown, User } from "lucide-react";
 import { Container } from "@/components/common/Container";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { BackButton } from "@/components/common/BackButton";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { siteConfig, primaryNav, type NavItem } from "@/lib/site-config";
@@ -58,6 +59,7 @@ export function Navbar() {
 
           {/* Right cluster */}
           <div className="flex items-center gap-1 sm:gap-2">
+            <ThemeToggle className="hidden lg:flex" />
             <Link
               href="/account"
               className="focus-ring hidden items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-deep-blue transition-colors hover:bg-brand-bg lg:inline-flex"
