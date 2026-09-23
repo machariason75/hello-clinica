@@ -230,3 +230,29 @@
   .dark .border-deep-blue\/10,
   .dark .border-deep-blue\/5 { border-color: hsl(var(--border)) !important; }
 }
+
+
+/* DARK MODE PHASE 2b — dark canvas + neutralize light background layers ===== */
+html.dark,
+.dark body { background-color: #0b1620 !important; }
+
+/* the ambient blobs are the light page wash — hide them in dark */
+.dark .ambient-blob { display: none !important; opacity: 0 !important; }
+
+/* common translucent-white surfaces (glass cards, chips) */
+.dark .bg-white\/70,
+.dark .bg-white\/60,
+.dark .bg-white\/55,
+.dark .bg-white\/50 { background-color: hsl(var(--card) / 0.75) !important; }
+
+/* petrol/teal brand fills used as page/section backgrounds keep their contrast;
+   soft coral/teal tint overlays are dimmed so they don't wash out on dark */
+.dark .bg-coral\/15,
+.dark .bg-coral\/10,
+.dark .bg-medical-blue\/10,
+.dark .bg-accent-blue\/12 { opacity: 0.5; }
+
+/* generic gradient page-tops that used near-white stops */
+.dark [class*="from-[#fff"],
+.dark [class*="via-[#fde"],
+.dark [class*="to-[#eaf"] { background-image: linear-gradient(135deg,#0e1b22 0%,#10222b 55%,#0c1a22 100%) !important; }
