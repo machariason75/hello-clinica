@@ -82,7 +82,7 @@ function StartConversation({ onDone, showCancel }: { onDone: () => void; showCan
         <UploadButton
           endpoint="messageAttachment"
           onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) submit((fFile as any).url, (fFile as any).name); }}
-          onUploadError={() => toast.error("Upload failed.")}
+          onUploadError={() => { toast.error("Upload failed."); }}
           appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue text-xs h-8 px-3", allowedContent: "hidden" }}
           content={{ button: "Attach file" }}
         />
@@ -137,7 +137,7 @@ function Card({ eng }: { eng: EngagementFull }) {
         <UploadButton
           endpoint="messageAttachment"
           onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) send((fFile as any).url, (fFile as any).name); }}
-          onUploadError={() => toast.error("Upload failed.")}
+          onUploadError={() => { toast.error("Upload failed."); }}
           appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue h-11 w-11 p-0", allowedContent: "hidden" }}
           content={{ button: <Paperclip className="h-4 w-4" /> }}
         />

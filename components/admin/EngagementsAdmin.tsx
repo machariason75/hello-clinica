@@ -88,7 +88,7 @@ function MessageStudent() {
       </div>
       <div className="mt-3 flex items-center gap-3">
         <button type="button" onClick={() => submit()} className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2 text-sm font-semibold text-white hover:opacity-90"><Send className="h-4 w-4" /> Send message</button>
-        <UploadButton endpoint="messageAttachment" onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) submit((fFile as any).url, (fFile as any).name); }} onUploadError={() => toast.error("Upload failed.")} appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue text-xs h-9 px-3", allowedContent: "hidden" }} content={{ button: "Attach file" }} />
+        <UploadButton endpoint="messageAttachment" onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) submit((fFile as any).url, (fFile as any).name); }} onUploadError={() => { toast.error("Upload failed."); }} appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue text-xs h-9 px-3", allowedContent: "hidden" }} content={{ button: "Attach file" }} />
       </div>
     </section>
   );
@@ -155,7 +155,7 @@ function AdminCard({ eng }: { eng: EngagementFull }) {
       {!eng.blocked && (
         <div className="mt-3 flex items-end gap-2">
           <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={2} placeholder="Reply to the student…" className="focus-ring flex-1 rounded-xl border border-border bg-white p-2.5 text-sm outline-none dark:bg-transparent" />
-          <UploadButton endpoint="messageAttachment" onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) send((fFile as any).url, (fFile as any).name); }} onUploadError={() => toast.error("Upload failed.")} appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue h-11 w-11 p-0", allowedContent: "hidden" }} content={{ button: <Paperclip className="h-4 w-4" /> }} />
+          <UploadButton endpoint="messageAttachment" onClientUploadComplete={(res) => { const fFile = res?.[0]; if (fFile) send((fFile as any).url, (fFile as any).name); }} onUploadError={() => { toast.error("Upload failed."); }} appearance={{ button: "ut-ready:bg-brand-bg ut-ready:text-medical-blue h-11 w-11 p-0", allowedContent: "hidden" }} content={{ button: <Paperclip className="h-4 w-4" /> }} />
           <button type="button" onClick={() => send()} className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90"><Send className="h-4 w-4" /> Send</button>
         </div>
       )}
