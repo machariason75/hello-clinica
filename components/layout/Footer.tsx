@@ -17,11 +17,23 @@ const socials = [
 ];
 
 /**
- * Footer — Legal and Contact only. The brand logo and the Explore column were
+ * Footer  Legal and Contact only. The brand logo and the Explore column were
  * removed as duplicates of the top navigation; the newsletter sign-up lives in
  * its own section above. Contact now carries the email plus social links.
  */
-export function Footer() {
+type SocialOverrides = { instagram?: string; facebook?: string; tiktok?: string; youtube?: string };
+
+export function Footer({ socialLinks }: { socialLinks?: SocialOverrides } = {}) {
+  const dynamicSocials = socialLinks
+    ? socials
+        .map((sci) => {
+          const key = sci.name.toLowerCase().includes("instagram") ? "instagram"
+            : sci.name.toLowerCase().includes("facebook") ? "facebook"
+            : sci.name.toLowerCase().includes("tiktok") ? "tiktok" : null;
+          if (key && socialLinks[key as keyof SocialOverrides]) return { ...sci, href: socialLinks[key as keyof SocialOverrides] as string };
+          return sci;
+        })
+    : socials;
   const pathname = usePathname();
   if (
     pathname?.startsWith("/admin") ||
@@ -59,7 +71,7 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-coral">Follow us</h3>
             <div className="mt-5 flex flex-wrap gap-4">
-              {socials.map(({ name, href, Icon }) => (
+              {dynamicSocials.map(({ name, href, Icon }) => (
                 <a
                   key={name}
                   href={href}
@@ -77,10 +89,11 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-deep-blue/10 pt-8 text-sm text-deep-blue/60 sm:flex-row">
-          <p>© {year} {siteConfig.name}. All rights reserved.</p>
+          <p> {year} {siteConfig.name}. All rights reserved.</p>
           <p>Expert guidance for future healthcare professionals.</p>
         </div>
       </Container>
     </footer>
   );
 }
+

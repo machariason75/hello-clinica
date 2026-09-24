@@ -16,9 +16,7 @@ export async function createEngagement(input: {
       studentId: student.id,
       service: input.service.trim() || "Advising",
       title: input.title.trim() || "Engagement",
-      steps: {
-        create: input.steps.filter((l) => l.trim()).map((label, i) => ({ label: label.trim(), order: i })),
-      },
+      steps: { create: input.steps.filter((l) => l.trim()).map((label, i) => ({ label: label.trim(), order: i })) },
     },
   });
   await createNotification(student.id, {
@@ -31,14 +29,39 @@ export async function createEngagement(input: {
   return { success: true };
 }
 
+/** Admin starts a direct conversation with an existing account holder. */
+export async function adminStartConversation(studentEmail: string, subject: string, body: string) {
+  await requireAdmin();
+  const email = studentEmail.trim().toLowerCase();
+  const student = await (prisma as any).student.findUnique({ where: { email }, select: { id: true } });
+  if (!student) return { success: false, message: "No account with that email." };
+  const text = body.trim();
+  if (!text) return { success: false, message: "Write a message first." };
+  await (prisma as any).engagement.create({
+    data: {
+      studentId: student.id,
+      service: "Direct message",
+      title: subject.trim() || "Message from Hello Clinica",
+      messages: { create: { sender: "admin", body: text } },
+    },
+  });
+  await createNotification(student.id, {
+    kind: "engagement",
+    title: "New message from Hello Clinica",
+    body: text.length > 90 ? text.slice(0, 90) + "…" : text,
+    actionUrl: "/account/engagements",
+    requiresReply: true,
+  });
+  revalidatePath("/admin/engagements");
+  revalidatePath("/account/engagements");
+  return { success: true };
+}
+
 export async function updateStep(stepId: string, data: { status?: string; dueAt?: string | null }) {
   await requireAdmin();
   const step = await (prisma as any).engagementStep.update({
     where: { id: stepId },
-    data: {
-      ...(data.status ? { status: data.status } : {}),
-      ...(data.dueAt !== undefined ? { dueAt: data.dueAt ? new Date(data.dueAt) : null } : {}),
-    },
+    data: { ...(data.status ? { status: data.status } : {}), ...(data.dueAt !== undefined ? { dueAt: data.dueAt ? new Date(data.dueAt) : null } : {}) },
     include: { engagement: { select: { id: true, studentId: true, title: true } } },
   });
   const e = step.engagement;

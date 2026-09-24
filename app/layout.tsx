@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { getSocialLinks } from "@/lib/settings-social";
 import { PremiumBanner } from "@/components/marketing/PremiumBanner";
 import { Toaster } from "@/components/common/Toaster";
 import { JsonLd } from "@/components/common/JsonLd";
@@ -28,17 +29,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const socialLinks = await getSocialLinks();
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen font-sans">
-        <script
-          id="__theme_init"
-          dangerouslySetInnerHTML={{
-            __html: "try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}",
-          }}
-        />
-
         <AmbientBackground />
         <JsonLd data={organizationJsonLd()} />
         <a href="#main-content" className="skip-link">
@@ -46,7 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <Navbar />
         <main id="main-content">{children}</main>
-        <Footer />
+        <Footer socialLinks={socialLinks} />
         <PremiumBanner />
         <Toaster />
         <SpeedInsights />
@@ -54,3 +49,4 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
