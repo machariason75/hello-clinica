@@ -388,3 +388,22 @@ html.dark,
 
 /* 7) rings that used black */
 .dark .ring-black\/5, .dark .ring-black\/10 { --tw-ring-color: hsl(var(--border)) !important; }
+
+
+/* DARK MODE PHASE 4 — logo filter off + dropdown de-clutter ================ */
+/* stop forcing the logo to white; the Navbar swaps to the colored dark logo */
+.dark header a[href="/"] img,
+.dark header img[alt*="Hello Clinica"],
+.dark img[alt*="Hello Clinica logo"] { filter: none !important; }
+
+/* dropdown menu items float on the dark bg (no per-item boxes) */
+.dark [role="menu"] a,
+.dark [role="menu"] button,
+.dark [role="menuitem"] {
+  border-color: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.dark [role="menu"] a:hover,
+.dark [role="menuitem"]:hover { background-color: hsl(200 24% 16%) !important; }

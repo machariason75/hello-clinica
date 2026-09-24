@@ -27,9 +27,9 @@ export function HeroSlideshow({ slotIndex: _slotIndex = 0 }: { slotIndex?: numbe
         initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut" }}
-        className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5 dark:bg-transparent dark:ring-white/10"
+        className="relative aspect-[4/3] overflow-hidden rounded-card bg-white shadow-card ring-1 ring-black/5 dark:bg-[#0b1620] dark:ring-white/10"
       >
-        {/* Light mode: clinician (optimized) */}
+        {/* Light: clinician */}
         <Image
           src={LIGHT_PHOTO.src}
           alt={LIGHT_PHOTO.alt}
@@ -38,18 +38,18 @@ export function HeroSlideshow({ slotIndex: _slotIndex = 0 }: { slotIndex?: numbe
           sizes="(max-width: 1024px) 90vw, 600px"
           className="object-cover dark:hidden"
         />
-        {/* Dark mode: eclipse (plain img so it always renders) */}
+        {/* Dark: eclipse — fills the whole card, centered (no black gap) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/hero-eclipse.png"
           alt=""
-          className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+          className="absolute inset-0 hidden h-full w-full object-cover object-center dark:block"
         />
-        {/* Dark blend: fade the eclipse edges into the page background */}
+        {/* Blend the edges into the page */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 hidden dark:block"
-          style={{ background: "radial-gradient(125% 100% at 50% 42%, transparent 50%, #0b1620 100%)" }}
+          style={{ background: "radial-gradient(130% 110% at 50% 45%, transparent 55%, #0b1620 100%)" }}
         />
       </motion.div>
     </div>
