@@ -58,11 +58,15 @@ export async function adminPostMessage(engagementId: string, body: string, fileU
   return { success: true };
 }
 
-export async function adminDeleteMessage(messageId: string) {
-  await requireAdmin();
-  await (prisma as any).engagementMessage.delete({ where: { id: messageId } });
-  revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
-  return { success: true };
+export async function adminDeleteMessage(messageId: string): Promise<{ success: boolean; message?: string }> {
+  try {
+    await requireAdmin();
+    await (prisma as any).engagementMessage.delete({ where: { id: messageId } });
+    revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
+    return { success: true };
+  } catch {
+    return { success: false, message: "Couldn't delete." };
+  }
 }
 
 export async function setEngagementArchived(id: string, archived: boolean) { await requireAdmin(); await (prisma as any).engagement.update({ where: { id }, data: { archived } }); revalidatePath("/admin/engagements"); return { success: true }; }
