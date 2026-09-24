@@ -1,22 +1,21 @@
 import { prisma } from "@/lib/prisma";
 
-const DEFAULT_WA = "17178137793";
-
+/** Digits-only WhatsApp number, or "" if the admin cleared it (no fallback). */
 export async function getWhatsAppNumber(): Promise<string> {
   try {
     const s = await (prisma as any).siteSettings.findFirst();
-    const digits = String(s?.whatsappNumber ?? DEFAULT_WA).replace(/[^0-9]/g, "");
-    return digits || DEFAULT_WA;
+    return String(s?.whatsappNumber ?? "").replace(/[^0-9]/g, "");
   } catch {
-    return DEFAULT_WA;
+    return "";
   }
 }
 
+/** Raw stored value (for the admin form); "" if unset. */
 export async function getWhatsAppRaw(): Promise<string> {
   try {
     const s = await (prisma as any).siteSettings.findFirst();
-    return s?.whatsappNumber ?? DEFAULT_WA;
+    return s?.whatsappNumber ?? "";
   } catch {
-    return DEFAULT_WA;
+    return "";
   }
 }

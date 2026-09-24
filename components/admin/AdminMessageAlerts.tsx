@@ -15,26 +15,45 @@ export function AdminMessageAlerts() {
     return () => { live = false; };
   }, []);
 
-  function dismiss(id: string) { setAlerts((a) => a.filter((x) => x.id !== id)); }
-  function markRead(id: string) { markEngagementRead(id).catch(() => {}); dismiss(id); }
-  function open(id: string) { markEngagementRead(id).catch(() => {}); dismiss(id); router.push("/admin/engagements"); }
+  // Remove strictly by id, functional update — never by position.
+  function removeById(id: string) {
+    setAlerts((prev) => prev.filter((x) => x.id !== id));
+  }
+  async function markRead(id: string) {
+    removeById(id);                                  // optimistic, by id
+    try { await markEngagementRead(id); } catch { /* stays read next fetch anyway */ }
+  }
+  async function open(id: string) {
+    removeById(id);
+    try { await markEngagementRead(id); } catch {}
+    router.push("/admin/engagements");
+  }
 
   if (alerts.length === 0) return null;
 
   return (
     <div className="pointer-events-none fixed right-4 top-20 z-50 flex w-80 max-w-[calc(100vw-2rem)] flex-col gap-2">
       {alerts.slice(0, 5).map((a) => (
-        <AlertCard key={a.id} a={a} onOpen={() => open(a.id)} onDismiss={() => dismiss(a.id)} onRead={() => markRead(a.id)} />
+        <AlertCard
+          key={a.id}
+          alert={a}
+          onOpen={() => open(a.id)}
+          onDismiss={() => removeById(a.id)}
+          onRead={() => markRead(a.id)}
+        />
       ))}
     </div>
   );
 }
 
-function AlertCard({ a, onOpen, onDismiss, onRead }: { a: AdminAlert; onOpen: () => void; onDismiss: () => void; onRead: () => void }) {
+function AlertCard({ alert, onOpen, onDismiss, onRead }: {
+  alert: AdminAlert; onOpen: () => void; onDismiss: () => void; onRead: () => void;
+}) {
   const startX = useRef<number | null>(null);
   const [dx, setDx] = useState(0);
   return (
     <div
+      data-alert-id={alert.id}
       className="surface-card pointer-events-auto p-3 shadow-card-hover transition-transform"
       style={{ transform: dx ? `translateX(${dx}px)` : undefined, opacity: dx ? Math.max(0, 1 - Math.abs(dx) / 200) : 1 }}
       onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
@@ -43,17 +62,17 @@ function AlertCard({ a, onOpen, onDismiss, onRead }: { a: AdminAlert; onOpen: ()
     >
       <div className="flex items-start gap-2">
         <MessageSquare className="mt-0.5 h-4 w-4 shrink-0 text-medical-blue" aria-hidden="true" />
-        <button type="button" onClick={onOpen} className="min-w-0 flex-1 text-left">
-          <p className="truncate text-sm font-semibold text-deep-blue">{a.name}</p>
-          <p className="truncate text-xs text-muted-foreground">{a.preview}</p>
+        <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(); }} className="min-w-0 flex-1 text-left">
+          <p className="truncate text-sm font-semibold text-deep-blue">{alert.name}</p>
+          <p className="truncate text-xs text-muted-foreground">{alert.preview}</p>
         </button>
-        <button type="button" onClick={onDismiss} aria-label="Dismiss" className="rounded p-1 text-muted-foreground hover:bg-brand-bg">
+        <button type="button" onClick={(e) => { e.stopPropagation(); onDismiss(); }} aria-label="Dismiss" className="rounded p-1 text-muted-foreground hover:bg-brand-bg">
           <X className="h-3.5 w-3.5" />
         </button>
       </div>
       <div className="mt-2 flex justify-end gap-3">
-        <button type="button" onClick={onRead} className="text-xs font-semibold text-muted-foreground hover:text-deep-blue">Mark read</button>
-        <button type="button" onClick={onOpen} className="text-xs font-semibold text-medical-blue">Open</button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); onRead(); }} className="text-xs font-semibold text-muted-foreground hover:text-deep-blue">Mark read</button>
+        <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(); }} className="text-xs font-semibold text-medical-blue">Open</button>
       </div>
     </div>
   );
