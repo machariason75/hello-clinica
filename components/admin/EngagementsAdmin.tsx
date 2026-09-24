@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { Send, Plus, Clock } from "lucide-react";
 import { toast } from "sonner";
-import { createEngagement, updateStep, adminPostMessage } from "@/lib/actions/admin-engagements";
+import { createEngagement, updateStep, adminPostMessage, adminStartConversation } from "@/lib/actions/admin-engagements";
 import type { EngagementFull, EngMessage } from "@/lib/queries/engagements";
 
 const STATUSES = ["pending", "in_progress", "done"];
@@ -38,9 +38,40 @@ export function EngagementsAdmin({ items }: { items: EngagementFull[] }) {
         </button>
       </section>
 
+      <MessageStudent />
+
       {items.map((e) => <AdminCard key={e.id} eng={e} />)}
       {items.length === 0 && <p className="text-muted-foreground">No engagements yet.</p>}
     </div>
+  );
+}
+
+function MessageStudent() {
+  const [, start] = useTransition();
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  function send() {
+    const t = body.trim(); if (!t) { toast.error("Write a message first."); return; }
+    start(async () => {
+      const r = await adminStartConversation(email, subject, t);
+      if (r.success) { toast.success("Message sent to the student."); setEmail(""); setSubject(""); setBody(""); }
+      else toast.error(r.message ?? "Could not send.");
+    });
+  }
+  return (
+    <section className="surface-card p-6">
+      <h2 className="text-lg font-semibold text-deep-blue">Message a student</h2>
+      <p className="text-sm text-muted-foreground">Start a direct conversation with an existing account holder. They get notified and can reply from their account.</p>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Student email" className="rounded-lg border border-border px-3 py-2 text-sm" />
+        <input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Subject (optional)" className="rounded-lg border border-border px-3 py-2 text-sm" />
+        <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={3} placeholder="Your message…" className="rounded-lg border border-border px-3 py-2 text-sm sm:col-span-2" />
+      </div>
+      <button type="button" onClick={send} className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
+        <Send className="h-4 w-4" /> Send message
+      </button>
+    </section>
   );
 }
 
@@ -66,7 +97,7 @@ function AdminCard({ eng }: { eng: EngagementFull }) {
     <section className="surface-card p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-coral">{eng.service}</p>
       <h3 className="text-h4 font-semibold text-deep-blue">{eng.title}</h3>
-      {eng.student && <p className="text-sm text-muted-foreground">{eng.student.name} · {eng.student.email}</p>}
+      {eng.student && <p className="text-sm text-muted-foreground">{eng.student.name}  {eng.student.email}</p>}
 
       <ul className="mt-4 space-y-2">
         {eng.steps.map((st) => (
@@ -88,13 +119,13 @@ function AdminCard({ eng }: { eng: EngagementFull }) {
           <div key={m.id} className={`flex ${m.sender === "admin" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${m.sender === "admin" ? "bg-medical-blue text-white" : "bg-brand-bg text-deep-blue"}`}>
               <p className="whitespace-pre-wrap">{m.body}</p>
-              <p className={`mt-1 text-[11px] ${m.sender === "admin" ? "text-white/70" : "text-muted-foreground"}`}>{m.sender === "admin" ? "You" : eng.student?.name ?? "Student"} · {new Date(m.createdAt).toLocaleString()}</p>
+              <p className={`mt-1 text-[11px] ${m.sender === "admin" ? "text-white/70" : "text-muted-foreground"}`}>{m.sender === "admin" ? "You" : eng.student?.name ?? "Student"}  {new Date(m.createdAt).toLocaleString()}</p>
             </div>
           </div>
         ))}
       </div>
       <div className="mt-3 flex items-end gap-2">
-        <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={2} placeholder="Reply to the student…" className="focus-ring flex-1 rounded-xl border border-border bg-white p-2.5 text-sm outline-none" />
+        <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={2} placeholder="Reply to the student" className="focus-ring flex-1 rounded-xl border border-border bg-white p-2.5 text-sm outline-none" />
         <button type="button" onClick={send} className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90"><Send className="h-4 w-4" /> Send</button>
       </div>
     </section>

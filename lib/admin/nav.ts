@@ -61,6 +61,7 @@ export const adminNav: AdminNavGroup[] = [
       { label: "Students", href: "/admin/students", icon: GraduationCap },
       { label: "Access Requests", href: "/admin/access-requests", icon: KeyRound },
       { label: "Password Resets", href: "/admin/password-resets", icon: ShieldCheck },
+      { label: "Messages", href: "/admin/engagements", icon: MessageSquareQuote },
     ],
   },
   {
@@ -84,3 +85,4 @@ export const adminNav: AdminNavGroup[] = [
     ],
   },
 ];
+

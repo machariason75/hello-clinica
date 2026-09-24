@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, ArrowLeft } from "lucide-react";
 import { adminNav } from "@/lib/admin/nav";
 import { SignOutButton } from "./SignOutButton";
 import { cn } from "@/lib/utils";
@@ -91,6 +91,7 @@ export function AdminShell({
   adminName: string;
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="min-h-screen bg-transparent lg:flex">
@@ -143,6 +144,14 @@ export function AdminShell({
             >
               <Menu className="h-5 w-5" />
             </button>
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="focus-ring inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-deep-blue hover:bg-brand-bg"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back
+            </button>
             <span className="text-sm font-medium text-muted-foreground">
               Welcome back, <span className="text-deep-blue">{adminName}</span>
             </span>
@@ -153,3 +162,4 @@ export function AdminShell({
     </div>
   );
 }
+
