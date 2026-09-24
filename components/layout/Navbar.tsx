@@ -76,6 +76,7 @@ export function Navbar() {
               <User className="h-4 w-4" aria-hidden="true" /> My Account
             </Link>
 
+            <ThemeToggle className="lg:hidden" />
             {/* Hamburger  mobile/tablet only */}
             <button
               type="button"

@@ -61,10 +61,12 @@ export default async function ResourceCategoryPage({ params }: Params) {
                     <FileText className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="text-xl font-semibold text-deep-blue">{resource.title}</h3>
-                  <p className="text-body mt-2 flex-1 text-muted-foreground">
-                    {resource.description}
-                  </p>
-                  <div className="mt-6">
+                  {resource.description && resource.description.trim() !== resource.title.trim() && (
+                    <p className="text-body mt-2 text-muted-foreground">
+                      {resource.description}
+                    </p>
+                  )}
+                  <div className="mt-auto pt-6">
                     <DownloadButton
                       type="resource"
                       id={resource.id}
@@ -83,7 +85,7 @@ export default async function ResourceCategoryPage({ params }: Params) {
               Guides coming soon
             </div>
             <p className="text-body mb-8 max-w-2xl text-muted-foreground">
-              We&apos;re preparing in-depth guides for this topic. Here&apos;s what to expect —
+              We&apos;re preparing in-depth guides for this topic. Here&apos;s what to expect 
               published resources will appear here as soon as they&apos;re ready.
             </p>
             <StaggerGroup className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -115,3 +117,4 @@ export default async function ResourceCategoryPage({ params }: Params) {
     </PageTransition>
   );
 }
+

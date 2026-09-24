@@ -10,7 +10,7 @@ export type ResourceCardData = {
   icon: LucideIcon;
 };
 
-/** Resource card — glassmorphism-leaning, soft gradient icon chip (frozen style). */
+/** Resource card  glassmorphism-leaning, soft gradient icon chip (frozen style). */
 export function ResourceCard({ data, className }: { data: ResourceCardData; className?: string }) {
   const Icon = data.icon;
   return (
@@ -25,7 +25,9 @@ export function ResourceCard({ data, className }: { data: ResourceCardData; clas
         <Icon className="h-6 w-6" aria-hidden="true" />
       </span>
       <h3 className="text-xl font-semibold text-deep-blue">{data.title}</h3>
-      <p className="text-body mt-2 flex-1 text-muted-foreground">{data.description}</p>
+      {data.description && data.description.trim() !== data.title.trim() && (
+        <p className="text-body mt-2 flex-1 text-muted-foreground">{data.description}</p>
+      )}
       <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-medical-blue">
         Explore
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
@@ -33,3 +35,4 @@ export function ResourceCard({ data, className }: { data: ResourceCardData; clas
     </Link>
   );
 }
+
