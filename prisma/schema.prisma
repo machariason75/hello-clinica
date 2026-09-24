@@ -905,6 +905,8 @@ model EngagementStep {
 }
 
 model EngagementMessage {
+  fileUrl  String?
+  fileName String?
   id           String     @id @default(cuid())
   engagementId String
   engagement   Engagement @relation(fields: [engagementId], references: [id], onDelete: Cascade)

@@ -4,9 +4,7 @@ import { requireAdmin } from "@/lib/admin/auth-helpers";
 import { createNotification } from "@/lib/actions/notifications";
 import { revalidatePath } from "next/cache";
 
-export async function createEngagement(input: {
-  studentEmail: string; service: string; title: string; steps: string[];
-}) {
+export async function createEngagement(input: { studentEmail: string; service: string; title: string; steps: string[]; }) {
   await requireAdmin();
   const email = input.studentEmail.trim().toLowerCase();
   const student = await (prisma as any).student.findUnique({ where: { email }, select: { id: true } });
@@ -19,38 +17,27 @@ export async function createEngagement(input: {
       steps: { create: input.steps.filter((l) => l.trim()).map((label, i) => ({ label: label.trim(), order: i })) },
     },
   });
-  await createNotification(student.id, {
-    kind: "engagement",
-    title: "Your engagement has started",
-    body: `We've set up "${eng.title}". Open it to see the plan and message your tutor.`,
-    actionUrl: "/account/engagements",
-  });
+  await createNotification(student.id, { kind: "engagement", title: "Your engagement has started", body: `We've set up "${eng.title}". Open it to see the plan and message your tutor.`, actionUrl: "/account/engagements" });
   revalidatePath("/admin/engagements");
   return { success: true };
 }
 
-export async function adminStartConversation(studentEmail: string, subject: string, body: string) {
+export async function adminStartConversation(studentEmail: string, subject: string, body: string, fileUrl?: string, fileName?: string) {
   await requireAdmin();
   const email = studentEmail.trim().toLowerCase();
   const student = await (prisma as any).student.findUnique({ where: { email }, select: { id: true } });
   if (!student) return { success: false, message: "No account with that email." };
   const text = body.trim();
-  if (!text) return { success: false, message: "Write a message first." };
+  if (!text && !fileUrl) return { success: false, message: "Write a message or attach a file." };
   await (prisma as any).engagement.create({
     data: {
       studentId: student.id,
       service: "Direct message",
       title: subject.trim() || "Message from Hello Clinica",
-      messages: { create: { sender: "admin", body: text } },
+      messages: { create: { sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null } },
     },
   });
-  await createNotification(student.id, {
-    kind: "engagement",
-    title: "New message from Hello Clinica",
-    body: text.length > 90 ? text.slice(0, 90) + "…" : text,
-    actionUrl: "/account/engagements",
-    requiresReply: true,
-  });
+  await createNotification(student.id, { kind: "engagement", title: "New message from Hello Clinica", body: text ? (text.length > 90 ? text.slice(0, 90) + "…" : text) : "Sent you a file.", actionUrl: "/account/engagements", requiresReply: true });
   revalidatePath("/admin/engagements");
   revalidatePath("/account/engagements");
   return { success: true };
@@ -64,32 +51,21 @@ export async function updateStep(stepId: string, data: { status?: string; dueAt?
     include: { engagement: { select: { id: true, studentId: true, title: true } } },
   });
   const e = step.engagement;
-  await createNotification(e.studentId, {
-    kind: "engagement",
-    title: `Update on "${e.title}"`,
-    body: data.status ? `Step "${step.label}" is now ${step.status.replace("_", " ")}.` : `A deadline was set for "${step.label}".`,
-    actionUrl: "/account/engagements",
-  });
+  await createNotification(e.studentId, { kind: "engagement", title: `Update on "${e.title}"`, body: data.status ? `Step "${step.label}" is now ${step.status.replace("_", " ")}.` : `A deadline was set for "${step.label}".`, actionUrl: "/account/engagements" });
   revalidatePath("/admin/engagements");
   revalidatePath("/account/engagements");
   return { success: true };
 }
 
-export async function adminPostMessage(engagementId: string, body: string) {
+export async function adminPostMessage(engagementId: string, body: string, fileUrl?: string, fileName?: string) {
   await requireAdmin();
   const text = body.trim();
-  if (!text) return { success: false, message: "Write a message first." };
+  if (!text && !fileUrl) return { success: false, message: "Write a message or attach a file." };
   const eng = await (prisma as any).engagement.findUnique({ where: { id: engagementId }, select: { studentId: true, title: true } });
   if (!eng) return { success: false, message: "Not found." };
-  await (prisma as any).engagementMessage.create({ data: { engagementId, sender: "admin", body: text } });
+  await (prisma as any).engagementMessage.create({ data: { engagementId, sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null } });
   await (prisma as any).engagement.update({ where: { id: engagementId }, data: { updatedAt: new Date() } });
-  await createNotification(eng.studentId, {
-    kind: "engagement",
-    title: `New message about "${eng.title}"`,
-    body: text.length > 90 ? text.slice(0, 90) + "…" : text,
-    actionUrl: "/account/engagements",
-    requiresReply: true,
-  });
+  await createNotification(eng.studentId, { kind: "engagement", title: `New message about "${eng.title}"`, body: text ? (text.length > 90 ? text.slice(0, 90) + "…" : text) : "Sent you a file.", actionUrl: "/account/engagements", requiresReply: true });
   revalidatePath("/admin/engagements");
   revalidatePath("/account/engagements");
   return { success: true };
@@ -101,14 +77,12 @@ export async function setEngagementArchived(id: string, archived: boolean) {
   revalidatePath("/admin/engagements");
   return { success: true };
 }
-
 export async function setEngagementBlocked(id: string, blocked: boolean) {
   await requireAdmin();
   await (prisma as any).engagement.update({ where: { id }, data: { blocked } });
   revalidatePath("/admin/engagements");
   return { success: true };
 }
-
 export async function deleteEngagement(id: string) {
   await requireAdmin();
   await (prisma as any).engagementMessage.deleteMany({ where: { engagementId: id } });
