@@ -48,11 +48,24 @@ export const ourFileRouter = {
     .middleware(requireAdminUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url })),
 
-  // Chat attachment — images, PDFs, and general documents, from admin or student.
+  // Chat attachment — images, PDFs, Office docs, and general files, from admin or student.
+  // `blob` is the catch-all that accepts ANY file type; the named types set larger,
+  // format-appropriate size limits. Together they cover png/jpg/gif/webp, pdf, docx,
+  // xlsx, pptx, csv, txt, html, zip, etc.
   messageAttachment: f({
     image: { maxFileSize: "16MB", maxFileCount: 1 },
     pdf: { maxFileSize: "64MB", maxFileCount: 1 },
-    blob: { maxFileSize: "64MB", maxFileCount: 1 },
+    text: { maxFileSize: "16MB", maxFileCount: 1 },
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": { maxFileSize: "64MB", maxFileCount: 1 }, // .docx
+    "application/msword": { maxFileSize: "64MB", maxFileCount: 1 }, // .doc
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": { maxFileSize: "64MB", maxFileCount: 1 }, // .xlsx
+    "application/vnd.ms-excel": { maxFileSize: "64MB", maxFileCount: 1 }, // .xls
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation": { maxFileSize: "64MB", maxFileCount: 1 }, // .pptx
+    "application/vnd.ms-powerpoint": { maxFileSize: "64MB", maxFileCount: 1 }, // .ppt
+    "text/csv": { maxFileSize: "32MB", maxFileCount: 1 },
+    "text/html": { maxFileSize: "16MB", maxFileCount: 1 },
+    "application/zip": { maxFileSize: "128MB", maxFileCount: 1 },
+    blob: { maxFileSize: "128MB", maxFileCount: 1 }, // catch-all for anything else
   })
     .middleware(requireChatUpload)
     .onUploadComplete(async ({ file }) => ({ url: file.url, name: file.name })),
