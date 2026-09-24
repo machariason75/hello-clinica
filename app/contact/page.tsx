@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Mail, Clock, MessageSquare } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
@@ -59,9 +59,13 @@ export default async function ContactPage() {
                 </span>
                 <div>
                   <p className="font-semibold text-deep-blue">WhatsApp</p>
-                  <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="block text-medical-blue hover:underline">
-                    Chat with us on WhatsApp
-                  </a>
+                  {whatsapp ? (
+                    <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="block text-medical-blue hover:underline">
+                      Chat with us on WhatsApp
+                    </a>
+                  ) : (
+                    <p className="text-muted-foreground">Currently unavailable - please reach us by email.</p>
+                  )}
                 </div>
               </li>
               <li className="surface-card flex items-start gap-4 p-5">
@@ -70,7 +74,7 @@ export default async function ContactPage() {
                 </span>
                 <div>
                   <p className="font-semibold text-deep-blue">Response time</p>
-                  <p className="text-muted-foreground">We aim to respond within 1–2 business days.</p>
+                  <p className="text-muted-foreground">We aim to respond within 1-2 business days.</p>
                 </div>
               </li>
               <li className="surface-card flex items-start gap-4 p-5">
