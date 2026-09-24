@@ -8,6 +8,7 @@ import { Menu, X, ArrowLeft } from "lucide-react";
 import { adminNav } from "@/lib/admin/nav";
 import { SignOutButton } from "./SignOutButton";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { AdminMessageAlerts } from "./AdminMessageAlerts";
 import { cn } from "@/lib/utils";
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -93,6 +94,8 @@ export function AdminShell({
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const isDashboard = pathname === "/admin/dashboard";
 
   return (
     <div className="min-h-screen bg-transparent lg:flex">
@@ -145,20 +148,23 @@ export function AdminShell({
             >
               <Menu className="h-5 w-5" />
             </button>
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="focus-ring inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-deep-blue hover:bg-brand-bg"
-              aria-label="Go back"
-            >
-              <ArrowLeft className="h-4 w-4" /> Back
-            </button>
-            <span className="text-sm font-medium text-muted-foreground">
+            {!isDashboard && (
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="focus-ring inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-deep-blue hover:bg-brand-bg"
+                aria-label="Go back"
+              >
+                <ArrowLeft className="h-4 w-4" /> Back
+              </button>
+            )}
+            <span className="hidden text-sm font-medium text-muted-foreground sm:inline">
               Welcome back, <span className="text-deep-blue">{adminName}</span>
             </span>
           </div>
           <ThemeToggle />
         </header>
+        <AdminMessageAlerts />
         <main className="flex-1 px-4 py-6 lg:px-8 lg:py-8">{children}</main>
       </div>
     </div>

@@ -871,6 +871,7 @@ model Bookmark {
 
 
 model Engagement {
+  adminReadAt DateTime?
   archived  Boolean @default(false)
   blocked   Boolean @default(false)
   id        String   @id @default(cuid())
