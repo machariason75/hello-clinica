@@ -4,6 +4,7 @@ export type EngStep = { id: string; label: string; status: string; order: number
 export type EngMessage = { id: string; sender: string; body: string; createdAt: Date };
 export type EngagementFull = {
   id: string; service: string; title: string; status: string; createdAt: Date;
+  archived?: boolean; blocked?: boolean;
   steps: EngStep[]; messages: EngMessage[];
   student?: { name: string; email: string };
 };
@@ -25,7 +26,7 @@ export async function getEngagementForStudent(id: string, studentId: string): Pr
 
 export async function getAllEngagements(): Promise<EngagementFull[]> {
   return (prisma as any).engagement.findMany({
-    orderBy: { updatedAt: "desc" },
+    orderBy: { updatedAt: "desc" }, // newest activity first (WhatsApp-style)
     include: {
       steps: { orderBy: { order: "asc" } },
       messages: { orderBy: { createdAt: "asc" } },

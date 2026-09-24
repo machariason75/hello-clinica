@@ -29,7 +29,6 @@ export async function createEngagement(input: {
   return { success: true };
 }
 
-/** Admin starts a direct conversation with an existing account holder. */
 export async function adminStartConversation(studentEmail: string, subject: string, body: string) {
   await requireAdmin();
   const email = studentEmail.trim().toLowerCase();
@@ -93,5 +92,28 @@ export async function adminPostMessage(engagementId: string, body: string) {
   });
   revalidatePath("/admin/engagements");
   revalidatePath("/account/engagements");
+  return { success: true };
+}
+
+export async function setEngagementArchived(id: string, archived: boolean) {
+  await requireAdmin();
+  await (prisma as any).engagement.update({ where: { id }, data: { archived } });
+  revalidatePath("/admin/engagements");
+  return { success: true };
+}
+
+export async function setEngagementBlocked(id: string, blocked: boolean) {
+  await requireAdmin();
+  await (prisma as any).engagement.update({ where: { id }, data: { blocked } });
+  revalidatePath("/admin/engagements");
+  return { success: true };
+}
+
+export async function deleteEngagement(id: string) {
+  await requireAdmin();
+  await (prisma as any).engagementMessage.deleteMany({ where: { engagementId: id } });
+  await (prisma as any).engagementStep.deleteMany({ where: { engagementId: id } });
+  await (prisma as any).engagement.delete({ where: { id } });
+  revalidatePath("/admin/engagements");
   return { success: true };
 }

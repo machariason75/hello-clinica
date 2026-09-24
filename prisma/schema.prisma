@@ -871,6 +871,8 @@ model Bookmark {
 
 
 model Engagement {
+  archived  Boolean @default(false)
+  blocked   Boolean @default(false)
   id        String   @id @default(cuid())
   studentId String
   student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)

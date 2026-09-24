@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, ArrowLeft } from "lucide-react";
 import { adminNav } from "@/lib/admin/nav";
 import { SignOutButton } from "./SignOutButton";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -156,6 +157,7 @@ export function AdminShell({
               Welcome back, <span className="text-deep-blue">{adminName}</span>
             </span>
           </div>
+          <ThemeToggle />
         </header>
         <main className="flex-1 px-4 py-6 lg:px-8 lg:py-8">{children}</main>
       </div>
