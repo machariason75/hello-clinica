@@ -46,7 +46,15 @@ export function Navbar() {
               width={290}
               height={134}
               priority
-              className="h-9 w-auto sm:h-10"
+              className="h-9 w-auto dark:hidden sm:h-10"
+            />
+            <Image
+              src="/images/logo-white.png"
+              alt={siteConfig.name}
+              width={290}
+              height={134}
+              priority
+              className="hidden h-9 w-auto dark:block sm:h-10"
             />
           </Link>
 
@@ -68,7 +76,7 @@ export function Navbar() {
               <User className="h-4 w-4" aria-hidden="true" /> My Account
             </Link>
 
-            {/* Hamburger — mobile/tablet only */}
+            {/* Hamburger  mobile/tablet only */}
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -82,7 +90,7 @@ export function Navbar() {
           </div>
         </Container>
 
-        {/* Back button strip — internal pages only */}
+        {/* Back button strip  internal pages only */}
         {!isHome && (
           <div className="border-t border-border/50 bg-white/60">
             <Container className="flex h-11 items-center">
@@ -194,4 +202,5 @@ function NavEntry({ item, pathname }: { item: NavItem; pathname: string }) {
     </div>
   );
 }
+
 
