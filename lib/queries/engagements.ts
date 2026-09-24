@@ -1,13 +1,8 @@
 import { prisma } from "@/lib/prisma";
 
 export type EngStep = { id: string; label: string; status: string; order: number; dueAt: Date | null };
-export type EngMessage = { id: string; sender: string; body: string; createdAt: Date; fileUrl?: string | null; fileName?: string | null };
-export type EngagementFull = {
-  id: string; service: string; title: string; status: string; createdAt: Date;
-  archived?: boolean; blocked?: boolean;
-  steps: EngStep[]; messages: EngMessage[];
-  student?: { name: string; email: string };
-};
+export type EngMessage = { id: string; sender: string; body: string; createdAt: Date; fileUrl?: string | null; fileName?: string | null; replyToId?: string | null };
+export type EngagementFull = { id: string; service: string; title: string; status: string; createdAt: Date; archived?: boolean; blocked?: boolean; steps: EngStep[]; messages: EngMessage[]; student?: { name: string; email: string }; };
 
 export async function getStudentEngagements(studentId: string): Promise<EngagementFull[]> {
   return (prisma as any).engagement.findMany({ where: { studentId }, orderBy: { createdAt: "desc" }, include: { steps: { orderBy: { order: "asc" } }, messages: { orderBy: { createdAt: "asc" } } } });

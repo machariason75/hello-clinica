@@ -905,6 +905,7 @@ model EngagementStep {
 }
 
 model EngagementMessage {
+  replyToId String?
   fileUrl  String?
   fileName String?
   id           String     @id @default(cuid())

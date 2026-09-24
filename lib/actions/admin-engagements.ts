@@ -10,12 +10,7 @@ export async function createEngagement(input: { studentEmail: string; service: s
   const student = await (prisma as any).student.findUnique({ where: { email }, select: { id: true } });
   if (!student) return { success: false, message: "No student with that email." };
   const eng = await (prisma as any).engagement.create({
-    data: {
-      studentId: student.id,
-      service: input.service.trim() || "Advising",
-      title: input.title.trim() || "Engagement",
-      steps: { create: input.steps.filter((l) => l.trim()).map((label, i) => ({ label: label.trim(), order: i })) },
-    },
+    data: { studentId: student.id, service: input.service.trim() || "Advising", title: input.title.trim() || "Engagement", steps: { create: input.steps.filter((l) => l.trim()).map((label, i) => ({ label: label.trim(), order: i })) } },
   });
   await createNotification(student.id, { kind: "engagement", title: "Your engagement has started", body: `We've set up "${eng.title}". Open it to see the plan and message your tutor.`, actionUrl: "/account/engagements" });
   revalidatePath("/admin/engagements");
@@ -30,16 +25,10 @@ export async function adminStartConversation(studentEmail: string, subject: stri
   const text = body.trim();
   if (!text && !fileUrl) return { success: false, message: "Write a message or attach a file." };
   await (prisma as any).engagement.create({
-    data: {
-      studentId: student.id,
-      service: "Direct message",
-      title: subject.trim() || "Message from Hello Clinica",
-      messages: { create: { sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null } },
-    },
+    data: { studentId: student.id, service: "Direct message", title: subject.trim() || "Message from Hello Clinica", messages: { create: { sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null } } },
   });
   await createNotification(student.id, { kind: "engagement", title: "New message from Hello Clinica", body: text ? (text.length > 90 ? text.slice(0, 90) + "…" : text) : "Sent you a file.", actionUrl: "/account/engagements", requiresReply: true });
-  revalidatePath("/admin/engagements");
-  revalidatePath("/account/engagements");
+  revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
   return { success: true };
 }
 
@@ -52,42 +41,30 @@ export async function updateStep(stepId: string, data: { status?: string; dueAt?
   });
   const e = step.engagement;
   await createNotification(e.studentId, { kind: "engagement", title: `Update on "${e.title}"`, body: data.status ? `Step "${step.label}" is now ${step.status.replace("_", " ")}.` : `A deadline was set for "${step.label}".`, actionUrl: "/account/engagements" });
-  revalidatePath("/admin/engagements");
-  revalidatePath("/account/engagements");
+  revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
   return { success: true };
 }
 
-export async function adminPostMessage(engagementId: string, body: string, fileUrl?: string, fileName?: string) {
+export async function adminPostMessage(engagementId: string, body: string, fileUrl?: string, fileName?: string, replyToId?: string) {
   await requireAdmin();
   const text = body.trim();
   if (!text && !fileUrl) return { success: false, message: "Write a message or attach a file." };
   const eng = await (prisma as any).engagement.findUnique({ where: { id: engagementId }, select: { studentId: true, title: true } });
   if (!eng) return { success: false, message: "Not found." };
-  await (prisma as any).engagementMessage.create({ data: { engagementId, sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null } });
+  await (prisma as any).engagementMessage.create({ data: { engagementId, sender: "admin", body: text, fileUrl: fileUrl ?? null, fileName: fileName ?? null, replyToId: replyToId ?? null } });
   await (prisma as any).engagement.update({ where: { id: engagementId }, data: { updatedAt: new Date() } });
   await createNotification(eng.studentId, { kind: "engagement", title: `New message about "${eng.title}"`, body: text ? (text.length > 90 ? text.slice(0, 90) + "…" : text) : "Sent you a file.", actionUrl: "/account/engagements", requiresReply: true });
-  revalidatePath("/admin/engagements");
-  revalidatePath("/account/engagements");
+  revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
   return { success: true };
 }
 
-export async function setEngagementArchived(id: string, archived: boolean) {
+export async function adminDeleteMessage(messageId: string) {
   await requireAdmin();
-  await (prisma as any).engagement.update({ where: { id }, data: { archived } });
-  revalidatePath("/admin/engagements");
+  await (prisma as any).engagementMessage.delete({ where: { id: messageId } });
+  revalidatePath("/admin/engagements"); revalidatePath("/account/engagements");
   return { success: true };
 }
-export async function setEngagementBlocked(id: string, blocked: boolean) {
-  await requireAdmin();
-  await (prisma as any).engagement.update({ where: { id }, data: { blocked } });
-  revalidatePath("/admin/engagements");
-  return { success: true };
-}
-export async function deleteEngagement(id: string) {
-  await requireAdmin();
-  await (prisma as any).engagementMessage.deleteMany({ where: { engagementId: id } });
-  await (prisma as any).engagementStep.deleteMany({ where: { engagementId: id } });
-  await (prisma as any).engagement.delete({ where: { id } });
-  revalidatePath("/admin/engagements");
-  return { success: true };
-}
+
+export async function setEngagementArchived(id: string, archived: boolean) { await requireAdmin(); await (prisma as any).engagement.update({ where: { id }, data: { archived } }); revalidatePath("/admin/engagements"); return { success: true }; }
+export async function setEngagementBlocked(id: string, blocked: boolean) { await requireAdmin(); await (prisma as any).engagement.update({ where: { id }, data: { blocked } }); revalidatePath("/admin/engagements"); return { success: true }; }
+export async function deleteEngagement(id: string) { await requireAdmin(); await (prisma as any).engagementMessage.deleteMany({ where: { engagementId: id } }); await (prisma as any).engagementStep.deleteMany({ where: { engagementId: id } }); await (prisma as any).engagement.delete({ where: { id } }); revalidatePath("/admin/engagements"); return { success: true }; }
