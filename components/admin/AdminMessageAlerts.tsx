@@ -15,18 +15,11 @@ export function AdminMessageAlerts() {
     return () => { live = false; };
   }, []);
 
-  // Remove strictly by id, functional update — never by position.
-  function removeById(id: string) {
+  // Persist read to the DB in ALL paths, then remove from view. Awaited so it sticks.
+  async function clear(id: string, go?: boolean) {
     setAlerts((prev) => prev.filter((x) => x.id !== id));
-  }
-  async function markRead(id: string) {
-    removeById(id);                                  // optimistic, by id
-    try { await markEngagementRead(id); } catch { /* stays read next fetch anyway */ }
-  }
-  async function open(id: string) {
-    removeById(id);
     try { await markEngagementRead(id); } catch {}
-    router.push("/admin/engagements");
+    if (go) router.push("/admin/engagements");
   }
 
   if (alerts.length === 0) return null;
@@ -34,26 +27,17 @@ export function AdminMessageAlerts() {
   return (
     <div className="pointer-events-none fixed right-4 top-20 z-50 flex w-80 max-w-[calc(100vw-2rem)] flex-col gap-2">
       {alerts.slice(0, 5).map((a) => (
-        <AlertCard
-          key={a.id}
-          alert={a}
-          onOpen={() => open(a.id)}
-          onDismiss={() => removeById(a.id)}
-          onRead={() => markRead(a.id)}
-        />
+        <AlertCard key={a.id} alert={a} onOpen={() => clear(a.id, true)} onDismiss={() => clear(a.id)} onRead={() => clear(a.id)} />
       ))}
     </div>
   );
 }
 
-function AlertCard({ alert, onOpen, onDismiss, onRead }: {
-  alert: AdminAlert; onOpen: () => void; onDismiss: () => void; onRead: () => void;
-}) {
+function AlertCard({ alert, onOpen, onDismiss, onRead }: { alert: AdminAlert; onOpen: () => void; onDismiss: () => void; onRead: () => void }) {
   const startX = useRef<number | null>(null);
   const [dx, setDx] = useState(0);
   return (
     <div
-      data-alert-id={alert.id}
       className="surface-card pointer-events-auto p-3 shadow-card-hover transition-transform"
       style={{ transform: dx ? `translateX(${dx}px)` : undefined, opacity: dx ? Math.max(0, 1 - Math.abs(dx) / 200) : 1 }}
       onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
