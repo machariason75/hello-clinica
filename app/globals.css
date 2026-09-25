@@ -431,3 +431,33 @@ html.dark,
 /* make sure text on those panels is legible */
 .dark [class~="bg-brand-bg/60"], .dark [class~="bg-brand-bg/50"],
 .dark [class*="F3E9DD"] { color: hsl(var(--foreground)); }
+
+
+/* ===== SOFT GLASS PASS (start) ============================================= */
+/* Continuous, glass-mirror feel: near-invisible edges + translucent fill +    */
+/* gentle blur + soft diffuse shadow. Dial the ★ values to taste.              */
+@layer components {
+  .surface-card {
+    border-color: hsl(var(--border) / 0.28) !important;                 /* ★ edge visibility (0 = none) */
+    background-color: hsl(0 0% 100% / 0.68) !important;                 /* translucency */
+    backdrop-filter: saturate(118%) blur(10px);                        /* ★ glass blur */
+    -webkit-backdrop-filter: saturate(118%) blur(10px);
+    box-shadow: 0 14px 44px -24px rgba(12, 60, 76, 0.20),               /* ★ soft diffuse shadow */
+                0 1px 2px rgba(12, 60, 76, 0.03) !important;
+  }
+  .surface-card-interactive:hover {
+    box-shadow: 0 22px 54px -26px rgba(12, 60, 76, 0.28) !important;
+  }
+  /* let sections flow: soften horizontal hairline dividers */
+  .border-t, .border-b { border-color: hsl(var(--border) / 0.45); }
+}
+
+/* Dark mode: translucent dark glass rather than hard boxes */
+.dark .surface-card {
+  border-color: hsl(var(--border) / 0.32) !important;
+  background-color: hsl(var(--card) / 0.55) !important;
+  backdrop-filter: saturate(120%) blur(10px);
+  -webkit-backdrop-filter: saturate(120%) blur(10px);
+  box-shadow: 0 16px 46px -26px rgba(0, 0, 0, 0.55) !important;
+}
+/* ===== SOFT GLASS PASS (end) =============================================== */
