@@ -82,7 +82,7 @@ function Card({ eng }: { eng: EngagementFull }) {
   return (
     <article className="surface-card p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-coral">{eng.service}</p>
-      <h2 className="text-h3 mt-1 text-deep-blue">{eng.title}</h2>
+      {eng.service !== "Direct message" && <h2 className="text-h3 mt-1 text-deep-blue">{eng.title}</h2>}
       {eng.steps.length > 0 && (
         <ol className="mt-5 space-y-2">
           {eng.steps.map((st) => {
