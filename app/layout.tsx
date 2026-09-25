@@ -35,6 +35,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen font-sans">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}",
+          }}
+        />
         <AmbientBackground />
         <JsonLd data={organizationJsonLd()} />
         <a href="#main-content" className="skip-link">
