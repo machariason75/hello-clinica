@@ -41,3 +41,11 @@ export async function getBookCountsByCategory() {
   for (const g of grouped) map.set(g.category, g._count._all);
   return map;
 }
+
+/** Books the given student has bookmarked (any category). Live, per-user. */
+export async function getBookmarkedBooks(studentId: string) {
+  const rows = await (prisma as any).bookmark.findMany({ where: { studentId, itemType: "book" } });
+  const ids: string[] = rows.map((r: any) => r.itemId);
+  if (ids.length === 0) return [];
+  return prisma.book.findMany({ where: { id: { in: ids }, ...visible }, orderBy: { title: "asc" } });
+}

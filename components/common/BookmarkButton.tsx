@@ -55,6 +55,7 @@ export function BookmarkButton({
         else toast.error("Couldn't update bookmark.");
       } else {
         toast.success(res.bookmarked ? "Bookmarked." : "Bookmark removed.");
+        router.refresh(); // reflect in the Bookmarks section immediately
       }
     });
   }
@@ -72,3 +73,4 @@ export function BookmarkButton({
     </button>
   );
 }
+

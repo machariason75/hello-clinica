@@ -24,10 +24,12 @@ export async function toggleBookmark(itemType: Kind, itemId: string) {
   if (existing) {
     await (prisma as any).bookmark.delete({ where: key });
     revalidatePath("/account/bookmarks");
+  revalidatePath("/books/recommended-books");
     return { success: true, bookmarked: false as const };
   }
   await (prisma as any).bookmark.create({ data: { studentId: s.id, itemType, itemId } });
   revalidatePath("/account/bookmarks");
+  revalidatePath("/books/recommended-books");
   return { success: true, bookmarked: true as const };
 }
 
@@ -36,5 +38,7 @@ export async function removeBookmark(id: string) {
   if (!s) return { success: false };
   await (prisma as any).bookmark.deleteMany({ where: { id, studentId: s.id } });
   revalidatePath("/account/bookmarks");
+  revalidatePath("/books/recommended-books");
   return { success: true };
 }
+
