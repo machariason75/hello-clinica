@@ -38,11 +38,6 @@ export default async function BooksPage() {
 
   return (
     <PageTransition>
-      <PageHero
-        eyebrow="Books"
-        title="Curated reading for future clinicians"
-        description="Recommended books, core medical school texts, study guides, and digital downloads — organized to help you find the right resource fast."
-      />
 
       <Section className="section-tight">
         <BooksFeatureBanner />
