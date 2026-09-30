@@ -1,6 +1,6 @@
 import type { BookCategory } from "@prisma/client";
 
-/** The four fixed book categories (taxonomy, per Content Structure). */
+/** Book category taxonomy (top-level trees shown in the Books section). */
 export type BookCategoryDef = {
   slug: string;
   enum: BookCategory;
@@ -9,12 +9,6 @@ export type BookCategoryDef = {
 };
 
 export const bookCategories: BookCategoryDef[] = [
-  {
-    slug: "recommended-books",
-    enum: "RECOMMENDED_BOOKS",
-    title: "Recommended Books",
-    description: "Our advisors' most-recommended reads for premed and medical students.",
-  },
   {
     slug: "medical-school-books",
     enum: "MEDICAL_SCHOOL_BOOKS",
@@ -25,13 +19,25 @@ export const bookCategories: BookCategoryDef[] = [
     slug: "nursing-books",
     enum: "NURSING_BOOKS",
     title: "Nursing Books",
-    description: "Foundational texts and references for nursing students at every stage.",
+    description: "Nursing texts and references organized by topic — including NCLEX & board review.",
   },
   {
     slug: "nclex-books",
     enum: "NCLEX_BOOKS",
     title: "NCLEX Books",
     description: "Review books and question banks focused on NCLEX preparation.",
+  },
+  {
+    slug: "mpje-books",
+    enum: "MPJE_BOOKS",
+    title: "MPJE Books",
+    description: "Multistate Pharmacy Jurisprudence Exam review materials and law references.",
+  },
+  {
+    slug: "usmle-books",
+    enum: "USMLE_BOOKS",
+    title: "USMLE Books",
+    description: "Review books and question banks for USMLE Step preparation.",
   },
   {
     slug: "study-guides",
@@ -44,6 +50,12 @@ export const bookCategories: BookCategoryDef[] = [
     enum: "DIGITAL_DOWNLOADS",
     title: "Digital Downloads",
     description: "Downloadable workbooks, checklists, and digital study tools.",
+  },
+  {
+    slug: "recommended-books",
+    enum: "RECOMMENDED_BOOKS",
+    title: "Recommended Books",
+    description: "Our advisors' most-recommended reads for premed and medical students.",
   },
 ];
 

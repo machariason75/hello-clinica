@@ -50,6 +50,8 @@ enum BookCategory {
   NCLEX_BOOKS
   STUDY_GUIDES
   DIGITAL_DOWNLOADS
+  MPJE_BOOKS
+  USMLE_BOOKS
 }
 
 enum ResourceCategory {
