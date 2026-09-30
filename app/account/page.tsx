@@ -119,6 +119,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             </div>
           </div>
 
+          {!student.hasAccess && (
           <div className="surface-card p-6">
             <div className="flex items-start gap-3">
               <GraduationCap className="mt-0.5 h-6 w-6 text-medical-blue" />
@@ -132,7 +133,8 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                 </Link>
               </div>
             </div>
-          </div>
+          </div>          )}
+
         </div>
       </Section>
     </PageTransition>
