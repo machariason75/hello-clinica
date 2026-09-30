@@ -34,6 +34,14 @@ export default async function BookmarksPage() {
           <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All books
         </Link>
 
+        {/* Who am I? — makes it obvious which account's bookmarks these are. */}
+        {student && (
+          <p className="mb-6 text-sm text-muted-foreground">
+            Signed in as <span className="font-semibold text-deep-blue">{student.email}</span>
+            {" "}· bookmarks are personal to your account.
+          </p>
+        )}
+
         {!student ? (
           <EmptyState icon={<Bookmark className="h-7 w-7" />} title="Sign in to see your bookmarks" description="Create a free account, then tap the bookmark icon on any book to save it here." />
         ) : books.length === 0 ? (
