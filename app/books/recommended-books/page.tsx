@@ -8,6 +8,7 @@ import { BookCard } from "@/components/cards/BookCard";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
+import { unstable_noStore as noStore } from "next/cache";
 import { getStudent } from "@/lib/student/auth";
 import { getBookmarkedBooks } from "@/lib/queries/books";
 import { getBookCategoryByEnum } from "@/lib/data/book-categories";
@@ -23,6 +24,7 @@ function hrefFor(b: BM) {
 }
 
 export default async function BookmarksPage() {
+  noStore();
   const student = await getStudent();
   const books = (student ? await getBookmarkedBooks(student.id) : []) as BM[];
 
