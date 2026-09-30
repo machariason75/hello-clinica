@@ -107,7 +107,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                 </h2>
                 <p className="text-body mt-1 text-muted-foreground">
                   {student.hasAccess
-                    ? "You can open every premium section of the Question Bank. Happy studying!"
+                    ? "Your premium access is active across the whole site — read every book and study guide, open all Question Bank categories and quizzes, download files, and save bookmarks and notes. Happy studying!"
                     : "Free practice is open to everyone. To unlock premium sections and course revision, request access below and our team will reach out."}
                 </p>
                 {!student.hasAccess && (
