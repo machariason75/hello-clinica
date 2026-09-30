@@ -476,3 +476,7 @@ html.dark,
 /* keep the page labels / chrome legible */
 .dark [class*="3a4a5a"] .text-muted-foreground { color: hsl(200 12% 68%) !important; }
 /* ===== READER DARK MODE (end) ============================================= */
+
+/* MONOCHROME LOGO DARK — consistent white logo everywhere in dark (site, login, admin) */
+.dark header a[href="/"] img,
+.dark img[alt*="Hello Clinica"] { filter: brightness(0) invert(1) !important; }

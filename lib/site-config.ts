@@ -108,7 +108,6 @@ export const primaryNav: NavItem[] = [
       { label: "USMLE Books", href: "/books/usmle-books" },
       { label: "Study Resources", href: "/books/study-guides" },
       { label: "Bookmarks", href: "/books/recommended-books" },
-      { label: "Study Guides", href: "/books/study-guides" },
     ],
   },
   { label: "Question Bank", href: "/question-bank" },
