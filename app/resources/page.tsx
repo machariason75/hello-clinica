@@ -23,7 +23,6 @@ export default async function ResourcesPage() {
   return (
     <PageTransition>
       <PageHero
-        eyebrow="Free Resources"
         title="Free Resources"
       />
 
