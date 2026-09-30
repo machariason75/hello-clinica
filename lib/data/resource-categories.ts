@@ -87,7 +87,7 @@ export const resourceCategories: ResourceCategoryDef[] = [
   {
     slug: "study-resources",
     enum: "STUDY_RESOURCES",
-    title: "Study Resources",
+    title: "Study Guides",
     description: "Strengthen academic performance and study habits.",
     overview:
       "Evidence-based study techniques, time-management frameworks, and recommended tools to help you perform well in coursework and standardized exams.",
