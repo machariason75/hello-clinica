@@ -28,7 +28,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             <div className="flex items-start gap-3 rounded-xl border border-coral/30 bg-coral/5 p-4">
               <Lock className="mt-0.5 h-5 w-5 shrink-0 text-coral" />
               <p className="text-sm text-deep-blue">
-                Downloads are a premium feature. You can read everything on the site for free — to save files to your
+                Downloads are a premium feature. You can read everything on the site for free â€” to save files to your
                 device, request premium access below.
               </p>
             </div>
@@ -107,7 +107,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                 </h2>
                 <p className="text-body mt-1 text-muted-foreground">
                   {student.hasAccess
-                    ? "Your premium access is active across the whole site � read every book and study guide, open all Question Bank categories and quizzes, download files, and save bookmarks and notes. Happy studying!"
+                    ? "Your premium access is active across the whole site — read every book and study guide, open all Question Bank categories and quizzes, download files, and save bookmarks and notes. Happy studying!"
                     : "Free practice is open to everyone. To unlock premium sections and course revision, request access below and our team will reach out."}
                 </p>
                 {!student.hasAccess && (
