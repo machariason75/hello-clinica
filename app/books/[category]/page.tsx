@@ -6,14 +6,15 @@ import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
 import { EmptyState } from "@/components/common/EmptyState";
 import { BookCard } from "@/components/cards/BookCard";
-import { MedicalSchoolShelf, type ShelfBook } from "@/components/books/MedicalSchoolShelf";
+import { CategoryShelf, type ShelfBook } from "@/components/books/CategoryShelf";
 import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 import { getBookCategoryBySlug } from "@/lib/data/book-categories";
+import { getDisciplinesForCategory } from "@/lib/data/book-disciplines";
 import { getBooksByCategory } from "@/lib/queries/books";
 
-export const revalidate = 300; // cached, refreshed every 5 min
+export const revalidate = 300;
 
 type Params = { params: Promise<{ category: string }> };
 
@@ -30,53 +31,30 @@ export default async function BookCategoryPage({ params }: Params) {
   if (!def) notFound();
 
   const books = await getBooksByCategory(def.enum);
-
-  // "Medical School Books" is browsed by discipline folders; the other
-  // categories keep the simple flat grid.
-  const isMedicalSchool = def.slug === "medical-school-books";
+  const disciplines = getDisciplinesForCategory(def.enum);
+  const foldered = disciplines.length > 0;
 
   return (
     <PageTransition>
       <PageHero eyebrow="Books" title={def.title} description={def.description} />
-
       <Section ariaLabel={`${def.title} listing`}>
-        <Link
-          href="/books"
-          className="focus-ring mb-8 inline-flex items-center gap-2 rounded-lg text-sm font-medium text-medical-blue hover:underline"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          All books
+        <Link href="/books" className="focus-ring mb-8 inline-flex items-center gap-2 rounded-lg text-sm font-medium text-medical-blue hover:underline">
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All books
         </Link>
 
         {books.length === 0 ? (
-          <EmptyState
-            icon={<BookOpen className="h-7 w-7" />}
-            title="No books here yet"
-            description="Titles for this category are being added. Check back soon or subscribe below."
-          />
-        ) : isMedicalSchool ? (
-          <MedicalSchoolShelf
-            books={books.map(
-              (b): ShelfBook => ({
-                id: b.id,
-                title: b.title,
-                author: b.author,
-                discipline: (b as { discipline: string | null }).discipline ?? null,
-              })
-            )}
+          <EmptyState icon={<BookOpen className="h-7 w-7" />} title="No books here yet" description="Titles for this category are being added. Check back soon or subscribe below." />
+        ) : foldered ? (
+          <CategoryShelf
+            categorySlug={def.slug}
+            disciplines={disciplines}
+            books={books.map((b): ShelfBook => ({ id: b.id, title: b.title, author: b.author, discipline: (b as { discipline: string | null }).discipline ?? null }))}
           />
         ) : (
           <StaggerGroup className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
             {books.map((b) => (
               <StaggerItem key={b.id} className="h-full">
-                <BookCard
-                  data={{
-                    title: b.title,
-                    author: b.author,
-                    category: def.title,
-                    href: `/books/${def.slug}/${b.id}`,
-                  }}
-                />
+                <BookCard data={{ title: b.title, author: b.author, category: def.title, href: `/books/${def.slug}/${b.id}` }} />
               </StaggerItem>
             ))}
           </StaggerGroup>

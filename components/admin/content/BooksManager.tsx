@@ -21,7 +21,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { YesNoPill } from "@/components/admin/ui/StatusPill";
 import { UploadField } from "@/components/admin/ui/UploadField";
-import { bookDisciplines } from "@/lib/data/book-disciplines";
+import { getDisciplinesForCategory } from "@/lib/data/book-disciplines";
+import { bookCategories } from "@/lib/data/book-categories";
 import { bookSchema, bookCategoryValues, type BookFormInput } from "@/lib/admin/content-schemas";
 import {
   createBook, updateBook, setBookFeatured, setBookArchived, deleteBook,
@@ -42,16 +43,18 @@ export type BookRow = {
 };
 
 const categoryLabels: Record<string, string> = {
-  RECOMMENDED_BOOKS: "Recommended Books",
   MEDICAL_SCHOOL_BOOKS: "Medical School Books",
   NURSING_BOOKS: "Nursing Books",
-  NCLEX_BOOKS: "NCLEX Books",
-  STUDY_GUIDES: "Study Guides",
-  DIGITAL_DOWNLOADS: "Digital Downloads",
+  MPJE_BOOKS: "MPJE Books",
+  USMLE_BOOKS: "USMLE Books",
+  STUDY_GUIDES: "Study Resources",
+  RECOMMENDED_BOOKS: "Bookmarks",
+  NCLEX_BOOKS: "NCLEX Books (legacy)",
+  DIGITAL_DOWNLOADS: "Digital Downloads (legacy)",
 };
 
 const emptyForm: BookFormInput = {
-  title: "", author: "", description: "", category: "RECOMMENDED_BOOKS",
+  title: "", author: "", description: "", category: "MEDICAL_SCHOOL_BOOKS",
   coverImage: "", fileUrl: "", discipline: "", featured: false, published: true,
 };
 
@@ -145,7 +148,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
         <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
           <div className="relative sm:max-w-xs">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search title or author…" className="pl-9" />
+            <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search title or author" className="pl-9" />
           </div>
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="sm:w-56"><SelectValue placeholder="Filter category" /></SelectTrigger>
@@ -251,18 +254,18 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
               <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v as BookFormInput["category"] })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  {bookCategoryValues.map((c) => (
-                    <SelectItem key={c} value={c}>{categoryLabels[c]}</SelectItem>
+                  {bookCategories.map((c) => (
+                    <SelectItem key={c.enum} value={c.enum}>{c.title}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </Field>
-            {form.category === "MEDICAL_SCHOOL_BOOKS" && (
+            {getDisciplinesForCategory(form.category).length > 0 && (
               <Field label="Discipline (folder)" error={errors.discipline}>
                 <Select value={form.discipline || ""} onValueChange={(v) => setForm({ ...form, discipline: v })}>
                   <SelectTrigger><SelectValue placeholder="Choose a discipline" /></SelectTrigger>
                   <SelectContent>
-                    {bookDisciplines.map((d) => (
+                    {getDisciplinesForCategory(form.category).map((d) => (
                       <SelectItem key={d.slug} value={d.slug}>{d.title}</SelectItem>
                     ))}
                   </SelectContent>
@@ -299,7 +302,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
           <div className="mt-2 flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setDialogOpen(false)} disabled={isPending}>Cancel</Button>
             <Button onClick={submit} disabled={isPending}>
-              {isPending ? <LoadingSpinner label="Saving…" /> : editingId ? "Save changes" : "Create book"}
+              {isPending ? <LoadingSpinner label="Saving" /> : editingId ? "Save changes" : "Create book"}
             </Button>
           </div>
         </DialogContent>
@@ -311,7 +314,7 @@ export function BooksManager({ rows }: { rows: BookRow[] }) {
           <div className="mb-2 space-y-1.5">
             <DialogTitle>Delete this book?</DialogTitle>
             <DialogDescription>
-              “{confirmDelete?.title}” will be permanently removed. This cannot be undone.
+              {confirmDelete?.title} will be permanently removed. This cannot be undone.
               Consider archiving instead if you may want it back.
             </DialogDescription>
           </div>
