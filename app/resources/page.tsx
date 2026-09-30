@@ -13,7 +13,7 @@ export const revalidate = 300; // cached, refreshed every 5 min
 export const metadata: Metadata = buildMetadata({
   title: "Free Resources",
   description:
-    "Free, practical guides for every stage of the medical school journey — admissions, essays, interviews, clinical experience, and more.",
+    "Free, practical guides for every stage of the medical school journey  admissions, essays, interviews, clinical experience, and more.",
   path: "/resources",
 });
 
@@ -24,8 +24,7 @@ export default async function ResourcesPage() {
     <PageTransition>
       <PageHero
         eyebrow="Free Resources"
-        title="Guides for your medical school journey"
-        description="A growing library of free, practical resources — from admissions and essays to interviews and clinical experience."
+        title="Free Resources"
       />
 
       <Section ariaLabel="Resource categories">
@@ -34,7 +33,7 @@ export default async function ResourcesPage() {
           whole library at a glance and navigate to any topic. Categories that
           don't hold published guides yet still have a page with an outline of
           what's coming, so none of these lead to a dead end. (The nursing
-          sub-folders — group "nursing" — live inside the Nursing Resources
+          sub-folders  group "nursing"  live inside the Nursing Resources
           page, so they're excluded here.)
         */}
         <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

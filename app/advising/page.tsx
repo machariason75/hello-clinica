@@ -22,8 +22,7 @@ export default function AdvisingPage() {
     <PageTransition>
       <PageHero
         eyebrow="Advising & Premium"
-        title="One-on-one support for every stage"
-        description="Work directly with advisors who shape their guidance around your goals — from admissions and exam prep to advanced-degree research and writing. Choose a service to see how it works."
+        title="Advising Services"
       />
 
       <Section>
@@ -39,3 +38,4 @@ export default function AdvisingPage() {
     </PageTransition>
   );
 }
+

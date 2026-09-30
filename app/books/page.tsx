@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/common/PageHero";
 import { Section } from "@/components/common/Section";
+import { PageHero } from "@/components/common/PageHero";
 import { EmptyState } from "@/components/common/EmptyState";
 import { BookOpen } from "lucide-react";
 import { PageTransition } from "@/components/motion/PageTransition";
@@ -38,6 +38,7 @@ export default async function BooksPage() {
 
   return (
     <PageTransition>
+      <PageHero eyebrow="Books" title="Medical & Nursing Books" />
 
       <Section className="section-tight">
         <BooksFeatureBanner />
@@ -57,3 +58,4 @@ export default async function BooksPage() {
     </PageTransition>
   );
 }
+

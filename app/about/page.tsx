@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const values = [
-  { icon: ShieldCheck, title: "Integrity", text: "Honest, transparent guidance — we tell you what you need to hear, not just what's easy." },
+  { icon: ShieldCheck, title: "Integrity", text: "Honest, transparent guidance  we tell you what you need to hear, not just what's easy." },
   { icon: HeartHandshake, title: "Empathy", text: "Every journey is personal. We meet you where you are and support your specific goals." },
   { icon: Sparkles, title: "Excellence", text: "Thoughtful, high-quality resources and advising you can rely on at every milestone." },
   { icon: Users, title: "Accessibility", text: "A strong base of free resources so guidance is within reach, wherever you're starting." },
@@ -26,9 +26,7 @@ export default function AboutPage() {
   return (
     <PageTransition>
       <PageHero
-        eyebrow="About Hello Clinica"
-        title="Guidance built around your journey"
-        description="We help students move through the healthcare education path with clarity, structure, and support that adapts to where they are."
+        title="About Hello Clinica"
       />
 
       <Section>
@@ -39,7 +37,7 @@ export default function AboutPage() {
             </span>
             <h2 className="text-h3 mt-5 text-deep-blue">Our mission</h2>
             <p className="text-body mt-3 text-muted-foreground">
-              To make expert guidance accessible to every aspiring healthcare professional — combining
+              To make expert guidance accessible to every aspiring healthcare professional  combining
               personalized advising with a free, trustworthy resource library that demystifies the path
               from pre-med to practice.
             </p>
@@ -50,7 +48,7 @@ export default function AboutPage() {
             </span>
             <h2 className="text-h3 mt-5 text-deep-blue">Our vision</h2>
             <p className="text-body mt-3 text-muted-foreground">
-              A future where no capable student is held back by a lack of guidance — where clear
+              A future where no capable student is held back by a lack of guidance  where clear
               information and caring mentorship help more people reach their potential in medicine and
               allied health.
             </p>
@@ -62,7 +60,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Our story"
           title="Why we built Hello Clinica"
-          intro="The path into healthcare is full of unwritten rules. We started Hello Clinica to make that path clearer — pairing practical resources with advising that treats each student as an individual."
+          intro="The path into healthcare is full of unwritten rules. We started Hello Clinica to make that path clearer  pairing practical resources with advising that treats each student as an individual."
         />
         <Reveal className="mx-auto mt-10 max-w-3xl space-y-5 text-body text-muted-foreground">
           <p>
@@ -101,3 +99,4 @@ export default function AboutPage() {
     </PageTransition>
   );
 }
+
