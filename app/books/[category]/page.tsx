@@ -43,7 +43,7 @@ export default async function BookCategoryPage({ params }: Params) {
         </Link>
 
         {books.length === 0 ? (
-          <EmptyState icon={<BookOpen className="h-7 w-7" />} title="No books here yet" description="Titles for this category are being added. Check back soon or subscribe below." />
+          <EmptyState icon={<BookOpen className="h-7 w-7" />} title="No books here yet" description="Titles for this category are being added. Check back soon - new books are published here regularly." />
         ) : foldered ? (
           <CategoryShelf
             categorySlug={def.slug}
