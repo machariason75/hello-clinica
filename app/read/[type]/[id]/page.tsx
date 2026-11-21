@@ -7,6 +7,7 @@ import { ReaderView, type ReaderNoteItem } from "@/components/reader/ReaderView"
 import { PremiumLock } from "@/components/quiz/PremiumLock";
 import { buildMetadata } from "@/lib/seo";
 import { headers } from "next/headers";
+import { detectFileKind } from "@/lib/reader/file-kind";
 
 export const dynamic = "force-dynamic";
 
@@ -33,27 +34,6 @@ async function titleFor(type: string, id: string): Promise<string | null> {
   if (type === "resource") return (await prisma.resource.findUnique({ where: { id }, select: { title: true } }))?.title ?? null;
   if (type === "book") return (await prisma.book.findUnique({ where: { id }, select: { title: true } }))?.title ?? null;
   return null;
-}
-
-type DocKind = "pdf" | "image" | "audio" | "video" | "excel" | "word" | "other";
-
-async function classifyKind(fileUrl: string | null): Promise<DocKind> {
-  if (!fileUrl) return "other";
-  let ct = "";
-  try {
-    const res = await fetch(fileUrl, { method: "GET", headers: { Range: "bytes=0-0" }, cache: "no-store" });
-    ct = (res.headers.get("content-type") || "").toLowerCase();
-  } catch {
-    ct = "";
-  }
-  const u = fileUrl.toLowerCase();
-  if (ct.includes("pdf") || /\.pdf($|\?)/.test(u)) return "pdf";
-  if (ct.startsWith("image/") || /\.(png|jpe?g|gif|webp|svg|avif)($|\?)/.test(u)) return "image";
-  if (ct.startsWith("audio/") || /\.(mp3|wav|m4a|aac|ogg|oga)($|\?)/.test(u)) return "audio";
-  if (ct.startsWith("video/") || /\.(mp4|webm|ogv|mov|m4v)($|\?)/.test(u)) return "video";
-  if (ct.includes("sheet") || ct.includes("excel") || ct.includes("csv") || /\.(xlsx|xls|csv)($|\?)/.test(u)) return "excel";
-  if (ct.includes("word") || ct.includes("wordprocessing") || /\.docx($|\?)/.test(u)) return "word";
-  return "other";
 }
 
 export default async function ReaderPage({ params }: Params) {
@@ -92,7 +72,15 @@ export default async function ReaderPage({ params }: Params) {
     id: n.id, content: n.content, page: n.page, createdAt: n.createdAt.toISOString(),
   }));
 
-  const kind = await classifyKind(fileUrl);
+  const { kind } = await detectFileKind(fileUrl);
+
+  // Absolute URL of the same-origin file proxy. Formats the browser can't draw
+  // itself (PowerPoint, old .doc/.ppt) are shown through Microsoft's online
+  // viewer, which needs a public URL to fetch the file from.
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "";
+  const proto = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https");
+  const publicFileUrl = host ? `${proto}://${host}/api/read-file?type=${type}&id=${encodeURIComponent(id)}` : "";
 
   return (
     <ReaderView
@@ -101,6 +89,7 @@ export default async function ReaderPage({ params }: Params) {
       title={title}
       hasFile={!!fileUrl}
       kind={kind}
+      publicFileUrl={publicFileUrl}
       backHref={backHref}
       signedIn={!!student}
       isPremium={!!student?.hasAccess}

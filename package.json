@@ -18,7 +18,8 @@
     "db:seed:quizbank": "tsx prisma/seed-quizbank.ts",
     "db:seed:quizsets": "tsx prisma/seed-quizsets.ts",
     "db:studio": "prisma studio",
-    "hash:password": "node scripts/hash-password.mjs"
+    "hash:password": "node scripts/hash-password.mjs",
+    "audit:reader": "tsx scripts/audit-reader-files.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

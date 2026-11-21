@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useCallback, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import {
-  ArrowLeft, StickyNote, X, Trash2, ExternalLink, FileText,
+  ArrowLeft, StickyNote, X, Trash2, FileText,
   ZoomIn, ZoomOut, Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import { ShareButton } from "@/components/common/ShareButton";
 import { BookmarkButton } from "@/components/common/BookmarkButton";
 import { Textarea } from "@/components/ui/textarea";
 import { addReaderNote, deleteReaderNote } from "@/lib/reader/notes";
+import type { DocKind } from "@/lib/reader/file-kind";
 
 export type ReaderNoteItem = { id: string; content: string; page: number | null; createdAt: string };
 
@@ -232,8 +233,6 @@ function PdfDocument({ src, onUnsupported }: { src: string; onUnsupported?: () =
   );
 }
 
-type DocKind = "pdf" | "image" | "audio" | "video" | "excel" | "word" | "other";
-
 function loadScriptOnce(id: string, src: string, globalKey: string): Promise<any> {
   return new Promise((resolve, reject) => {
     const w = window as any;
@@ -346,14 +345,106 @@ function DocxViewer({ src, onUnsupported }: { src: string; onUnsupported?: () =>
   return <div className="docx-viewer prose mx-auto max-w-3xl p-8" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
+/**
+ * PowerPoint and old .doc/.xls/.ppt can't be drawn by the browser. They are
+ * shown in Microsoft's free online viewer, embedded in the page, so the reader
+ * never gets a file download. The viewer fetches the file from our public
+ * /api/read-file URL, so this only works on the live site, not localhost.
+ */
+function OfficeViewer({ fileUrl, title }: { fileUrl: string; title: string }) {
+  const isLocal = /\/\/(localhost|127\.|0\.0\.0\.0|192\.168\.)/.test(fileUrl);
+  if (!fileUrl || isLocal) {
+    return (
+      <CannotDisplay message="This file opens in the online document viewer, which only works on the live site (it can't reach a local computer). Check it on the deployed site." />
+    );
+  }
+  const src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
+  return <iframe title={title} src={src} className="h-full w-full border-0 bg-white" allowFullScreen />;
+}
+
+/** EPUB rendered in-app with epub.js (via CDN). */
+function EpubViewer({ src, onUnsupported }: { src: string; onUnsupported?: () => void }) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const renditionRef = useRef<any>(null);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  useEffect(() => {
+    let cancelled = false;
+    let book: any = null;
+    (async () => {
+      try {
+        await loadScriptOnce("jszip-cdn", "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", "JSZip");
+        const ePub = await loadScriptOnce("epubjs-cdn", "https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js", "ePub");
+        const res = await fetch(src, { credentials: "include" });
+        if (!res.ok) throw new Error("fetch failed");
+        const buf = await res.arrayBuffer();
+        if (cancelled || !hostRef.current) return;
+        book = ePub(buf);
+        const rendition = book.renderTo(hostRef.current, { width: "100%", height: "100%", flow: "scrolled-doc" });
+        renditionRef.current = rendition;
+        await rendition.display();
+        if (!cancelled) setStatus("ready");
+      } catch {
+        if (!cancelled) {
+          setStatus("error");
+          onUnsupported?.();
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+      try { book?.destroy(); } catch { /* ignore */ }
+    };
+  }, [src, onUnsupported]);
+  return (
+    <div className="relative flex h-full flex-col">
+      {status === "loading" && <div className="absolute inset-0"><ViewerLoading label="Opening book…" /></div>}
+      <div ref={hostRef} className="min-h-0 flex-1 overflow-y-auto bg-white" onContextMenu={(e) => e.preventDefault()} />
+      {status === "ready" && (
+        <div className="flex items-center justify-center gap-4 border-t border-deep-blue/10 bg-white/95 px-3 py-2 text-sm">
+          <button onClick={() => renditionRef.current?.prev()} className="focus-ring rounded-lg px-3 py-1 text-medical-blue hover:bg-medical-blue/5">‹ Previous</button>
+          <button onClick={() => renditionRef.current?.next()} className="focus-ring rounded-lg px-3 py-1 text-medical-blue hover:bg-medical-blue/5">Next ›</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Plain text files shown as text. */
+function TextViewer({ src, onUnsupported }: { src: string; onUnsupported?: () => void }) {
+  const [text, setText] = useState<string | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(src, { credentials: "include" })
+      .then((r) => (r.ok ? r.text() : Promise.reject(new Error("fetch failed"))))
+      .then((t) => { if (!cancelled) setText(t); })
+      .catch(() => { if (!cancelled) onUnsupported?.(); });
+    return () => { cancelled = true; };
+  }, [src, onUnsupported]);
+  if (text === null) return <ViewerLoading label="Opening document…" />;
+  return <pre className="mx-auto h-full max-w-3xl overflow-auto whitespace-pre-wrap p-8 font-sans text-sm text-deep-blue">{text}</pre>;
+}
+
+/** Final fallback — deliberately NO link to the raw file (that link is what downloaded). */
+function CannotDisplay({ message }: { message?: string }) {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
+      <FileText className="h-10 w-10 text-medical-blue/40" />
+      <p className="max-w-md text-muted-foreground">
+        {message ?? "This document can't be displayed in the reader right now. Please try again shortly — our team has been notified."}
+      </p>
+    </div>
+  );
+}
+
 export function ReaderView({
-  itemType, itemId, title, hasFile, kind, backHref, signedIn, isPremium, initialNotes,
+  itemType, itemId, title, hasFile, kind, publicFileUrl, backHref, signedIn, isPremium, initialNotes,
 }: {
   itemType: "book" | "resource";
   itemId: string;
   title: string;
   hasFile: boolean;
   kind: DocKind;
+  publicFileUrl: string;
   backHref: string;
   signedIn: boolean;
   isPremium: boolean;
@@ -361,6 +452,8 @@ export function ReaderView({
 }) {
   const [notesOpen, setNotesOpen] = useState(false);
   const [unsupported, setUnsupported] = useState(false);
+  const markUnsupported = useCallback(() => setUnsupported(true), []);
+  const fileSrc = `/api/read-file?type=${itemType}&id=${itemId}`;
   const [notes, setNotes] = useState<ReaderNoteItem[]>(initialNotes);
   const [draft, setDraft] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -443,50 +536,49 @@ export function ReaderView({
               <p className="text-muted-foreground">This item doesn't have a file yet. Please check back soon.</p>
             </div>
           ) : unsupported ? (
-            <div className="flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
-              <FileText className="h-10 w-10 text-medical-blue/50" />
-              <p className="text-muted-foreground">This file format opens in a new tab.</p>
-              <a href={`/api/read-file?type=${itemType}&id=${itemId}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-xl bg-medical-blue px-4 py-2 text-sm font-semibold text-white">
-                <ExternalLink className="h-4 w-4" /> Open document
-              </a>
-            </div>
+            // In-app renderer failed. Word/Excel get a second chance in the online
+            // viewer; everything else shows a message. Never a raw-file link.
+            kind === "word" || kind === "excel" ? (
+              <OfficeViewer fileUrl={publicFileUrl} title={title} />
+            ) : (
+              <CannotDisplay />
+            )
           ) : kind === "image" ? (
             <div className="flex min-h-full items-start justify-center p-4">
               <img
-                src={`/api/read-file?type=${itemType}&id=${itemId}`}
+                src={fileSrc}
                 alt={title}
                 className="mx-auto max-h-[calc(100dvh-140px)] max-w-full rounded-lg shadow"
+                onError={markUnsupported}
               />
             </div>
           ) : kind === "audio" ? (
             <div className="flex h-full flex-col items-center justify-center gap-6 p-8 text-center">
               <FileText className="h-10 w-10 text-medical-blue/50" />
               <p className="font-semibold text-deep-blue">{title}</p>
-              <audio controls className="w-full max-w-xl" src={`/api/read-file?type=${itemType}&id=${itemId}`} />
+              <audio controls controlsList="nodownload" className="w-full max-w-xl" src={fileSrc} />
             </div>
           ) : kind === "video" ? (
             <div className="flex h-full items-center justify-center p-4">
               <video
                 controls
+                controlsList="nodownload"
                 className="max-h-[calc(100dvh-140px)] w-full max-w-4xl rounded-lg shadow"
-                src={`/api/read-file?type=${itemType}&id=${itemId}`}
+                src={fileSrc}
               />
             </div>
           ) : kind === "excel" ? (
-            <SheetViewer
-              src={`/api/read-file?type=${itemType}&id=${itemId}`}
-              onUnsupported={() => setUnsupported(true)}
-            />
+            <SheetViewer src={fileSrc} onUnsupported={markUnsupported} />
           ) : kind === "word" ? (
-            <DocxViewer
-              src={`/api/read-file?type=${itemType}&id=${itemId}`}
-              onUnsupported={() => setUnsupported(true)}
-            />
+            <DocxViewer src={fileSrc} onUnsupported={markUnsupported} />
+          ) : kind === "powerpoint" || kind === "office-legacy" ? (
+            <OfficeViewer fileUrl={publicFileUrl} title={title} />
+          ) : kind === "epub" ? (
+            <EpubViewer src={fileSrc} onUnsupported={markUnsupported} />
+          ) : kind === "text" ? (
+            <TextViewer src={fileSrc} onUnsupported={markUnsupported} />
           ) : (
-            <PdfDocument
-              src={`/api/read-file?type=${itemType}&id=${itemId}`}
-              onUnsupported={() => setUnsupported(true)}
-            />
+            <PdfDocument src={fileSrc} onUnsupported={markUnsupported} />
           )}
         </main>
 

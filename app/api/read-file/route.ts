@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { classify, detectFileKind, type DocKind } from "@/lib/reader/file-kind";
 
 /**
  * Streams an item's file INLINE for the in-browser reader (PDF, image, audio,
@@ -57,8 +58,49 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unavailable" }, { status: 502 });
   }
 
-  const contentType = upstream.headers.get("content-type") || "application/octet-stream";
-  const safeName = title.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+  // Storage often reports "application/octet-stream" for files with no
+  // extension. With nosniff, browsers then DOWNLOAD instead of displaying, so we
+  // work out the real type from the file's signature and serve that instead.
+  const reported = (upstream.headers.get("content-type") || "").toLowerCase();
+  const generic = !reported || /octet-stream|x-download|force-download|zip/.test(reported);
+  let body: ReadableStream<Uint8Array> = upstream.body;
+  let contentType = reported || "application/octet-stream";
+  let kind: DocKind = "other";
+
+  const startsAtZero = !range || /^bytes=0-/.test(range);
+  if (startsAtZero) {
+    // Peek at the first bytes of the stream we're already sending, then replay them.
+    const reader = upstream.body.getReader();
+    const head: Uint8Array[] = [];
+    let got = 0;
+    while (got < 16384) {
+      const { done, value } = await reader.read();
+      if (done || !value) break;
+      head.push(value);
+      got += value.length;
+    }
+    const joined = new Uint8Array(got);
+    let o = 0;
+    for (const c of head) { joined.set(c, o); o += c.length; }
+    const c = classify(joined, reported, fileUrl);
+    kind = c.kind;
+    if (generic) contentType = c.mime;
+    body = new ReadableStream<Uint8Array>({
+      start(ctrl) { for (const c of head) ctrl.enqueue(c); },
+      async pull(ctrl) {
+        const { done, value } = await reader.read();
+        if (done) ctrl.close(); else if (value) ctrl.enqueue(value);
+      },
+      cancel() { reader.cancel().catch(() => {}); },
+    });
+  } else if (generic) {
+    const d = await detectFileKind(fileUrl);
+    kind = d.kind;
+    contentType = d.mime;
+  }
+
+  const ext: Partial<Record<DocKind, string>> = { pdf: ".pdf", word: ".docx", excel: ".xlsx", powerpoint: ".pptx", epub: ".epub", text: ".txt" };
+  const safeName = title.replace(/[^a-z0-9]+/gi, "-").toLowerCase() + (ext[kind] ?? "");
 
   const headers: Record<string, string> = {
     "Content-Type": contentType,
@@ -73,5 +115,5 @@ export async function GET(req: Request) {
   if (contentLength) headers["Content-Length"] = contentLength;
 
   // 206 when the upstream honoured the range, otherwise 200.
-  return new NextResponse(upstream.body, { status: upstream.status === 206 ? 206 : 200, headers });
+  return new NextResponse(body, { status: upstream.status === 206 ? 206 : 200, headers });
 }
